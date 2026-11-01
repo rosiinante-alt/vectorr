@@ -1,0 +1,194 @@
+{
+  "info": {
+    "name": "VECTORR_API",
+    "description": "Vectorr backend API. Sign in first: POST /api/auth/login sends a magic link, then POST /api/auth/callback with the code. Postman keeps the session cookies automatically for the configured domain.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "fileId", "value": "" },
+    { "key": "exportId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "GET /api/health",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/health", "host": ["{{baseUrl}}"], "path": ["api", "health"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "POST /api/auth/login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('asks the user to check email', () => pm.expect(pm.response.json().message).to.include('email'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"you@example.com\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"] }
+          }
+        },
+        {
+          "name": "POST /api/auth/login (invalid email → 400)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"not-an-email\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"] }
+          }
+        },
+        {
+          "name": "GET /api/auth/callback?code=",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/callback?code={{authCode}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "callback"],
+              "query": [{ "key": "code", "value": "{{authCode}}" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Files",
+      "item": [
+        {
+          "name": "POST /api/files/upload",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status is 201', () => pm.response.to.have.status(201));",
+                  "const body = pm.response.json();",
+                  "if (body.id) { pm.collectionVariables.set('fileId', body.id); }"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [{ "key": "file", "type": "file", "src": [] }]
+            },
+            "url": { "raw": "{{baseUrl}}/api/files/upload", "host": ["{{baseUrl}}"], "path": ["api", "files", "upload"] }
+          }
+        },
+        {
+          "name": "GET /api/files",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/files?limit=50&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "files"],
+              "query": [
+                { "key": "limit", "value": "50" },
+                { "key": "offset", "value": "0" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /api/files/:id",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/files/{{fileId}}", "host": ["{{baseUrl}}"], "path": ["api", "files", "{{fileId}}"] }
+          }
+        },
+        {
+          "name": "DELETE /api/files/:id",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/api/files/{{fileId}}", "host": ["{{baseUrl}}"], "path": ["api", "files", "{{fileId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Exports",
+      "item": [
+        {
+          "name": "POST /api/export",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status is 201', () => pm.response.to.have.status(201));",
+                  "const body = pm.response.json();",
+                  "if (body.id) { pm.collectionVariables.set('exportId', body.id); }"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"file_id\": \"{{fileId}}\",\n  \"format\": \"svg\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/export", "host": ["{{baseUrl}}"], "path": ["api", "export"] }
+          }
+        },
+        {
+          "name": "POST /api/files/:id/export",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"format\": \"svg\"\n}" },
+            "url": {
+              "raw": "{{baseUrl}}/api/files/{{fileId}}/export",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "files", "{{fileId}}", "export"]
+            }
+          }
+        },
+        {
+          "name": "GET /api/exports/:id",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/exports/{{exportId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "exports", "{{exportId}}"]
+            }
+          }
+        },
+        {
+          "name": "GET /api/exports/:id?download=1",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/exports/{{exportId}}?download=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "exports", "{{exportId}}"],
+              "query": [{ "key": "download", "value": "1" }]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
