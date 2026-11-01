@@ -232,6 +232,12 @@ on conflict (id) do nothing;
 --   <user_id>/<timestamp>-<filename>.svg
 -- The first path segment is therefore the ownership test.
 
+-- RLS must be enabled on storage.objects explicitly. Supabase enables it by
+-- default, but the policies below are inert without it, and Postgres accepts
+-- policies on a table with RLS off without raising an error — so a missing
+-- enable silently exposes every uploaded file to every user.
+alter table storage.objects enable row level security;
+
 drop policy if exists "Users can read own vector objects" on storage.objects;
 create policy "Users can read own vector objects"
   on storage.objects for select
