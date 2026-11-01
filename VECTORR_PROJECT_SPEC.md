@@ -55,9 +55,12 @@
 - **Vector Processing**: Sharp.js + Potrace CLI (or Replicate for AI)
 
 ### Deployment
-- **Hosting**: Vercel (Next.js native)
-- **Database**: Supabase cloud
-- **CDN**: Vercel CDN
+- **Hosting**: Docker + Coolify on Hetzner/Netcup VPS
+- **Database**: Supabase cloud (PostgreSQL + Auth + Storage)
+- **CDN**: Cloudflare (proxied DNS, caching, DDoS protection)
+- **Server**: Dedicated Netcup VPS (159.195.244.160)
+- **SSL**: Let's Encrypt via Coolify automatic provisioning
+- **Container Orchestration**: Docker Compose managed by Coolify
 
 ---
 

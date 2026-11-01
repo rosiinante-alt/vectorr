@@ -1,10 +1,12 @@
-# Vectorr — Backend
+# Vectorr — Vector Art Optimization Platform
 
-Backend for Vectorr, a vector-art optimization and enhancement platform.
-Next.js App Router route handlers on Supabase (Postgres + Auth + Storage).
+Full-stack vector-art optimization and enhancement platform built with Next.js.
+Backend: Node.js + Next.js API routes  
+Database: Supabase (Postgres + Auth + Storage)  
+Deployment: Docker + Coolify on Hetzner/Netcup VPS
 
 The frontend scaffold lives in `src/app/`; this document covers the API,
-database, and test layer.
+database, deployment, and test layer.
 
 ---
 
@@ -100,7 +102,7 @@ Fixed-window, in-memory: login 5/min per IP, upload 20/min per user, export
 
 > The in-memory store is per-process and resets on deploy, so it is a
 > single-instance guard. Production should back `src/lib/rate-limit.ts` with
-> Upstash Redis or Vercel KV — the module interface is deliberately small.
+> Upstash Redis or a shared cache for multi-instance deployments.
 
 ---
 
@@ -141,6 +143,44 @@ rows, so tests assert on persisted state — "an audit row exists", "the storage
 object was rolled back" — rather than on call order. The fake can also be told
 to fail a specific operation, which is how the `500` and rollback branches are
 covered.
+
+---
+
+## Deployment
+
+### Docker + Coolify (Recommended)
+
+See **[COOLIFY_DEPLOYMENT.md](COOLIFY_DEPLOYMENT.md)** for complete step-by-step instructions.
+
+Quick start:
+```bash
+# 1. Build Docker image
+docker build -t vectorr:latest .
+
+# 2. Run locally with environment variables
+docker run -p 3000:3000 \
+  -e NEXT_PUBLIC_SUPABASE_URL=your-url \
+  -e NEXT_PUBLIC_SUPABASE_ANON_KEY=your-key \
+  -e SUPABASE_SERVICE_ROLE_KEY=your-secret \
+  -e NEXT_PUBLIC_SITE_URL=http://localhost:3000 \
+  vectorr:latest
+
+# 3. Or use docker-compose
+cp .env.example .env   # Fill in Supabase credentials
+docker-compose up -d
+```
+
+The app runs on **port 3000** by default. For production deployment on Hetzner/Netcup VPS with Coolify, follow the full guide.
+
+### Manual Deployment (Node.js)
+
+```bash
+npm ci --omit=dev
+npm run build
+npm start   # Runs on port 3000
+```
+
+Set environment variables via `.env.local` or shell exports.
 
 ---
 

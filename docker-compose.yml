@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  # =========================================================================
+  # Vectorr Node.js Backend
+  # =========================================================================
+  vectorr:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vectorr-app
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    environment:
+      # Supabase Configuration (required)
+      NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
+
+      # Site URL for redirects (set to your domain)
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+
+      # Next.js production settings
+      NODE_ENV: production
+
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+    networks:
+      - vectorr-network
+
+    # Optional: Coolify volumes for persistent data
+    volumes:
+      - vectorr-logs:/app/logs
+
+  # =========================================================================
+  # Optional: Nginx reverse proxy (for Coolify)
+  # Uncomment to add reverse proxy in front of Vectorr
+  # =========================================================================
+  # nginx:
+  #   image: nginx:alpine
+  #   container_name: vectorr-nginx
+  #   restart: unless-stopped
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  #     - ./certs:/etc/nginx/certs:ro
+  #   depends_on:
+  #     - vectorr
+  #   networks:
+  #     - vectorr-network
+
+networks:
+  vectorr-network:
+    driver: bridge
+
+volumes:
+  vectorr-logs:
+    driver: local

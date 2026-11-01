@@ -24,6 +24,10 @@
 .DS_Store
 *.pem
 
+# docker
+docker-compose.override.yml
+*.log
+
 # debug
 npm-debug.log*
 yarn-debug.log*
@@ -33,8 +37,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
-# vercel
-.vercel
+# docker
+docker-compose.override.yml
+*.log
 
 # typescript
 *.tsbuildinfo
