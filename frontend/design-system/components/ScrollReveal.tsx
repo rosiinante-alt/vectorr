@@ -10,9 +10,9 @@
 
 import { motion, MotionProps } from 'motion/react';
 import { useEffect, useState, useRef } from 'react';
-import { scrollReveal, prefersReducedMotion } from '../tokens/motion';
+import { scrollReveal, easingCurves, prefersReducedMotion } from '../tokens/motion';
 
-interface ScrollRevealProps extends MotionProps {
+interface ScrollRevealProps extends Omit<MotionProps, 'ref'> {
   children: React.ReactNode;
   threshold?: number;
 }
@@ -49,9 +49,15 @@ export function ScrollReveal({
 
   if (reducedMotion) {
     return (
-      <div ref={ref} {...props}>
+      <motion.div
+        ref={ref}
+        initial={false}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.01 }}
+        {...props}
+      >
         {children}
-      </div>
+      </motion.div>
     );
   }
 
@@ -60,7 +66,7 @@ export function ScrollReveal({
       ref={ref}
       initial={scrollReveal.animation.initial}
       animate={isVisible ? scrollReveal.animation.animate : scrollReveal.animation.initial}
-      transition={scrollReveal.animation.transition}
+      transition={{ ...scrollReveal.animation.transition, ease: easingCurves.spring }}
       {...props}
     >
       {children}

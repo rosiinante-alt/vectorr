@@ -11,7 +11,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { wordReveal, stagger, prefersReducedMotion } from '../tokens/motion';
+import { wordReveal, stagger, easingCurves, prefersReducedMotion } from '../tokens/motion';
 import { useEffect, useState, useRef } from 'react';
 
 interface RevealTextProps {

@@ -19,7 +19,7 @@ interface ScrollTriggerOptions {
 
 export function useScrollTrigger<T extends HTMLElement = HTMLDivElement>(
   options: ScrollTriggerOptions = {}
-): [RefObject<T>, boolean] {
+): [RefObject<T | null>, boolean] {
   const {
     threshold = 0.2,
     rootMargin = '0px 0px -10% 0px',

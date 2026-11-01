@@ -9,7 +9,8 @@
 'use client';
 
 import { motion, MotionProps } from 'motion/react';
-import { springs, durations, animationDistance, prefersReducedMotion } from '../tokens/motion';
+import { springs, durations, prefersReducedMotion } from '../tokens/motion';
+import { animationDistance } from '../tokens/spacing';
 
 interface SlideUpProps extends MotionProps {
   children: React.ReactNode;

@@ -75,9 +75,9 @@ export const semanticSpacing = {
  * How far elements move during entrance/exit animations
  */
 export const animationDistance = {
-  subtle: spacing[100],  // 12px - small movements
-  normal: spacing[300],  // 24px - standard entrance
-  large: spacing[400],   // 32px - scroll reveals
+  subtle: 12,  // px - small movements
+  normal: 24,  // px - standard entrance
+  large: 32,   // px - scroll reveals
 } as const;
 
 // Type exports

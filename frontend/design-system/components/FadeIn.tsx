@@ -8,7 +8,7 @@
 'use client';
 
 import { motion, MotionProps } from 'motion/react';
-import { durations, easings, prefersReducedMotion } from '../tokens/motion';
+import { durations, easingCurves, prefersReducedMotion } from '../tokens/motion';
 
 interface FadeInProps extends MotionProps {
   children: React.ReactNode;
@@ -26,7 +26,7 @@ export function FadeIn({ children, delay = 0, duration = durations.base / 1000, 
       transition={{
         duration: reducedMotion ? 0.01 : duration,
         delay,
-        ease: easings.spring,
+        ease: easingCurves.spring,
       }}
       {...props}
     >

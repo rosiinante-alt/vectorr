@@ -8,12 +8,16 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { hover, active, durations, easings, prefersReducedMotion } from '../tokens/motion';
+import { hover, active, durations, easingCurves, prefersReducedMotion } from '../tokens/motion';
 import { spacing } from '../tokens/spacing';
 import { colors } from '../tokens/colors';
 import React from 'react';
 
-interface AnimatedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface AnimatedButtonProps
+  extends Omit<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    'onAnimationStart' | 'onDragStart' | 'onDragEnd' | 'onDrag'
+  > {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
@@ -52,7 +56,7 @@ export function AnimatedButton({
   const buttonMotionProps = reducedMotion ? {} : {
     whileHover: !disabled ? { scale: 1.02 } : {},
     whileTap: !disabled ? { scale: 0.98 } : {},
-    transition: { duration: durations.fast / 1000, ease: easings.spring },
+    transition: { duration: durations.fast / 1000, ease: easingCurves.spring },
   };
 
   return (

@@ -15,6 +15,9 @@
 /**
  * Easing curves
  * Base curve: cubic-bezier(0.22, 1, 0.36, 1)
+ *
+ * `easings` holds CSS strings for CSS transitions. `easingCurves` holds the
+ * same curves as Motion's BezierDefinition tuples, which `ease` requires.
  */
 export const easings = {
   // Primary curve - use for most animations
@@ -28,6 +31,14 @@ export const easings = {
   entrance: 'cubic-bezier(0, 0, 0.2, 1)',
   exit: 'cubic-bezier(0.4, 0, 1, 1)',
 } as const;
+
+export const easingCurves = {
+  spring: [0.22, 1, 0.36, 1],
+  smooth: [0.4, 0, 0.2, 1],
+  snappy: [0.25, 0.46, 0.45, 0.94],
+  entrance: [0, 0, 0.2, 1],
+  exit: [0.4, 0, 1, 1],
+} as const satisfies Record<keyof typeof easings, readonly [number, number, number, number]>;
 
 /**
  * Duration tokens in milliseconds
@@ -157,19 +168,19 @@ export const hover = {
   // Subtle lift
   lift: {
     y: -2,
-    transition: { duration: durations.fast / 1000, ease: easings.spring },
+    transition: { duration: durations.fast / 1000, ease: easingCurves.spring },
   },
   
   // Scale up slightly
   scale: {
     scale: 1.02,
-    transition: { duration: durations.fast / 1000, ease: easings.spring },
+    transition: { duration: durations.fast / 1000, ease: easingCurves.spring },
   },
   
   // Glow effect (opacity change on pseudo-element)
   glow: {
     boxShadow: '0 8px 24px rgba(0, 114, 204, 0.2)',
-    transition: { duration: durations.base / 1000, ease: easings.spring },
+    transition: { duration: durations.base / 1000, ease: easingCurves.spring },
   },
 } as const;
 
@@ -203,7 +214,7 @@ export const scrollReveal = {
     animate: { opacity: 1, y: 0 },
     transition: {
       duration: durations.reveal / 1000,
-      ease: easings.spring,
+      ease: easingCurves.spring,
     },
   },
 } as const;
@@ -222,7 +233,7 @@ export const wordReveal = {
     opacity: 1,
     transition: {
       duration: durations.slow / 1000,
-      ease: easings.spring,
+      ease: easingCurves.spring,
     },
   },
 } as const;
@@ -236,7 +247,7 @@ export const pageTransition = {
   exit: { opacity: 0, y: -8 },
   transition: {
     duration: durations.base / 1000,
-    ease: easings.spring,
+    ease: easingCurves.spring,
   },
 } as const;
 
@@ -269,7 +280,7 @@ export const loading = {
     transition: {
       duration: 1.5,
       repeat: Infinity,
-      ease: easings.smooth,
+      ease: easingCurves.smooth,
     },
   },
   

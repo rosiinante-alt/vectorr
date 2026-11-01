@@ -8,6 +8,7 @@
 'use client';
 
 import { motion, MotionProps } from 'motion/react';
+import React from 'react';
 import { stagger as staggerConfig, durations, springs, prefersReducedMotion } from '../tokens/motion';
 
 interface StaggerProps extends MotionProps {
