@@ -9,7 +9,8 @@ type RouteContext = { params: Promise<{ id: string }> };
 /**
  * GET /api/files/:id
  *
- * Returns the file record plus a short-lived signed URL for inline preview.
+ * Returns the file record plus a short-lived signed URL for inline preview,
+ * optimization report (if present), and the user's quota status.
  * Ownership is enforced by the RLS policy on `files`.
  */
 export async function GET(_request: NextRequest, { params }: RouteContext) {
@@ -41,9 +42,53 @@ export async function GET(_request: NextRequest, { params }: RouteContext) {
     .from(STORAGE_BUCKET)
     .createSignedUrl(file.file_path, 60 * 10);
 
+  // Fetch quota for the current billing period
+  const currentMonth = new Date().toISOString().slice(0, 7); // 'YYYY-MM'
+  const { data: quotaData } = await supabase
+    .from('optimization_quota')
+    .select('count')
+    .eq('user_id', user.id)
+    .eq('year_month', currentMonth)
+    .single();
+
+  const FREE_TIER_LIMIT = 3;
+  const used = quotaData?.count ?? 0;
+  const quota = {
+    used,
+    limit: FREE_TIER_LIMIT,
+    remaining: Math.max(0, FREE_TIER_LIMIT - used),
+  };
+
+  // Extract optimization report from metadata if present
+  const metadata = (file.metadata || {}) as Record<string, unknown>;
+  const optimization = metadata.optimization as
+    | {
+        originalSizeBytes: number;
+        optimizedSizeBytes: number;
+        savedBytes: number;
+        savedPercent: number;
+        optimizations: Array<{
+          id: string;
+          label: string;
+          savedBytes: number;
+          count: number;
+        }>;
+        exportId: string;
+        optimizedAt: string;
+        precision: number;
+      }
+    | undefined;
+
   return NextResponse.json({
     ...file,
     preview_url: signError ? null : signed?.signedUrl ?? null,
+    quota,
+    ...(optimization && {
+      originalSizeBytes: optimization.originalSizeBytes,
+      optimizedSizeBytes: optimization.optimizedSizeBytes,
+      savedPercent: optimization.savedPercent,
+      optimization,
+    }),
   });
 }
 

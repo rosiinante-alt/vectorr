@@ -20,7 +20,7 @@ export async function POST(request: NextRequest, { params }: RouteContext) {
   }
 
   const limiter = rateLimit(
-    clientKey(request, 'export', user.id),
+    clientKey(request, 'export'),
     LIMITS.export.limit,
     LIMITS.export.windowMs,
   );

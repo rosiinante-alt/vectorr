@@ -63,6 +63,22 @@ create table if not exists public.exports (
 create index if not exists exports_file_id_idx on public.exports (file_id);
 
 -- ---------------------------------------------------------------------------
+-- optimization_quota — tracks monthly optimization usage per user.
+-- ---------------------------------------------------------------------------
+create table if not exists public.optimization_quota (
+  user_id       uuid not null references public.users(id) on delete cascade,
+  year_month    text not null,  -- format: 'YYYY-MM'
+  count         integer not null default 0 check (count >= 0),
+  primary key (user_id, year_month)
+);
+
+comment on table public.optimization_quota is
+  'Monthly optimization count for quota enforcement (free tier: 3/mo).';
+
+create index if not exists optimization_quota_user_id_idx
+  on public.optimization_quota (user_id);
+
+-- ---------------------------------------------------------------------------
 -- audit_log — append-only. No UPDATE/DELETE policy exists, by design.
 -- ---------------------------------------------------------------------------
 create table if not exists public.audit_log (
@@ -129,10 +145,11 @@ on conflict (id) do nothing;
 -- ============================================================================
 -- Row-Level Security
 -- ============================================================================
-alter table public.users     enable row level security;
-alter table public.files     enable row level security;
-alter table public.exports   enable row level security;
-alter table public.audit_log enable row level security;
+alter table public.users               enable row level security;
+alter table public.files               enable row level security;
+alter table public.exports             enable row level security;
+alter table public.optimization_quota  enable row level security;
+alter table public.audit_log           enable row level security;
 
 -- ---------------------------------------------------------------------------
 -- users: read + update own profile. No INSERT (the trigger owns creation),
@@ -220,6 +237,25 @@ drop policy if exists "Users can read own audit entries" on public.audit_log;
 create policy "Users can read own audit entries"
   on public.audit_log for select
   using (user_id = auth.uid());
+
+-- ---------------------------------------------------------------------------
+-- optimization_quota: users can read and upsert their own monthly counters.
+-- ---------------------------------------------------------------------------
+drop policy if exists "Users can read own quota" on public.optimization_quota;
+create policy "Users can read own quota"
+  on public.optimization_quota for select
+  using (user_id = auth.uid());
+
+drop policy if exists "Users can insert own quota" on public.optimization_quota;
+create policy "Users can insert own quota"
+  on public.optimization_quota for insert
+  with check (user_id = auth.uid());
+
+drop policy if exists "Users can update own quota" on public.optimization_quota;
+create policy "Users can update own quota"
+  on public.optimization_quota for update
+  using (user_id = auth.uid())
+  with check (user_id = auth.uid());
 
 -- ============================================================================
 -- Storage: private bucket for uploaded vector files

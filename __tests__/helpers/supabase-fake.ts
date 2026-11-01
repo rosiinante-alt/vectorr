@@ -21,8 +21,12 @@ export type FailPoint =
   | 'insert:files'
   | 'insert:exports'
   | 'insert:audit_log'
+  | 'insert:optimization_quota'
+  | 'update:files'
+  | 'update:optimization_quota'
   | 'select:files'
   | 'select:exports'
+  | 'select:optimization_quota'
   | 'delete:files'
   | 'storage:upload'
   | 'storage:download'
@@ -38,7 +42,7 @@ export interface FakeSupabase {
 
 interface QueryState {
   table: string;
-  op: 'select' | 'insert' | 'delete';
+  op: 'select' | 'insert' | 'update' | 'upsert' | 'delete';
   payload?: Record<string, unknown>;
   filters: [string, unknown][];
   single: boolean;
@@ -55,6 +59,7 @@ export function createFakeSupabase(user: TestUser | null): FakeSupabase {
     files: [],
     exports: [],
     audit_log: [],
+    optimization_quota: [],
   };
   const objects = new Map<string, StoredObject>();
   const inserts: { table: string; row: Record<string, unknown> }[] = [];
@@ -102,10 +107,58 @@ export function createFakeSupabase(user: TestUser | null): FakeSupabase {
       return { data: null, error: null };
     }
 
+    if (state.op === 'update') {
+      const forced = fail(`update:${state.table}` as FailPoint);
+      if (forced) return { data: null, error: forced };
+      const updated = rows.filter(matches);
+      updated.forEach((row) => {
+        Object.assign(row, state.payload);
+      });
+      return { data: state.single && updated.length ? updated[0] : updated, error: null };
+    }
+
+    if (state.op === 'upsert') {
+      const forced = fail(`insert:${state.table}` as FailPoint);
+      if (forced) return { data: null, error: forced };
+      
+      // Upsert: find row matching the payload's unique keys, update if found, insert if not
+      // For optimization_quota, the composite key is (user_id, year_month)
+      const payload = state.payload!;
+      const existing = rows.find((row) => {
+        if (state.table === 'optimization_quota') {
+          return row.user_id === payload.user_id && row.year_month === payload.year_month;
+        }
+        return row.id === payload.id;
+      });
+      
+      if (existing) {
+        Object.assign(existing, payload);
+        return { data: [existing], error: null };
+      } else {
+        const row = {
+          id: crypto.randomUUID(),
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          ...payload,
+        };
+        rows.push(row);
+        inserts.push({ table: state.table, row });
+        return { data: [row], error: null };
+      }
+    }
+
     const forced = fail(`select:${state.table}` as FailPoint);
     if (forced) return { data: null, error: forced };
 
-    let found = rows.filter(matches);
+    // Emulate RLS: filter rows by user_id for tables that have it
+    let found = rows.filter((row) => {
+      if (!matches(row)) return false;
+      // RLS check: if table has user_id and user is set, only return matching rows
+      if (user && 'user_id' in row && state.table in { files: 1, exports: 1, optimization_quota: 1 }) {
+        return row.user_id === user.id;
+      }
+      return true;
+    });
     const total = found.length;
     if (state.orderDesc) {
       const col = state.orderDesc;
@@ -156,6 +209,17 @@ export function createFakeSupabase(user: TestUser | null): FakeSupabase {
       insert: (payload: Record<string, unknown>) => {
         state.op = 'insert';
         state.payload = payload;
+        return builder;
+      },
+      update: (payload: Record<string, unknown>) => {
+        state.op = 'update';
+        state.payload = payload;
+        return builder;
+      },
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      upsert: (payload: Record<string, unknown> | Record<string, unknown>[], options?: { onConflict?: string }) => {
+        state.op = 'upsert';
+        state.payload = Array.isArray(payload) ? payload[0] : payload;
         return builder;
       },
       delete: () => {

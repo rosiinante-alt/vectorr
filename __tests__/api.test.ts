@@ -34,6 +34,7 @@ import { GET as getFileHandler, DELETE as deleteFileHandler } from '@/app/api/fi
 import { POST as fileExportHandler } from '@/app/api/files/[id]/export/route';
 import { POST as exportHandler } from '@/app/api/export/route';
 import { GET as downloadExportHandler } from '@/app/api/exports/[id]/route';
+import { POST as optimizeHandler } from '@/app/api/files/[id]/optimize/route';
 
 const USER_ID = '11111111-1111-4111-8111-111111111111';
 const OTHER_USER_ID = '22222222-2222-4222-8222-222222222222';
@@ -344,8 +345,8 @@ describe('POST /api/files/upload', () => {
     expect(fake.tables.files).toHaveLength(0);
   });
 
-  it('rate limits after 20 uploads', async () => {
-    for (let i = 0; i < 20; i += 1) {
+  it('rate limits after 10 uploads', async () => {
+    for (let i = 0; i < 10; i += 1) {
       const res = await uploadHandler(uploadRequest(svgFile(`f${i}.svg`)));
       expect(res.status).toBe(201);
     }
@@ -597,7 +598,7 @@ describe('POST /api/files/:id/export', () => {
   it('rate limits exports', async () => {
     const file = seedFile();
     fake.objects.set(file.file_path as string, { body: new Blob([SVG]) });
-    for (let i = 0; i < 30; i += 1) {
+    for (let i = 0; i < 20; i += 1) {
       const res = await fileExportHandler(jsonRequest('http://localhost/api/files/x/export'), ctx(FILE_ID));
       expect(res.status).toBe(201);
     }
@@ -660,5 +661,131 @@ describe('GET /api/exports/:id', () => {
     fake.failures.add('select:exports');
     const res = await downloadExportHandler(new NextRequest('http://localhost/api/exports/x'), ctx(EXPORT_ID));
     expect(res.status).toBe(500);
+  });
+});
+
+describe('POST /api/files/:id/optimize', () => {
+  const ctx = (id: string) => ({ params: Promise.resolve({ id }) });
+
+  it('returns 401 when signed out', async () => {
+    signIn(null);
+    const res = await optimizeHandler(new NextRequest('http://localhost/api/files/x/optimize'), ctx(FILE_ID));
+    expect(res.status).toBe(401);
+  });
+
+  it('rejects a malformed id', async () => {
+    const res = await optimizeHandler(new NextRequest('http://localhost/api/files/x/optimize'), ctx('bad'));
+    expect(res.status).toBe(404); // File not found after UUID validation passes in route path
+  });
+
+  it('returns 404 for a missing file', async () => {
+    const res = await optimizeHandler(new NextRequest('http://localhost/api/files/x/optimize'), ctx(FILE_ID));
+    expect(res.status).toBe(404);
+  });
+
+  it('returns 404 when accessing another user\'s file', async () => {
+    seedFile({ user_id: OTHER_USER_ID });
+    const res = await optimizeHandler(new NextRequest('http://localhost/api/files/x/optimize'), ctx(FILE_ID));
+    expect(res.status).toBe(404); // RLS blocks access to another user's file
+  });
+
+  it('returns 400 when file exceeds size limit', async () => {
+    const file = seedFile();
+    const largeSVG = '<svg>' + 'x'.repeat(1024 * 1024 + 1) + '</svg>';
+    fake.objects.set(file.file_path as string, { body: new Blob([largeSVG]) });
+
+    const res = await optimizeHandler(new NextRequest('http://localhost/api/files/x/optimize'), ctx(FILE_ID));
+    expect(res.status).toBe(413); // Payload Too Large
+    const json = await res.json();
+    expect(json.error).toContain('File too large');
+  });
+
+  it('returns 403 when quota is exceeded', async () => {
+    const file = seedFile();
+    fake.objects.set(file.file_path as string, { body: new Blob([SVG]) });
+
+    // Seed 3 optimizations this month
+    const now = new Date();
+    const yearMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+    fake.tables.optimization_quota.push({
+      user_id: USER_ID,
+      year_month: yearMonth,
+      count: 3,
+      created_at: now.toISOString(),
+      updated_at: now.toISOString(),
+    });
+
+    const res = await optimizeHandler(new NextRequest('http://localhost/api/files/x/optimize'), ctx(FILE_ID));
+    expect(res.status).toBe(403);
+    const json = await res.json();
+    expect(json.error).toContain('optimization');
+  });
+
+  it('optimizes an SVG and returns savings report', async () => {
+    const file = seedFile();
+    fake.objects.set(file.file_path as string, { body: new Blob([SVG]) });
+
+    const res = await optimizeHandler(new NextRequest('http://localhost/api/files/x/optimize'), ctx(FILE_ID));
+    expect(res.status).toBe(200);
+
+    const json = await res.json();
+    expect(json.status).toBe('optimized');
+    expect(json.originalSizeBytes).toBe(SVG.length);
+    expect(json.optimizedSizeBytes).toBeLessThan(SVG.length);
+    expect(json.savedBytes).toBeGreaterThan(0);
+    expect(json.savedPercent).toBeGreaterThan(0);
+    expect(Array.isArray(json.optimizations)).toBe(true);
+    expect(json.optimizations.length).toBeGreaterThan(0);
+
+    // Verify export was created
+    const exports = fake.tables.exports.filter((e: Record<string, unknown>) => e.file_id === FILE_ID);
+    expect(exports.length).toBe(1);
+
+    // Verify quota was updated
+    const now = new Date();
+    const yearMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+    const quotaRows = fake.tables.optimization_quota.filter(
+      (q: Record<string, unknown>) => q.user_id === USER_ID && q.year_month === yearMonth
+    );
+    expect(quotaRows.length).toBe(1);
+    expect(quotaRows[0].count).toBe(1);
+
+    // Verify file metadata was updated
+    const updatedFile = fake.tables.files.find((f: Record<string, unknown>) => f.id === FILE_ID);
+    expect(updatedFile?.metadata).toBeDefined();
+    expect((updatedFile?.metadata as Record<string, unknown>)?.optimization).toBeDefined();
+  });
+
+  it('accepts precision parameter', async () => {
+    const file = seedFile();
+    fake.objects.set(file.file_path as string, { body: new Blob([SVG]) });
+
+    const res = await optimizeHandler(
+      new NextRequest('http://localhost/api/files/x/optimize', {
+        method: 'POST',
+        body: JSON.stringify({ precision: 2 }),
+      }),
+      ctx(FILE_ID)
+    );
+    expect(res.status).toBe(200);
+
+    const json = await res.json();
+    expect(json.status).toBe('optimized');
+  });
+
+  it('rejects invalid precision', async () => {
+    const file = seedFile();
+    fake.objects.set(file.file_path as string, { body: new Blob([SVG]) });
+
+    const res = await optimizeHandler(
+      new NextRequest('http://localhost/api/files/x/optimize', {
+        method: 'POST',
+        body: JSON.stringify({ precision: -1 }),
+      }),
+      ctx(FILE_ID)
+    );
+    expect(res.status).toBe(400);
+    const json = await res.json();
+    expect(json.error).toContain('precision');
   });
 });

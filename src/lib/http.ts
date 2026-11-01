@@ -8,12 +8,17 @@ export function jsonError(error: string, status: number, details?: unknown): Nex
 export const unauthorized = () => jsonError('Unauthorized', 401);
 export const badRequest = (message: string, details?: unknown) => jsonError(message, 400, details);
 export const notFound = (message = 'Not found') => jsonError(message, 404);
+export const forbidden = (message = 'Forbidden') => jsonError(message, 403);
 export const tooManyRequests = (retryAfterSeconds: number) =>
   NextResponse.json<ApiError>(
     { error: 'Rate limit exceeded. Try again later.' },
     { status: 429, headers: { 'Retry-After': String(retryAfterSeconds) } },
   );
 export const serverError = (message = 'Internal server error') => jsonError(message, 500);
+
+export function json<T>(data: T, init?: ResponseInit): NextResponse<T> {
+  return NextResponse.json(data, init);
+}
 
 /**
  * Reads a JSON body, tolerating an empty body or a non-JSON content type.

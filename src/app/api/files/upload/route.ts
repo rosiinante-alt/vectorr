@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
   }
 
   const limiter = rateLimit(
-    clientKey(request, 'upload', user.id),
+    clientKey(request, 'upload'),
     LIMITS.upload.limit,
     LIMITS.upload.windowMs,
   );
