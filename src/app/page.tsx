@@ -7,8 +7,8 @@ import { ButtonLink } from "@/components/ui/button";
 const features = [
   {
     title: "Optimize",
-    body: "SVGO's plugin chain, tuned per destination. Path precision, redundant groups, unused defs and dead attributes — run in the right order, conservatively enough to keep the curves you drew.",
-    detail: "Web · Print · Laser · Figma presets",
+    body: "SVGO's plugin chain, run in a fixed conservative order. Path precision, redundant groups, unused defs and dead attributes — trimmed without touching the curves you drew.",
+    detail: "2 · 3 · 5 decimal precision",
     icon: (
       <>
         <path d="M4 20L12 4l8 16z" />
@@ -17,9 +17,9 @@ const features = [
     ),
   },
   {
-    title: "Enhance",
-    body: "Trim the palette, merge repeated colors and quantize what is left. An SVG with 4,318 near-identical fills usually needs about twelve — and saying so is half the fix.",
-    detail: "Palette reduction · color audit",
+    title: "Attribute",
+    body: "Every plugin is measured by removing it and re-running the file, so each byte saved is attributed to the pass that actually saved it. The remainder is reported honestly, never inflated.",
+    detail: "Per-plugin byte deltas",
     icon: (
       <>
         <circle cx="12" cy="12" r="8.5" />
@@ -29,8 +29,8 @@ const features = [
   },
   {
     title: "Export",
-    body: "Download the optimized SVG, or PNG and PDF when you need something other than vectors. The report goes with it, so you can prove what changed before anything ships.",
-    detail: "SVG · PNG · PDF",
+    body: "Download the optimized SVG with the report that produced it, so you can prove what changed before anything ships. PNG and PDF are on the roadmap, not in the product yet.",
+    detail: "SVG today · PNG & PDF next",
     icon: (
       <>
         <path d="M12 3v12" />
@@ -42,10 +42,10 @@ const features = [
 ];
 
 const breakdown = [
-  { rule: "Path data precision", bytes: "1,204 KB", share: 62 },
-  { rule: "Editor metadata", bytes: "388 KB", share: 20 },
-  { rule: "Redundant groups", bytes: "219 KB", share: 11 },
-  { rule: "Unused definitions", bytes: "136 KB", share: 7 },
+  { rule: "Path data precision", bytes: "641 KB", share: 62 },
+  { rule: "Editor metadata", bytes: "207 KB", share: 20 },
+  { rule: "Redundant groups", bytes: "114 KB", share: 11 },
+  { rule: "Unused definitions", bytes: "72 KB", share: 7 },
 ];
 
 export default function Home() {
@@ -64,13 +64,13 @@ export default function Home() {
               <span className="rounded-full bg-text-primary px-2.5 py-0.5 text-[12px] font-semibold text-white">
                 New
               </span>
-              Batch optimization for whole icon sets
+              Per-plugin savings report — see where every byte went
             </p>
 
             <h1 className="display mx-auto max-w-[880px] text-[clamp(38px,6.4vw,74px)]">
               Your SVG is 2.4 MB.
               <br />
-              <span className="text-accent">Make it 180 KB.</span>
+              <span className="text-accent">Find the 1 MB you can cut.</span>
             </h1>
 
             <p className="mx-auto mt-6 max-w-[620px] text-[clamp(17px,1.9vw,20px)] leading-relaxed text-text-secondary">
@@ -117,20 +117,18 @@ export default function Home() {
                 </div>
                 <div className="text-right">
                   <p className="tabular font-mono text-[34px] leading-none font-bold tracking-[-0.03em] text-success-text">
-                    −92.7%
+                    −41.9%
                   </p>
                   <p className="tabular mt-1 font-mono text-[13px] text-text-tertiary">
-                    2.3 MB saved
+                    1,034 KB saved
                   </p>
                 </div>
               </div>
 
               <dl className="grid gap-x-10 px-6 py-4 text-left sm:grid-cols-2">
                 {[
-                  { label: "File size", before: "2.41 MB", after: "178 KB" },
-                  { label: "Nodes", before: "41,203", after: "2,914" },
-                  { label: "Paths", before: "8,940", after: "1,102" },
-                  { label: "Distinct colors", before: "4,318", after: "12" },
+                  { label: "File size", before: "2,468 KB", after: "1,434 KB" },
+                  { label: "Coordinate precision", before: "6 decimals", after: "3 decimals" },
                 ].map((stat) => (
                   <div
                     key={stat.label}
@@ -300,8 +298,8 @@ export default function Home() {
                   {[
                     { label: "Vector → vector", a: "Yes", b: "Yes, CLI only", c: "No" },
                     { label: "Savings report", a: "Yes", b: "No", c: "No" },
-                    { label: "Color audit", a: "Yes", b: "Partial", c: "No" },
-                    { label: "Batch icon sets", a: "Yes", b: "Scripted", c: "No" },
+                    { label: "Color audit", a: "Soon", b: "Partial", c: "No" },
+                    { label: "Batch icon sets", a: "Soon", b: "Scripted", c: "No" },
                     { label: "Runs in a browser", a: "Yes", b: "No", c: "Yes" },
                     { label: "Measured before / after", a: "Yes", b: "No", c: "No" },
                   ].map((row) => (
@@ -351,12 +349,12 @@ export default function Home() {
                 </ButtonLink>
               </div>
               <p className="mt-5 text-[13.5px] text-text-tertiary">
-                Free for 3 files a month · Pro $9/mo ·{" "}
+                Free for 3 files a month · No signup to preview ·{" "}
                 <Link
                   href="/pricing"
                   className="text-accent-ink underline underline-offset-[3px]"
                 >
-                  $6.99 to unlock one file
+                  See what Pro will add
                 </Link>
               </p>
             </div>

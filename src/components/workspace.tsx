@@ -10,8 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   ApiError,
-  exportFile,
-  getExport,
+  downloadExport,
   optimizeFile,
   uploadFile,
   type OptimizationReport,
@@ -19,10 +18,9 @@ import {
 import type { SvgEstimate } from "@/lib/svg-estimate";
 
 const PRESETS = [
-  { id: "web", label: "Web", hint: "Aggressive: precision 2, merge paths" },
-  { id: "print", label: "Print", hint: "Conservative: keeps gradients and filters" },
-  { id: "laser", label: "Laser", hint: "Preserves stroke geometry exactly" },
-  { id: "figma", label: "Figma", hint: "Keeps IDs and group structure" },
+  { id: "2", label: "2 decimals", hint: "Smaller output; review fine details" },
+  { id: "3", label: "3 decimals", hint: "Default precision" },
+  { id: "5", label: "5 decimals", hint: "Higher coordinate precision" },
 ] as const;
 
 type Stage = "empty" | "preview" | "optimizing" | "done";
@@ -44,7 +42,7 @@ export function Workspace({ isSignedIn }: WorkspaceProps) {
   const [uploadedId, setUploadedId] = useState<string | null>(null);
   const [report, setReport] = useState<OptimizationReport | null>(null);
   const [stage, setStage] = useState<Stage>("empty");
-  const [preset, setPreset] = useState<string>("web");
+  const [preset, setPreset] = useState<string>("3");
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [exporting, setExporting] = useState(false);
@@ -72,6 +70,7 @@ export function Workspace({ isSignedIn }: WorkspaceProps) {
     setMessage(null);
 
     try {
+      setStage("optimizing");
       // Upload first; the optimizer operates on a stored file.
       let fileId = uploadedId;
       if (!fileId) {
@@ -81,14 +80,14 @@ export function Workspace({ isSignedIn }: WorkspaceProps) {
       }
 
       setStage("optimizing");
-      const result = await optimizeFile(fileId, preset);
+      const result = await optimizeFile(fileId, Number(preset));
       setReport(result);
       setStage("done");
     } catch (err) {
-      setStage(uploadedId ? "preview" : "empty");
+      setStage("preview");
       if (err instanceof ApiError && err.status === 404) {
         setMessage(
-          "Optimization is not wired up yet — the backend endpoint is still being built. The estimate below is what we can measure locally.",
+          "This file is no longer available. Select it again to upload a new copy.",
         );
       } else if (err instanceof ApiError && err.isUnauthorized) {
         setError("Your session expired. Sign in again to optimize.");
@@ -99,14 +98,17 @@ export function Workspace({ isSignedIn }: WorkspaceProps) {
   };
 
   const runExport = async () => {
-    if (!uploadedId) return;
+    if (!report) return;
     setExporting(true);
     setError(null);
     try {
-      const record = await exportFile(uploadedId, "svg");
-      const { url } = await getExport(record.id);
-      if (!url) throw new Error("The export is not ready yet.");
-      window.location.assign(url);
+      const blob = await downloadExport(report.exportId);
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = selected?.file.name.replace(/\.svg$/i, "-optimized.svg") ?? "optimized.svg";
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Export failed.");
     } finally {
@@ -136,7 +138,7 @@ export function Workspace({ isSignedIn }: WorkspaceProps) {
       {selected && (
         <section aria-labelledby="preset-heading">
           <h2 id="preset-heading" className="mb-3 text-[19px] font-semibold tracking-[-0.022em]">
-            2. Pick a destination
+            2. Choose coordinate precision
           </h2>
           <div
             role="radiogroup"
@@ -151,6 +153,7 @@ export function Workspace({ isSignedIn }: WorkspaceProps) {
                   type="button"
                   role="radio"
                   aria-checked={active}
+                  disabled={stage === "optimizing"}
                   onClick={() => setPreset(option.id)}
                   className={
                     "rounded-[var(--radius-lg)] px-4 py-3.5 text-left transition-colors " +
@@ -174,7 +177,7 @@ export function Workspace({ isSignedIn }: WorkspaceProps) {
         <VectorCanvas
           svgText={selected.text}
           filename={selected.file.name}
-          onExport={isSignedIn && uploadedId ? runExport : undefined}
+          onExport={isSignedIn && report ? runExport : undefined}
           exportLabel={report ? "Download optimized SVG" : "Download SVG"}
           isExporting={exporting}
         />
@@ -212,7 +215,7 @@ export function Workspace({ isSignedIn }: WorkspaceProps) {
               Sign in to optimize
             </Button>
           )}
-          <Button variant="ghost" onClick={reset}>
+          <Button variant="ghost" onClick={reset} disabled={stage === "optimizing"}>
             Start over
           </Button>
         </div>

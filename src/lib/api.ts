@@ -143,20 +143,7 @@ export async function getHealth(): Promise<{ status: string }> {
   return parse<{ status: string }>(response);
 }
 
-/* ---------------------------------------------------------------------------
- * Optimization
- *
- * The backend agent is adding the optimization endpoint in this same tree. The
- * route it lands on is not settled yet, so the path is confined to this one
- * constant: when the route ships, point OPTIMIZE_PATH at it and the savings
- * report picks it up everywhere.
- *
- * Until then `isOptimizeAvailable()` reports false and the UI shows the
- * signed-out estimate instead of pretending an optimization ran.
- * ------------------------------------------------------------------------ */
-
-const OPTIMIZE_PATH = "/api/files/optimize";
-
+/** View model adapted from the server's measured optimization response. */
 export interface OptimizationReport {
   original_bytes: number;
   optimized_bytes: number;
@@ -166,31 +153,39 @@ export interface OptimizationReport {
   paths_after: number | null;
   colors_before: number | null;
   colors_after: number | null;
-  /** Per-rule savings, e.g. { "path precision": 412000 }. */
   breakdown: Array<{ rule: string; saved_bytes: number }>;
-  optimized_svg: string;
-  /** Server-side preset, mirrored from the destination selector. */
-  preset: string;
+  exportId: string;
 }
 
-export function isOptimizeAvailable(): boolean {
-  return process.env.NEXT_PUBLIC_OPTIMIZE_ENABLED === "true";
-}
-
-/**
- * POST /api/files/optimize
- *
- * Throws ApiError(404) while the route is unbuilt, which callers surface as an
- * "optimization is not available yet" message rather than an error.
- */
 export async function optimizeFile(
   fileId: string,
-  preset: string,
+  precision = 3,
 ): Promise<OptimizationReport> {
-  const response = await fetch(OPTIMIZE_PATH, {
+  const response = await fetch(`/api/files/${encodeURIComponent(fileId)}/optimize`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ file_id: fileId, preset }),
+    body: JSON.stringify({ precision }),
   });
-  return parse<OptimizationReport>(response);
+  const result = await parse<{
+    originalSizeBytes: number;
+    optimizedSizeBytes: number;
+    exportId: string;
+    optimizations: Array<{ label: string; savedBytes: number }>;
+  }>(response);
+  return {
+    original_bytes: result.originalSizeBytes,
+    optimized_bytes: result.optimizedSizeBytes,
+    nodes_before: null, nodes_after: null,
+    paths_before: null, paths_after: null,
+    colors_before: null, colors_after: null,
+    breakdown: result.optimizations.map(item => ({ rule: item.label, saved_bytes: item.savedBytes })),
+    exportId: result.exportId,
+  };
+}
+
+/** Downloads stream directly from the authenticated export endpoint. */
+export async function downloadExport(id: string): Promise<Blob> {
+  const response = await fetch(`/api/exports/${encodeURIComponent(id)}?download=1`);
+  if (!response.ok) await parse(response);
+  return response.blob();
 }

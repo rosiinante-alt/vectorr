@@ -173,6 +173,7 @@ export async function POST(
 
   return json({
     fileId,
+    exportId: exportRecord.id,
     originalSizeBytes: result.originalSizeBytes,
     optimizedSizeBytes: result.optimizedSizeBytes,
     savedBytes: result.savedBytes,

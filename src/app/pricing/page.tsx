@@ -8,7 +8,7 @@ import { ButtonLink } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "Pricing — Vectorr",
   description:
-    "Free for 3 optimizations a month. Pro $9/mo, Team $29/mo, and $6.99 to unlock a single file.",
+    "Free for 3 optimizations a month. Pro and Team plans are coming soon.",
 };
 
 interface Tier {
@@ -20,6 +20,7 @@ interface Tier {
   cta: string;
   href: string;
   featured?: boolean;
+  comingSoon?: boolean;
   features: string[];
 }
 
@@ -33,9 +34,9 @@ const tiers: Tier[] = [
     href: "/dashboard",
     features: [
       "3 optimizations a month",
-      "Up to 10 MB per file",
+      "Up to 1 MB per SVG",
       "SVG export",
-      "Bytes-saved summary",
+      "Per-plugin savings report",
       "Local estimate without an account",
     ],
   },
@@ -45,15 +46,13 @@ const tiers: Tier[] = [
     period: "per month",
     yearly: "$79/year — about $6.58/mo",
     blurb: "For designers shipping vectors into real products.",
-    cta: "Go Pro",
+    cta: "Join the Pro waitlist",
     href: "/login",
     featured: true,
+    comingSoon: true,
     features: [
-      "Unlimited optimizations (fair use 1,000/mo)",
-      "Full savings report: nodes, paths, colors",
-      "SVG, PNG and PDF export",
-      "Destination presets: Web, Print, Laser, Figma",
-      "Color and palette audit",
+      "Everything in Free, without the monthly cap",
+      "Coordinate precision control (2 · 3 · 5 decimals)",
       "Priority support",
     ],
   },
@@ -63,15 +62,15 @@ const tiers: Tier[] = [
     period: "per month",
     yearly: "$249/year — about $20.75/mo",
     blurb: "For design-system and print teams with a lot of icons.",
-    cta: "Start a team",
+    cta: "Join the waitlist",
     href: "/login",
+    comingSoon: true,
     features: [
       "Everything in Pro",
       "Batch optimization, up to 50 files",
       "ZIP download with per-file reports",
-      "Up to 10 seats",
-      "Shared history and CSV export",
-      "API access, 5,000 calls/mo",
+      "Shared history",
+      "API access",
     ],
   },
 ];
@@ -118,6 +117,7 @@ export default function PricingPage() {
                       {tier.name}
                     </h3>
                     {tier.featured && <Badge tone="accent">Most popular</Badge>}
+                    {tier.comingSoon && <Badge tone="neutral">Coming soon</Badge>}
                   </div>
 
                   <p className="mt-4 flex items-baseline gap-2">
@@ -148,7 +148,6 @@ export default function PricingPage() {
                       {tier.cta}
                     </ButtonLink>
                   </div>
-
                   <ul className="mt-6 grid gap-3 border-t border-[var(--border)] pt-6">
                     {tier.features.map((feature) => (
                       <li key={feature} className="flex gap-2.5 text-[14.5px] leading-snug">
@@ -177,12 +176,12 @@ export default function PricingPage() {
                 Just one file?
               </h2>
               <p className="mt-2 text-[15px] text-text-secondary">
-                Skip the subscription. Unlock a single optimization for $6.99, no
-                account required.
+                Skip the subscription. A single-file unlock is coming with paid
+                plans — until then, the free tier covers 3 files a month.
               </p>
               <div className="mt-5 flex justify-center">
                 <ButtonLink href="/dashboard" variant="secondary">
-                  Unlock one file — $6.99
+                  Optimize a file free
                 </ButtonLink>
               </div>
             </div>
@@ -249,10 +248,10 @@ export default function PricingPage() {
                 <tbody>
                   {[
                     ["Shrink an existing SVG", "Yes", "Manual", "Yes, CLI", "Export and hope"],
-                    ["Readable savings report", "Yes", "No", "No", "No"],
+                    ["Per-plugin byte attribution", "Yes", "No", "No", "No"],
                     ["Works without installing", "Yes", "No", "No", "Browser only"],
-                    ["Batch a whole icon set", "Yes", "Scripted", "Scripted", "No"],
-                    ["Color / palette audit", "Yes", "Manual", "Partial", "No"],
+                    ["Batch a whole icon set", "Soon", "Scripted", "Scripted", "No"],
+                    ["Color / palette audit", "Soon", "Manual", "Partial", "No"],
                     ["Price", "Free / $9", "~$23/mo", "Free", "$16/seat"],
                   ].map(([need, vectorr, illustrator, svgo, figma]) => (
                     <tr key={need}>
