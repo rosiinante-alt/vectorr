@@ -47,10 +47,10 @@ USER nextjs
 # Expose port (Coolify default)
 EXPOSE 3000
 
-# Health check (simple HTTP GET using shell)
+# Health check (use container's internal IP or hostname)
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD sh -c "wget -q -O- http://127.0.0.1:3000/api/health || exit 1"
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1
 
 # Use dumb-init to handle signals properly
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["node", "server.js"]
+CMD ["sh", "-c", "HOSTNAME=0.0.0.0 node server.js"]
