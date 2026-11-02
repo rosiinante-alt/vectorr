@@ -10,6 +10,12 @@ const CONTENT_TYPES: Record<string, string> = {
   svg: 'image/svg+xml',
   png: 'image/png',
   pdf: 'application/pdf',
+  dxf: 'image/vnd.dxf',
+  eps: 'application/postscript',
+  gcode: 'text/plain; charset=utf-8',
+  dst: 'application/octet-stream',
+  pes: 'application/octet-stream',
+  jef: 'application/octet-stream',
 };
 
 /**

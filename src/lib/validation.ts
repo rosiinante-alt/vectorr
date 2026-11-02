@@ -1,8 +1,8 @@
 import type { ExportFormat } from './types';
 
 export const MAX_FILE_BYTES = 10 * 1024 * 1024; // 10 MB
-export const SUPPORTED_EXPORT_FORMATS: readonly ExportFormat[] = ['svg', 'png', 'pdf'];
-export const MVP_EXPORT_FORMATS: readonly ExportFormat[] = ['svg'];
+export const SUPPORTED_EXPORT_FORMATS: readonly ExportFormat[] = ['svg', 'png', 'pdf', 'dxf', 'eps', 'gcode', 'dst', 'pes', 'jef'];
+export const MVP_EXPORT_FORMATS: readonly ExportFormat[] = SUPPORTED_EXPORT_FORMATS;
 export const STORAGE_BUCKET = 'vector-files';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -75,9 +75,6 @@ export function validateExportFormat(value: unknown): ValidationResult<ExportFor
       ok: false,
       error: `Unsupported format. Allowed: ${SUPPORTED_EXPORT_FORMATS.join(', ')}`,
     };
-  }
-  if (!MVP_EXPORT_FORMATS.includes(format)) {
-    return { ok: false, error: 'Only SVG export available in MVP' };
   }
   return { ok: true, value: format };
 }

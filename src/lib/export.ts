@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 
 import { badRequest, notFound, serverError } from '@/lib/http';
 import { isValidUuid, STORAGE_BUCKET, validateExportFormat } from '@/lib/validation';
+import { exportFile } from '@/lib/exporters';
 
 export interface CreateExportInput {
   supabase: SupabaseClient;
@@ -57,18 +58,42 @@ export async function createExport({
     return { ok: false, response: serverError(downloadError?.message ?? 'Failed to read file from storage') };
   }
 
+  let output: Buffer | string;
+  try {
+    const source = await blob.text();
+    if (formatCheck.value === 'png') {
+      const sharp = (await import('sharp')).default;
+      output = await sharp(Buffer.from(source)).png().toBuffer();
+    } else {
+      output = await exportFile(formatCheck.value, source);
+    }
+  } catch (error) {
+    return { ok: false, response: badRequest(error instanceof Error ? error.message : 'Export failed') };
+  }
+
+  const outputBuffer = Buffer.isBuffer(output) ? output : Buffer.from(output);
+  const outputPath = `exports/${userId}/${crypto.randomUUID()}.${formatCheck.value}`;
+  const { error: uploadError } = await supabase.storage
+    .from(STORAGE_BUCKET)
+    .upload(outputPath, outputBuffer, { upsert: false, contentType: {
+      svg: 'image/svg+xml', png: 'image/png', pdf: 'application/pdf', dxf: 'image/vnd.dxf', eps: 'application/postscript',
+      gcode: 'text/plain', dst: 'application/octet-stream', pes: 'application/octet-stream', jef: 'application/octet-stream',
+    }[formatCheck.value] });
+  if (uploadError) return { ok: false, response: serverError(uploadError.message) };
+
   const { data: record, error: insertError } = await supabase
     .from('exports')
     .insert({
       file_id: file.id,
       format: formatCheck.value,
-      file_path: file.file_path,
-      file_size_bytes: blob.size,
+      file_path: outputPath,
+      file_size_bytes: outputBuffer.length,
     })
     .select()
     .single();
 
   if (insertError || !record) {
+    await supabase.storage.from(STORAGE_BUCKET).remove([outputPath]);
     return { ok: false, response: serverError(insertError?.message ?? 'Failed to create export record') };
   }
 

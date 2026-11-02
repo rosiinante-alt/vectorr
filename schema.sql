@@ -57,7 +57,7 @@ create table if not exists public.exports (
   file_path       text not null,
   file_size_bytes integer check (file_size_bytes >= 0),
   created_at      timestamptz not null default now(),
-  constraint exports_format_check check (format in ('svg', 'png', 'pdf'))
+  constraint exports_format_check check (format in ('svg', 'png', 'pdf', 'dxf', 'eps', 'gcode', 'dst', 'pes', 'jef'))
 );
 
 create index if not exists exports_file_id_idx on public.exports (file_id);
