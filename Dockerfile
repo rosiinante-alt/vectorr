@@ -47,9 +47,9 @@ USER nextjs
 # Expose port (Coolify default)
 EXPOSE 3000
 
-# Health check
+# Health check (using curl to avoid DNS resolution issues with localhost)
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget --quiet --tries=1 --spider http://localhost:3000/api/health || exit 1
+  CMD node -e "require('http').get('http://127.0.0.1:3000/api/health', (r) => r.statusCode === 200 ? process.exit(0) : process.exit(1)).on('error', () => process.exit(1))"
 
 # Use dumb-init to handle signals properly
 ENTRYPOINT ["dumb-init", "--"]
