@@ -172,18 +172,50 @@ export function VectorCanvas({
         style={{ cursor: dragging ? "grabbing" : "grab" }}
       >
         <div
-          className="absolute left-1/2 top-1/2 h-2/3 w-2/3"
+          className="absolute left-1/2 top-1/2"
           style={{
             transform: `translate(-50%, -50%) translate(${offset.x}px, ${offset.y}px) scale(${zoom})`,
             transition: dragging ? "none" : "transform 0.18s var(--spring)",
+            width: "fit-content",
+            height: "fit-content",
+            maxWidth: "90%",
+            maxHeight: "90%",
           }}
         >
           {/* sandbox with no allow-scripts: uploaded SVG cannot execute */}
           <iframe
             title={`Rendered ${filename}`}
-            srcDoc={svgText}
+            srcDoc={`<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { 
+      width: 100%; 
+      height: 100%; 
+      overflow: hidden; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+    }
+    svg { 
+      max-width: 100%; 
+      max-height: 100%; 
+      width: auto; 
+      height: auto; 
+      display: block;
+    }
+  </style>
+</head>
+<body>${svgText}</body>
+</html>`}
             sandbox=""
-            className="h-full w-full border-0"
+            className="border-0"
+            style={{
+              width: "400px",
+              height: "400px",
+              display: "block",
+            }}
           />
         </div>
       </div>
