@@ -2,7 +2,7 @@
 
 **Status:** Integration complete and ready for production testing  
 **Date:** November 3, 2026  
-**Organization:** corazon-builds (`cc3cbe8c-2507-4fe3-ac7d-293c1428401b`)  
+**Organization:** corazon-builds (`YOUR_ORG_ID_HERE`)  
 **Environment:** Production (`https://api.polar.sh`)
 
 ---
@@ -40,8 +40,8 @@ Handle incoming webhook events with signature validation
 
 ### 3. **Environment Variables** (`.env.local`)
 ```
-POLAR_ACCESS_TOKEN=polar_oat_WuxPtzvYzuKo2uMiXETMqREBysuFtcj9t8Uuo0MQ4GF
-POLAR_WEBHOOK_SECRET=whsec_cBSzqhm3Mib4Ph2PtrlqvJUXRTEhY+PcpnJjH7adLg4=
+POLAR_ACCESS_TOKEN=polar_oat_YOUR_ACCESS_TOKEN_HERE
+POLAR_WEBHOOK_SECRET=whsec_YOUR_WEBHOOK_SECRET_HERE
 POLAR_SERVER=production
 ```
 
