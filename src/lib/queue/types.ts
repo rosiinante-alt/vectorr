@@ -1,0 +1,30 @@
+export interface VectorizeJobData {
+  conversionId: string;
+  userId: string;
+  originalFileUrl: string;
+  preprocessing?: {
+    removeBg?: boolean;
+    upscale?: '2x' | '4x';
+    destination?: 'web' | 'cricut' | 'laser' | 'print';
+  };
+  outputFormat: 'svg' | 'dxf' | 'eps' | 'pdf';
+}
+
+export interface BatchJobData {
+  batchId: string;
+  userId: string;
+  files: Array<{
+    fileId: string;
+    url: string;
+  }>;
+  preprocessing?: Record<string, any>;
+}
+
+export interface AIGenerateJobData {
+  generationId: string;
+  userId: string;
+  type: 'style_transfer' | 'logo' | 'svg' | 'pattern';
+  prompt?: string;
+  preset?: string;
+  inputFileUrl?: string;
+}
