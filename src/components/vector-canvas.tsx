@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { useKeyboardShortcuts } from "@/hooks/use-keyboard-shortcuts";
 
 export interface VectorCanvasProps {
   /** SVG markup to render, read-only. */
@@ -37,6 +38,7 @@ export function VectorCanvas({
   const [zoom, setZoom] = useState(1);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
+  const [spacePressed, setSpacePressed] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
   const dragStart = useRef({ x: 0, y: 0, originX: 0, originY: 0 });
 
@@ -47,6 +49,46 @@ export function VectorCanvas({
     setZoom(1);
     setOffset({ x: 0, y: 0 });
   }, []);
+
+  // Global keyboard shortcuts for zoom
+  useKeyboardShortcuts([
+    {
+      key: "+",
+      callback: () => {
+        if (stageRef.current) {
+          setZoom((current) => clampZoom(current * STEP));
+        }
+      },
+      ignoreTextInput: true,
+    },
+    {
+      key: "=",
+      callback: () => {
+        if (stageRef.current) {
+          setZoom((current) => clampZoom(current * STEP));
+        }
+      },
+      ignoreTextInput: true,
+    },
+    {
+      key: "-",
+      callback: () => {
+        if (stageRef.current) {
+          setZoom((current) => clampZoom(current / STEP));
+        }
+      },
+      ignoreTextInput: true,
+    },
+    {
+      key: "0",
+      callback: () => {
+        if (stageRef.current) {
+          reset();
+        }
+      },
+      ignoreTextInput: true,
+    },
+  ]);
 
   // Pan with the pointer.
   useEffect(() => {
@@ -95,7 +137,7 @@ export function VectorCanvas({
             {filename}
           </p>
           <p className="text-[12.5px] text-text-tertiary">
-            Read-only preview · drag to pan
+            Read-only preview · drag to pan · press Space to pan mode · press ? for help
           </p>
         </div>
 
@@ -145,27 +187,30 @@ export function VectorCanvas({
         ref={stageRef}
         tabIndex={0}
         role="application"
-        aria-label="Vector preview. Use plus and minus to zoom, reset to recentre."
+        aria-label="Vector preview. Use +/- to zoom, 0 to reset, or space to pan. Press ? for keyboard shortcuts."
         onPointerDown={(event) => {
           if (event.button !== 0) return;
-          dragStart.current = {
-            x: event.clientX,
-            y: event.clientY,
-            originX: offset.x,
-            originY: offset.y,
-          };
-          setDragging(true);
+          // Start pan if spacebar is pressed OR primary mouse button on canvas
+          if (spacePressed || event.button === 0) {
+            dragStart.current = {
+              x: event.clientX,
+              y: event.clientY,
+              originX: offset.x,
+              originY: offset.y,
+            };
+            setDragging(true);
+          }
         }}
         onKeyDown={(event) => {
-          if (event.key === "+" || event.key === "=") {
+          // Handle space for pan mode
+          if (event.key === " ") {
             event.preventDefault();
-            step(1);
-          } else if (event.key === "-" || event.key === "_") {
-            event.preventDefault();
-            step(-1);
-          } else if (event.key === "0") {
-            event.preventDefault();
-            reset();
+            setSpacePressed(true);
+          }
+        }}
+        onKeyUp={(event) => {
+          if (event.key === " ") {
+            setSpacePressed(false);
           }
         }}
         className="relative h-[320px] touch-none overflow-hidden bg-[repeating-conic-gradient(#f0f0f3_0%_25%,#ffffff_0%_50%)] bg-[length:18px_18px] select-none sm:h-[440px]"

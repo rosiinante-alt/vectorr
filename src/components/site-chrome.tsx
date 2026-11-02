@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HelpCircle } from "lucide-react";
 
 export function SiteHeader() {
   return (
@@ -113,9 +114,15 @@ export function SiteFooter() {
           <p className="text-[13.5px] text-text-tertiary">
             © 2026 Vectorr. Your files stay yours.
           </p>
-          <p className="text-[13.5px] text-text-tertiary">
-            Optimization runs on the server. Nothing is shared.
-          </p>
+          <div className="flex flex-wrap items-center gap-6">
+            <p className="text-[13.5px] text-text-tertiary">
+              Optimization runs on the server. Nothing is shared.
+            </p>
+            <div className="inline-flex items-center gap-1.5 rounded-[var(--radius-md)] bg-bg-tertiary px-2.5 py-1.5">
+              <HelpCircle className="h-3.5 w-3.5 text-text-tertiary" />
+              <span className="text-[12px] text-text-tertiary">Press <kbd className="font-mono">?</kbd> for keyboard shortcuts</span>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

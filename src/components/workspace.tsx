@@ -7,6 +7,7 @@ import { InfoIcon } from "lucide-react";
 import { FileUpload, type SelectedFile } from "@/components/file-upload";
 import { SavingsReport } from "@/components/savings-report";
 import { VectorCanvas } from "@/components/vector-canvas";
+import { KeyboardShortcutsModal } from "@/components/keyboard-shortcuts-modal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,6 +23,7 @@ import {
   uploadFile,
   type OptimizationReport,
 } from "@/lib/api";
+import { useKeyboardShortcuts } from "@/hooks/use-keyboard-shortcuts";
 import type { SvgEstimate } from "@/lib/svg-estimate";
 
 const PRESETS = [
@@ -53,6 +55,18 @@ export function Workspace({ isSignedIn }: WorkspaceProps) {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [exporting, setExporting] = useState(false);
+  const [showShortcuts, setShowShortcuts] = useState(false);
+
+  // Register keyboard shortcut for showing help
+  useKeyboardShortcuts([
+    {
+      key: "?",
+      callback: () => {
+        setShowShortcuts(true);
+      },
+      ignoreTextInput: true,
+    },
+  ]);
 
   const reset = () => {
     setSelected(null);
@@ -124,7 +138,9 @@ export function Workspace({ isSignedIn }: WorkspaceProps) {
   };
 
   return (
-    <div className="grid gap-6">
+    <>
+      <KeyboardShortcutsModal isOpen={showShortcuts} onClose={() => setShowShortcuts(false)} />
+      <div className="grid gap-6">
       <section aria-labelledby="upload-heading">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
           <h2 id="upload-heading" className="text-[19px] font-semibold tracking-[-0.022em]">
@@ -280,6 +296,7 @@ export function Workspace({ isSignedIn }: WorkspaceProps) {
         selected && <EstimatePanel estimate={selected.estimate} />
       )}
     </div>
+    </>
   );
 }
 
