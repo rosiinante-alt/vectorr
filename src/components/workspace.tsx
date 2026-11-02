@@ -2,12 +2,19 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { InfoIcon } from "lucide-react";
 
 import { FileUpload, type SelectedFile } from "@/components/file-upload";
 import { SavingsReport } from "@/components/savings-report";
 import { VectorCanvas } from "@/components/vector-canvas";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
   ApiError,
   downloadExport,
@@ -137,9 +144,44 @@ export function Workspace({ isSignedIn }: WorkspaceProps) {
 
       {selected && (
         <section aria-labelledby="preset-heading">
-          <h2 id="preset-heading" className="mb-3 text-[19px] font-semibold tracking-[-0.022em]">
-            2. Choose coordinate precision
-          </h2>
+          <div className="mb-3 flex items-center gap-2">
+            <h2 id="preset-heading" className="text-[19px] font-semibold tracking-[-0.022em]">
+              2. Choose coordinate precision
+            </h2>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    type="button"
+                    className="inline-flex h-5 w-5 items-center justify-center rounded-full text-text-tertiary hover:bg-bg-secondary hover:text-text-secondary transition-colors"
+                    aria-label="Learn about coordinate precision"
+                  >
+                    <InfoIcon className="h-4 w-4" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent side="right" className="max-w-[320px]">
+                  <p className="mb-2 font-semibold">What does this control?</p>
+                  <p className="mb-2 text-[13px] leading-relaxed">
+                    SVG coordinates are rounded to this many decimal places.
+                  </p>
+                  <ul className="space-y-1.5 text-[13px]">
+                    <li>
+                      <strong>2 decimals:</strong> Smallest file (e.g., 10.25, 15.75) — good for icons
+                    </li>
+                    <li>
+                      <strong>3 decimals:</strong> Balanced size + quality (e.g., 10.255, 15.752) — recommended
+                    </li>
+                    <li>
+                      <strong>5 decimals:</strong> Highest precision (e.g., 10.25542, 15.75123) — for detailed illustrations
+                    </li>
+                  </ul>
+                  <p className="mt-2 text-[12px] text-gray-300">
+                    💡 Lower precision = smaller file, but may slightly simplify curves
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
           <div
             role="radiogroup"
             aria-labelledby="preset-heading"
