@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { HelpCircle } from "lucide-react";
+import { createSupabaseServerClient } from '@/lib/supabase/server';
+import { SignOutButton } from './sign-out-button';
 
-export function SiteHeader() {
+export async function SiteHeader() {
+  const supabase = await createSupabaseServerClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-white/85 backdrop-blur-xl [backdrop-filter:saturate(1.8)_blur(20px)]">
       <div className="wrap flex h-[60px] items-center justify-between gap-4">
@@ -38,12 +43,24 @@ export function SiteHeader() {
           >
             Pricing
           </Link>
-          <Link
-            href="/dashboard"
-            className="ml-1.5 inline-flex h-9 items-center rounded-full bg-text-primary px-4 text-[13.5px] font-semibold text-white transition-colors hover:bg-black"
-          >
-            Open app
-          </Link>
+          {user ? (
+            <>
+              <Link
+                href="/dashboard"
+                className="ml-1.5 inline-flex h-9 items-center rounded-full bg-text-primary px-4 text-[13.5px] font-semibold text-white transition-colors hover:bg-black"
+              >
+                Dashboard
+              </Link>
+              <SignOutButton />
+            </>
+          ) : (
+            <Link
+              href="/login"
+              className="ml-1.5 inline-flex h-9 items-center rounded-full bg-text-primary px-4 text-[13.5px] font-semibold text-white transition-colors hover:bg-black"
+            >
+              Sign in
+            </Link>
+          )}
         </nav>
       </div>
     </header>
