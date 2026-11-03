@@ -33,7 +33,18 @@ export async function proxy(request: NextRequest) {
   });
 
   // Do not remove: this call is what triggers the token refresh.
-  await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  // Check if the current path requires authentication
+  const pathname = request.nextUrl.pathname;
+  const protectedPaths = ['/dashboard', '/convert', '/workflows', '/settings'];
+  const isProtectedPath = protectedPaths.some((p) => pathname.startsWith(p));
+
+  if (isProtectedPath && !user) {
+    // Redirect to login if not authenticated
+    const loginUrl = new URL('/login', request.url);
+    return NextResponse.redirect(loginUrl);
+  }
 
   return response;
 }
