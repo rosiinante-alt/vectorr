@@ -4,7 +4,7 @@ import { badRequest, readJson, serverError, unauthorized } from '@/lib/http';
 import { vectorizeQueue } from '@/lib/queue/queues';
 import type { VectorizeJobData } from '@/lib/queue/types';
 import { clientKey, rateLimit, LIMITS } from '@/lib/rate-limit';
-import { authenticate } from '@/lib/supabase/server';
+import { authenticate, createSupabaseAdminClient } from '@/lib/supabase/server';
 import { STORAGE_BUCKET } from '@/lib/validation';
 import { CREDIT_COSTS } from '@/lib/credits/constants';
 import { creditManager } from '@/lib/credits/credit-manager';
@@ -49,6 +49,8 @@ export async function POST(request: NextRequest) {
   if (!user || !supabase) {
     return unauthorized();
   }
+
+  const adminSupabase = createSupabaseAdminClient();
 
   const limiter = rateLimit(
     clientKey(request, 'convert'),
@@ -115,7 +117,7 @@ export async function POST(request: NextRequest) {
     const storagePath = `${user.id}/${Date.now()}-${safeName}`;
     const buffer = Buffer.from(await fileCandidate.arrayBuffer());
 
-    const { error: uploadError } = await supabase.storage
+    const { error: uploadError } = await adminSupabase.storage
       .from(STORAGE_BUCKET)
       .upload(storagePath, buffer, {
         contentType: fileCandidate.type || 'image/png',
@@ -127,7 +129,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get signed URL for Replicate access
-    const { data: signed, error: signError } = await supabase.storage
+    const { data: signed, error: signError } = await adminSupabase.storage
       .from(STORAGE_BUCKET)
       .createSignedUrl(storagePath, JOB_TTL_MS);
 
@@ -168,7 +170,7 @@ export async function POST(request: NextRequest) {
     originalFileUrl = fileUrl;
     const storagePath = storagePathOf(fileUrl);
     if (storagePath) {
-      const { data: signed, error: signError } = await supabase.storage
+      const { data: signed, error: signError } = await adminSupabase.storage
         .from(STORAGE_BUCKET)
         .createSignedUrl(storagePath, JOB_TTL_MS);
 
