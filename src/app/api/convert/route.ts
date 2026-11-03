@@ -198,7 +198,7 @@ export async function POST(request: NextRequest) {
     (preprocessing.upscale === '4x' ? CREDIT_COSTS.UPSCALE_4X : 0);
 
   // Check user credit balance
-  const balance = await creditManager.getBalance(supabase, user.id);
+  const balance = await creditManager.getBalance(adminSupabase, user.id);
   if (balance.balance < creditCost) {
     return NextResponse.json(
       {
@@ -211,7 +211,7 @@ export async function POST(request: NextRequest) {
   }
 
   // Record conversion in database
-  const { data: conversion, error: insertError } = await supabase
+  const { data: conversion, error: insertError } = await adminSupabase
     .from('conversions')
     .insert({
       user_id: user.id,
@@ -232,7 +232,7 @@ export async function POST(request: NextRequest) {
   // Deduct credits
   try {
     const charged = await creditManager.deductCredits(
-      supabase,
+      adminSupabase,
       user.id,
       creditCost,
       'conversion',
@@ -240,7 +240,7 @@ export async function POST(request: NextRequest) {
     );
 
     if (!charged) {
-      await supabase.from('conversions').delete().eq('id', conversion.id);
+      await adminSupabase.from('conversions').delete().eq('id', conversion.id);
       return NextResponse.json(
         {
           error: `Insufficient credits. You need ${creditCost.toFixed(2)} credits to run this conversion.`,
@@ -252,7 +252,7 @@ export async function POST(request: NextRequest) {
     }
   } catch (deductErr) {
     console.error('Credit deduction error:', deductErr);
-    await supabase.from('conversions').delete().eq('id', conversion.id);
+    await adminSupabase.from('conversions').delete().eq('id', conversion.id);
     return serverError('Could not process credit transaction');
   }
 
@@ -287,7 +287,7 @@ export async function POST(request: NextRequest) {
       { status: 202 },
     );
   } catch (queueError) {
-    await supabase
+    await adminSupabase
       .from('conversions')
       .update({
         status: 'failed',
@@ -297,7 +297,7 @@ export async function POST(request: NextRequest) {
 
     // Refund credits since queue failed
     try {
-      await creditManager.addCredits(supabase, user.id, creditCost, 'refund');
+      await creditManager.addCredits(adminSupabase, user.id, creditCost, 'refund');
     } catch {
       // Ignored
     }
