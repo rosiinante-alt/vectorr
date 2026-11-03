@@ -9,7 +9,7 @@ import { STORAGE_BUCKET } from '@/lib/validation';
 
 /** Raster formats accepted by the `conversions.original_format` constraint. */
 const SOURCE_FORMATS = ['png', 'jpg', 'jpeg', 'webp', 'gif', 'heic', 'tiff', 'bmp'] as const;
-const OUTPUT_FORMATS = ['svg', 'dxf', 'eps', 'pdf', 'gcode', 'dst', 'pes', 'jef'] as const;
+const OUTPUT_FORMATS = ['svg', 'dxf', 'eps', 'pdf'] as const;
 
 const JOB_TTL_MS = 24 * 60 * 60 * 1000;
 

@@ -97,7 +97,11 @@ export class VectorizeWorker extends BaseWorker<VectorizeJobData> {
       const message = error instanceof Error ? error.message : 'Unknown error';
 
       // A failed status write must not mask the original failure.
-      await update({ status: 'failed', error_message: message }).catch(() => undefined);
+      try {
+        await update({ status: 'failed', error_message: message });
+      } catch {
+        // Ignored: the job error below is the one that matters.
+      }
 
       throw error;
     }
