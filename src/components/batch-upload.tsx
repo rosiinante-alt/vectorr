@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState, type DragEvent } from "react";
+import { useRef, useState, type DragEvent } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -33,25 +33,21 @@ export function BatchUpload({ onBatchCreate }: BatchUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const dragDepth = useRef(0);
 
-  const handleFileSelect = useCallback(
-    (incoming: File[]) => {
-      if (incoming.length === 0) return;
+  const handleFileSelect = (incoming: File[]) => {
+    if (incoming.length === 0) return;
 
-      const problems = incoming.map(fileProblem).filter((problem): problem is string => Boolean(problem));
-      const valid = incoming.filter((file) => fileProblem(file) === null);
+    const problems = incoming.map(fileProblem).filter((problem): problem is string => Boolean(problem));
+    const valid = incoming.filter((file) => fileProblem(file) === null);
+    const merged = [...files, ...valid];
 
-      setFiles((current) => {
-        const merged = [...current, ...valid];
-        if (merged.length > MAX_BATCH_FILES) {
-          setError(`A batch holds up to ${MAX_BATCH_FILES} files. You already had ${current.length}.`);
-          return current;
-        }
-        setError(problems[0] ?? null);
-        return merged;
-      });
-    },
-    [],
-  );
+    if (merged.length > MAX_BATCH_FILES) {
+      setError(`A batch holds up to ${MAX_BATCH_FILES} files. You already had ${files.length}.`);
+      return;
+    }
+
+    setFiles(merged);
+    setError(problems[0] ?? null);
+  };
 
   const handleRemoveFile = (index: number) => {
     setFiles((current) => current.filter((_, i) => i !== index));
