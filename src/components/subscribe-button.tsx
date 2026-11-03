@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -22,6 +23,7 @@ export function SubscribeButton({
 }) {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   async function startCheckout() {
     setPending(true);
@@ -35,8 +37,8 @@ export function SubscribeButton({
       });
 
       if (response.status === 401) {
-        // Signing in first keeps the plan in the URL so it can be resumed.
-        window.location.href = `/login?next=${encodeURIComponent('/pricing')}`;
+        // Checkout needs a session; the pricing page is one click away after.
+        router.push('/login');
         return;
       }
 
@@ -46,7 +48,8 @@ export function SubscribeButton({
         return;
       }
 
-      window.location.href = body.url;
+      // External Polar-hosted page, so a full navigation rather than a route push.
+      window.location.assign(body.url);
     } catch {
       setError('Could not reach the checkout. Check your connection and try again.');
     } finally {

@@ -44,7 +44,6 @@ export default function PricingPage() {
             <ul className="grid gap-5 lg:grid-cols-3 xl:grid-cols-5">
               {tierOrder.map((key) => {
                 const tier = PRICING_TIERS[key];
-                const isFree = key === "FREE";
                 const isPlus = key === "PLUS";
 
                 return (
