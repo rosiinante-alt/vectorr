@@ -11,6 +11,27 @@
  *   ts-node scripts/start-workers.ts
  */
 
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+
+// Load .env.local before anything else
+const envLocalPath = join(process.cwd(), '.env.local');
+const envPath = join(process.cwd(), '.env');
+
+if (existsSync(envLocalPath)) {
+  try {
+    process.loadEnvFile(envLocalPath);
+  } catch (err) {
+    console.warn('Failed to load .env.local with loadEnvFile:', err);
+  }
+} else if (existsSync(envPath)) {
+  try {
+    process.loadEnvFile(envPath);
+  } catch (err) {
+    console.warn('Failed to load .env with loadEnvFile:', err);
+  }
+}
+
 import { VectorizeWorker } from '../src/lib/workers/vectorize-worker';
 import { UpscaleWorker } from '../src/lib/workers/upscale-worker';
 import { RemoveBgWorker } from '../src/lib/workers/remove-bg-worker';
