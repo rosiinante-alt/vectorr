@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 
 import { BatchStatusView } from "@/components/batch-status-view";
@@ -9,9 +10,16 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function BatchPage({ params }: { params: Promise<{ id: string }> }) {
+/**
+ * `params` is runtime data, so it must be read inside a Suspense boundary for
+ * the route to prerender its shell instead of blocking on it.
+ */
+async function BatchContent({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+  return <BatchStatusView batchId={id} />;
+}
 
+export default function BatchPage({ params }: { params: Promise<{ id: string }> }) {
   return (
     <>
       <a className="skip-link" href="#main">
@@ -21,7 +29,17 @@ export default async function BatchPage({ params }: { params: Promise<{ id: stri
 
       <main id="main" className="flex-1 py-10 sm:py-14">
         <div className="wrap max-w-[820px]">
-          <BatchStatusView batchId={id} />
+          <Suspense
+            fallback={
+              <div className="rounded-[var(--radius-xl)] border border-[var(--border)] p-6">
+                <p className="text-[15px] text-text-secondary" role="status">
+                  Loading batch…
+                </p>
+              </div>
+            }
+          >
+            <BatchContent params={params} />
+          </Suspense>
         </div>
       </main>
 

@@ -30,7 +30,7 @@ export function BatchStatusView({ batchId }: { batchId: string }) {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const done = useRef(false);
+  const finished = useRef(false);
 
   const fetchBatch = useCallback(async () => {
     try {
@@ -40,7 +40,7 @@ export function BatchStatusView({ batchId }: { batchId: string }) {
         throw new Error(payload.error ?? "Could not load this batch.");
       }
       const next = (await response.json()) as BatchStatusResponse;
-      done.current = TERMINAL.includes(next.status);
+      finished.current = TERMINAL.includes(next.status);
       setBatch(next);
       setError(null);
     } catch (err) {
@@ -57,7 +57,7 @@ export function BatchStatusView({ batchId }: { batchId: string }) {
     // never stack requests, and polling stops as soon as the batch finishes.
     const poll = async () => {
       await fetchBatch();
-      if (cancelled || done.current) return;
+      if (cancelled || finished.current) return;
       timer.current = setTimeout(poll, POLL_INTERVAL_MS);
     };
 
@@ -89,14 +89,15 @@ export function BatchStatusView({ batchId }: { batchId: string }) {
     );
   }
 
-  const done = TERMINAL.includes(batch.status);
+
+  const batchFinished = TERMINAL.includes(batch.status);
 
   return (
     <div className="space-y-6">
       <Card>
         <CardHeader>
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <CardTitle as="h1">Batch {batch.id.slice(0, 8)}</CardTitle>
+            <CardTitle as="h2">Batch {batch.id.slice(0, 8)}</CardTitle>
             <Badge tone={statusTone[batch.status]}>{batch.status.toUpperCase()}</Badge>
           </div>
         </CardHeader>
@@ -128,7 +129,7 @@ export function BatchStatusView({ batchId }: { batchId: string }) {
                 style={{ width: `${batch.progress}%` }}
               />
             </div>
-            {!done && (
+            {!batchFinished && (
               <p className="mt-2 text-[13.5px] text-text-tertiary" role="status" aria-live="polite">
                 Converting files one at a time — this page updates automatically.
               </p>

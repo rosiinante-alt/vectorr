@@ -1,15 +1,17 @@
 import { NextResponse } from 'next/server';
-import { createSupabaseServerClient } from '@/lib/supabase/server';
+
+import { creditManager } from '@/lib/credits/credit-manager';
+import { serverError, unauthorized } from '@/lib/http';
+import { authenticate } from '@/lib/supabase/server';
 
 export async function GET() {
-  const supabase = await createSupabaseServerClient();
-  const { data: { user }, error } = await supabase.auth.getUser();
-  
-  if (error || !user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
+  const { user, supabase } = await authenticate();
+  if (!user || !supabase) return unauthorized();
 
-  // For now, return mock credit balance
-  // TODO: Add credit_balance column to users table
-  return NextResponse.json({ balance: 100 });
+  try {
+    const { balance, tier } = await creditManager.getBalance(supabase, user.id);
+    return NextResponse.json({ balance, tier });
+  } catch (error) {
+    return serverError(error instanceof Error ? error.message : 'Could not read credits');
+  }
 }

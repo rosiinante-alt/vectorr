@@ -5,7 +5,6 @@ import { batchQueue } from '@/lib/queue/queues';
 import type { BatchJobData } from '@/lib/queue/types';
 
 import type {
-  BatchFileProgress,
   BatchFileRecord,
   BatchJobRecord,
   BatchOptions,

@@ -20,14 +20,18 @@ interface BatchFileOutcome {
  *
  * Sequential on purpose: each file costs money at Replicate and a batch can hold
  * 50 of them, so one batch must never fan out into 50 concurrent calls. The
- * queue-level concurrency (2) then bounds simultaneous batches at 2.
+ * queue-level concurrency bounds how many batches run at once.
  */
 export class BatchWorker extends BaseWorker<BatchJobData> {
+  private readonly adminFactory: () => SupabaseClient;
+
   constructor(
-    private readonly adminFactory: () => SupabaseClient = createSupabaseAdminClient,
+    concurrency = 2,
+    adminFactory: () => SupabaseClient = createSupabaseAdminClient,
     private readonly engineFactory?: () => Promise<ConversionEngine>,
   ) {
-    super('batch', 2);
+    super('batch', concurrency);
+    this.adminFactory = adminFactory;
   }
 
   async process(job: Job<BatchJobData>) {
