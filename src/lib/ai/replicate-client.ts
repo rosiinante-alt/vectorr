@@ -5,23 +5,53 @@ import Replicate from 'replicate';
  * vectorizer pipeline uses: raster→SVG tracing, upscaling, and background
  * removal.
  *
- * Model versions are pinned by name (`owner/name`), which Replicate resolves to
- * the model's latest version. Pin an exact version hash instead when a model's
- * output shape or pricing must stay stable across releases.
+ * Two operational details drive the shape of this module:
+ *
+ * 1. Predictions are created through the *versioned* endpoint
+ *    (`POST /v1/predictions` with a pinned version hash). The
+ *    `POST /v1/models/{owner}/{name}/predictions` shortcut currently answers
+ *    404 for these models even though their metadata is readable, so the
+ *    version hashes below are pinned deliberately.
+ * 2. Low-credit accounts are throttled to 6 prediction creations per minute
+ *    with a burst of 1, which means concurrent worker slots will hit 429s. The
+ *    wrapper retries those with backoff honouring `retry_after`.
  */
 
 // ---------------------------------------------------------------------------
 // Model registry
 // ---------------------------------------------------------------------------
 
+export interface ReplicateModel {
+  /** `owner/name` slug, used for logging and error messages. */
+  id: string;
+  /** Immutable version hash the prediction runs against. */
+  version: string;
+  /** Approximate billed cost per successful run, in USD. */
+  costUsd: number;
+}
+
 export const REPLICATE_MODELS = {
   /** Raster → SVG. Output is a single URI pointing at the .svg file. */
-  vectorize: 'recraft-ai/recraft-vectorize',
+  vectorize: {
+    id: 'recraft-ai/recraft-vectorize',
+    version: '060005b7c1316233bd3a4fc353fc23dcc0675fade3ad880b7d8d1d44e99f400e',
+    costUsd: 0.01,
+  },
   /** GAN upscaler with optional GFPGAN face enhancement. */
-  upscale: 'nightmareai/real-esrgan',
+  upscale: {
+    id: 'nightmareai/real-esrgan',
+    version: 'b3ef194191d13140337468c916c2c5b96dd0cb06dffc032a022a31807f6a5ea8',
+    costUsd: 0.0021,
+  },
   /** U^2-Net based background removal. */
-  removeBg: 'cjwbw/rembg',
-} as const;
+  removeBg: {
+    id: 'cjwbw/rembg',
+    version: 'fb8af171cfa1616ddcf1242c093f9c46bcada5ad4cf6f2fbe8b81b330ec5c003',
+    costUsd: 0.0014,
+  },
+} as const satisfies Record<string, ReplicateModel>;
+
+export type ReplicateOperation = keyof typeof REPLICATE_MODELS;
 
 // ---------------------------------------------------------------------------
 // Public types
@@ -44,11 +74,6 @@ export interface RemoveBgResult {
   outputUrl: string;
 }
 
-export type VectorizeOptions = {
-  /** Emit an SVG, or a second SVG holding the background separately. */
-  variant?: 'svg' | 'svg-with-background';
-};
-
 export type UpscaleOptions = {
   /** Run GFPGAN face restoration alongside upscaling. */
   faceEnhance?: boolean;
@@ -60,11 +85,24 @@ export type UpscaleOptions = {
 
 export class ReplicateError extends Error {
   readonly model: string;
+  readonly status?: number;
+  readonly retryAfterSeconds?: number;
 
-  constructor(model: string, message: string, options?: { cause?: unknown }) {
-    super(`[${model}] ${message}`, options);
+  constructor(
+    model: string,
+    message: string,
+    options: { cause?: unknown; status?: number; retryAfterSeconds?: number } = {},
+  ) {
+    super(`[${model}] ${message}`, options.cause === undefined ? undefined : { cause: options.cause });
     this.name = 'ReplicateError';
     this.model = model;
+    this.status = options.status;
+    this.retryAfterSeconds = options.retryAfterSeconds;
+  }
+
+  /** True for the low-credit throttle, which is worth retrying later. */
+  get isRateLimited(): boolean {
+    return this.status === 429;
   }
 }
 
@@ -77,7 +115,7 @@ const globalForReplicate = globalThis as typeof globalThis & {
 };
 
 /** Lazily constructed so importing this module never requires the token. */
-function getClient(): Replicate {
+export function getReplicateClient(): Replicate {
   if (!process.env.REPLICATE_API_TOKEN) {
     throw new ReplicateError(
       'config',
@@ -91,16 +129,82 @@ function getClient(): Replicate {
   }));
 }
 
+const MAX_RATE_LIMIT_RETRIES = 4;
+const DEFAULT_RETRY_AFTER_SECONDS = 10;
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function readStatus(error: unknown): number | undefined {
+  const candidate = error as { status?: unknown; response?: { status?: unknown } };
+  const status = candidate?.response?.status ?? candidate?.status;
+  return typeof status === 'number' ? status : undefined;
+}
+
+function readRetryAfter(error: unknown): number | undefined {
+  const candidate = error as {
+    retry_after?: unknown;
+    response?: { data?: { retry_after?: unknown } };
+  };
+  const value = candidate?.response?.data?.retry_after ?? candidate?.retry_after;
+  return typeof value === 'number' ? value : undefined;
+}
+
+/**
+ * Runs a model and returns the raw prediction output, retrying the low-credit
+ * throttle. Non-429 failures throw immediately so the worker's own retry policy
+ * decides what happens next.
+ */
+async function runModel<T>(model: ReplicateModel, input: Record<string, unknown>): Promise<T> {
+  const client = getReplicateClient();
+
+  for (let attempt = 0; ; attempt += 1) {
+    try {
+      const prediction = await client.predictions.create({
+        version: model.version,
+        input,
+        // Block until the prediction finishes so the worker sees a result.
+        wait: 60,
+      });
+
+      if (prediction.status !== 'succeeded') {
+        throw new ReplicateError(
+          model.id,
+          prediction.error?.toString() || `Prediction ended with status "${prediction.status}"`,
+        );
+      }
+
+      return prediction.output as T;
+    } catch (error) {
+      if (error instanceof ReplicateError) throw error;
+
+      const status = readStatus(error);
+
+      if (status === 429 && attempt < MAX_RATE_LIMIT_RETRIES) {
+        const retryAfter = readRetryAfter(error) ?? DEFAULT_RETRY_AFTER_SECONDS;
+        await sleep(Math.min(retryAfter, 60) * 1000 + 500);
+        continue;
+      }
+
+      throw new ReplicateError(model.id, 'Replicate request failed', {
+        cause: error,
+        status,
+        retryAfterSeconds: readRetryAfter(error),
+      });
+    }
+  }
+}
+
 /**
  * Replicate emits different shapes per model: a bare URI string, an array of
- * URIs, or a `Stream`/`FileOutput`. Normalize to a plain URL string.
+ * URIs, or a `FileOutput` object. Normalize to a plain URL string.
  */
-function toUrl(output: unknown): string {
+function toUrl(output: unknown, model: ReplicateModel): string {
   const first = Array.isArray(output) ? output[0] : output;
 
   if (typeof first === 'string') return first;
 
-  // FileOutput / Stream expose a string form that is the download URL.
   if (first && typeof first === 'object') {
     const candidate = first as { url?: unknown; toString?: () => string };
     if (typeof candidate.url === 'function') {
@@ -114,7 +218,7 @@ function toUrl(output: unknown): string {
     }
   }
 
-  throw new ReplicateError('output', 'Replicate returned no usable output URL');
+  throw new ReplicateError(model.id, 'Replicate returned no usable output URL');
 }
 
 // ---------------------------------------------------------------------------
@@ -127,45 +231,32 @@ function toUrl(output: unknown): string {
  * `imageUrl` must be publicly reachable by Replicate. For objects in a private
  * Supabase bucket, pass a signed URL rather than the bucket path.
  */
-export async function vectorizeImage(
-  imageUrl: string,
-  options: VectorizeOptions = {},
-): Promise<VectorizationResult> {
+export async function vectorizeImage(imageUrl: string): Promise<VectorizationResult> {
   const model = REPLICATE_MODELS.vectorize;
 
-  let output: unknown;
-  try {
-    output = await getClient().run(model, {
-      input: {
-        image: imageUrl,
-        ...(options.variant && options.variant !== 'svg' ? { variant: options.variant } : {}),
-      },
-    });
-  } catch (error) {
-    throw new ReplicateError(model, 'Vectorization request failed', { cause: error });
-  }
-
-  const outputUrl = toUrl(output);
+  const output = await runModel<unknown>(model, { image: imageUrl });
+  const outputUrl = toUrl(output, model);
 
   // The model returns a link to the .svg file, not the markup itself. Fetch it
-  // so callers can upload the SVG directly to storage.
+  // so callers can upload the SVG straight to storage.
   const response = await fetch(outputUrl);
   if (!response.ok) {
     throw new ReplicateError(
-      model,
+      model.id,
       `Could not download generated SVG (HTTP ${response.status})`,
+      { status: response.status },
     );
   }
 
   const svg = await response.text();
   if (!svg.includes('<svg')) {
-    throw new ReplicateError(model, 'Model output was not valid SVG markup');
+    throw new ReplicateError(model.id, 'Model output was not valid SVG markup');
   }
 
   return { svg, outputUrl };
 }
 
-/** Upscale an image by integer factor. */
+/** Upscale an image by an integer factor. */
 export async function upscaleImage(
   imageUrl: string,
   scale: 2 | 4 = 2,
@@ -173,36 +264,27 @@ export async function upscaleImage(
 ): Promise<UpscaleResult> {
   const model = REPLICATE_MODELS.upscale;
 
-  try {
-    const output = await getClient().run(model, {
-      input: {
-        image: imageUrl,
-        scale,
-        face_enhance: options.faceEnhance ?? false,
-      },
-    });
+  const output = await runModel<unknown>(model, {
+    image: imageUrl,
+    scale,
+    face_enhance: options.faceEnhance ?? false,
+  });
 
-    return { outputUrl: toUrl(output), scale };
-  } catch (error) {
-    if (error instanceof ReplicateError) throw error;
-    throw new ReplicateError(model, 'Upscale request failed', { cause: error });
-  }
+  return { outputUrl: toUrl(output, model), scale };
 }
 
 /** Remove the background, returning a transparent PNG URL. */
 export async function removeBackground(imageUrl: string): Promise<RemoveBgResult> {
   const model = REPLICATE_MODELS.removeBg;
 
-  try {
-    const output = await getClient().run(model, {
-      input: { image: imageUrl },
-    });
+  const output = await runModel<unknown>(model, { image: imageUrl });
 
-    return { outputUrl: toUrl(output) };
-  } catch (error) {
-    if (error instanceof ReplicateError) throw error;
-    throw new ReplicateError(model, 'Background removal request failed', { cause: error });
-  }
+  return { outputUrl: toUrl(output, model) };
 }
 
-export { getClient as getReplicateClient };
+/** Estimated USD cost of one run of `operation`. */
+export function operationCost(operation: ReplicateOperation): number {
+  return REPLICATE_MODELS[operation].costUsd;
+}
+
+export { getReplicateClient as replicate };

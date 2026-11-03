@@ -18,6 +18,8 @@ export interface BatchJobData {
     url: string;
   }>;
   preprocessing?: Record<string, any>;
+  /** Requested output format; defaults to svg in the worker. */
+  outputFormat?: 'svg' | 'dxf' | 'eps' | 'ai' | 'pdf' | 'cdr' | 'lottie' | 'dst' | 'pes' | 'jef' | 'gcode';
 }
 
 export interface AIGenerateJobData {

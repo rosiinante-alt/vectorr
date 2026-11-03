@@ -73,9 +73,13 @@ export async function applyStyleTransfer({
 
   const input = { ...preset.params, ...customParams, image: imageUrl };
 
-  const output = await getReplicate().run(preset.replicateModel, { input, signal }, (prediction) => {
-    if (prediction.status === 'processing') onProgress?.(50);
-  });
+  const output = await getReplicate().run(
+    preset.replicateModel as `${string}/${string}`,
+    { input, signal },
+    (prediction) => {
+      if (prediction.status === 'processing') onProgress?.(50);
+    },
+  );
 
   return normalizeOutput(output);
 }

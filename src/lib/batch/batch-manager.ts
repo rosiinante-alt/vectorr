@@ -10,6 +10,7 @@ import type {
   BatchJobRecord,
   BatchOptions,
   BatchStatusResponse,
+  CreatedBatch,
 } from './types';
 import {
   BATCH_BUCKET,
@@ -62,7 +63,7 @@ export class BatchManager {
    * deletes the half-built batch (cascading to `batch_files`) and its stored
    * objects.
    */
-  async createBatch({ userId, files, options, client }: CreateBatchInput): Promise<BatchJobRecord> {
+  async createBatch({ userId, files, options, client }: CreateBatchInput): Promise<CreatedBatch> {
     const countError = validateBatchFileCount(files.length);
     if (countError) throw new BatchError(countError, files.length > MAX_BATCH_FILES ? 413 : 400);
 
@@ -94,8 +95,8 @@ export class BatchManager {
           slice.map(async (file, offset) => {
             const index = start + offset;
             const path = `batch/${userId}/${batch.id}/source/${storageSafeName(file.name, index)}`;
-            // Workers read these without a user cookie, so the bucket must serve
-            // them; the object key is<|place_holder_mm_span_0442|> by the user id.
+            // Workers read these without a user cookie, so uploads go through
+            // the admin client; the key is scoped by the user id.
             const { error: uploadError } = await this.adminFactory()
               .storage.from(BATCH_BUCKET)
               .upload(path, file, { contentType: file.type || 'application/octet-stream', upsert: false });
@@ -140,7 +141,7 @@ export class BatchManager {
       }
 
       // The row id is what the UI polls; the BullMQ id is kept only for logs.
-      return { ...queued, ...(job.id ? { job_id: job.id } : {}) } as BatchJobRecord;
+      return { ...queued, jobId: job.id ?? null } as CreatedBatch;
     } catch (error) {
       await this.cleanupFailedCreate(batch.id, uploadedPaths, client);
       throw error;

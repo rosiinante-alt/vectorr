@@ -20,17 +20,20 @@ export interface StylePreset {
   name: string;
   description: string;
   /** Replicate model identifier, either `owner/name` or `owner/name:version`. */
-  replicateModel: string;
+  replicateModel: ReplicateModelId;
   params: Record<string, unknown>;
   previewImage?: string;
   category: StyleCategory;
 }
 
+/** Replicate's `run()` only accepts `owner/name` or `owner/name:version`. */
+export type ReplicateModelId = `${string}/${string}` | `${string}/${string}:${string}`;
+
 /**
  * Default Replicate model for image-to-image restyling. Accepts an image URL plus
  * a text prompt and a strength multiplier.
  */
-const IMAGE_TO_IMAGE_MODEL = 'fofr/sdxl-emoji' satisfies string;
+const IMAGE_TO_IMAGE_MODEL: ReplicateModelId = 'fofr/sdxl-emoji';
 
 /**
  * All built-in presets. Every entry is image-to-image, so `image` is supplied by
