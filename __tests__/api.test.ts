@@ -516,10 +516,13 @@ describe('POST /api/export', () => {
     expect(res.status).toBe(400);
   });
 
-  it('rejects png in the MVP', async () => {
+  it('exports a raster format when the source is rasterised', async () => {
+    const file = seedFile();
+    fake.objects.set(file.file_path as string, { body: new Blob([SVG]) });
+
     const res = await exportHandler(jsonRequest(url, { file_id: FILE_ID, format: 'png' }));
-    expect(res.status).toBe(400);
-    expect((await res.json()).error).toBe('Only SVG export available in MVP');
+    expect(res.status).toBe(201);
+    expect((await res.json()).format).toBe('png');
   });
 
   it('returns 404 for another user’s file', async () => {
@@ -538,9 +541,11 @@ describe('POST /api/export', () => {
     expect(body).toMatchObject({
       file_id: FILE_ID,
       format: 'svg',
-      file_path: file.file_path,
       file_size_bytes: SVG.length,
     });
+    // Exports are written under their own prefix, not over the source object.
+    expect(body.file_path.startsWith(`exports/${USER_ID}/`)).toBe(true);
+    expect(body.file_path.endsWith('.svg')).toBe(true);
     expect(fake.tables.audit_log[0]).toMatchObject({ action: 'export', resource_id: body.id });
   });
 

@@ -11,6 +11,10 @@ export const CREDIT_COSTS = {
 } as const;
 
 // Pricing tiers via Polar
+//
+// `planKey` points at the entry in src/lib/payments/products.ts that the
+// Subscribe button purchases. Keep the two in step: the catalog decides the
+// tier and credit grant, so this file is the marketing copy only.
 export const PRICING_TIERS = {
   FREE: {
     name: 'Free',
@@ -19,6 +23,7 @@ export const PRICING_TIERS = {
     interval: null,
     description: '5 credits on signup. Try the core conversion flow.',
     polarProductId: '', // no product needed
+    planKey: null,
     features: [
       '5 free credits',
       'PNG/JPG/WEBP → SVG',
@@ -33,6 +38,7 @@ export const PRICING_TIERS = {
     interval: 'month',
     description: '50 credits/month. Best for individuals.',
     polarProductId: process.env.POLAR_PLUS_PRODUCT_ID ?? '',
+    planKey: 'plus_monthly',
     features: [
       '50 credits/month',
       'PNG/JPG/WEBP → SVG',
@@ -49,6 +55,7 @@ export const PRICING_TIERS = {
     interval: 'month',
     description: '200 credits/month shared across 3 seats.',
     polarProductId: process.env.POLAR_TEAM_PRODUCT_ID ?? '',
+    planKey: 'plus_monthly',
     features: [
       '200 credits/month',
       '3 team seats',
@@ -65,6 +72,7 @@ export const PRICING_TIERS = {
     interval: 'month',
     description: '1,000 credits/month for agencies and studios.',
     polarProductId: process.env.POLAR_AGENCY_PRODUCT_ID ?? '',
+    planKey: 'pro_monthly',
     features: [
       '1,000 credits/month',
       'Unlimited seats',
@@ -81,6 +89,7 @@ export const PRICING_TIERS = {
     interval: 'month',
     description: 'Custom volume, SSO, audit logs.',
     polarProductId: process.env.POLAR_ENTERPRISE_PRODUCT_ID ?? '',
+    planKey: 'pro_monthly',
     features: [
       '10,000 credits/month',
       'SSO / SAML',

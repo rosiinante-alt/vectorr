@@ -122,9 +122,10 @@ describe('validateExportFormat', () => {
     expect(validateExportFormat('gif').ok).toBe(false);
   });
 
-  it('rejects valid-but-not-yet-implemented formats', () => {
-    expect(validateExportFormat('png')).toEqual({ ok: false, error: 'Only SVG export available in MVP' });
-    expect(validateExportFormat('pdf')).toEqual({ ok: false, error: 'Only SVG export available in MVP' });
+  it('accepts the raster and vector formats that are now implemented', () => {
+    for (const format of ['png', 'pdf', 'dxf', 'eps', 'gcode', 'dst', 'pes', 'jef']) {
+      expect(validateExportFormat(format)).toEqual({ ok: true, value: format });
+    }
   });
 });
 

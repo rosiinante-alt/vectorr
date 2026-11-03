@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
+import { SubscribeButton } from "@/components/subscribe-button";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { PRICING_TIERS, CREDIT_COSTS } from "@/lib/credits/constants";
@@ -79,14 +80,23 @@ export default function PricingPage() {
                     </p>
 
                     <div className="mt-6">
-                      <ButtonLink
-                        href={isFree ? "/convert" : "/api/checkout"}
-                        size="lg"
-                        variant={isPlus ? "primary" : "secondary"}
-                        className="w-full"
-                      >
-                        {isFree ? "Get started" : "Subscribe"}
-                      </ButtonLink>
+                      {tier.planKey === null ? (
+                        <ButtonLink
+                          href="/convert"
+                          size="lg"
+                          variant="secondary"
+                          className="w-full"
+                        >
+                          Get started
+                        </ButtonLink>
+                      ) : (
+                        <SubscribeButton
+                          planKey={tier.planKey}
+                          variant={isPlus ? "primary" : "secondary"}
+                        >
+                          Subscribe
+                        </SubscribeButton>
+                      )}
                     </div>
                     <ul className="mt-6 grid gap-3 border-t border-[var(--border)] pt-6">
                       {tier.features.map((feature) => (

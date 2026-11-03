@@ -1,6 +1,6 @@
+import { connection, type NextRequest } from "next/server";
 import { polar, organizationId } from "@/lib/polar";
 import { json, serverError } from "@/lib/http";
-import type { NextRequest } from "next/server";
 
 /**
  * GET /api/polar/orders
@@ -22,6 +22,9 @@ import type { NextRequest } from "next/server";
  * }
  */
 export async function GET(req: NextRequest) {
+  // Bails out of prerendering: this reads live Polar data at request time.
+  await connection();
+
   try {
     const response = await polar.orders.list({
       organization_id: organizationId,
