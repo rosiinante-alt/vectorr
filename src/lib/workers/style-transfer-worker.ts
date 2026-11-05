@@ -1,6 +1,7 @@
 import type { Job } from 'bullmq';
 
 import { applyStyleTransfer } from '../ai/style-transfer-service';
+import { refundFailedJob } from '../credits/refund';
 import { createSupabaseAdminClient } from '../supabase/server';
 import { BaseWorker } from './base-worker';
 
@@ -93,11 +94,22 @@ export class StyleTransferWorker extends BaseWorker<StyleTransferJobData> {
       const message = error instanceof Error ? error.message : 'Unknown error';
       await supabase
         .from('ai_generations')
-        .update({ status: 'failed', error_message: message })
+        .update({ error_message: message })
         .eq('id', styleTransferId)
         .eq('user_id', userId);
 
       throw error;
     }
+  }
+
+  protected async onFinalFailure(job: Job<StyleTransferJobData>, error: Error) {
+    const { styleTransferId, userId } = job.data;
+    const supabase = createSupabaseAdminClient();
+    await supabase
+      .from('ai_generations')
+      .update({ status: 'failed', error_message: error.message })
+      .eq('id', styleTransferId)
+      .eq('user_id', userId);
+    await refundFailedJob(supabase, 'generation', styleTransferId);
   }
 }

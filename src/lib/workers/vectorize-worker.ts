@@ -1,6 +1,7 @@
 import type { Job } from 'bullmq';
 
 import { removeBackground, upscaleImage, vectorizeImage } from '../ai/replicate-client';
+import { refundFailedJob } from '../credits/refund';
 import { exportFile } from '../exporters';
 import { createSupabaseAdminClient } from '../supabase/server';
 import type { VectorizeJobData } from '../queue/types';
@@ -96,14 +97,24 @@ export class VectorizeWorker extends BaseWorker<VectorizeJobData> {
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unknown error';
 
-      // A failed status write must not mask the original failure.
+      // Record the error but leave the final `failed` status to onFinalFailure,
+      // so a job that succeeds on retry never shows as failed in between.
       try {
-        await update({ status: 'failed', error_message: message });
+        await update({ error_message: message });
       } catch {
         // Ignored: the job error below is the one that matters.
       }
 
       throw error;
     }
+  }
+
+  protected async onFinalFailure(job: Job<VectorizeJobData>, error: Error) {
+    const supabase = createSupabaseAdminClient();
+    await supabase
+      .from('conversions')
+      .update({ status: 'failed', error_message: error.message })
+      .eq('id', job.data.conversionId);
+    await refundFailedJob(supabase, 'conversion', job.data.conversionId);
   }
 }

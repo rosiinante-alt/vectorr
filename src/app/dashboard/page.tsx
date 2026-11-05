@@ -12,9 +12,10 @@ interface FileRecord {
   filename: string;
   status: string;
   created_at: string;
-  original_size_bytes: number | null;
-  optimized_size_bytes: number | null;
-  file_path: string;
+  output_format: string | null;
+  credits_used: number;
+  error_message: string | null;
+  download_url: string | null;
 }
 
 export default function DashboardPage() {
@@ -49,7 +50,8 @@ export default function DashboardPage() {
 
   const getStatusTone = (status: string): BadgeTone => {
     switch (status) {
-      case 'ready': return 'success';
+      case 'complete': return 'success';
+      case 'pending':
       case 'processing': return 'accent';
       case 'failed': return 'error';
       default: return 'neutral';
@@ -58,9 +60,10 @@ export default function DashboardPage() {
 
   const getStatusLabel = (status: string): string => {
     switch (status) {
-      case 'ready': return 'Complete';
+      case 'complete': return 'Complete';
+      case 'pending': return 'Queued';
       case 'processing': return 'Processing';
-      case 'failed': return 'Failed';
+      case 'failed': return 'Failed (refunded)';
       default: return status;
     }
   };
@@ -73,13 +76,6 @@ export default function DashboardPage() {
       hour: 'numeric',
       minute: '2-digit',
     }).format(date);
-  };
-
-  const formatBytes = (bytes: number | null) => {
-    if (bytes === null) return '—';
-    if (bytes < 1024) return `${bytes} B`;
-    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
   };
 
   return (
@@ -180,20 +176,21 @@ export default function DashboardPage() {
                             </p>
                             <div className="mt-1 flex items-center gap-3 text-[13px] text-text-tertiary">
                               <span>{formatDate(file.created_at)}</span>
-                              {file.original_size_bytes && file.optimized_size_bytes && (
-                                <span className="font-mono">
-                                  {formatBytes(file.original_size_bytes)} → {formatBytes(file.optimized_size_bytes)}
-                                </span>
+                              {file.output_format && (
+                                <span className="font-mono uppercase">{file.output_format}</span>
                               )}
+                              <span className="font-mono">{file.credits_used.toFixed(2)} cr</span>
                             </div>
                           </div>
                           <div className="flex items-center gap-3">
                             <Badge tone={getStatusTone(file.status)}>
                               {getStatusLabel(file.status)}
                             </Badge>
-                            {file.status === 'ready' && (
+                            {file.status === 'complete' && file.download_url && (
                               <a
-                                href={`/api/files/${file.id}/download`}
+                                href={file.download_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="text-[13.5px] font-medium text-accent hover:underline"
                               >
                                 Download

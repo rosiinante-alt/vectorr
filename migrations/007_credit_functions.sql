@@ -59,7 +59,7 @@ declare
   v_balance numeric;
 begin
   insert into user_credits (user_id, balance, tier)
-  values (p_user_id, 0)
+  values (p_user_id, 0, 'free')
   on conflict (user_id) do nothing;
 
   select balance into v_balance

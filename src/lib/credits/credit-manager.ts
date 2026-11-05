@@ -1,16 +1,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 
-/**
- * Credit costs in credits. Values are numeric(6,2) in Postgres, so costs are
- * kept to two decimals.
- */
-export const CREDIT_COSTS = {
-  VECTORIZE: 0.2,
-  REMOVE_BG: 0.1,
-  UPSCALE: 0.25,
-  STYLE_TRANSFER: 0.5,
-  BATCH_CONVERSION: 0.15,
-} as const;
+/** Re-exported so there is one source of truth for prices. */
+export { CREDIT_COSTS } from './constants';
 
 export type CreditReason =
   | 'conversion'
