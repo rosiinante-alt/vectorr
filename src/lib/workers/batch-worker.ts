@@ -2,7 +2,7 @@ import type { Job } from 'bullmq';
 import type { SupabaseClient } from '@supabase/supabase-js';
 
 import { BaseWorker } from './base-worker';
-import { batchCreditCost, contentTypeFor, CREDITS_PER_BATCH_FILE, fileExtension, parseBatchOptions } from '../batch/validation';
+import { batchCreditCost, batchFileCost, contentTypeFor, fileExtension, parseBatchOptions } from '../batch/validation';
 import { convertBatchFile, type ConversionEngine } from '../batch/conversion-engine';
 import { BATCH_BUCKET, type BatchPreprocessing } from '../batch/types';
 import type { BatchJobData } from '../queue/types';
@@ -75,7 +75,7 @@ export class BatchWorker extends BaseWorker<BatchJobData> {
               status: 'complete',
               result_url: publicUrl.publicUrl,
               error_message: null,
-              credits_used: CREDITS_PER_BATCH_FILE,
+              credits_used: batchFileCost(preprocessing as BatchPreprocessing),
               completed_at: new Date().toISOString(),
             })
             .eq('id', file.fileId);
@@ -123,7 +123,7 @@ export class BatchWorker extends BaseWorker<BatchJobData> {
         })
         .eq('id', batchId);
 
-      await this.deductCredits(supabase, userId, completed, batchId);
+      await this.deductCredits(supabase, userId, completed, batchId, preprocessing as BatchPreprocessing);
 
       // A partial batch is still a useful result, so only a total failure throws.
       if (allFailed) {
@@ -164,10 +164,11 @@ export class BatchWorker extends BaseWorker<BatchJobData> {
     userId: string,
     completedFiles: number,
     batchId: string,
+    preprocessing: BatchPreprocessing,
   ) {
     if (completedFiles <= 0) return;
 
-    const amount = batchCreditCost(completedFiles);
+    const amount = batchCreditCost(completedFiles, preprocessing);
     const { data, error } = await supabase.rpc('deduct_credits', {
       p_user_id: userId,
       p_amount: amount,

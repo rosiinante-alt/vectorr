@@ -72,12 +72,15 @@ export async function createExport({
   }
 
   const outputBuffer = Buffer.isBuffer(output) ? output : Buffer.from(output);
-  const outputPath = `exports/${userId}/${crypto.randomUUID()}.${formatCheck.value}`;
+  const extension = formatCheck.value === 'color-separation' ? 'zip' : formatCheck.value;
+  const outputPath = `exports/${userId}/${crypto.randomUUID()}.${extension}`;
   const { error: uploadError } = await supabase.storage
     .from(STORAGE_BUCKET)
     .upload(outputPath, outputBuffer, { upsert: false, contentType: {
       svg: 'image/svg+xml', png: 'image/png', pdf: 'application/pdf', dxf: 'image/vnd.dxf', eps: 'application/postscript',
       gcode: 'text/plain', dst: 'application/octet-stream', pes: 'application/octet-stream', jef: 'application/octet-stream',
+      '3mf': 'application/vnd.ms-package.3dmanufacturing-3dmodel+xml', stl: 'model/stl', obj: 'model/obj',
+      'color-separation': 'application/zip',
     }[formatCheck.value] });
   if (uploadError) return { ok: false, response: serverError(uploadError.message) };
 

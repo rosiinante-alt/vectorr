@@ -25,6 +25,7 @@ export type FailPoint =
   | 'update:files'
   | 'update:optimization_quota'
   | 'select:files'
+  | 'select:conversions'
   | 'select:exports'
   | 'select:optimization_quota'
   | 'delete:files'
@@ -57,6 +58,7 @@ export function createFakeSupabase(user: TestUser | null): FakeSupabase {
   const tables: Record<string, Record<string, unknown>[]> = {
     users: [],
     files: [],
+    conversions: [],
     exports: [],
     audit_log: [],
     optimization_quota: [],

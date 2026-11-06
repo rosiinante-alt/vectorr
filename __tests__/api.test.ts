@@ -101,6 +101,25 @@ function seedFile(overrides: Record<string, unknown> = {}) {
   return row;
 }
 
+function seedConversion(overrides: Record<string, unknown> = {}) {
+  const row = {
+    id: FILE_ID,
+    user_id: USER_ID,
+    original_file_url: `https://example.test/${USER_ID}/123-logo.png`,
+    converted_file_url: 'https://example.test/out/logo.svg',
+    original_format: 'png',
+    output_format: 'svg',
+    status: 'complete',
+    credits_used: 0.2,
+    error_message: null,
+    created_at: '2026-11-01T00:00:00.000Z',
+    completed_at: '2026-11-01T00:00:05.000Z',
+    ...overrides,
+  };
+  fake.tables.conversions.push(row);
+  return row;
+}
+
 function seedExport(overrides: Record<string, unknown> = {}) {
   const row = {
     id: EXPORT_ID,
@@ -365,9 +384,9 @@ describe('GET /api/files', () => {
     expect(res.status).toBe(401);
   });
 
-  it('returns only the caller’s files', async () => {
-    seedFile();
-    seedFile({ id: '55555555-5555-4555-8555-555555555555', user_id: OTHER_USER_ID });
+  it('returns only the caller’s conversions', async () => {
+    seedConversion();
+    seedConversion({ id: '55555555-5555-4555-8555-555555555555', user_id: OTHER_USER_ID });
 
     const res = await listHandler(new NextRequest('http://localhost:3000/api/files'));
     expect(res.status).toBe(200);
@@ -376,8 +395,21 @@ describe('GET /api/files', () => {
     expect(body.total).toBe(1);
   });
 
+  it('maps a complete conversion to a download link', async () => {
+    seedConversion();
+    const res = await listHandler(new NextRequest('http://localhost:3000/api/files'));
+    const [file] = (await res.json()).files;
+    expect(file).toMatchObject({
+      filename: 'logo.png',
+      status: 'complete',
+      output_format: 'svg',
+      credits_used: 0.2,
+      download_url: 'https://example.test/out/logo.svg',
+    });
+  });
+
   it('clamps pagination params', async () => {
-    seedFile();
+    seedConversion();
     const res = await listHandler(
       new NextRequest('http://localhost:3000/api/files?limit=9999&offset=-5'),
     );
@@ -387,7 +419,7 @@ describe('GET /api/files', () => {
   });
 
   it('returns 500 on a query error', async () => {
-    fake.failures.add('select:files');
+    fake.failures.add('select:conversions');
     const res = await listHandler(new NextRequest('http://localhost:3000/api/files'));
     expect(res.status).toBe(500);
   });

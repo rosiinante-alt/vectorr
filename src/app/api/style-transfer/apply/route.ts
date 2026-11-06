@@ -4,7 +4,7 @@ import { creditManager, CREDIT_COSTS } from '@/lib/credits/credit-manager';
 import { badRequest, jsonError, serverError, unauthorized } from '@/lib/http';
 import { styleTransferQueue } from '@/lib/queue/queues';
 import { clientKey, LIMITS, rateLimit } from '@/lib/rate-limit';
-import { authenticate } from '@/lib/supabase/server';
+import { authenticate, createSupabaseAdminClient } from '@/lib/supabase/server';
 import { isStylePresetId, STYLE_PRESETS } from '@/lib/ai/style-transfer-presets';
 
 const MAX_CUSTOM_PARAMS_BYTES = 4096;
@@ -57,8 +57,12 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  // Credit functions and job rows are service-role only; the user's identity
+  // comes from `authenticate()` above.
+  const admin = createSupabaseAdminClient();
+
   const hasCredits = await creditManager.hasEnoughCredits(
-    supabase,
+    admin,
     user.id,
     CREDIT_COSTS.STYLE_TRANSFER,
   );
@@ -66,7 +70,7 @@ export async function POST(request: NextRequest) {
     return jsonError('Insufficient credits', 402);
   }
 
-  const { data: transfer, error } = await supabase
+  const { data: transfer, error } = await admin
     .from('ai_generations')
     .insert({
       user_id: user.id,
@@ -87,14 +91,14 @@ export async function POST(request: NextRequest) {
   // `deduct_credits` re-checks under a row lock, so this can still fail here
   // even though the advisory check above passed.
   const charged = await creditManager.deductCredits(
-    supabase,
+    admin,
     user.id,
     CREDIT_COSTS.STYLE_TRANSFER,
     'ai_generation',
   );
 
   if (!charged) {
-    await supabase.from('ai_generations').delete().eq('id', transfer.id);
+    await admin.from('ai_generations').delete().eq('id', transfer.id);
     return jsonError('Insufficient credits', 402);
   }
 
@@ -107,7 +111,7 @@ export async function POST(request: NextRequest) {
       customParams: customParams as Record<string, unknown> | undefined,
     });
 
-    await supabase
+    await admin
       .from('ai_generations')
       .update({ job_id: String(job.id), status: 'pending' })
       .eq('id', transfer.id);
@@ -115,8 +119,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ id: transfer.id, jobId: job.id }, { status: 202 });
   } catch (queueError) {
     // Never leave a paid job that will not run.
-    await creditManager.addCredits(supabase, user.id, CREDIT_COSTS.STYLE_TRANSFER, 'refund');
-    await supabase
+    await creditManager.addCredits(admin, user.id, CREDIT_COSTS.STYLE_TRANSFER, 'refund');
+    await admin
       .from('ai_generations')
       .update({
         status: 'failed',

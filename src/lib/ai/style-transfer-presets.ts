@@ -33,7 +33,10 @@ export type ReplicateModelId = `${string}/${string}` | `${string}/${string}:${st
  * Default Replicate model for image-to-image restyling. Accepts an image URL plus
  * a text prompt and a strength multiplier.
  */
-const IMAGE_TO_IMAGE_MODEL: ReplicateModelId = 'fofr/sdxl-emoji';
+// Pinned: the unversioned /v1/models/{owner}/{name}/predictions route 404s for
+// community models, so run() must target a version hash.
+const IMAGE_TO_IMAGE_MODEL: ReplicateModelId =
+  'fofr/sdxl-emoji:dee76b5afde21b0f01ed7925f0665b7e879c50ee718c5f78a9d38e04d523cc5e';
 
 /**
  * All built-in presets. Every entry is image-to-image, so `image` is supplied by

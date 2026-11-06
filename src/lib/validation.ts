@@ -1,7 +1,7 @@
 import type { ExportFormat } from './types';
 
 export const MAX_FILE_BYTES = 10 * 1024 * 1024; // 10 MB
-export const SUPPORTED_EXPORT_FORMATS: readonly ExportFormat[] = ['svg', 'png', 'pdf', 'dxf', 'eps', 'gcode', 'dst', 'pes', 'jef'];
+export const SUPPORTED_EXPORT_FORMATS: readonly ExportFormat[] = ['svg', 'png', 'pdf', 'dxf', 'eps', 'gcode', 'dst', 'pes', 'jef', '3mf', 'stl', 'obj', 'color-separation'];
 export const MVP_EXPORT_FORMATS: readonly ExportFormat[] = SUPPORTED_EXPORT_FORMATS;
 export const STORAGE_BUCKET = 'vector-files';
 

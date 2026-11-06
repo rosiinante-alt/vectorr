@@ -110,15 +110,23 @@ export class BatchManager {
         fileRows.push(...uploaded);
       }
 
-      const { data: batchFiles, error: filesError } = await client
+      // Users may only read batch_files under RLS; rows describe server-side
+      // work, so they are written with the admin client.
+      const { data: insertedFiles, error: filesError } = await this.adminFactory()
         .from('batch_files')
         .insert(fileRows)
-        .select('id, file_url')
-        .order('created_at', { ascending: true });
+        .select('id, file_url');
 
-      if (filesError || !batchFiles) {
+      if (filesError || !insertedFiles) {
         throw new BatchError(filesError?.message ?? 'Could not record batch files', 500);
       }
+
+      // Every row in one insert shares the same created_at, so sorting on it
+      // cannot recover upload order. Each file_url is unique, so match on it.
+      const order = new Map(fileRows.map((row, index) => [row.file_url, index]));
+      const batchFiles = [...insertedFiles].sort(
+        (a, b) => (order.get(a.file_url as string) ?? 0) - (order.get(b.file_url as string) ?? 0),
+      );
 
       const job = await this.enqueue({
         batchId: batch.id,
@@ -128,7 +136,7 @@ export class BatchManager {
         outputFormat: options.outputFormat,
       });
 
-      const { data: queued, error: queueError } = await client
+      const { data: queued, error: queueError } = await this.adminFactory()
         .from('batch_jobs')
         .update({ status: 'processing' })
         .eq('id', batch.id)

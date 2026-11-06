@@ -1,16 +1,27 @@
 import type { BatchOutputFormat, BatchOptions, BatchPreprocessing } from './types';
 import { BATCH_OUTPUT_FORMATS, MAX_BATCH_FILES } from './types';
+import { CREDIT_COSTS } from '../credits/constants';
 
 /**
  * Credits deducted per converted file in a batch. Deliberately identical to the
  * `conversions.credits_used` default so a batch of N files costs exactly what N
  * single conversions would — batching is a convenience, not a discount.
  */
-export const CREDITS_PER_BATCH_FILE = 0.2;
+export const CREDITS_PER_BATCH_FILE = CREDIT_COSTS.VECTORIZE;
 
-export function batchCreditCost(fileCount: number): number {
+/** Per-file price including preprocessing, matching a single /api/convert call. */
+export function batchFileCost(preprocessing: BatchPreprocessing = {}): number {
+  const cost =
+    CREDIT_COSTS.VECTORIZE +
+    (preprocessing.removeBg ? CREDIT_COSTS.REMOVE_BG : 0) +
+    (preprocessing.upscale === '2x' ? CREDIT_COSTS.UPSCALE_2X : 0) +
+    (preprocessing.upscale === '4x' ? CREDIT_COSTS.UPSCALE_4X : 0);
+  return Math.round(cost * 100) / 100;
+}
+
+export function batchCreditCost(fileCount: number, preprocessing: BatchPreprocessing = {}): number {
   // Round to 2dp to stay within numeric(6,2) and avoid float drift like 0.6000001.
-  return Math.round(fileCount * CREDITS_PER_BATCH_FILE * 100) / 100;
+  return Math.round(fileCount * batchFileCost(preprocessing) * 100) / 100;
 }
 
 export function isBatchOutputFormat(value: unknown): value is BatchOutputFormat {

@@ -138,7 +138,7 @@ describe('BatchWorker.process', () => {
     expect(fake.rpcCalls).toEqual([
       {
         fn: 'deduct_credits',
-        args: { p_user_id: 'user-1', p_amount: 0.4, p_reason: 'batch_conversion', p_conversion_id: null },
+        args: { p_user_id: 'user-1', p_amount: 0.54, p_reason: 'batch_conversion', p_conversion_id: null },
       },
     ]);
   });
@@ -171,7 +171,7 @@ describe('BatchWorker.process', () => {
     expect(finalBatchUpdate?.values).toMatchObject({ status: 'partial', completed_files: 1, failed_files: 1 });
 
     // Only the successfully converted file is charged.
-    expect(fake.rpcCalls[0].args).toMatchObject({ p_amount: 0.2 });
+    expect(fake.rpcCalls[0].args).toMatchObject({ p_amount: 0.27 });
   });
 
   it('throws and marks the batch failed when every file fails', async () => {

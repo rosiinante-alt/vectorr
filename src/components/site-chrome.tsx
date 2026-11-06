@@ -62,6 +62,24 @@ export function SiteHeader({ initialUser = null }: { initialUser?: User | null }
           >
             Pricing
           </Link>
+          <Link
+            href="/resources"
+            className="hidden rounded-[var(--radius-sm)] px-3 py-2 text-[14px] font-medium text-text-secondary transition-colors hover:bg-[rgba(0,0,0,0.045)] hover:text-text-primary sm:block"
+          >
+            Resources
+          </Link>
+          <Link
+            href="/for-crafters/cricut-design-space"
+            className="hidden rounded-[var(--radius-sm)] px-3 py-2 text-[14px] font-medium text-text-secondary transition-colors hover:bg-[rgba(0,0,0,0.045)] hover:text-text-primary lg:block"
+          >
+            For Crafters
+          </Link>
+          <Link
+            href="/compare/vectosolve"
+            className="hidden rounded-[var(--radius-sm)] px-3 py-2 text-[14px] font-medium text-text-secondary transition-colors hover:bg-[rgba(0,0,0,0.045)] hover:text-text-primary sm:block"
+          >
+            Compare
+          </Link>
           {user ? (
             <>
               <Link
@@ -93,15 +111,24 @@ export function SiteFooter() {
       links: [
         { label: "How it works", href: "/#how" },
         { label: "Pricing", href: "/pricing" },
+        { label: "Resources", href: "/resources" },
         { label: "Open app", href: "/dashboard" },
+      ],
+    },
+    {
+      title: "For Crafters",
+      links: [
+        { label: "Cricut Design Space", href: "/for-crafters/cricut-design-space" },
+        { label: "Laser Engraving", href: "/for-crafters/laser-engraving" },
+        { label: "Embroidery", href: "/for-crafters/embroidery-digitizing" },
       ],
     },
     {
       title: "Compare",
       links: [
-        { label: "vs SVGO", href: "/pricing#compare" },
-        { label: "vs Illustrator", href: "/pricing#compare" },
-        { label: "vs Figma export", href: "/pricing#compare" },
+        { label: "vs Vectosolve", href: "/compare/vectosolve" },
+        { label: "vs Illustrator", href: "/compare/adobe-illustrator" },
+        { label: "vs Inkscape", href: "/compare/inkscape" },
       ],
     },
     {

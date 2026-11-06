@@ -1,5 +1,5 @@
 export type FileStatus = 'processing' | 'ready' | 'failed';
-export type ExportFormat = 'svg' | 'png' | 'pdf' | 'dxf' | 'eps' | 'gcode' | 'dst' | 'pes' | 'jef';
+export type ExportFormat = 'svg' | 'png' | 'pdf' | 'dxf' | 'eps' | 'gcode' | 'dst' | 'pes' | 'jef' | '3mf' | 'stl' | 'obj' | 'color-separation';
 export type AuditAction = 'upload' | 'export' | 'delete' | 'login';
 
 export interface User {

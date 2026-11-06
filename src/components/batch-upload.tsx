@@ -114,7 +114,7 @@ export function BatchUpload({ onBatchCreate }: BatchUploadProps) {
       <CardHeader>
         <CardTitle as="h3">Batch upload ({files.length}/{MAX_BATCH_FILES})</CardTitle>
         <CardDescription>
-          {CREDITS_PER_BATCH_FILE} credits per file — {batchCreditCost(files.length)} for this batch.
+          {CREDITS_PER_BATCH_FILE} credits per file. {batchCreditCost(files.length)} for this batch.
         </CardDescription>
       </CardHeader>
 

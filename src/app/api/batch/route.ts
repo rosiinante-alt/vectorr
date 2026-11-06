@@ -2,10 +2,11 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 import { BatchError, batchManager } from '@/lib/batch/batch-manager';
 import { MAX_BATCH_BYTES, MAX_BATCH_FILES } from '@/lib/batch/types';
-import { validateBatchFileCount, validateBatchOptions } from '@/lib/batch/validation';
+import { batchCreditCost, validateBatchFileCount, validateBatchOptions } from '@/lib/batch/validation';
+import { creditManager } from '@/lib/credits/credit-manager';
 import { badRequest, jsonError, serverError, unauthorized } from '@/lib/http';
 import { clientKey, rateLimit } from '@/lib/rate-limit';
-import { authenticate } from '@/lib/supabase/server';
+import { authenticate, createSupabaseAdminClient } from '@/lib/supabase/server';
 
 /** Batches are far heavier than single uploads, so the window is generous. */
 const BATCH_LIMITS = { limit: 5, windowMs: 10 * 60 * 1000 }; // 5 batches per 10 minutes
@@ -57,6 +58,24 @@ export async function POST(request: NextRequest) {
 
   const options = validateBatchOptions(preprocessing, formData.get('outputFormat') ?? undefined);
   if (!options.ok || !options.value) return badRequest(options.error ?? 'Invalid batch options');
+
+  // Credits are charged after conversion, only for files that succeed, so a
+  // failed file never costs the customer. Check up front that the balance
+  // covers the whole batch so the work is never done unpaid.
+  const required = batchCreditCost(files.length, options.value.preprocessing);
+  try {
+    const { balance } = await creditManager.getBalance(createSupabaseAdminClient(), user.id);
+    if (balance < required) {
+      return jsonError(
+        `Insufficient credits. This batch requires ${required.toFixed(2)} credits, but you have ${balance.toFixed(2)}.`,
+        402,
+        { creditCost: required, remainingBalance: balance },
+      );
+    }
+  } catch (error) {
+    console.error('Balance check failed:', error);
+    return serverError('Could not check credit balance');
+  }
 
   try {
     const batch = await batchManager.createBatch({

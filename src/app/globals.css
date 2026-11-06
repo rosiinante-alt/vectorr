@@ -185,6 +185,80 @@ html.js .reveal.reveal-vis {
 }
 
 /* ------------------------------------------------------------
+   Long-form prose (resource guides)
+   ------------------------------------------------------------ */
+.resource-prose {
+  color: var(--text-primary);
+  font-size: 17.5px;
+  line-height: 1.75;
+}
+.resource-prose > * + * {
+  margin-top: 1.15em;
+}
+.resource-prose h2 {
+  margin-top: 2.4em;
+  font-size: 1.42em;
+  line-height: 1.25;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.resource-prose h2:first-child {
+  margin-top: 0;
+}
+.resource-prose strong {
+  font-weight: 600;
+}
+.resource-prose ul,
+.resource-prose ol {
+  padding-left: 1.4em;
+}
+.resource-prose ul {
+  list-style: disc;
+}
+.resource-prose ol {
+  list-style: decimal;
+}
+.resource-prose li + li {
+  margin-top: 0.5em;
+}
+.resource-prose li::marker {
+  color: var(--text-tertiary);
+}
+.resource-prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.resource-prose .table-wrap {
+  overflow-x: auto;
+  margin-top: 1.6em;
+  border-radius: var(--radius-lg);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+.resource-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86em;
+  line-height: 1.5;
+}
+.resource-prose th,
+.resource-prose td {
+  padding: 0.7em 0.9em;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+.resource-prose th {
+  font-weight: 600;
+  background: var(--bg-secondary);
+  white-space: nowrap;
+}
+.resource-prose tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* ------------------------------------------------------------
    Motion safety
    ------------------------------------------------------------ */
 @media (prefers-reduced-motion: reduce) {

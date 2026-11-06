@@ -1,6 +1,6 @@
 /**
  * SEO-Optimized Converter Landing Pages Configuration
- * Generates 67 converter pages for format conversions and use-case specific workflows
+ * Generates 83 converter pages for format conversions and use-case specific workflows
  */
 
 export interface ConverterConfig {
@@ -97,6 +97,22 @@ export const CONVERTER_PAGES = [
   'image-to-pes',
   'image-to-jef',
   'image-to-g-code',
+  'svg-to-stl',
+  'svg-to-obj',
+  'image-to-stl',
+  'svg-to-gcode',
+  'image-to-gcode',
+  'dxf-to-gcode',
+  'zip-svg-batch',
+  'multiple-files-to-svg',
+  'svg-color-separation',
+  'image-to-cmyk-svg',
+  'raw-to-svg',
+  'cr2-to-svg',
+  'nef-to-svg',
+  'image-to-obj',
+  'dxf-to-svg',
+  'svg-to-3d-model',
 
   // Additional Format Converters (7)
   'avif-to-svg',
@@ -1484,6 +1500,162 @@ export const CONVERTER_CONFIGS: Record<string, ConverterConfig> = {
     },
   },
 
+  'svg-to-stl': {
+    title: 'SVG to STL', seoTitle: 'SVG to STL Converter - Turn Vector Art into 3D Printable Models',
+    seoDescription: 'Convert SVG artwork into a watertight STL mesh for 3D printing. Set extrusion depth and export a clean model for slicing software.',
+    inputFormat: 'SVG', outputFormat: 'STL', useCases: ['3D printing', 'Relief plaques', 'Custom signs'],
+    keywords: ['svg to stl', 'convert svg to stl', '3d print svg', 'svg extrusion'],
+    content: generateContent('SVG', 'STL', 'svg-to-stl'),
+    schema: { toolName: 'SVG to STL Converter', inputName: 'SVG Vector', outputName: 'STL 3D Model', steps: [{ name: 'Upload', text: 'Upload a closed-path SVG' }, { name: 'Extrude', text: 'Choose model depth and resolve paths' }, { name: 'Download', text: 'Download the printable STL mesh' }] },
+  },
+
+  'svg-to-obj': {
+    title: 'SVG to OBJ', seoTitle: 'SVG to OBJ Converter - Export Vector Designs as 3D Meshes',
+    seoDescription: 'Convert SVG paths into OBJ geometry for Blender, Maya, and other 3D tools. Extrude logos and illustrations into editable meshes online.',
+    inputFormat: 'SVG', outputFormat: 'OBJ', useCases: ['3D logo modeling', 'Game assets', 'Blender workflows'],
+    keywords: ['svg to obj', 'convert svg to obj', 'vector to 3d mesh', 'obj logo converter'],
+    content: generateContent('SVG', 'OBJ', 'svg-to-obj'),
+    schema: { toolName: 'SVG to OBJ Converter', inputName: 'SVG Vector', outputName: 'OBJ Mesh', steps: [{ name: 'Upload', text: 'Select your SVG design' }, { name: 'Build', text: 'Extrude paths into polygon geometry' }, { name: 'Download', text: 'Download the OBJ model for 3D editing' }] },
+  },
+
+  'image-to-stl': {
+    title: 'Image to STL', seoTitle: 'Image to STL Converter - Create 3D Printable Reliefs',
+    seoDescription: 'Convert a PNG or JPG image into an STL relief model. Adjust contrast, base thickness, and height for lithophanes, signs, and plaques.',
+    inputFormat: 'Image', outputFormat: 'STL', useCases: ['Lithophanes', '3D printed signs', 'Relief art'],
+    keywords: ['image to stl', 'jpg to stl', 'png to stl', '3d relief maker'],
+    content: generateContent('Image', 'STL', 'image-to-stl'),
+    schema: { toolName: 'Image to STL Converter', inputName: 'PNG or JPG Image', outputName: 'STL Relief Model', steps: [{ name: 'Upload', text: 'Upload a high-contrast image' }, { name: 'Shape', text: 'Tune relief height and base thickness' }, { name: 'Download', text: 'Download the STL for slicing' }] },
+  },
+
+  'svg-to-gcode': {
+    title: 'SVG to G-code', seoTitle: 'SVG to G-code Converter - Generate CNC and Laser Toolpaths',
+    seoDescription: 'Turn SVG paths into machine-ready G-code for CNC routers, plotters, and laser engravers. Configure feed rate, depth, and travel moves.',
+    inputFormat: 'SVG', outputFormat: 'G-code', useCases: ['CNC routing', 'Laser engraving', 'Pen plotting'],
+    keywords: ['svg to gcode', 'svg g-code generator', 'cnc svg converter', 'laser gcode'],
+    content: generateContent('SVG', 'G-code', 'svg-to-gcode'),
+    schema: { toolName: 'SVG to G-code Converter', inputName: 'SVG Toolpath Design', outputName: 'G-code Program', steps: [{ name: 'Upload', text: 'Upload paths with a defined scale' }, { name: 'Configure', text: 'Set feed rate, plunge depth, and safe height' }, { name: 'Download', text: 'Download the generated G-code' }] },
+  },
+
+  'image-to-gcode': {
+    title: 'Image to G-code',
+    seoTitle: 'Image to G-code Converter - Create CNC Paths from Images',
+    seoDescription: 'Convert image artwork into G-code for CNC routers, laser engravers, and plotters. Trace the source, set machine parameters, and export a practical toolpath.',
+    inputFormat: 'Image',
+    outputFormat: 'G-code',
+    useCases: ['CNC relief work', 'Laser engraving', 'Pen plotting', 'Workshop automation'],
+    keywords: ['image to gcode', 'image to g-code', 'image cnc converter', 'picture to gcode'],
+    content: generateContent('Image', 'G-code', 'image-to-gcode'),
+    schema: {
+      toolName: 'Image to G-code Converter',
+      inputName: 'Image File',
+      outputName: 'G-code Toolpath',
+      steps: [
+        { name: 'Upload', text: 'Upload a clear image or logo' },
+        { name: 'Configure', text: 'Set tracing, feed, and depth parameters' },
+        { name: 'Download', text: 'Download the generated G-code' },
+      ],
+    },
+  },
+
+  'dxf-to-gcode': {
+    title: 'DXF to G-code', seoTitle: 'DXF to G-code Converter - Convert CAD Drawings to Toolpaths',
+    seoDescription: 'Convert DXF linework into G-code for CNC routers and laser machines. Preserve CAD dimensions while preparing efficient cutting paths.',
+    inputFormat: 'DXF', outputFormat: 'G-code', useCases: ['CNC machining', 'CAD fabrication', 'Laser cutting'],
+    keywords: ['dxf to gcode', 'cad to g-code', 'cnc dxf converter', 'dxf toolpath'],
+    content: generateContent('DXF', 'G-code', 'dxf-to-gcode'),
+    schema: { toolName: 'DXF to G-code Converter', inputName: 'DXF CAD Drawing', outputName: 'G-code Toolpath', steps: [{ name: 'Upload', text: 'Upload a DXF drawing' }, { name: 'Map', text: 'Map layers to cutting operations' }, { name: 'Download', text: 'Download machine-ready G-code' }] },
+  },
+
+  'zip-svg-batch': {
+    title: 'ZIP to SVG Batch Converter', seoTitle: 'ZIP to SVG Batch Converter - Convert an Archive of Images',
+    seoDescription: 'Upload a ZIP archive of supported images and convert the collection to SVG in one batch. Keep files organized with a downloadable result archive.',
+    inputFormat: 'ZIP Archive', outputFormat: 'SVG Batch', useCases: ['Bulk vectorization', 'Design libraries', 'Archive migration'],
+    keywords: ['zip to svg', 'batch image to svg', 'svg archive converter', 'bulk vectorizer'],
+    content: generateContent('ZIP Archive', 'SVG Batch', 'zip-svg-batch'),
+    schema: { toolName: 'ZIP to SVG Batch Converter', inputName: 'ZIP Image Archive', outputName: 'ZIP of SVG Files', steps: [{ name: 'Upload', text: 'Upload a ZIP containing image files' }, { name: 'Convert', text: 'Vectorize each supported image' }, { name: 'Download', text: 'Download the organized SVG archive' }] },
+  },
+
+  'multiple-files-to-svg': {
+    title: 'Multiple Files to SVG', seoTitle: 'Multiple Files to SVG Converter - Batch Convert Images Online',
+    seoDescription: 'Convert multiple PNG, JPG, WebP, and other image files to SVG together. Review each result and download a tidy batch without repetitive uploads.',
+    inputFormat: 'Multiple Images', outputFormat: 'SVG Files', useCases: ['Batch conversion', 'Icon libraries', 'Product catalogs'],
+    keywords: ['multiple files to svg', 'batch svg converter', 'bulk image vectorizer', 'images to svg'],
+    content: generateContent('Multiple Images', 'SVG Files', 'multiple-files-to-svg'),
+    schema: { toolName: 'Multiple Files to SVG Converter', inputName: 'Image File Set', outputName: 'SVG File Set', steps: [{ name: 'Select', text: 'Choose several image files at once' }, { name: 'Convert', text: 'Process every file with matching settings' }, { name: 'Download', text: 'Download the complete SVG batch' }] },
+  },
+
+  'svg-color-separation': {
+    title: 'SVG Color Separation', seoTitle: 'SVG Color Separation Tool - Split Artwork into Print Layers',
+    seoDescription: 'Separate SVG artwork into clean, editable color layers for screen printing, vinyl, and spot-color production. Export each ink as an organized SVG.',
+    inputFormat: 'SVG', outputFormat: 'Separated SVG Layers', useCases: ['Screen printing', 'Spot-color graphics', 'Vinyl cutting'],
+    keywords: ['svg color separation', 'separate svg colors', 'screen print color layers', 'spot color svg'],
+    content: generateContent('SVG', 'Separated Color Layers', 'svg-color-separation'),
+    schema: { toolName: 'SVG Color Separation Tool', inputName: 'Multicolor SVG', outputName: 'Color-Separated SVG Layers', steps: [{ name: 'Upload', text: 'Upload multicolor SVG artwork' }, { name: 'Separate', text: 'Group shapes into individual color layers' }, { name: 'Download', text: 'Download production-ready layer files' }] },
+  },
+
+  'image-to-cmyk-svg': {
+    title: 'Image to CMYK SVG', seoTitle: 'Image to CMYK SVG Converter - Prepare Artwork for Four-Color Print',
+    seoDescription: 'Convert raster artwork into a CMYK-aware SVG workflow for print production. Inspect cyan, magenta, yellow, and black separations before output.',
+    inputFormat: 'Image', outputFormat: 'CMYK SVG', useCases: ['CMYK printing', 'Packaging artwork', 'Print proofing'],
+    keywords: ['image to cmyk svg', 'cmyk svg converter', 'rgb to cmyk vector', 'print color separation'],
+    content: generateContent('Image', 'CMYK SVG', 'image-to-cmyk-svg'),
+    schema: { toolName: 'Image to CMYK SVG Converter', inputName: 'RGB Image', outputName: 'CMYK SVG Artwork', steps: [{ name: 'Upload', text: 'Upload the source image' }, { name: 'Separate', text: 'Build cyan, magenta, yellow, and black channels' }, { name: 'Download', text: 'Download the CMYK SVG output' }] },
+  },
+
+  'raw-to-svg': {
+    title: 'RAW to SVG', seoTitle: 'RAW to SVG Converter - Vectorize Camera RAW Images',
+    seoDescription: 'Convert camera RAW images into scalable SVG artwork after developing the source image. Useful for tracing logos, line art, and high-detail captures.',
+    inputFormat: 'RAW Image', outputFormat: 'SVG', useCases: ['Camera workflow', 'Photo tracing', 'High-resolution artwork'],
+    keywords: ['raw to svg', 'camera raw to vector', 'raw image converter', 'raw vectorizer'],
+    content: generateContent('RAW', 'SVG', 'raw-to-svg'),
+    schema: { toolName: 'RAW to SVG Converter', inputName: 'Camera RAW File', outputName: 'SVG Vector', steps: [{ name: 'Upload', text: 'Upload a supported camera RAW file' }, { name: 'Develop', text: 'Prepare tonal detail for vector tracing' }, { name: 'Download', text: 'Download the scalable SVG result' }] },
+  },
+
+  'cr2-to-svg': {
+    title: 'CR2 to SVG', seoTitle: 'CR2 to SVG Converter - Convert Canon RAW Photos to Vectors',
+    seoDescription: 'Convert Canon CR2 camera files into SVG vector artwork. Preserve important edges from high-resolution captures for logos, illustrations, and print.',
+    inputFormat: 'CR2', outputFormat: 'SVG', useCases: ['Canon photo conversion', 'Logo tracing', 'Print illustration'],
+    keywords: ['cr2 to svg', 'canon raw to svg', 'cr2 vector converter', 'cr2 image to vector'],
+    content: generateContent('CR2', 'SVG', 'cr2-to-svg'),
+    schema: { toolName: 'CR2 to SVG Converter', inputName: 'Canon CR2 Image', outputName: 'SVG Vector', steps: [{ name: 'Upload', text: 'Upload your Canon CR2 file' }, { name: 'Trace', text: 'Analyze contrast and generate vector paths' }, { name: 'Download', text: 'Download the SVG artwork' }] },
+  },
+
+  'nef-to-svg': {
+    title: 'NEF to SVG', seoTitle: 'NEF to SVG Converter - Convert Nikon RAW Images to Vector',
+    seoDescription: 'Convert Nikon NEF camera images into SVG vectors for editing, signage, and print projects. Start with detailed RAW captures and export scalable paths.',
+    inputFormat: 'NEF', outputFormat: 'SVG', useCases: ['Nikon photo conversion', 'Artwork tracing', 'Sign design'],
+    keywords: ['nef to svg', 'nikon raw to svg', 'nef vector converter', 'nef image to vector'],
+    content: generateContent('NEF', 'SVG', 'nef-to-svg'),
+    schema: { toolName: 'NEF to SVG Converter', inputName: 'Nikon NEF Image', outputName: 'SVG Vector', steps: [{ name: 'Upload', text: 'Upload a Nikon NEF image' }, { name: 'Vectorize', text: 'Trace visible forms into editable paths' }, { name: 'Download', text: 'Download the SVG file' }] },
+  },
+
+  'image-to-obj': {
+    title: 'Image to OBJ', seoTitle: 'Image to OBJ Converter - Create 3D Meshes from Artwork',
+    seoDescription: 'Turn a logo or image into an OBJ mesh for 3D scenes and product mockups. Create an extruded model from a clean source image in a few steps.',
+    inputFormat: 'Image', outputFormat: 'OBJ', useCases: ['3D logos', 'Product visualization', 'Game assets'],
+    keywords: ['image to obj', 'jpg to obj', 'png to obj', 'image 3d mesh'],
+    content: generateContent('Image', 'OBJ', 'image-to-obj'),
+    schema: { toolName: 'Image to OBJ Converter', inputName: 'Logo or Image', outputName: 'OBJ 3D Mesh', steps: [{ name: 'Upload', text: 'Upload a crisp logo or graphic' }, { name: 'Model', text: 'Trace and extrude the visible shapes' }, { name: 'Download', text: 'Download the OBJ for your 3D application' }] },
+  },
+
+  'dxf-to-svg': {
+    title: 'DXF to SVG', seoTitle: 'DXF to SVG Converter - Convert CAD Drawings for Web and Design',
+    seoDescription: 'Convert DXF CAD drawings to lightweight SVG files for web previews, documentation, and design editing while retaining accurate line geometry.',
+    inputFormat: 'DXF', outputFormat: 'SVG', useCases: ['CAD previews', 'Technical documentation', 'Web diagrams'],
+    keywords: ['dxf to svg', 'cad to svg', 'convert dxf drawing', 'dxf web preview'],
+    content: generateContent('DXF', 'SVG', 'dxf-to-svg'),
+    schema: { toolName: 'DXF to SVG Converter', inputName: 'DXF CAD File', outputName: 'SVG Drawing', steps: [{ name: 'Upload', text: 'Upload a DXF drawing' }, { name: 'Convert', text: 'Translate CAD entities into SVG paths' }, { name: 'Download', text: 'Download the scalable SVG drawing' }] },
+  },
+
+  'svg-to-3d-model': {
+    title: 'SVG to 3D Model', seoTitle: 'SVG to 3D Model Converter - Extrude Vector Art Online',
+    seoDescription: 'Convert SVG illustrations and logos into downloadable 3D models. Turn flat paths into extruded geometry for printing, rendering, and prototypes.',
+    inputFormat: 'SVG', outputFormat: '3D Model', useCases: ['3D prototyping', 'Logo modeling', 'Decorative objects'],
+    keywords: ['svg to 3d model', 'extrude svg', 'vector to 3d', 'svg 3d converter'],
+    content: generateContent('SVG', '3D Model', 'svg-to-3d-model'),
+    schema: { toolName: 'SVG to 3D Model Converter', inputName: 'SVG Vector', outputName: '3D Model', steps: [{ name: 'Upload', text: 'Upload a path-based SVG' }, { name: 'Extrude', text: 'Set depth and inspect the 3D preview' }, { name: 'Download', text: 'Download the generated 3D model' }] },
+  },
+
   // ============= ADDITIONAL FORMAT CONVERTERS (7) =============
 
   'avif-to-svg': {
@@ -2267,6 +2439,166 @@ function generateContent(
 </ul>
 
 <p>Convert your file now!</p>
+`,
+
+    'svg-to-stl': (inp, out) => `
+<h1>Turn ${inp} Paths into a Printable ${out} Model</h1>
+<p>Convert clean SVG artwork into an extruded STL mesh for 3D printing. This workflow is useful for logos, plaques, signs, badges, and relief designs that begin as flat vector paths.</p>
+<h2>Prepare a Reliable Mesh</h2>
+<p>Closed paths become solid faces while open paths are flagged for review. Choose an extrusion depth, add a base when needed, and inspect the preview before exporting. The resulting STL can be opened in Cura, PrusaSlicer, Bambu Studio, or other slicing software.</p>
+<h2>Best Results</h2>
+<ul><li>Use closed shapes with consistent winding direction</li><li>Remove duplicate lines and tiny decorative fragments</li><li>Choose a depth that matches your printer and material</li><li>Check scale before sending the model to a slicer</li></ul>
+<p>Upload your ${inp}, set the thickness, and download a ${out} ready for the next stage of your 3D workflow.</p>
+`,
+
+    'svg-to-obj': (inp, out) => `
+<h1>Export ${inp} Artwork as an ${out} Mesh</h1>
+<p>Create polygon geometry from SVG logos, lettering, and illustrations. Converting vectors to OBJ makes flat brand artwork useful inside Blender, Maya, Cinema 4D, and browser-based 3D scenes.</p>
+<h2>From Paths to Geometry</h2>
+<p>The converter interprets closed SVG paths, resolves holes, and extrudes the artwork into a mesh. Set the model depth and review the front and side surfaces before downloading. OBJ is a broadly supported interchange format, so you can continue editing materials, lighting, and topology in your preferred 3D application.</p>
+<h2>Useful Workflows</h2>
+<p>Build raised logos for product mockups, create title cards for motion graphics, or prepare simple game and AR assets from existing vector files. Simplifying overly detailed artwork usually produces cleaner geometry and faster imports.</p>
+<p>Upload an ${inp} file to begin creating an editable ${out} model.</p>
+`,
+
+    'image-to-stl': (inp, out) => `
+<h1>Create an ${out} Relief from an ${inp}</h1>
+<p>Turn a photograph, portrait, or high-contrast graphic into a height-based model for 3D printing. Bright and dark areas are mapped to different elevations, making this format useful for lithophanes, tactile art, plaques, and embossed signs.</p>
+<h2>Control the Relief</h2>
+<p>Adjust contrast before generating the mesh, then choose base thickness and maximum relief height. A solid base improves bed adhesion, while moderate smoothing prevents noisy surfaces from producing excessive facets in the exported STL.</p>
+<h2>Printing Tips</h2>
+<ul><li>Use a clear subject with strong tonal separation</li><li>Preview thin highlights and deep shadows carefully</li><li>Orient the relief for the intended viewing direction</li><li>Verify the final dimensions in your slicer</li></ul>
+<p>Upload your ${inp}, tune the height map, and download an ${out} model for slicing.</p>
+`,
+
+    'svg-to-gcode': (inp, out) => `
+<h1>Generate ${out} from ${inp} Paths</h1>
+<p>Prepare vector outlines for CNC routers, laser engravers, pen plotters, and similar motion-controlled equipment. This converter turns SVG geometry into ordered machine moves while keeping your design scale visible.</p>
+<h2>Machine Settings Matter</h2>
+<p>Set feed rate, plunge or laser power, cutting depth, safe travel height, and unit system for your machine. Review the path order to reduce unnecessary travel and confirm that closed contours cut in the intended direction.</p>
+<h2>Before You Run the File</h2>
+<p>Always simulate the toolpath and test on scrap material. Machine origins, work offsets, tool diameter, kerf, and controller dialect vary by setup. The downloaded ${out} is a starting program that should be checked against your equipment documentation.</p>
+<p>Upload an ${inp}, configure the operation, and export a machine-ready path.</p>
+`,
+
+    'dxf-to-gcode': (inp, out) => `
+<h1>Convert CAD ${inp} Drawings to ${out}</h1>
+<p>Move dimensioned CAD linework into a CNC or laser workflow. DXF layers and entities can become ordered profiles, pockets, or engraving paths when you configure the operation for your material and machine.</p>
+<h2>Preserve CAD Intent</h2>
+<p>Check drawing units first, then assign layers to cutting operations. Duplicate entities can cause repeated passes, while open contours may create incomplete profiles. A preview makes it easier to catch scale and ordering issues before export.</p>
+<h2>Fabrication Checklist</h2>
+<ul><li>Confirm the DXF uses the expected units</li><li>Separate construction lines from production geometry</li><li>Set safe Z, depth, feed, and plunge values</li><li>Simulate the ${out} before loading it on a machine</li></ul>
+<p>Upload your ${inp} drawing and prepare a controlled ${out} toolpath.</p>
+`,
+
+    'image-to-gcode': (inp, out) => `
+<h1>Convert ${inp} Artwork into ${out}</h1>
+<p>Create a machine path from a logo, drawing, or high-contrast image. This workflow is useful for engraving, plotting, and shallow CNC work where an image needs to become ordered motion commands.</p>
+<h2>Trace Before You Cut</h2>
+<p>Clear silhouettes and bold linework produce the most predictable paths. Adjust threshold, smoothing, scale, feed rate, depth, and safe travel height while watching the preview. Fine photographic detail may need simplification before it can run well on a machine.</p>
+<h2>Test the Program</h2>
+<p>Simulate the ${out}, confirm your controller dialect, and run a dry pass or scrap-material test. Machine origin, tool diameter, laser power, and material settings remain specific to your equipment.</p>
+<p>Upload an ${inp}, tune the operation, and download a ${out} ready for review.</p>
+`,
+
+    'zip-svg-batch': (inp, out) => `
+<h1>Convert a ${inp} into an ${out} Archive</h1>
+<p>Process a collection of source images without uploading every file separately. A ZIP batch workflow is practical for icon libraries, product catalogs, scanned artwork, and agencies preparing many assets for vector editing.</p>
+<h2>Organized Batch Processing</h2>
+<p>Keep source filenames and folder relationships intact while each supported image is traced into SVG. Review the output list for unsupported files or unusually complex artwork, then download the completed archive as one organized package.</p>
+<h2>Prepare the Archive</h2>
+<p>Use descriptive filenames, remove temporary files, and choose clear, high-contrast source images for the best paths. Batch conversion saves time, but individual files may still benefit from cleanup after vectorization.</p>
+<p>Upload your ${inp} and receive an ${out} ready for design work.</p>
+`,
+
+    'multiple-files-to-svg': (inp, out) => `
+<h1>Batch Convert ${inp} to ${out}</h1>
+<p>Vectorize a group of images in one streamlined workflow. This is useful when a brand refresh, catalog update, or icon project contains dozens of files that need consistent SVG output.</p>
+<h2>Consistent Conversion</h2>
+<p>Select the complete set, apply matching tracing preferences, and monitor each result independently. Keeping a batch together makes naming, review, and handoff easier than repeating the same conversion steps one file at a time.</p>
+<h2>Quality Checks</h2>
+<p>Use crisp sources whenever possible and inspect thin strokes, transparency, and small text after processing. Complex photographs may need manual simplification, while logos and high-contrast illustrations generally produce the cleanest paths.</p>
+<p>Choose your ${inp} files and download the resulting ${out} set.</p>
+`,
+
+    'svg-color-separation': (inp, out) => `
+<h1>Separate ${inp} into Production Color Layers</h1>
+<p>Prepare multicolor SVG artwork for screen printing, spot-color reproduction, vinyl cutting, and other workflows where each ink needs its own layer. Separation turns a finished composition into clear, editable production components.</p>
+<h2>Clean Ink Assignments</h2>
+<p>Matching fills are grouped into consistent layers while preserving the original artwork dimensions. Review overlaps, trapping, and small details before sending individual color files to a printer or cutter.</p>
+<h2>Useful for Print Teams</h2>
+<p>Designers can hand off an organized ${out} package instead of manually hiding shapes and rebuilding swatches. Spot-color separation also makes it easier to estimate ink count and identify artwork that needs simplification.</p>
+<p>Upload your ${inp} and export clearly labeled color layers.</p>
+`,
+
+    'image-to-cmyk-svg': (inp, out) => `
+<h1>Prepare an ${inp} for CMYK SVG Printing</h1>
+<p>Move RGB artwork toward a four-color print workflow with a CMYK-aware SVG result. Inspect cyan, magenta, yellow, and black contributions before sending packaging, labels, posters, or proofs to production.</p>
+<h2>Understand the Conversion</h2>
+<p>Screen colors do not always have a direct equivalent in ink. The conversion provides an organized representation of the four process channels so you can spot muddy shadows, weak contrast, or colors that need adjustment before printing.</p>
+<h2>Proof Before Production</h2>
+<p>Review the ${out} in the software used by your print provider and confirm the requested profile, bleed, trim, and overprint settings. A monitor preview is helpful, but a calibrated proof remains the best check for important work.</p>
+<p>Upload an ${inp} and create a print-focused ${out} workflow.</p>
+`,
+
+    'raw-to-svg': (inp, out) => `
+<h1>Vectorize Camera ${inp} Images as ${out}</h1>
+<p>Start with the tonal detail of a camera RAW capture and create scalable artwork for tracing, signage, documentation, or print. RAW files can preserve more source information than a compressed preview, giving the vectorization step a stronger starting point.</p>
+<h2>From Capture to Paths</h2>
+<p>Develop exposure and contrast first, then identify the edges or shapes that should become vector paths. A clean subject and deliberate threshold usually matter more than maximum resolution once the tracing begins.</p>
+<h2>Review the Result</h2>
+<p>Inspect curves at close range, simplify unnecessary nodes, and confirm that transparent or background areas were interpreted as intended. The resulting ${out} can be edited in Illustrator, Inkscape, or other vector applications.</p>
+<p>Upload a ${inp} capture and download scalable ${out} artwork.</p>
+`,
+
+    'cr2-to-svg': (inp, out) => `
+<h1>Convert Canon ${inp} Photos to ${out}</h1>
+<p>Turn a Canon camera RAW file into editable vector artwork for print, signage, illustration, and design reuse. CR2 captures provide a detailed source for extracting strong silhouettes, linework, and recognizable shapes.</p>
+<h2>Get Better Traces</h2>
+<p>Choose a well-lit subject, develop the RAW image for clear separation, and remove distracting background detail before tracing. Logos, objects, and graphic compositions tend to convert more cleanly than busy photographic scenes.</p>
+<h2>Finish in a Vector Editor</h2>
+<p>After conversion, inspect nodes and adjust colors or grouping as needed. The ${out} result is resolution independent and can be scaled for print or imported into a larger illustration.</p>
+<p>Upload your ${inp} image to begin the Canon RAW vector workflow.</p>
+`,
+
+    'nef-to-svg': (inp, out) => `
+<h1>Convert Nikon ${inp} Images to ${out}</h1>
+<p>Use a Nikon RAW capture as the source for scalable vector artwork. This workflow helps turn detailed photographs, product shots, and high-contrast subjects into reusable paths for signs, layouts, and illustrations.</p>
+<h2>Develop with Vectorization in Mind</h2>
+<p>Balance highlights and shadows so the important contours remain distinct. Simplify backgrounds and choose a tracing threshold that protects the subject without creating hundreds of distracting nodes.</p>
+<h2>Make the SVG Useful</h2>
+<p>Open the result in a vector editor to refine curves, rename groups, and tune the palette. Because ${out} is scalable, the same asset can support a small label, a large sign, or a web graphic.</p>
+<p>Upload a ${inp} file and create clean ${out} paths from your Nikon capture.</p>
+`,
+
+    'image-to-obj': (inp, out) => `
+<h1>Build an ${out} Mesh from an ${inp}</h1>
+<p>Convert a clean logo or graphic into an extruded mesh for 3D scenes, product visualizations, motion design, and game prototypes. This workflow bridges familiar 2D artwork and basic 3D production.</p>
+<h2>Use a Strong Source</h2>
+<p>High-contrast images with simple silhouettes produce more predictable geometry. Remove background clutter, decide which regions should be holes, and inspect the outline before setting the extrusion depth.</p>
+<h2>Continue in 3D Software</h2>
+<p>Import the ${out} into Blender or another modeler to assign materials, bevel edges, position lights, or combine the mesh with a larger scene. The exported geometry is a starting point for creative iteration.</p>
+<p>Upload an ${inp} and download an editable ${out} model.</p>
+`,
+
+    'dxf-to-svg': (inp, out) => `
+<h1>Convert CAD ${inp} Drawings into ${out}</h1>
+<p>Bring technical linework into web pages, documentation, presentations, and vector design tools. SVG makes a CAD drawing easy to scale and display while retaining sharp geometry on screen.</p>
+<h2>Keep the Drawing Accurate</h2>
+<p>Check units, layers, line weights, and the drawing view before export. Unneeded construction geometry can be hidden or removed so the ${out} remains readable and lightweight.</p>
+<h2>Where SVG Helps</h2>
+<p>Embed a diagram in product documentation, create a browser preview for a fabrication file, or continue styling the drawing in a vector editor. The conversion is especially useful when a viewer does not support native DXF files.</p>
+<p>Upload your ${inp} and download a scalable ${out} drawing.</p>
+`,
+
+    'svg-to-3d-model': (inp, out) => `
+<h1>Extrude ${inp} into a ${out}</h1>
+<p>Give flat vector artwork physical depth for prototypes, decorative objects, logos, and rapid fabrication. An SVG-to-3D workflow lets you reuse familiar paths without rebuilding the design by hand in a modeling package.</p>
+<h2>Set Depth with Purpose</h2>
+<p>Choose a thickness that suits the intended use, inspect the side walls, and confirm that every important contour is closed. Simple, well-organized paths produce cleaner surfaces and more dependable exports.</p>
+<h2>Ready for the Next Tool</h2>
+<p>Use the generated ${out} in a slicer, renderer, or 3D editor. Add bevels, materials, supports, or mechanical details there while preserving the original vector as your editable source.</p>
+<p>Upload an ${inp}, set the extrusion depth, and download a usable ${out}.</p>
 `,
   };
 
