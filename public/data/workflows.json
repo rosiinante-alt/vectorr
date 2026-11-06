@@ -840,7 +840,95 @@
         "question": "How do I prevent cardstock from sticking to the die?",
         "answer": "Apply release spray or dry cooking spray to die before use. Let spray dry (1-2 minutes), wipe off excess with paper towel, then load cardstock."
       }
-    ]
+    ],
+    "content": "# Provo Craft Cuttlebug Embossing Workflow\n\nThis workflow provides step-by-step guidance for provo craft cuttlebug embossing workflow.\n\n## Key Tips\n\n- **What is the difference between embossing and debossing?** Embossing raises the design (convex). Debossing presses it inward (concave). Cuttlebug does both\u2014flip the die over for debossing, or use embossing folders for raised texture.\n- **Can I emboss metal with Cuttlebug?** Yes, thin copper and aluminum foil (20-26 gauge). Use lower pressure settings, feed slowly, and check alignment. Thicker metal requires a separate metal embossing press.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Provo Craft Cuttlebug Embossing Workflow",
+          "description": "Use Cuttlebug embossing machine for cardstock, vellum, and thin metals. Dies, embossing folder patterns, sandwich technique, and heat embossing.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "What is the difference between embossing and debossing?",
+              "text": "Embossing raises the design (convex). Debossing presses it inward (concave). Cuttlebug does both\u2014flip the die over for debossing, or use embossing folders for raised texture."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Can I emboss metal with Cuttlebug?",
+              "text": "Yes, thin copper and aluminum foil (20-26 gauge). Use lower pressure settings, feed slowly, and check alignment. Thicker metal requires a separate metal embossing press."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Why is my embossing uneven or faint?",
+              "text": "Sandwich plates misaligned, die worn out, or feed speed too fast. Check plate alignment, replace worn dies, and slow feed speed. Run through twice at lower pressure for thick cardstock."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "Can I reuse dies I've already purchased for Cricut?",
+              "text": "No. Cricut and Cuttlebug use different die systems. Cricut dies are cartridges; Cuttlebug uses metal dies with different edge shapes and thicknesses."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 5,
+              "name": "How do I prevent cardstock from sticking to the die?",
+              "text": "Apply release spray or dry cooking spray to die before use. Let spray dry (1-2 minutes), wipe off excess with paper towel, then load cardstock."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the difference between embossing and debossing?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Embossing raises the design (convex). Debossing presses it inward (concave). Cuttlebug does both\u2014flip the die over for debossing, or use embossing folders for raised texture."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I emboss metal with Cuttlebug?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, thin copper and aluminum foil (20-26 gauge). Use lower pressure settings, feed slowly, and check alignment. Thicker metal requires a separate metal embossing press."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why is my embossing uneven or faint?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sandwich plates misaligned, die worn out, or feed speed too fast. Check plate alignment, replace worn dies, and slow feed speed. Run through twice at lower pressure for thick cardstock."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I reuse dies I've already purchased for Cricut?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Cricut and Cuttlebug use different die systems. Cricut dies are cartridges; Cuttlebug uses metal dies with different edge shapes and thicknesses."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I prevent cardstock from sticking to the die?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Apply release spray or dry cooking spray to die before use. Let spray dry (1-2 minutes), wipe off excess with paper towel, then load cardstock."
+              }
+            }
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "heat-press-htv-application",
@@ -890,7 +978,103 @@
         "question": "Can I use HTV on light-colored polyester?",
         "answer": "Yes, but light colors show heat shine more than dark colors. Use lowest recommended temperature and check for glossiness before full production run."
       }
-    ]
+    ],
+    "content": "# Heat Press HTV (Heat Transfer Vinyl) Application\n\nThis workflow provides step-by-step guidance for heat press htv (heat transfer vinyl) application.\n\n## Key Tips\n\n- **What is the difference between hot and cold peel HTV?** Hot peel: Peel carrier film while warm, faster process, works on standard vinyl. Cold peel: Peel after cooling, better for metallics/glitter, adhesive sets fully before peeling.\n- **Why is my HTV lifting after washing?** Temperature too low, pressure too light, or insufficient dwell time. Repress at higher temp (+10\u00b0F), increase pressure 5 PSI, or add 3 more seconds. Always cure 24 hours before washing.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Heat Press HTV (Heat Transfer Vinyl) Application",
+          "description": "Apply heat transfer vinyl to apparel with correct temperature, pressure, and dwell time. Cotton, polyester, blends, and specialty finishes.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "What is the difference between hot and cold peel HTV?",
+              "text": "Hot peel: Peel carrier film while warm, faster process, works on standard vinyl. Cold peel: Peel after cooling, better for metallics/glitter, adhesive sets fully before peeling."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Why is my HTV lifting after washing?",
+              "text": "Temperature too low, pressure too light, or insufficient dwell time. Repress at higher temp (+10\u00b0F), increase pressure 5 PSI, or add 3 more seconds. Always cure 24 hours before washing."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Can I use HTV on 100% polyester?",
+              "text": "Yes, but use lower temperature (290-300\u00b0F) to prevent glossiness or melting. Polyester responds well to HTV but requires precise temp control."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "How do I layer multiple colors of HTV?",
+              "text": "Press first color, cool completely, then position second color overlapping first by 1-2mm. Press at same settings. Layers add visual interest but can cause stiffness if too thick."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 5,
+              "name": "What causes white residue on HTV edges?",
+              "text": "Adhesive bleeding or improper pressure. Use firm, even pressure, reduce dwell time by 1-2 seconds, or lower temperature slightly. Clean with damp cloth if it occurs."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the difference between hot and cold peel HTV?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hot peel: Peel carrier film while warm, faster process, works on standard vinyl. Cold peel: Peel after cooling, better for metallics/glitter, adhesive sets fully before peeling."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why is my HTV lifting after washing?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Temperature too low, pressure too light, or insufficient dwell time. Repress at higher temp (+10\u00b0F), increase pressure 5 PSI, or add 3 more seconds. Always cure 24 hours before washing."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I use HTV on 100% polyester?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, but use lower temperature (290-300\u00b0F) to prevent glossiness or melting. Polyester responds well to HTV but requires precise temp control."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I layer multiple colors of HTV?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Press first color, cool completely, then position second color overlapping first by 1-2mm. Press at same settings. Layers add visual interest but can cause stiffness if too thick."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What causes white residue on HTV edges?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Adhesive bleeding or improper pressure. Use firm, even pressure, reduce dwell time by 1-2 seconds, or lower temperature slightly. Clean with damp cloth if it occurs."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I use HTV on light-colored polyester?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, but light colors show heat shine more than dark colors. Use lowest recommended temperature and check for glossiness before full production run."
+              }
+            }
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "resin-printing-casting",
@@ -941,7 +1125,103 @@
         "question": "Can I use water-washable resin instead of IPA?",
         "answer": "Yes. Water-washable resin is gentler, no solvent smell, but requires washing immediately after printing. Dry thoroughly after washing to prevent water spotting during cure."
       }
-    ]
+    ],
+    "content": "# Resin Printing and Casting Workflow\n\nThis workflow provides step-by-step guidance for resin printing and casting workflow.\n\n## Key Tips\n\n- **What is the difference between SLA and LCD resin printers?** SLA (Stereolithography) uses a laser\u2014precise but slower, high detail. LCD uses a screen mask\u2014faster, lower cost, similar quality. Both produce similar print quality; LCD is more affordable.\n- **Why do my resin prints fail mid-print?** Build plate not properly leveled, FEP film worn/damaged, or exposure time too short. Re-level plate, replace FEP film if scratched, and test exposure on scrap print.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Resin Printing and Casting Workflow",
+          "description": "Prepare STL files for resin SLA/LCD printers. UV exposure, support design, washing, curing, and casting molds.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "What is the difference between SLA and LCD resin printers?",
+              "text": "SLA (Stereolithography) uses a laser\u2014precise but slower, high detail. LCD uses a screen mask\u2014faster, lower cost, similar quality. Both produce similar print quality; LCD is more affordable."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Why do my resin prints fail mid-print?",
+              "text": "Build plate not properly leveled, FEP film worn/damaged, or exposure time too short. Re-level plate, replace FEP film if scratched, and test exposure on scrap print."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "How do I remove supports without damaging the part?",
+              "text": "Use flush cutters at base of support\u2014cut close to the part, then sand attachment points smooth with 400-600 grit. For delicate features, cut 1-2mm from part, finish with sandpaper."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "Can I reuse IPA for multiple prints?",
+              "text": "Yes, but resin accumulates. Filter used IPA through coffee filters back into a container, or use dedicated 'dirty' IPA for first wash, fresh IPA for second wash."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 5,
+              "name": "What causes sticky/tacky resin after curing?",
+              "text": "Under-cured from insufficient UV exposure time. Increase UV curing time by 5-10 minutes, or ensure build plate is correctly positioned in chamber for consistent exposure."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the difference between SLA and LCD resin printers?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "SLA (Stereolithography) uses a laser\u2014precise but slower, high detail. LCD uses a screen mask\u2014faster, lower cost, similar quality. Both produce similar print quality; LCD is more affordable."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why do my resin prints fail mid-print?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Build plate not properly leveled, FEP film worn/damaged, or exposure time too short. Re-level plate, replace FEP film if scratched, and test exposure on scrap print."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I remove supports without damaging the part?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use flush cutters at base of support\u2014cut close to the part, then sand attachment points smooth with 400-600 grit. For delicate features, cut 1-2mm from part, finish with sandpaper."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I reuse IPA for multiple prints?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, but resin accumulates. Filter used IPA through coffee filters back into a container, or use dedicated 'dirty' IPA for first wash, fresh IPA for second wash."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What causes sticky/tacky resin after curing?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Under-cured from insufficient UV exposure time. Increase UV curing time by 5-10 minutes, or ensure build plate is correctly positioned in chamber for consistent exposure."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I use water-washable resin instead of IPA?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Water-washable resin is gentler, no solvent smell, but requires washing immediately after printing. Dry thoroughly after washing to prevent water spotting during cure."
+              }
+            }
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "glowforge-pro-laser-cutting",
@@ -993,7 +1273,103 @@
         "question": "What is the Passthrough Ramp and how much does it cost?",
         "answer": "Add-on accessory ($500+) that allows cutting items up to 11 feet long. Only works on Glowforge Pro model. Requires ramp installation and precision alignment."
       }
-    ]
+    ],
+    "content": "# Glowforge Pro Laser Cutting Workflow\n\nThis workflow provides step-by-step guidance for glowforge pro laser cutting workflow.\n\n## Key Tips\n\n- **What materials can Glowforge Pro cut?** Wood, plywood, acrylic, leather, cork, fabric, rubber, paper. CANNOT cut: PVC (toxic fumes), vinyl, fiberglass, carbon fiber, or anodized aluminum.\n- **Can I cut clear acrylic?** Yes. Cast clear acrylic cuts cleanly\u2014not transparent in cut line, appears frosted/white. Use 80-100 power, 100 speed. Avoid polycarbonate (plastic will melt).\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Glowforge Pro Laser Cutting Workflow",
+          "description": "Prepare files for Glowforge Pro CO2 laser with SVG/PDF imports, passthrough ramp for unlimited length cuts, and variable power engraving.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "What materials can Glowforge Pro cut?",
+              "text": "Wood, plywood, acrylic, leather, cork, fabric, rubber, paper. CANNOT cut: PVC (toxic fumes), vinyl, fiberglass, carbon fiber, or anodized aluminum."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Can I cut clear acrylic?",
+              "text": "Yes. Cast clear acrylic cuts cleanly\u2014not transparent in cut line, appears frosted/white. Use 80-100 power, 100 speed. Avoid polycarbonate (plastic will melt)."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "How long does it take to cut through 1/4 inch wood?",
+              "text": "About 3-5 minutes for a medium-sized design. Glowforge is not the fastest laser\u2014optimized for detail over speed. Multiple passes at lower power produce cleaner cuts than one high-power pass."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "Why does my engrave look splotchy or uneven?",
+              "text": "Material surface not flat, lens dirty, or power settings off. Check material sits flat, clean lens with lens cleaning kit (in Glowforge store), and test engrave on scrap to verify settings."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 5,
+              "name": "Can I cut leather with Glowforge?",
+              "text": "Yes, vegetable-tanned leather only. Synthetic/chrome-tanned leather can off-gas harmful chemicals. Test leather first to confirm type. Use 80-90 power, 100 speed."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What materials can Glowforge Pro cut?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Wood, plywood, acrylic, leather, cork, fabric, rubber, paper. CANNOT cut: PVC (toxic fumes), vinyl, fiberglass, carbon fiber, or anodized aluminum."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I cut clear acrylic?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Cast clear acrylic cuts cleanly\u2014not transparent in cut line, appears frosted/white. Use 80-100 power, 100 speed. Avoid polycarbonate (plastic will melt)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does it take to cut through 1/4 inch wood?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "About 3-5 minutes for a medium-sized design. Glowforge is not the fastest laser\u2014optimized for detail over speed. Multiple passes at lower power produce cleaner cuts than one high-power pass."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why does my engrave look splotchy or uneven?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Material surface not flat, lens dirty, or power settings off. Check material sits flat, clean lens with lens cleaning kit (in Glowforge store), and test engrave on scrap to verify settings."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I cut leather with Glowforge?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, vegetable-tanned leather only. Synthetic/chrome-tanned leather can off-gas harmful chemicals. Test leather first to confirm type. Use 80-90 power, 100 speed."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the Passthrough Ramp and how much does it cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Add-on accessory ($500+) that allows cutting items up to 11 feet long. Only works on Glowforge Pro model. Requires ramp installation and precision alignment."
+              }
+            }
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "sublimation-blanks-mugs-setup",
@@ -1138,7 +1514,8 @@
           }
         ]
       }
-    }
+    },
+    "content": "# Sublimation Blanks & Mugs Setup\n\nThis workflow provides step-by-step guidance for sublimation blanks & mugs setup.\n\n## Key Tips\n\n- **Why are my sublimation colors fading or muddy?** Fading indicates low temperature or insufficient pressure. Muddy colors suggest overheating. Calibrate your heat press temperature with a laser thermometer, adjust pressure gradually (0.5 psi increments), and test on scrap blanks first.\n- **What's the difference between polyester-coated and ceramic blanks?** Polyester-coated blanks have a synthetic polymer layer and require 350-375\u00b0F; ceramic blanks have a glazed polymer surface and need 385-400\u00b0F. Ceramic holds colors longer-term but is more expensive. Polyester offers faster turnaround.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
   },
   {
     "slug": "vinyl-weeding-technique-precision",
@@ -1283,7 +1660,8 @@
           }
         ]
       }
-    }
+    },
+    "content": "# Vinyl Weeding Technique & Precision\n\nThis workflow provides step-by-step guidance for vinyl weeding technique & precision.\n\n## Key Tips\n\n- **My vinyl tears while weeding. What am I doing wrong?** Vinyl tears when weeding angle is too steep (>60 degrees) or when pulling too forcefully. Keep your weeding tool at 45 degrees, use slow, steady motions, and apply gentle heat if vinyl adheres too strongly. Practice on scrap vinyl first.\n- **What's the best weeding tool for fine details?** Fine-tipped weeding hooks (0.5-1mm tips) or dental picks work best for details smaller than 0.25 inches. For hollow lettering, a hook helps lift from behind the letter. Tweezers are best for removing torn fragments.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
   },
   {
     "slug": "htv-layering-multi-color-transfers",
@@ -1428,7 +1806,8 @@
           }
         ]
       }
-    }
+    },
+    "content": "# HTV Layering & Multi-Color Transfers\n\nThis workflow provides step-by-step guidance for htv layering & multi-color transfers.\n\n## Key Tips\n\n- **How do I prevent color bleeding when layering different HTV colors?** Bleeding occurs when pressing too hot for too long, causing dyes to migrate. Use exact temperatures per brand specs, keep times precise (12-15 seconds), and always cool completely between layers. Use a laser thermometer to verify actual platen temperature.\n- **What's the maximum number of layers I can stack?** Most projects work well with 2-3 layers. Beyond 4 layers, fabric becomes stiff and uncomfortable, and adhesion degradation increases. For complex multi-color designs, consider using specialty DTG or UV DTF instead.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
   },
   {
     "slug": "rhinestone-template-placement",
@@ -1573,7 +1952,8 @@
           }
         ]
       }
-    }
+    },
+    "content": "# Rhinestone Template & Placement\n\nThis workflow provides step-by-step guidance for rhinestone template & placement.\n\n## Key Tips\n\n- **What's the difference between heat-set and fabric-glue rhinestones?** Heat-set rhinestones use adhesive powder that bonds with heat (300\u00b0F, 10 seconds); results cure in minutes. Fabric-glue rhinestones use liquid adhesive; curing takes 24 hours but requires no heat press. Heat-set is faster but requires precise temperature control; fabric glue is more forgiving.\n- **How do I keep rhinestones from shifting during placement?** Pre-apply adhesive to the garment in advance of template removal. Keep template in place while placing 3-5 stones per area, then remove template sections as you progress. Use firm, downward pressure on each stone for 3 seconds.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
   },
   {
     "slug": "stencil-making-laser-cutting",
@@ -1718,7 +2098,8 @@
           }
         ]
       }
-    }
+    },
+    "content": "# Stencil Making & Laser Cutting\n\nThis workflow provides step-by-step guidance for stencil making & laser cutting.\n\n## Key Tips\n\n- **What's the minimum line thickness for a laser-cut stencil?** 0.25 inches (6mm) is the safe minimum. Thinner lines may not cut completely or may be fragile. For fine details, use mylar instead of plywood\u2014it tolerates thinner cuts better.\n- **How long do laser-cut stencils last?** Plywood stencils: 50-100 uses before wear. Sealed plywood: 200+ uses. Mylar: 50-80 uses. Longevity depends on paint type (acrylics last longer than oils), cleaning frequency, and storage conditions.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
   },
   {
     "slug": "custom-decal-production-waterslide",
@@ -1863,7 +2244,8 @@
           }
         ]
       }
-    }
+    },
+    "content": "# Custom Decal Production & Waterslide\n\nThis workflow provides step-by-step guidance for custom decal production & waterslide.\n\n## Key Tips\n\n- **What's the difference between transparent and opaque waterslide paper?** Transparent: background shows through, best for light ceramic. Opaque: includes white background, best for dark or colored ceramics. Choose based on your blank color\u2014transparent on dark produces muddy colors; opaque on light wastes ink.\n- **My decal is backward/mirrored on the ceramic. Did I do something wrong?** You likely forgot to flip the artwork before printing. Waterslide requires artwork to be horizontally mirrored (flipped left-right) in your design software before printing. Always mirror text and logos\u2014otherwise they appear reversed on the final product.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
   },
   {
     "slug": "magnetic-backing-production",
@@ -2008,7 +2390,8 @@
           }
         ]
       }
-    }
+    },
+    "content": "# Magnetic Backing & Production\n\nThis workflow provides step-by-step guidance for magnetic backing & production.\n\n## Key Tips\n\n- **What's the difference between glossy and matte magnetic sheets?** Glossy sheets produce vibrant, saturated colors and sharp details; best for photo-quality designs. Matte sheets are more affordable but less vibrant; work well for text-heavy designs. Glossy is worth the cost for premium products; matte is fine for budget merchandise.\n- **Can I use any inkjet printer to print on magnetic sheets?** Most modern inkjet printers work, but check specifications first. Avoid mixing magnetic sheets with regular paper in your feed tray\u2014magnetic properties can interfere with paper feed sensors. Use manual feed when available.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
   },
   {
     "slug": "acrylic-keychain-production",
@@ -2153,7 +2536,8 @@
           }
         ]
       }
-    }
+    },
+    "content": "# Acrylic Keychain Production\n\nThis workflow provides step-by-step guidance for acrylic keychain production.\n\n## Key Tips\n\n- **What's the best method for coloring acrylic keychains?** Three options: (1) UV printing for full color (fastest); (2) laser engraving on colored acrylic for permanence (recommended); (3) multi-layer acrylic with different colors (most striking). Each has tradeoffs\u2014choose based on volume and desired look.\n- **Why are my laser-engraved keychains charred/burned?** Charring happens when laser power is too high or speed too slow. Reduce power to 60-70%, increase speed to 40-50%, or make multiple light passes instead of one deep pass. Always test settings on scrap acrylic first.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
   },
   {
     "slug": "xtool-d1-pro-workflow",
@@ -2203,7 +2587,103 @@
         "question": "How do I prevent smoke stains on engraved wood?",
         "answer": "Enable Air Assist, apply masking tape to the surface before engraving, or coat with dish soap solution (prevents smoke adhesion). Clean immediately after with isopropyl alcohol."
       }
-    ]
+    ],
+    "content": "# xTool D1 Pro Laser Engraving Workflow\n\nThis workflow provides step-by-step guidance for xtool d1 pro laser engraving workflow.\n\n## Key Tips\n\n- **Can the xTool D1 Pro cut clear acrylic?** No. Diode lasers (445nm wavelength) pass through transparent acrylic without cutting. Use black, colored, or frosted acrylic instead, or switch to a CO2 laser for clear acrylic.\n- **Why are my cuts not going all the way through?** Focus height is off, power too low, or speed too fast. Verify focus with the gauge, increase power 10-20%, and reduce speed by 25%. Run test cuts on scrap.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "xTool D1 Pro Laser Engraving Workflow",
+          "description": "Prepare files for xTool D1 Pro diode laser with proper focus height, material-specific power/speed, rotary attachment setup, and XCS software optimization.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "Can the xTool D1 Pro cut clear acrylic?",
+              "text": "No. Diode lasers (445nm wavelength) pass through transparent acrylic without cutting. Use black, colored, or frosted acrylic instead, or switch to a CO2 laser for clear acrylic."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Why are my cuts not going all the way through?",
+              "text": "Focus height is off, power too low, or speed too fast. Verify focus with the gauge, increase power 10-20%, and reduce speed by 25%. Run test cuts on scrap."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "How do I engrave photos on wood?",
+              "text": "Use 300 DPI grayscale images, enable Dithering in XCS for smooth gradients, set power 30-50% and speed 3000-4000mm/min. Darker woods (walnut, mahogany) show better contrast than pine."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "Can I engrave metal without coating?",
+              "text": "Not with a diode laser. Bare metal reflects 445nm wavelength. Use anodized aluminum, powder-coated metal, or apply marking spray (CerMark, Enduramark) to bare stainless steel."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 5,
+              "name": "What is the maximum cutting thickness?",
+              "text": "10W module cuts ~5mm plywood, 20W module cuts ~10mm plywood in one pass. For thicker materials, use multiple passes at reduced speed or switch to CO2 laser."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Can the xTool D1 Pro cut clear acrylic?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Diode lasers (445nm wavelength) pass through transparent acrylic without cutting. Use black, colored, or frosted acrylic instead, or switch to a CO2 laser for clear acrylic."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why are my cuts not going all the way through?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Focus height is off, power too low, or speed too fast. Verify focus with the gauge, increase power 10-20%, and reduce speed by 25%. Run test cuts on scrap."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I engrave photos on wood?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use 300 DPI grayscale images, enable Dithering in XCS for smooth gradients, set power 30-50% and speed 3000-4000mm/min. Darker woods (walnut, mahogany) show better contrast than pine."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I engrave metal without coating?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not with a diode laser. Bare metal reflects 445nm wavelength. Use anodized aluminum, powder-coated metal, or apply marking spray (CerMark, Enduramark) to bare stainless steel."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the maximum cutting thickness?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "10W module cuts ~5mm plywood, 20W module cuts ~10mm plywood in one pass. For thicker materials, use multiple passes at reduced speed or switch to CO2 laser."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I prevent smoke stains on engraved wood?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Enable Air Assist, apply masking tape to the surface before engraving, or coat with dish soap solution (prevents smoke adhesion). Clean immediately after with isopropyl alcohol."
+              }
+            }
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "bambu-lab-3d-printing",
@@ -2254,7 +2734,103 @@
         "question": "What causes layer shifting mid-print?",
         "answer": "Belt tension too loose, print speed too fast for complexity, or motor overheating. Tighten belts to 200-250Hz resonance frequency, reduce speed 10-20%, and ensure cooling fan runs."
       }
-    ]
+    ],
+    "content": "# Bambu Lab 3D Printing Workflow\n\nThis workflow provides step-by-step guidance for bambu lab 3d printing workflow.\n\n## Key Tips\n\n- **What is AMS and how does multi-color printing work?** AMS (Automatic Material System) is a 4-spool filament changer. Assign colors to model regions in Bambu Studio, and AMS switches filaments automatically. Purging between colors creates waste (20-50g per change).\n- **Do I need supports for overhangs?** Yes, for overhangs steeper than 50-60\u00b0. Bambu Studio auto-generates supports. Use tree supports for organic shapes (less material, faster removal) and normal supports for mechanical parts.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Bambu Lab 3D Printing Workflow",
+          "description": "Prepare models for Bambu Lab P1/X1 Carbon with AMS multi-color printing, Bambu Studio slicing, support optimization, and remote print monitoring.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "What is AMS and how does multi-color printing work?",
+              "text": "AMS (Automatic Material System) is a 4-spool filament changer. Assign colors to model regions in Bambu Studio, and AMS switches filaments automatically. Purging between colors creates waste (20-50g per change)."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Do I need supports for overhangs?",
+              "text": "Yes, for overhangs steeper than 50-60\u00b0. Bambu Studio auto-generates supports. Use tree supports for organic shapes (less material, faster removal) and normal supports for mechanical parts."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Why does my first layer not stick?",
+              "text": "Bed not level, Z-offset wrong, or bed temperature too low. Run auto-leveling calibration, adjust Z-offset -0.02mm at a time, and increase bed temp 5-10\u00b0C. Clean bed with IPA."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "Can I print ABS without an enclosure?",
+              "text": "Not recommended. ABS requires stable 50-60\u00b0C chamber temperature to prevent warping. X1 Carbon has a heated chamber; P1P needs an aftermarket enclosure or stick to PLA/PETG."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 5,
+              "name": "How do I reduce stringing and blobs?",
+              "text": "Lower nozzle temperature 5-10\u00b0C, enable retraction (6-7mm for Bowden, 0.5-1mm for direct drive), increase retraction speed to 40-50mm/s, and enable 'Wipe While Retracting'."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is AMS and how does multi-color printing work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AMS (Automatic Material System) is a 4-spool filament changer. Assign colors to model regions in Bambu Studio, and AMS switches filaments automatically. Purging between colors creates waste (20-50g per change)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do I need supports for overhangs?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, for overhangs steeper than 50-60\u00b0. Bambu Studio auto-generates supports. Use tree supports for organic shapes (less material, faster removal) and normal supports for mechanical parts."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why does my first layer not stick?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Bed not level, Z-offset wrong, or bed temperature too low. Run auto-leveling calibration, adjust Z-offset -0.02mm at a time, and increase bed temp 5-10\u00b0C. Clean bed with IPA."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I print ABS without an enclosure?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not recommended. ABS requires stable 50-60\u00b0C chamber temperature to prevent warping. X1 Carbon has a heated chamber; P1P needs an aftermarket enclosure or stick to PLA/PETG."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I reduce stringing and blobs?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Lower nozzle temperature 5-10\u00b0C, enable retraction (6-7mm for Bowden, 0.5-1mm for direct drive), increase retraction speed to 40-50mm/s, and enable 'Wipe While Retracting'."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What causes layer shifting mid-print?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Belt tension too loose, print speed too fast for complexity, or motor overheating. Tighten belts to 200-250Hz resonance frequency, reduce speed 10-20%, and ensure cooling fan runs."
+              }
+            }
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "brother-scanncut-workflow",
@@ -2305,6 +2881,102 @@
         "question": "Can ScanNCut cut fabric without backing?",
         "answer": "No. Fabric requires iron-on stabilizer or temporary spray adhesive to hold it flat on the mat. Without backing, fabric shifts during cutting and produces jagged edges."
       }
-    ]
+    ],
+    "content": "# Brother ScanNCut Workflow\n\nThis workflow provides step-by-step guidance for brother scanncut workflow.\n\n## Key Tips\n\n- **What is the difference between ScanNCut and Cricut?** ScanNCut has a built-in scanner for cutting physical artwork directly without a computer. Cricut requires Design Space software and cannot scan. ScanNCut uses USB/cloud; Cricut uses Bluetooth/cloud.\n- **Can I use ScanNCut without a computer?** Yes. Built-in scanner, 600+ built-in designs, and touchscreen interface allow fully offline operation. USB stick imports SVG files. CanvasWorkspace app is optional for cloud sync.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Brother ScanNCut Workflow",
+          "description": "Prepare files for Brother ScanNCut with direct scanning, SVG import, print-then-cut registration, and CanvasWorkspace integration.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "What is the difference between ScanNCut and Cricut?",
+              "text": "ScanNCut has a built-in scanner for cutting physical artwork directly without a computer. Cricut requires Design Space software and cannot scan. ScanNCut uses USB/cloud; Cricut uses Bluetooth/cloud."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Can I use ScanNCut without a computer?",
+              "text": "Yes. Built-in scanner, 600+ built-in designs, and touchscreen interface allow fully offline operation. USB stick imports SVG files. CanvasWorkspace app is optional for cloud sync."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Why won't my SVG file import?",
+              "text": "ScanNCut only reads basic SVG paths. Export with outlines (not text objects), flatten groups, remove gradients/filters, and save as 'SVG 1.1' not 'SVG Tiny'."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "How does Print-Then-Cut registration work?",
+              "text": "CanvasWorkspace adds three black rectangle marks to your printout. After printing, place the sheet on the mat and scan. The scanner detects marks and aligns cuts to printed artwork automatically."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 5,
+              "name": "What blade depth should I use?",
+              "text": "Cardstock: 1-2. Vinyl: 1 (kiss-cut). Fabric with backing: 3-4. Foam/magnetic sheets: 4-5. Run a test cut and check if material cuts cleanly without cutting through the mat."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the difference between ScanNCut and Cricut?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ScanNCut has a built-in scanner for cutting physical artwork directly without a computer. Cricut requires Design Space software and cannot scan. ScanNCut uses USB/cloud; Cricut uses Bluetooth/cloud."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I use ScanNCut without a computer?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Built-in scanner, 600+ built-in designs, and touchscreen interface allow fully offline operation. USB stick imports SVG files. CanvasWorkspace app is optional for cloud sync."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why won't my SVG file import?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ScanNCut only reads basic SVG paths. Export with outlines (not text objects), flatten groups, remove gradients/filters, and save as 'SVG 1.1' not 'SVG Tiny'."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does Print-Then-Cut registration work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "CanvasWorkspace adds three black rectangle marks to your printout. After printing, place the sheet on the mat and scan. The scanner detects marks and aligns cuts to printed artwork automatically."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What blade depth should I use?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Cardstock: 1-2. Vinyl: 1 (kiss-cut). Fabric with backing: 3-4. Foam/magnetic sheets: 4-5. Run a test cut and check if material cuts cleanly without cutting through the mat."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can ScanNCut cut fabric without backing?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Fabric requires iron-on stabilizer or temporary spray adhesive to hold it flat on the mat. Without backing, fabric shifts during cutting and produces jagged edges."
+              }
+            }
+          ]
+        }
+      ]
+    }
   }
 ]
