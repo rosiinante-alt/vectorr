@@ -35,9 +35,9 @@ export const PRODUCTS: Record<string, ProductDefinition> = {
     id: process.env.POLAR_PRODUCT_ONE_TIME_CREDITS ?? null,
     envKey: 'POLAR_PRODUCT_ONE_TIME_CREDITS',
     name: 'Credit pack',
-    credits: 1.2,
+    credits: 20,
     interval: null,
-    tier: 'starter',
+    tier: 'free',
     recurring: false,
   },
   starter_monthly: {

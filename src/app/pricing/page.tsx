@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "Simple credit-based pricing for PNG/JPG/WEBP to SVG conversion. Start with 5 free credits.",
 };
 
-const tierOrder = ["FREE", "PLUS", "TEAM", "AGENCY", "ENTERPRISE"] as const;
+const tierOrder = ["FREE", "STARTER", "PLUS", "PRO"] as const;
 
 export default function PricingPage() {
   return (

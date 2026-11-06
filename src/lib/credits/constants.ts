@@ -15,6 +15,9 @@ export const CREDIT_COSTS = {
 // `planKey` points at the entry in src/lib/payments/products.ts that the
 // Subscribe button purchases. Keep the two in step: the catalog decides the
 // tier and credit grant, so this file is the marketing copy only.
+//
+// CAUTION: prices and credit amounts MUST match the live Polar product catalog
+// exactly. A customer who sees a different price at checkout will abandon.
 export const PRICING_TIERS = {
   FREE: {
     name: 'Free',
@@ -31,72 +34,52 @@ export const PRICING_TIERS = {
       'Watermarked exports',
     ],
   },
-  PLUS: {
-    name: 'Plus',
-    price: 9.99,
-    credits: 50,
+  STARTER: {
+    name: 'Starter',
+    price: 7.99,
+    credits: 5,
     interval: 'month',
-    description: '50 credits/month. Best for individuals.',
-    polarProductId: process.env.POLAR_PLUS_PRODUCT_ID ?? '',
-    planKey: 'plus_monthly',
+    description: '5 credits/month. Best for individuals.',
+    planKey: 'starter_monthly',
     features: [
-      '50 credits/month',
+      '5 credits/month',
       'PNG/JPG/WEBP → SVG',
       'Background removal',
-      '2x upscaling',
+      '2× upscaling',
       'All export formats',
       'No watermarks',
     ],
   },
-  TEAM: {
-    name: 'Team',
-    price: 39,
-    credits: 200,
+  PLUS: {
+    name: 'Plus',
+    price: 9.99,
+    credits: 8,
     interval: 'month',
-    description: '200 credits/month shared across 3 seats.',
-    polarProductId: process.env.POLAR_TEAM_PRODUCT_ID ?? '',
+    description: '8 credits/month. Perfect for small teams.',
     planKey: 'plus_monthly',
     features: [
-      '200 credits/month',
-      '3 team seats',
-      'Shared workspace',
-      'Comments & version history',
-      'All Plus features',
-      'Priority support',
+      '8 credits/month',
+      'Everything in Starter',
+      '4× upscaling',
+      'Style transfer',
+      'Batch conversions',
+      'Priority processing',
     ],
   },
-  AGENCY: {
-    name: 'Agency',
-    price: 99,
-    credits: 1000,
+  PRO: {
+    name: 'Pro',
+    price: 14.99,
+    credits: 20,
     interval: 'month',
-    description: '1,000 credits/month for agencies and studios.',
-    polarProductId: process.env.POLAR_AGENCY_PRODUCT_ID ?? '',
+    description: '20 credits/month. For professionals and agencies.',
     planKey: 'pro_monthly',
     features: [
-      '1,000 credits/month',
-      'Unlimited seats',
+      '20 credits/month',
+      'Everything in Plus',
+      'AI generation',
       'Workflow automation',
-      'Folder watching',
       'API access',
-      'All Team features',
-    ],
-  },
-  ENTERPRISE: {
-    name: 'Enterprise',
-    price: 999,
-    credits: 10000,
-    interval: 'month',
-    description: 'Custom volume, SSO, audit logs.',
-    polarProductId: process.env.POLAR_ENTERPRISE_PRODUCT_ID ?? '',
-    planKey: 'pro_monthly',
-    features: [
-      '10,000 credits/month',
-      'SSO / SAML',
-      'Audit logs',
-      'SLA guarantee',
-      'Dedicated support',
-      'Custom integrations',
+      'Priority support',
     ],
   },
 } as const;
