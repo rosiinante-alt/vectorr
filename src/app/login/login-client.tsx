@@ -12,17 +12,11 @@ type State =
   | { kind: 'loading' }
   | { kind: 'error'; message: string };
 
-function LoginForm() {
-  const router = useRouter();
+/** Extracts error from URL search params. Wrapped in Suspense separately. */
+function ErrorHandler({ onError }: { onError: (message: string) => void }) {
   const searchParams = useSearchParams();
-  const [mode, setMode] = useState<Mode>('signin');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [state, setState] = useState<State>({ kind: 'idle' });
-
-  // Handle error from URL
   const urlError = searchParams.get('error');
+
   useEffect(() => {
     if (urlError) {
       const errorMessages: Record<string, string> = {
@@ -30,9 +24,20 @@ function LoginForm() {
         missing_code: 'That sign-in link was missing its code. Request a new one.',
         invalid_code: 'That sign-in link has expired or was already used. Request a new one.',
       };
-      setState({ kind: 'error', message: errorMessages[urlError] || 'An error occurred' });
+      onError(errorMessages[urlError] || 'An error occurred');
     }
-  }, [urlError]);
+  }, [urlError, onError]);
+
+  return null;
+}
+
+function LoginForm() {
+  const router = useRouter();
+  const [mode, setMode] = useState<Mode>('signin');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [state, setState] = useState<State>({ kind: 'idle' });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -148,6 +153,13 @@ function LoginForm() {
             <h1 className="display mt-6 text-center text-[clamp(28px,4vw,38px)]">
               {mode === 'signin' ? 'Welcome back' : 'Create account'}
             </h1>
+
+            {/* Error handler from URL */}
+            <Suspense fallback={null}>
+              <ErrorHandler
+                onError={(message) => setState({ kind: 'error', message })}
+              />
+            </Suspense>
 
             {/* Error message */}
             {state.kind === 'error' && (
@@ -342,53 +354,5 @@ function LoginForm() {
 }
 
 export default function LoginClient() {
-  return (
-    <Suspense fallback={<LoginPageSkeleton />}>
-      <LoginForm />
-    </Suspense>
-  );
-}
-
-function LoginPageSkeleton() {
-  return (
-    <>
-      <a className="skip-link" href="#main">
-        Skip to content
-      </a>
-      <SiteHeader />
-
-      <main id="main" className="flex-1 py-16 sm:py-24">
-        <div className="wrap">
-          <div className="mx-auto max-w-[440px]">
-            <div className="flex items-center justify-center gap-2.5 text-[16px] font-semibold tracking-[-0.015em] text-text-primary">
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                className="h-6 w-6 text-accent"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.9"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M4 18L12 5l8 13z" />
-                <path d="M8.5 18L12 12l3.5 6" />
-              </svg>
-              Vectorr
-            </div>
-
-            <h1 className="display mt-6 text-center text-[clamp(28px,4vw,38px)]">
-              Welcome back
-            </h1>
-
-            <div className="mt-8 rounded-[var(--radius-xl)] bg-white p-6 shadow-[var(--shadow-1)]">
-              <div className="h-[400px]" aria-hidden="true" />
-            </div>
-          </div>
-        </div>
-      </main>
-
-      <SiteFooter />
-    </>
-  );
+  return <LoginForm />;
 }
