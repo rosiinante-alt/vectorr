@@ -2,7 +2,7 @@
   {
     "slug": "figma-to-production-assets",
     "title": "Export Production-Ready Assets from Figma",
-    "seoTitle": "Figma to Production Assets — SVG, PNG Export Settings and Optimization",
+    "seoTitle": "Figma to Production Assets \u2014 SVG, PNG Export Settings and Optimization",
     "seoDescription": "Export clean SVG and PNG assets from Figma for web, iOS, Android, and print. Outline text, flatten effects, optimize file size, and avoid common export failures.",
     "keywords": [
       "figma export svg",
@@ -22,7 +22,7 @@
       "PNG",
       "PDF"
     ],
-    "content": "# Export Production-Ready Assets from Figma\n\nFigma exports look perfect in preview but break in production for predictable reasons: live text that references unavailable fonts, effects that flatten to raster, masks that create clipping artifacts, and absolute positioning that fails responsive layouts. This guide walks through export settings that produce assets engineers can use without manual cleanup.\n\n## Why Vectorr for Figma Assets?\n\nPost-Export Optimization: Clean up Figma's verbose SVG output—remove editor metadata, collapse groups, reduce decimal precision.\n\nBatch Processing: Export an entire icon set, optimize all files in one pass, and verify they still render correctly.\n\nWeb-Ready Output: Inline critical CSS, remove Figma's default viewBox padding, and ensure assets work in all browsers.\n\n## Figma Export Checklist\n\n1. **Outline Text**: Convert all text layers to outlines before export (Cmd+Shift+O). Fonts render differently across platforms.\n2. **Flatten Effects**: Shadows, blurs, and blend modes don't export reliably. Use \"Flatten\" to rasterize them into the base layer.\n3. **Simplify Paths**: Reduce node count with the \"Simplify\" command (Cmd+Shift+P) to shrink file size.\n4. **Name Layers**: Export names come from layer names. Use descriptive, kebab-case names (icon-home, button-primary).\n5. **Set Export Scale**: @1x for web SVG, @2x and @3x for mobile PNG, 300 DPI for print PDF.\n\n## SVG Export Settings\n\nFigma's SVG export dialog has three critical settings:\n\n- **Include \"id\" attribute**: Disable unless you're animating with JavaScript. IDs add bulk and create conflicts when multiple instances load.\n- **Outline text**: Always enable. Keeps text editable in Figma but exports as paths.\n- **Simplify stroke**: Enable for icons, disable for illustrations. Converts strokes to fills, which reduces nodes but loses stroke-width editability.\n\n## PNG Export for High-DPI Screens\n\nMobile apps need @2x and @3x assets. Export at 2× and 3× scale in Figma, then name files with suffixes: `icon-home@2x.png`, `icon-home@3x.png`. iOS and Android asset catalogs read these suffixes automatically.\n\nFor web, export @2x PNG and serve via `srcset`: `<img src=\"icon.png\" srcset=\"icon@2x.png 2x\">`. This gives Retina displays crisp rendering without forcing all users to download large files.\n\n## PDF Export for Print\n\nFigma's PDF export is RGB, not CMYK. For print-ready files, export as SVG, open in Illustrator, convert to CMYK, and add bleed. Or export a high-res PNG (600 DPI) and embed it in a print-ready PDF with proper crop marks.\n\n## Common Export Failures\n\nText Renders as Boxes: Font not available on the target platform. Outline text before export, or embed the font (increases file size).\n\nEffects Disappear: Shadow or blur didn't export. Flatten the effect into the base layer before export.\n\nMask Clips Unexpectedly: Figma's masks use CSS clip-path, which older browsers don't support. Flatten masked layers into a single shape.\n\nColors Look Different: Figma uses display P3 color space; most web browsers use sRGB. Export with \"Convert to sRGB\" enabled.\n\n## Icon Sets and Batch Export\n\nFor icon libraries, use Figma's batch export: select all frames, set export settings once, and export all at once. Name each frame consistently (icon-name-variant), and Figma will name files accordingly. After export, use Vectorr's batch optimizer to reduce file size across the entire set without manual tweaking.\n\n## Responsive SVG Sizing\n\nFigma exports SVG with fixed width/height attributes. For responsive web SVG, remove those attributes and rely on viewBox only. The SVG will scale to fit its container. Or set `width=\"100%\" height=\"auto\"` in the exported file.\n\n## Troubleshooting\n\nIf exported SVG looks different from Figma preview, check for blend modes (Multiply, Overlay) that CSS doesn't support well—flatten them. If file size is huge, check for embedded raster images—export those separately as PNG. If edges look pixelated, increase export scale (2× or 4×), then scale down in CSS with image-rendering: crisp-edges.",
+    "content": "# Export Production-Ready Assets from Figma\n\nFigma exports look perfect in preview but break in production for predictable reasons: live text that references unavailable fonts, effects that flatten to raster, masks that create clipping artifacts, and absolute positioning that fails responsive layouts. This guide walks through export settings that produce assets engineers can use without manual cleanup.\n\n## Why Vectorr for Figma Assets?\n\nPost-Export Optimization: Clean up Figma's verbose SVG output\u2014remove editor metadata, collapse groups, reduce decimal precision.\n\nBatch Processing: Export an entire icon set, optimize all files in one pass, and verify they still render correctly.\n\nWeb-Ready Output: Inline critical CSS, remove Figma's default viewBox padding, and ensure assets work in all browsers.\n\n## Figma Export Checklist\n\n1. **Outline Text**: Convert all text layers to outlines before export (Cmd+Shift+O). Fonts render differently across platforms.\n2. **Flatten Effects**: Shadows, blurs, and blend modes don't export reliably. Use \"Flatten\" to rasterize them into the base layer.\n3. **Simplify Paths**: Reduce node count with the \"Simplify\" command (Cmd+Shift+P) to shrink file size.\n4. **Name Layers**: Export names come from layer names. Use descriptive, kebab-case names (icon-home, button-primary).\n5. **Set Export Scale**: @1x for web SVG, @2x and @3x for mobile PNG, 300 DPI for print PDF.\n\n## SVG Export Settings\n\nFigma's SVG export dialog has three critical settings:\n\n- **Include \"id\" attribute**: Disable unless you're animating with JavaScript. IDs add bulk and create conflicts when multiple instances load.\n- **Outline text**: Always enable. Keeps text editable in Figma but exports as paths.\n- **Simplify stroke**: Enable for icons, disable for illustrations. Converts strokes to fills, which reduces nodes but loses stroke-width editability.\n\n## PNG Export for High-DPI Screens\n\nMobile apps need @2x and @3x assets. Export at 2\u00d7 and 3\u00d7 scale in Figma, then name files with suffixes: `icon-home@2x.png`, `icon-home@3x.png`. iOS and Android asset catalogs read these suffixes automatically.\n\nFor web, export @2x PNG and serve via `srcset`: `<img src=\"icon.png\" srcset=\"icon@2x.png 2x\">`. This gives Retina displays crisp rendering without forcing all users to download large files.\n\n## PDF Export for Print\n\nFigma's PDF export is RGB, not CMYK. For print-ready files, export as SVG, open in Illustrator, convert to CMYK, and add bleed. Or export a high-res PNG (600 DPI) and embed it in a print-ready PDF with proper crop marks.\n\n## Common Export Failures\n\nText Renders as Boxes: Font not available on the target platform. Outline text before export, or embed the font (increases file size).\n\nEffects Disappear: Shadow or blur didn't export. Flatten the effect into the base layer before export.\n\nMask Clips Unexpectedly: Figma's masks use CSS clip-path, which older browsers don't support. Flatten masked layers into a single shape.\n\nColors Look Different: Figma uses display P3 color space; most web browsers use sRGB. Export with \"Convert to sRGB\" enabled.\n\n## Icon Sets and Batch Export\n\nFor icon libraries, use Figma's batch export: select all frames, set export settings once, and export all at once. Name each frame consistently (icon-name-variant), and Figma will name files accordingly. After export, use Vectorr's batch optimizer to reduce file size across the entire set without manual tweaking.\n\n## Responsive SVG Sizing\n\nFigma exports SVG with fixed width/height attributes. For responsive web SVG, remove those attributes and rely on viewBox only. The SVG will scale to fit its container. Or set `width=\"100%\" height=\"auto\"` in the exported file.\n\n## Troubleshooting\n\nIf exported SVG looks different from Figma preview, check for blend modes (Multiply, Overlay) that CSS doesn't support well\u2014flatten them. If file size is huge, check for embedded raster images\u2014export those separately as PNG. If edges look pixelated, increase export scale (2\u00d7 or 4\u00d7), then scale down in CSS with image-rendering: crisp-edges.",
     "faqs": [
       {
         "question": "Should I outline text in Figma before exporting?",
@@ -42,7 +42,7 @@
       },
       {
         "question": "Can I export print-ready files from Figma?",
-        "answer": "Not directly—Figma exports RGB, not CMYK. Export SVG, open in Illustrator, convert to CMYK, and add bleed for print."
+        "answer": "Not directly\u2014Figma exports RGB, not CMYK. Export SVG, open in Illustrator, convert to CMYK, and add bleed for print."
       }
     ],
     "schema": {
@@ -121,7 +121,7 @@
               "name": "Can I export print-ready files from Figma?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Not directly—Figma exports RGB, not CMYK. Export SVG, open in Illustrator, convert to CMYK, and add bleed for print."
+                "text": "Not directly\u2014Figma exports RGB, not CMYK. Export SVG, open in Illustrator, convert to CMYK, and add bleed for print."
               }
             }
           ]
@@ -132,7 +132,7 @@
   {
     "slug": "logo-redesign-workflow",
     "title": "Vectorize and Export Logo Variants for Branding",
-    "seoTitle": "Logo Redesign — Vectorization, Multi-Format Export, Brand Guidelines",
+    "seoTitle": "Logo Redesign \u2014 Vectorization, Multi-Format Export, Brand Guidelines",
     "seoDescription": "Vectorize logos in Figma, create horizontal, stacked, mono, and color variants, and export specs for brand guidelines. Optimize for all sizes and media.",
     "keywords": [
       "logo vectorization",
@@ -262,7 +262,7 @@
   {
     "slug": "icon-system-design",
     "title": "Build a Consistent Icon System in Figma",
-    "seoTitle": "Icon System Design — Grid Alignment, Stroke Consistency, SVG Optimization",
+    "seoTitle": "Icon System Design \u2014 Grid Alignment, Stroke Consistency, SVG Optimization",
     "seoDescription": "Design icon systems with consistent grids, stroke weights, sizing conventions, and naming. Export optimized SVGs for production use.",
     "keywords": [
       "icon system design",
@@ -282,11 +282,11 @@
       "PNG",
       "JSON"
     ],
-    "content": "# Build a Consistent Icon System in Figma\n\nIcon systems live or die on consistency. A 24px icon drawn on a 16px grid, paired with inconsistent stroke weights, fragments across products. This guide covers grid setup, stroke standardization, naming conventions, and SVG export best practices for production icon libraries.\n\n## Grid and Size Standards\n\nStart with a grid and stick to it. Common conventions:\n\n- **Web**: 16px, 24px, 32px base sizes (commonly increased to 48px, 64px for touch interfaces).\n- **Mobile**: 24px, 48px (iOS), 24px, 48px (Android).\n- **Desktop app**: 16px (UI elements), 32px (toolbar), 64px (app icon).\n\nIn Figma, set up your artboard at 64px × 64px with a **2px padding** (leaving 60px × 60px for content). This gives buffer space and scales cleanly to 16px (÷4), 24px (×3/8), 32px (÷2).\n\nEnable **Pixel Grid** (View > Pixel Grid) and **Guides** to snap all paths to grid. For strokes, enable **Snap to Pixel** in export settings.\n\n## Stroke Weight Consistency\n\nAll icons in a system must use the same stroke weight. Common standards:\n\n- **Thin (1.5px)**: Minimal, modern aesthetic. Works at 24px and above.\n- **Regular (2px)**: Most versatile. Works at 16px–64px.\n- **Bold (2.5–3px)**: Emphasizes icons, used sparingly for important states.\n\nChoose one primary stroke weight, then optionally offer a bold variant. Apply uniformly:\n\n1. **Stroke alignment**: Center (scales predictably). Never mix inner/outer.\n2. **Corner radius**: Consistent joins (rounded vs. sharp). Set caps to **Round** for softer appearance.\n3. **Filled vs. outlined**: Separate these into different sets (outlined for default, filled for active/hover states).\n\nVerify consistency by toggling between icons at 16px preview. Mismatches stand out immediately.\n\n## Naming Conventions\n\nEstablish a naming schema before creating 200+ icons. Example:\n\n`icon-[name]-[size]-[weight]`\n\n- `icon-home-24-regular`\n- `icon-menu-24-bold`\n- `icon-chevron-right-16-regular`\n\nOr, if size and weight are uniform across your set:\n\n`icon-[descriptive-name]` (e.g., `icon-home`, `icon-menu`, `icon-chevron-right`)\n\nIn Figma, organize as components with **variant properties**:\n\n- Base component: `icon`\n- Variant 1: `name=home|size=24|state=default`\n- Variant 2: `name=home|size=24|state=filled`\n\nThis makes swapping variants in designs instant for design teams.\n\n## Testing at Actual Sizes\n\nBefore exporting:\n\n1. **Preview at target sizes**: Export a test set at 16px, 24px, 32px. Open in browser or image viewer. Legibility drops off fast at 16px.\n2. **Check antialiasing**: Zoom to 100% in your browser. Look for rough edges or misaligned strokes. If evident, enable **Pixel Snapping** in Figma.\n3. **Contrast test**: Ensure icons work on both light and dark backgrounds. Export a white version on a dark canvas; export dark on light.\n4. **Pair with type**: Icons rarely stand alone. Test icons next to text at the size you'll use them. Ensure visual balance.\n\n## SVG Export and Cleanup\n\nFigma's SVG export includes editor metadata (IDs, layer names, unused styles). Before shipping:\n\n1. **Export from Figma**: Select icon, right-click > Copy as SVG (or Export > SVG).\n2. **Run SVGO**: `svgo icon-home.svg --output icon-home.opt.svg`. Removes metadata, simplifies paths, reduces file size by 30–50%.\n3. **Verify rendering**: Open optimized SVG in browser. Compare to original. Some optimization may strip essential data; adjust SVGO config if needed.\n4. **Inline or link**: For web, inline SVGs in CSS `background-image` or use `<img src>`. Inline gives more styling control; linked keeps markup clean.\n\n## Organizing and Versioning\n\nStore your icon system with clear structure:\n\n```\nicon-system/\n├── figma/ (source file)\n├── src/\n│   ├── 16px/\n│   ├── 24px/\n│   ├── 32px/\n│   └── 64px/\n├── dist/ (optimized SVG)\n├── package.json (version, metadata)\n└── README.md (usage guide)\n```\n\nVersion your icon set (e.g., v1.0, v1.1, v2.0). When adding new icons, increment minor version; breaking changes (renamed icons, grid changes) bump major. Publish to npm or a private package registry for easy consumption.\n\n## Integration with Design Tools\n\nFor design teams, set up Figma components with auto-layout:\n\n1. Create a 24px × 24px component frame.\n2. Add the icon path inside.\n3. Set auto-layout with 0 padding and no spacing.\n4. Enable **Resizable**: All selected (so designs can scale the component).\n5. Publish to a Figma library for team access.\n\nDesigners can now drag icons into designs, resize instantly, and stay in sync when you publish updates.",
+    "content": "# Build a Consistent Icon System in Figma\n\nIcon systems live or die on consistency. A 24px icon drawn on a 16px grid, paired with inconsistent stroke weights, fragments across products. This guide covers grid setup, stroke standardization, naming conventions, and SVG export best practices for production icon libraries.\n\n## Grid and Size Standards\n\nStart with a grid and stick to it. Common conventions:\n\n- **Web**: 16px, 24px, 32px base sizes (commonly increased to 48px, 64px for touch interfaces).\n- **Mobile**: 24px, 48px (iOS), 24px, 48px (Android).\n- **Desktop app**: 16px (UI elements), 32px (toolbar), 64px (app icon).\n\nIn Figma, set up your artboard at 64px \u00d7 64px with a **2px padding** (leaving 60px \u00d7 60px for content). This gives buffer space and scales cleanly to 16px (\u00f74), 24px (\u00d73/8), 32px (\u00f72).\n\nEnable **Pixel Grid** (View > Pixel Grid) and **Guides** to snap all paths to grid. For strokes, enable **Snap to Pixel** in export settings.\n\n## Stroke Weight Consistency\n\nAll icons in a system must use the same stroke weight. Common standards:\n\n- **Thin (1.5px)**: Minimal, modern aesthetic. Works at 24px and above.\n- **Regular (2px)**: Most versatile. Works at 16px\u201364px.\n- **Bold (2.5\u20133px)**: Emphasizes icons, used sparingly for important states.\n\nChoose one primary stroke weight, then optionally offer a bold variant. Apply uniformly:\n\n1. **Stroke alignment**: Center (scales predictably). Never mix inner/outer.\n2. **Corner radius**: Consistent joins (rounded vs. sharp). Set caps to **Round** for softer appearance.\n3. **Filled vs. outlined**: Separate these into different sets (outlined for default, filled for active/hover states).\n\nVerify consistency by toggling between icons at 16px preview. Mismatches stand out immediately.\n\n## Naming Conventions\n\nEstablish a naming schema before creating 200+ icons. Example:\n\n`icon-[name]-[size]-[weight]`\n\n- `icon-home-24-regular`\n- `icon-menu-24-bold`\n- `icon-chevron-right-16-regular`\n\nOr, if size and weight are uniform across your set:\n\n`icon-[descriptive-name]` (e.g., `icon-home`, `icon-menu`, `icon-chevron-right`)\n\nIn Figma, organize as components with **variant properties**:\n\n- Base component: `icon`\n- Variant 1: `name=home|size=24|state=default`\n- Variant 2: `name=home|size=24|state=filled`\n\nThis makes swapping variants in designs instant for design teams.\n\n## Testing at Actual Sizes\n\nBefore exporting:\n\n1. **Preview at target sizes**: Export a test set at 16px, 24px, 32px. Open in browser or image viewer. Legibility drops off fast at 16px.\n2. **Check antialiasing**: Zoom to 100% in your browser. Look for rough edges or misaligned strokes. If evident, enable **Pixel Snapping** in Figma.\n3. **Contrast test**: Ensure icons work on both light and dark backgrounds. Export a white version on a dark canvas; export dark on light.\n4. **Pair with type**: Icons rarely stand alone. Test icons next to text at the size you'll use them. Ensure visual balance.\n\n## SVG Export and Cleanup\n\nFigma's SVG export includes editor metadata (IDs, layer names, unused styles). Before shipping:\n\n1. **Export from Figma**: Select icon, right-click > Copy as SVG (or Export > SVG).\n2. **Run SVGO**: `svgo icon-home.svg --output icon-home.opt.svg`. Removes metadata, simplifies paths, reduces file size by 30\u201350%.\n3. **Verify rendering**: Open optimized SVG in browser. Compare to original. Some optimization may strip essential data; adjust SVGO config if needed.\n4. **Inline or link**: For web, inline SVGs in CSS `background-image` or use `<img src>`. Inline gives more styling control; linked keeps markup clean.\n\n## Organizing and Versioning\n\nStore your icon system with clear structure:\n\n```\nicon-system/\n\u251c\u2500\u2500 figma/ (source file)\n\u251c\u2500\u2500 src/\n\u2502   \u251c\u2500\u2500 16px/\n\u2502   \u251c\u2500\u2500 24px/\n\u2502   \u251c\u2500\u2500 32px/\n\u2502   \u2514\u2500\u2500 64px/\n\u251c\u2500\u2500 dist/ (optimized SVG)\n\u251c\u2500\u2500 package.json (version, metadata)\n\u2514\u2500\u2500 README.md (usage guide)\n```\n\nVersion your icon set (e.g., v1.0, v1.1, v2.0). When adding new icons, increment minor version; breaking changes (renamed icons, grid changes) bump major. Publish to npm or a private package registry for easy consumption.\n\n## Integration with Design Tools\n\nFor design teams, set up Figma components with auto-layout:\n\n1. Create a 24px \u00d7 24px component frame.\n2. Add the icon path inside.\n3. Set auto-layout with 0 padding and no spacing.\n4. Enable **Resizable**: All selected (so designs can scale the component).\n5. Publish to a Figma library for team access.\n\nDesigners can now drag icons into designs, resize instantly, and stay in sync when you publish updates.",
     "faqs": [
       {
         "question": "What grid size should I use for icon systems?",
-        "answer": "64px × 64px is standard (with 2px padding, leaving 60px content area). This scales cleanly to 16px, 24px, 32px, and larger. Use consistent grid across all icons."
+        "answer": "64px \u00d7 64px is standard (with 2px padding, leaving 60px content area). This scales cleanly to 16px, 24px, 32px, and larger. Use consistent grid across all icons."
       },
       {
         "question": "Should all icons use the same stroke weight?",
@@ -349,7 +349,7 @@
               "name": "What grid size should I use for icon systems?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "64px × 64px is standard (with 2px padding, leaving 60px content area). This scales cleanly to 16px, 24px, 32px, and larger. Use consistent grid across all icons."
+                "text": "64px \u00d7 64px is standard (with 2px padding, leaving 60px content area). This scales cleanly to 16px, 24px, 32px, and larger. Use consistent grid across all icons."
               }
             },
             {
@@ -392,7 +392,7 @@
   {
     "slug": "typeface-optimization",
     "title": "Optimize Fonts for Web Performance",
-    "seoTitle": "Font Optimization — Subsetting, Variable Fonts, WOFF2 Conversion",
+    "seoTitle": "Font Optimization \u2014 Subsetting, Variable Fonts, WOFF2 Conversion",
     "seoDescription": "Optimize fonts for web with subsetting, variable fonts, and WOFF2 format. Reduce file sizes, check licenses, and implement Google Fonts best practices.",
     "keywords": [
       "font subsetting",
@@ -412,15 +412,15 @@
       "WOFF",
       "TTF"
     ],
-    "content": "# Optimize Fonts for Web Performance\n\nWeb fonts slow pages down. A full font family at 400–800 KB per weight shifts layouts, delays text rendering, and burns mobile data. This guide covers subsetting, variable fonts, format conversion, and licensing checks to ship fonts that load fast.\n\n## Why Font File Size Matters\n\nEvery font weight is a separate HTTP request. A typical family (regular, medium, bold, italic) is 2–3 MB uncompressed. On slow networks:\n\n- **FOIT (Flash of Invisible Text)**: Text stays invisible until fonts load.\n- **FOUT (Flash of Unstyled Text)**: System font shows first, then swaps. Creates jarring layout shift.\n- **Cumulative Layout Shift**: Text reflows when font loads, breaking scroll position.\n\nSubsetting and compression reduce load time from 2–3s to 200–400ms, making text instantly readable.\n\n## Subsetting Fonts\n\nSubsetting removes unused glyphs. A Latin-only site doesn't need Cyrillic, Greek, or CJK characters. Subsetting a font to Latin + punctuation cuts file size by 60–80%.\n\n### Using Glyphhanger\n\n```bash\n# Install glyphhanger (requires Node.js)\nnpm install -g glyphhanger\n\n# Subset a font to Latin only\nglyphhanger --LATIN --subset=font.ttf\n\n# Subset to specific text (for headings)\nglyphhanger --whitelist=\"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\" --subset=heading.ttf\n```\n\n### Using Fonttools (Python)\n\n```bash\n# Install fonttools\npip install fonttools brotli\n\n# Subset to Latin\npyftsubset font.ttf \\\n  --output-file=font-subset.woff2 \\\n  --flavor=woff2 \\\n  --layout-features='*' \\\n  --unicodes=U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD\n```\n\nThis reduces a 200 KB TTF to 40–60 KB WOFF2.\n\n## Variable Fonts vs. Static Families\n\nVariable fonts store multiple weights in one file. Instead of 6 files (Thin, Light, Regular, Medium, Bold, Black), one variable font covers 100–900 weight range.\n\n**Pros**:\n- Smaller total file size (one 80 KB file vs. six 40 KB files = 240 KB saved).\n- Smooth weight transitions (animate from 400 to 700).\n- Fewer HTTP requests.\n\n**Cons**:\n- Not all fonts offer variable versions.\n- Older browsers (IE11) don't support variable fonts (fallback to static).\n\nUse variable fonts when you need 3+ weights. For one or two weights, static fonts are smaller.\n\n## Format Conversion: WOFF2 is King\n\nFont formats by size (same typeface):\n\n- **TTF/OTF**: 200 KB (uncompressed)\n- **WOFF**: 120 KB (compressed)\n- **WOFF2**: 80 KB (Brotli compression, ~40% smaller than WOFF)\n\nModern browsers (Chrome, Firefox, Safari, Edge) support WOFF2. Skip WOFF and TTF unless supporting IE11.\n\n### Converting to WOFF2\n\n```bash\n# Using fonttools\npyftsubset font.ttf --output-file=font.woff2 --flavor=woff2\n```\n\nOr use online tools: [everythingfonts.com](https://everythingfonts.com/), [transfonter.org](https://transfonter.org/).\n\n## Licensing and Legal Compliance\n\nBefore subsetting or self-hosting:\n\n1. **Check the license**: Read the font's EULA. Some licenses prohibit modification or self-hosting.\n2. **Google Fonts**: Free to subset, modify, and self-host (SIL Open Font License).\n3. **Commercial fonts**: Adobe Fonts, MyFonts, Monotype often prohibit subsetting. Check before optimizing.\n4. **Embedding permissions**: Some fonts allow web embedding but not subsetting. Verify OTF/TTF embedding bits.\n\nIf unsure, email the foundry. Licensing violations risk legal action.\n\n## Google Fonts Best Practices\n\nGoogle Fonts are pre-optimized but can be further tuned:\n\n### 1. Limit Weights and Styles\n\n```html\n<!-- Bad: loads 12 font files -->\n<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap\" rel=\"stylesheet\">\n\n<!-- Good: loads 2 files -->\n<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap\" rel=\"stylesheet\">\n```\n\n### 2. Self-Host for Performance\n\nDownload Google Fonts and serve from your CDN. Eliminates DNS lookup and TLS handshake to fonts.googleapis.com.\n\n```bash\n# Download Google Font\ncurl -o inter.woff2 \"https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2\"\n```\n\nThen reference in CSS:\n\n```css\n@font-face {\n  font-family: 'Inter';\n  font-style: normal;\n  font-weight: 400;\n  src: url('/fonts/inter.woff2') format('woff2');\n  font-display: swap;\n}\n```\n\n### 3. Use `font-display: swap`\n\nPrevents FOIT. Text shows immediately in fallback font, then swaps when custom font loads.\n\n```css\n@font-face {\n  font-family: 'Inter';\n  src: url('/fonts/inter.woff2') format('woff2');\n  font-display: swap; /* Critical */\n}\n```\n\n## Testing and Validation\n\nBefore deploying:\n\n- **File size check**: Optimized fonts should be 40–80 KB per weight. If larger, subset more aggressively.\n- **Render test**: Open the font in FontDrop (fontdrop.info) to verify glyphs render correctly after subsetting.\n- **Cross-browser test**: Test in Chrome, Firefox, Safari. Ensure fallback fonts work in IE11 if supporting it.\n- **Lighthouse audit**: Run Google Lighthouse. Fonts should load in <500ms on 3G.\n\nSubsetting, WOFF2 conversion, and self-hosting reduce font load times from seconds to milliseconds, making text instantly readable.",
+    "content": "# Optimize Fonts for Web Performance\n\nWeb fonts slow pages down. A full font family at 400\u2013800 KB per weight shifts layouts, delays text rendering, and burns mobile data. This guide covers subsetting, variable fonts, format conversion, and licensing checks to ship fonts that load fast.\n\n## Why Font File Size Matters\n\nEvery font weight is a separate HTTP request. A typical family (regular, medium, bold, italic) is 2\u20133 MB uncompressed. On slow networks:\n\n- **FOIT (Flash of Invisible Text)**: Text stays invisible until fonts load.\n- **FOUT (Flash of Unstyled Text)**: System font shows first, then swaps. Creates jarring layout shift.\n- **Cumulative Layout Shift**: Text reflows when font loads, breaking scroll position.\n\nSubsetting and compression reduce load time from 2\u20133s to 200\u2013400ms, making text instantly readable.\n\n## Subsetting Fonts\n\nSubsetting removes unused glyphs. A Latin-only site doesn't need Cyrillic, Greek, or CJK characters. Subsetting a font to Latin + punctuation cuts file size by 60\u201380%.\n\n### Using Glyphhanger\n\n```bash\n# Install glyphhanger (requires Node.js)\nnpm install -g glyphhanger\n\n# Subset a font to Latin only\nglyphhanger --LATIN --subset=font.ttf\n\n# Subset to specific text (for headings)\nglyphhanger --whitelist=\"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\" --subset=heading.ttf\n```\n\n### Using Fonttools (Python)\n\n```bash\n# Install fonttools\npip install fonttools brotli\n\n# Subset to Latin\npyftsubset font.ttf \\\n  --output-file=font-subset.woff2 \\\n  --flavor=woff2 \\\n  --layout-features='*' \\\n  --unicodes=U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD\n```\n\nThis reduces a 200 KB TTF to 40\u201360 KB WOFF2.\n\n## Variable Fonts vs. Static Families\n\nVariable fonts store multiple weights in one file. Instead of 6 files (Thin, Light, Regular, Medium, Bold, Black), one variable font covers 100\u2013900 weight range.\n\n**Pros**:\n- Smaller total file size (one 80 KB file vs. six 40 KB files = 240 KB saved).\n- Smooth weight transitions (animate from 400 to 700).\n- Fewer HTTP requests.\n\n**Cons**:\n- Not all fonts offer variable versions.\n- Older browsers (IE11) don't support variable fonts (fallback to static).\n\nUse variable fonts when you need 3+ weights. For one or two weights, static fonts are smaller.\n\n## Format Conversion: WOFF2 is King\n\nFont formats by size (same typeface):\n\n- **TTF/OTF**: 200 KB (uncompressed)\n- **WOFF**: 120 KB (compressed)\n- **WOFF2**: 80 KB (Brotli compression, ~40% smaller than WOFF)\n\nModern browsers (Chrome, Firefox, Safari, Edge) support WOFF2. Skip WOFF and TTF unless supporting IE11.\n\n### Converting to WOFF2\n\n```bash\n# Using fonttools\npyftsubset font.ttf --output-file=font.woff2 --flavor=woff2\n```\n\nOr use online tools: [everythingfonts.com](https://everythingfonts.com/), [transfonter.org](https://transfonter.org/).\n\n## Licensing and Legal Compliance\n\nBefore subsetting or self-hosting:\n\n1. **Check the license**: Read the font's EULA. Some licenses prohibit modification or self-hosting.\n2. **Google Fonts**: Free to subset, modify, and self-host (SIL Open Font License).\n3. **Commercial fonts**: Adobe Fonts, MyFonts, Monotype often prohibit subsetting. Check before optimizing.\n4. **Embedding permissions**: Some fonts allow web embedding but not subsetting. Verify OTF/TTF embedding bits.\n\nIf unsure, email the foundry. Licensing violations risk legal action.\n\n## Google Fonts Best Practices\n\nGoogle Fonts are pre-optimized but can be further tuned:\n\n### 1. Limit Weights and Styles\n\n```html\n<!-- Bad: loads 12 font files -->\n<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap\" rel=\"stylesheet\">\n\n<!-- Good: loads 2 files -->\n<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap\" rel=\"stylesheet\">\n```\n\n### 2. Self-Host for Performance\n\nDownload Google Fonts and serve from your CDN. Eliminates DNS lookup and TLS handshake to fonts.googleapis.com.\n\n```bash\n# Download Google Font\ncurl -o inter.woff2 \"https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2\"\n```\n\nThen reference in CSS:\n\n```css\n@font-face {\n  font-family: 'Inter';\n  font-style: normal;\n  font-weight: 400;\n  src: url('/fonts/inter.woff2') format('woff2');\n  font-display: swap;\n}\n```\n\n### 3. Use `font-display: swap`\n\nPrevents FOIT. Text shows immediately in fallback font, then swaps when custom font loads.\n\n```css\n@font-face {\n  font-family: 'Inter';\n  src: url('/fonts/inter.woff2') format('woff2');\n  font-display: swap; /* Critical */\n}\n```\n\n## Testing and Validation\n\nBefore deploying:\n\n- **File size check**: Optimized fonts should be 40\u201380 KB per weight. If larger, subset more aggressively.\n- **Render test**: Open the font in FontDrop (fontdrop.info) to verify glyphs render correctly after subsetting.\n- **Cross-browser test**: Test in Chrome, Firefox, Safari. Ensure fallback fonts work in IE11 if supporting it.\n- **Lighthouse audit**: Run Google Lighthouse. Fonts should load in <500ms on 3G.\n\nSubsetting, WOFF2 conversion, and self-hosting reduce font load times from seconds to milliseconds, making text instantly readable.",
     "faqs": [
       {
         "question": "What is font subsetting and why does it matter?",
-        "answer": "Subsetting removes unused characters (e.g., Cyrillic, CJK) from a font file. A Latin-only subset reduces file size by 60–80%, speeding up page load and text rendering."
+        "answer": "Subsetting removes unused characters (e.g., Cyrillic, CJK) from a font file. A Latin-only subset reduces file size by 60\u201380%, speeding up page load and text rendering."
       },
       {
         "question": "Should I use variable fonts or static fonts?",
-        "answer": "Use variable fonts when you need 3+ weights (one 80 KB file vs. six 40 KB files saves 160 KB). For 1–2 weights, static fonts are smaller and simpler."
+        "answer": "Use variable fonts when you need 3+ weights (one 80 KB file vs. six 40 KB files saves 160 KB). For 1\u20132 weights, static fonts are smaller and simpler."
       },
       {
         "question": "Why WOFF2 instead of TTF or WOFF?",
@@ -456,7 +456,7 @@
             {
               "@type": "HowToStep",
               "name": "Subset the font",
-              "text": "Use glyphhanger or fonttools to remove unused glyphs. Latin-only subset cuts size by 60–80%."
+              "text": "Use glyphhanger or fonttools to remove unused glyphs. Latin-only subset cuts size by 60\u201380%."
             },
             {
               "@type": "HowToStep",
@@ -483,7 +483,7 @@
               "name": "What is font subsetting and why does it matter?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Subsetting removes unused characters (e.g., Cyrillic, CJK) from a font file. A Latin-only subset reduces file size by 60–80%, speeding up page load and text rendering."
+                "text": "Subsetting removes unused characters (e.g., Cyrillic, CJK) from a font file. A Latin-only subset reduces file size by 60\u201380%, speeding up page load and text rendering."
               }
             },
             {
@@ -491,7 +491,7 @@
               "name": "Should I use variable fonts or static fonts?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Use variable fonts when you need 3+ weights (one 80 KB file vs. six 40 KB files saves 160 KB). For 1–2 weights, static fonts are smaller and simpler."
+                "text": "Use variable fonts when you need 3+ weights (one 80 KB file vs. six 40 KB files saves 160 KB). For 1\u20132 weights, static fonts are smaller and simpler."
               }
             },
             {
@@ -526,7 +526,7 @@
   {
     "slug": "brand-asset-management",
     "title": "Organize and Version Design Assets",
-    "seoTitle": "Brand Asset Management — Folder Structure, Naming, Version Control",
+    "seoTitle": "Brand Asset Management \u2014 Folder Structure, Naming, Version Control",
     "seoDescription": "Organize design assets with consistent folder structure, naming conventions, version control, and asset libraries. Keep brand files accessible and up-to-date.",
     "keywords": [
       "brand asset management",
@@ -548,7 +548,7 @@
       "PDF",
       "Figma"
     ],
-    "content": "# Organize and Version Design Assets\n\nBrand assets scatter across drives, Figma files, and local folders until no one knows which logo is current. This guide covers folder structure, naming conventions, version control, and asset libraries that keep brand files organized, accessible, and up-to-date.\n\n## Folder Structure\n\nStart with a clear hierarchy. Two common approaches:\n\n### Type-Based Structure\n\n```\nbrand-assets/\n├── logos/\n│   ├── horizontal/\n│   ├── stacked/\n│   ├── icon/\n│   └── archive/\n├── colors/\n│   ├── palette.pdf\n│   └── tokens.json\n├── typography/\n│   ├── fonts/\n│   └── specimens/\n├── icons/\n├── photography/\n├── templates/\n│   ├── presentations/\n│   ├── social-media/\n│   └── print/\n└── guidelines/\n    └── brand-guide-v3.pdf\n```\n\nPros: Easy to find all logos, colors, or icons in one place.  \nCons: Hard to see all assets for a specific project or campaign.\n\n### Project-Based Structure\n\n```\nbrand-assets/\n├── brand-identity-2024/\n│   ├── logos/\n│   ├── colors/\n│   ├── typography/\n│   └── deliverables/\n├── website-redesign/\n│   ├── mockups/\n│   ├── components/\n│   └── assets/\n├── q1-campaign/\n│   ├── social/\n│   ├── print/\n│   └── email/\n└── core-assets/\n    ├── logos/\n    ├── colors/\n    └── fonts/\n```\n\nPros: All assets for a project are together.  \nCons: Core assets (logos, colors) may duplicate across folders.\n\n**Recommendation**: Hybrid. Use type-based for core brand assets (logos, colors, fonts), project-based for campaigns and temporary work.\n\n## Naming Conventions\n\nInconsistent naming creates chaos. Establish rules before creating 500 files:\n\n### File Naming Schema\n\n```\n[asset-type]-[descriptor]-[variant]-[version].[format]\n\nExamples:\nlogo-horizontal-color-v2.svg\nlogo-icon-mono-black-v2.png\nbutton-primary-hover-default.svg\nicon-home-24-regular.svg\nphoto-hero-landing-page-2024-q1.jpg\n```\n\n### Rules\n\n1. **Lowercase with hyphens**: No spaces, underscores, or camelCase. `logo-horizontal.svg`, not `Logo Horizontal.svg` or `logo_horizontal.svg`.\n2. **Descriptive, not generic**: `button-primary-hover.svg`, not `button1.svg`.\n3. **Version suffix**: `-v1`, `-v2`, `-v3`. Never `_final`, `_FINAL2`, `_final_REAL`.\n4. **Date for time-sensitive assets**: `hero-photo-2024-11.jpg` for assets that expire or get replaced seasonally.\n5. **Size/scale in filename for raster**: `icon-home-24.png`, `icon-home-48@2x.png`.\n\n### Figma Layer Naming\n\nSame rules apply in Figma:\n\n- Components: `button/primary`, `icon/home`, `logo/horizontal`\n- Variants: `size=24|state=default`, `theme=light|state=hover`\n- Frames: `home-hero-desktop-1920`, `dashboard-mobile-375`\n\nConsistent naming makes exports automatic (Export as SVG uses layer name).\n\n## Version Control\n\nDesign files need version control just like code.\n\n### For Figma\n\nFigma has built-in version history (File > Show Version History). Use it:\n\n1. **Save versions after major changes**: \"Logo finalized\", \"Color palette updated\", \"Website redesign complete\".\n2. **Restore old versions**: Click a version to restore or duplicate it.\n3. **Branching**: Create a branch (File > Save as branch) for experimental work. Merge back when approved.\n\n### For Files (Logos, PDFs, Fonts)\n\nUse **Git** or **cloud storage with versioning**:\n\n#### Git (for developers and technical teams)\n\n```bash\n# Initialize repo\ngit init\ngit add logos/\ngit commit -m \"Add logo variants v2\"\n\n# Tag releases\ngit tag v2.0\ngit push origin v2.0\n```\n\nPros: Full history, branching, collaboration.  \nCons: Non-designers find Git intimidating.\n\n#### Cloud Storage (Dropbox, Google Drive)\n\nEnable version history:\n\n- **Google Drive**: Right-click > Manage versions. Upload new versions, restore old ones.\n- **Dropbox**: File history keeps 30-day (free) or unlimited (paid) history.\n\nPros: Easy for non-technical teams.  \nCons: No branching, limited comparison tools.\n\n## Asset Libraries\n\nKeep brand assets accessible across teams.\n\n### Figma Libraries\n\nPublish components and styles as a library:\n\n1. **Create a Brand Library file**: Components for logos, buttons, icons, colors, typography.\n2. **Publish as library**: Assets > Publish library.\n3. **Enable in team files**: Any file in your team can now use components from the library.\n\nWhen you update the library, Figma prompts designers to accept updates in their files. This keeps everyone on the latest logos/colors without manual copying.\n\n### Cloud-Based Asset Management\n\nFor non-Figma assets (photos, fonts, videos):\n\n- **Notion**: Embed files, organize by category, add metadata (license, usage notes).\n- **Google Drive**: Shared folders with clear structure. Use Drive File Stream for local sync.\n- **Dropbox**: Similar to Drive. Better for large files (video, high-res photos).\n- **Abstract** (paid): Version control for Sketch and Adobe XD. Git-like branching for designers.\n\n## Backup Strategy\n\nDesign files are irreplaceable. Backup everything:\n\n1. **Cloud sync**: All files in Google Drive, Dropbox, or similar. Auto-syncs from local.\n2. **Figma auto-saves**: Figma files live in the cloud. Export critical files as `.fig` backups monthly.\n3. **External drive**: Quarterly backup of entire `brand-assets/` folder to external SSD.\n\nIf Figma, Drive, or Dropbox fails (rare but possible), you have offline copies.\n\n## Access Control and Permissions\n\nNot everyone needs edit access. Set permissions:\n\n- **View-only**: Marketing, external partners. Can view and download, can't edit.\n- **Edit**: Designers, brand managers. Can modify files.\n- **Admin**: Creative director. Can delete, change permissions, manage libraries.\n\nIn Figma: Share > Set permissions (View, Edit, Admin).  \nIn Drive/Dropbox: Share > Viewer, Commenter, Editor.\n\n## Archiving Old Assets\n\nDon't delete old assets—archive them. Create an `archive/` folder for superseded logos, outdated colors, or deprecated designs.\n\nExample:\n\n```\nlogos/\n├── current/\n│   ├── logo-horizontal-v3.svg\n│   └── logo-icon-v3.svg\n└── archive/\n    ├── logo-horizontal-v1.svg\n    ├── logo-horizontal-v2.svg\n    └── old-brand-2019/\n```\n\nWhen someone asks \"what did the old logo look like?\", you have it.",
+    "content": "# Organize and Version Design Assets\n\nBrand assets scatter across drives, Figma files, and local folders until no one knows which logo is current. This guide covers folder structure, naming conventions, version control, and asset libraries that keep brand files organized, accessible, and up-to-date.\n\n## Folder Structure\n\nStart with a clear hierarchy. Two common approaches:\n\n### Type-Based Structure\n\n```\nbrand-assets/\n\u251c\u2500\u2500 logos/\n\u2502   \u251c\u2500\u2500 horizontal/\n\u2502   \u251c\u2500\u2500 stacked/\n\u2502   \u251c\u2500\u2500 icon/\n\u2502   \u2514\u2500\u2500 archive/\n\u251c\u2500\u2500 colors/\n\u2502   \u251c\u2500\u2500 palette.pdf\n\u2502   \u2514\u2500\u2500 tokens.json\n\u251c\u2500\u2500 typography/\n\u2502   \u251c\u2500\u2500 fonts/\n\u2502   \u2514\u2500\u2500 specimens/\n\u251c\u2500\u2500 icons/\n\u251c\u2500\u2500 photography/\n\u251c\u2500\u2500 templates/\n\u2502   \u251c\u2500\u2500 presentations/\n\u2502   \u251c\u2500\u2500 social-media/\n\u2502   \u2514\u2500\u2500 print/\n\u2514\u2500\u2500 guidelines/\n    \u2514\u2500\u2500 brand-guide-v3.pdf\n```\n\nPros: Easy to find all logos, colors, or icons in one place.  \nCons: Hard to see all assets for a specific project or campaign.\n\n### Project-Based Structure\n\n```\nbrand-assets/\n\u251c\u2500\u2500 brand-identity-2024/\n\u2502   \u251c\u2500\u2500 logos/\n\u2502   \u251c\u2500\u2500 colors/\n\u2502   \u251c\u2500\u2500 typography/\n\u2502   \u2514\u2500\u2500 deliverables/\n\u251c\u2500\u2500 website-redesign/\n\u2502   \u251c\u2500\u2500 mockups/\n\u2502   \u251c\u2500\u2500 components/\n\u2502   \u2514\u2500\u2500 assets/\n\u251c\u2500\u2500 q1-campaign/\n\u2502   \u251c\u2500\u2500 social/\n\u2502   \u251c\u2500\u2500 print/\n\u2502   \u2514\u2500\u2500 email/\n\u2514\u2500\u2500 core-assets/\n    \u251c\u2500\u2500 logos/\n    \u251c\u2500\u2500 colors/\n    \u2514\u2500\u2500 fonts/\n```\n\nPros: All assets for a project are together.  \nCons: Core assets (logos, colors) may duplicate across folders.\n\n**Recommendation**: Hybrid. Use type-based for core brand assets (logos, colors, fonts), project-based for campaigns and temporary work.\n\n## Naming Conventions\n\nInconsistent naming creates chaos. Establish rules before creating 500 files:\n\n### File Naming Schema\n\n```\n[asset-type]-[descriptor]-[variant]-[version].[format]\n\nExamples:\nlogo-horizontal-color-v2.svg\nlogo-icon-mono-black-v2.png\nbutton-primary-hover-default.svg\nicon-home-24-regular.svg\nphoto-hero-landing-page-2024-q1.jpg\n```\n\n### Rules\n\n1. **Lowercase with hyphens**: No spaces, underscores, or camelCase. `logo-horizontal.svg`, not `Logo Horizontal.svg` or `logo_horizontal.svg`.\n2. **Descriptive, not generic**: `button-primary-hover.svg`, not `button1.svg`.\n3. **Version suffix**: `-v1`, `-v2`, `-v3`. Never `_final`, `_FINAL2`, `_final_REAL`.\n4. **Date for time-sensitive assets**: `hero-photo-2024-11.jpg` for assets that expire or get replaced seasonally.\n5. **Size/scale in filename for raster**: `icon-home-24.png`, `icon-home-48@2x.png`.\n\n### Figma Layer Naming\n\nSame rules apply in Figma:\n\n- Components: `button/primary`, `icon/home`, `logo/horizontal`\n- Variants: `size=24|state=default`, `theme=light|state=hover`\n- Frames: `home-hero-desktop-1920`, `dashboard-mobile-375`\n\nConsistent naming makes exports automatic (Export as SVG uses layer name).\n\n## Version Control\n\nDesign files need version control just like code.\n\n### For Figma\n\nFigma has built-in version history (File > Show Version History). Use it:\n\n1. **Save versions after major changes**: \"Logo finalized\", \"Color palette updated\", \"Website redesign complete\".\n2. **Restore old versions**: Click a version to restore or duplicate it.\n3. **Branching**: Create a branch (File > Save as branch) for experimental work. Merge back when approved.\n\n### For Files (Logos, PDFs, Fonts)\n\nUse **Git** or **cloud storage with versioning**:\n\n#### Git (for developers and technical teams)\n\n```bash\n# Initialize repo\ngit init\ngit add logos/\ngit commit -m \"Add logo variants v2\"\n\n# Tag releases\ngit tag v2.0\ngit push origin v2.0\n```\n\nPros: Full history, branching, collaboration.  \nCons: Non-designers find Git intimidating.\n\n#### Cloud Storage (Dropbox, Google Drive)\n\nEnable version history:\n\n- **Google Drive**: Right-click > Manage versions. Upload new versions, restore old ones.\n- **Dropbox**: File history keeps 30-day (free) or unlimited (paid) history.\n\nPros: Easy for non-technical teams.  \nCons: No branching, limited comparison tools.\n\n## Asset Libraries\n\nKeep brand assets accessible across teams.\n\n### Figma Libraries\n\nPublish components and styles as a library:\n\n1. **Create a Brand Library file**: Components for logos, buttons, icons, colors, typography.\n2. **Publish as library**: Assets > Publish library.\n3. **Enable in team files**: Any file in your team can now use components from the library.\n\nWhen you update the library, Figma prompts designers to accept updates in their files. This keeps everyone on the latest logos/colors without manual copying.\n\n### Cloud-Based Asset Management\n\nFor non-Figma assets (photos, fonts, videos):\n\n- **Notion**: Embed files, organize by category, add metadata (license, usage notes).\n- **Google Drive**: Shared folders with clear structure. Use Drive File Stream for local sync.\n- **Dropbox**: Similar to Drive. Better for large files (video, high-res photos).\n- **Abstract** (paid): Version control for Sketch and Adobe XD. Git-like branching for designers.\n\n## Backup Strategy\n\nDesign files are irreplaceable. Backup everything:\n\n1. **Cloud sync**: All files in Google Drive, Dropbox, or similar. Auto-syncs from local.\n2. **Figma auto-saves**: Figma files live in the cloud. Export critical files as `.fig` backups monthly.\n3. **External drive**: Quarterly backup of entire `brand-assets/` folder to external SSD.\n\nIf Figma, Drive, or Dropbox fails (rare but possible), you have offline copies.\n\n## Access Control and Permissions\n\nNot everyone needs edit access. Set permissions:\n\n- **View-only**: Marketing, external partners. Can view and download, can't edit.\n- **Edit**: Designers, brand managers. Can modify files.\n- **Admin**: Creative director. Can delete, change permissions, manage libraries.\n\nIn Figma: Share > Set permissions (View, Edit, Admin).  \nIn Drive/Dropbox: Share > Viewer, Commenter, Editor.\n\n## Archiving Old Assets\n\nDon't delete old assets\u2014archive them. Create an `archive/` folder for superseded logos, outdated colors, or deprecated designs.\n\nExample:\n\n```\nlogos/\n\u251c\u2500\u2500 current/\n\u2502   \u251c\u2500\u2500 logo-horizontal-v3.svg\n\u2502   \u2514\u2500\u2500 logo-icon-v3.svg\n\u2514\u2500\u2500 archive/\n    \u251c\u2500\u2500 logo-horizontal-v1.svg\n    \u251c\u2500\u2500 logo-horizontal-v2.svg\n    \u2514\u2500\u2500 old-brand-2019/\n```\n\nWhen someone asks \"what did the old logo look like?\", you have it.",
     "faqs": [
       {
         "question": "Should I use type-based or project-based folder structure?",
@@ -658,7 +658,7 @@
   {
     "slug": "design-to-code-handoff",
     "title": "Figma Dev Mode and Design-to-Code Handoff",
-    "seoTitle": "Design to Code Handoff — Figma Dev Mode, Design Tokens, CSS Variables",
+    "seoTitle": "Design to Code Handoff \u2014 Figma Dev Mode, Design Tokens, CSS Variables",
     "seoDescription": "Use Figma Dev Mode to inspect specs, export design tokens for colors, spacing, typography, and map components for developers. Streamline design-to-code workflow.",
     "keywords": [
       "figma dev mode",
@@ -793,7 +793,7 @@
   {
     "slug": "color-palette-management",
     "title": "Create Accessible Color Palettes",
-    "seoTitle": "Color Palette Management — WCAG Contrast, Perceptual Uniformity, Colorblind-Safe",
+    "seoTitle": "Color Palette Management \u2014 WCAG Contrast, Perceptual Uniformity, Colorblind-Safe",
     "seoDescription": "Build accessible color palettes with WCAG contrast ratios, perceptual uniformity, and colorblind simulation. Export to design systems as CSS, JSON, SCSS.",
     "keywords": [
       "wcag color contrast",
@@ -814,7 +814,7 @@
       "CSS",
       "SCSS"
     ],
-    "content": "# Create Accessible Color Palettes\n\nColor palettes fail when text becomes unreadable or colorblind users can't distinguish states. This guide covers WCAG contrast ratios, perceptual uniformity, colorblind simulation, and exporting palettes to design systems.\n\n## WCAG Contrast Ratios\n\nWCAG (Web Content Accessibility Guidelines) defines minimum contrast ratios:\n\n- **AA (minimum)**: 4.5:1 for normal text, 3:1 for large text (18px+ or bold 14px+).\n- **AAA (enhanced)**: 7:1 for normal text, 4.5:1 for large text.\n\nMost products aim for AA compliance. AAA is recommended for high-contrast themes or government sites.\n\n### Checking Contrast\n\nUse a contrast checker:\n\n- **Figma A11y Plugin**: Select text, check contrast against background.\n- **Color.Ninja**: Paste colors, see contrast ratio.\n- **WebAIM Contrast Checker**: [webaim.org/resources/contrastchecker/](https://webaim.org/resources/contrastchecker/).\n\nExample:\n\n- **Pass AA**: `#3B6DFF` (text) on `#FFFFFF` (background) = 4.51:1 ✓\n- **Fail AA**: `#6EE7B7` (text) on `#FFFFFF` (background) = 1.78:1 ✗\n\nIf a color fails, darken text or lighten background until it passes.\n\n## Building a Tonal Scale\n\nDon't pick one blue and call it a palette. Build a tonal scale: 5–9 steps from near-black to near-white, tinted toward your brand hue.\n\n### Example: Cyan Tonal Scale\n\n```\ncyan-50:  #E0F7FA  (background, hover states)\ncyan-100: #B2EBF2\ncyan-200: #80DEEA\ncyan-300: #4DD0E1\ncyan-400: #26C6DA\ncyan-500: #00BCD4  (primary, base)\ncyan-600: #00ACC1\ncyan-700: #0097A7  (text on light backgrounds)\ncyan-800: #00838F\ncyan-900: #006064  (text, high contrast)\n```\n\nThis gives you options: `cyan-500` for buttons, `cyan-700` for text on white, `cyan-900` for high-contrast text.\n\n### Perceptual Uniformity\n\nRGB space is not perceptually uniform. A jump from `#0000FF` to `#0000CC` looks different than `#FF0000` to `#CC0000`. Use **LAB color space** for perceptually uniform scales.\n\nTools:\n\n- **Figma Palette Plugin**: Generates perceptually uniform scales.\n- **Leonardo** (Adobe): [leonardocolor.io](https://leonardocolor.io/). Creates accessible, perceptually uniform palettes.\n- **Coolors**: [coolors.co](https://coolors.co/). Quick palette generation with contrast checks.\n\nThese tools ensure each step in your scale has consistent perceived lightness.\n\n## Colorblind Simulation\n\n8% of men and 0.5% of women have color vision deficiency. Three common types:\n\n- **Deuteranopia**: Red-green confusion (most common).\n- **Protanopia**: Similar to Deuteranopia, but red is darker.\n- **Tritanopia**: Blue-yellow confusion (rare).\n\n### Testing Your Palette\n\nUse colorblind simulators:\n\n- **Figma Stark Plugin**: Simulate colorblindness in Figma. See how your design looks to colorblind users.\n- **Color Oracle**: [colororacle.org](https://colororacle.org/). Desktop app that simulates colorblindness across your entire screen.\n- **Chrome DevTools**: Open DevTools > Rendering > Emulate vision deficiencies.\n\n### Fixing Colorblind Issues\n\nDon't rely on color alone to convey information. Examples:\n\n**Bad**: Green button = success, red button = error (colorblind users can't distinguish).\n\n**Good**: Green button + checkmark icon = success, red button + X icon = error. Color + icon/text ensures clarity.\n\n**Bad**: Red line and green line on a chart (colorblind users see two similar lines).\n\n**Good**: Red solid line and green dashed line. Pattern + color ensures distinction.\n\n## Exporting Palettes to Design Systems\n\nOnce your palette is finalized, export it as JSON, CSS, or SCSS.\n\n### JSON Export\n\n```json\n{\n  \"colors\": {\n    \"primary\": {\n      \"50\": \"#E0F7FA\",\n      \"500\": \"#00BCD4\",\n      \"700\": \"#0097A7\",\n      \"900\": \"#006064\"\n    },\n    \"background\": {\n      \"default\": \"#0A0D12\",\n      \"card\": \"#0F131C\",\n      \"elevated\": \"#161D2B\"\n    },\n    \"text\": {\n      \"primary\": \"#FFFFFF\",\n      \"secondary\": \"#A0A4A8\",\n      \"muted\": \"#6B7280\"\n    }\n  }\n}\n```\n\n### CSS Variables\n\n```css\n:root {\n  --color-primary-50: #E0F7FA;\n  --color-primary-500: #00BCD4;\n  --color-primary-700: #0097A7;\n  --color-primary-900: #006064;\n\n  --color-background-default: #0A0D12;\n  --color-background-card: #0F131C;\n\n  --color-text-primary: #FFFFFF;\n  --color-text-secondary: #A0A4A8;\n}\n```\n\n### SCSS Variables\n\n```scss\n$color-primary-50: #E0F7FA;\n$color-primary-500: #00BCD4;\n$color-primary-700: #0097A7;\n$color-primary-900: #006064;\n\n$color-background-default: #0A0D12;\n$color-background-card: #0F131C;\n\n$color-text-primary: #FFFFFF;\n$color-text-secondary: #A0A4A8;\n```\n\nUse a tool like **Style Dictionary** to automate conversion:\n\n```bash\n# Install\nnpm install -g style-dictionary\n\n# Build\nstyle-dictionary build --config config.json\n```\n\n## Naming Color Tokens\n\nAvoid literal names (`blue-500`). Use semantic names:\n\n- **Good**: `--color-primary`, `--color-background`, `--color-text-primary`\n- **Bad**: `--blue-500`, `--gray-800`, `--cyan-700`\n\nSemantic names let you swap colors without renaming every variable. If you rebrand from blue to purple, `--color-primary` stays the same; only its value changes.\n\n## Testing Accessibility\n\nBefore launch:\n\n1. **Contrast check**: All text passes WCAG AA (4.5:1 for normal, 3:1 for large).\n2. **Colorblind simulation**: Test with Stark or Color Oracle. Ensure critical UI is distinguishable.\n3. **Automated audit**: Run Lighthouse or Axe DevTools. Fix reported color contrast issues.\n4. **Manual review**: Navigate the site without color. Can you tell success from error? If not, add icons/labels.\n\nAccessible color palettes ensure everyone can use your product, regardless of vision.",
+    "content": "# Create Accessible Color Palettes\n\nColor palettes fail when text becomes unreadable or colorblind users can't distinguish states. This guide covers WCAG contrast ratios, perceptual uniformity, colorblind simulation, and exporting palettes to design systems.\n\n## WCAG Contrast Ratios\n\nWCAG (Web Content Accessibility Guidelines) defines minimum contrast ratios:\n\n- **AA (minimum)**: 4.5:1 for normal text, 3:1 for large text (18px+ or bold 14px+).\n- **AAA (enhanced)**: 7:1 for normal text, 4.5:1 for large text.\n\nMost products aim for AA compliance. AAA is recommended for high-contrast themes or government sites.\n\n### Checking Contrast\n\nUse a contrast checker:\n\n- **Figma A11y Plugin**: Select text, check contrast against background.\n- **Color.Ninja**: Paste colors, see contrast ratio.\n- **WebAIM Contrast Checker**: [webaim.org/resources/contrastchecker/](https://webaim.org/resources/contrastchecker/).\n\nExample:\n\n- **Pass AA**: `#3B6DFF` (text) on `#FFFFFF` (background) = 4.51:1 \u2713\n- **Fail AA**: `#6EE7B7` (text) on `#FFFFFF` (background) = 1.78:1 \u2717\n\nIf a color fails, darken text or lighten background until it passes.\n\n## Building a Tonal Scale\n\nDon't pick one blue and call it a palette. Build a tonal scale: 5\u20139 steps from near-black to near-white, tinted toward your brand hue.\n\n### Example: Cyan Tonal Scale\n\n```\ncyan-50:  #E0F7FA  (background, hover states)\ncyan-100: #B2EBF2\ncyan-200: #80DEEA\ncyan-300: #4DD0E1\ncyan-400: #26C6DA\ncyan-500: #00BCD4  (primary, base)\ncyan-600: #00ACC1\ncyan-700: #0097A7  (text on light backgrounds)\ncyan-800: #00838F\ncyan-900: #006064  (text, high contrast)\n```\n\nThis gives you options: `cyan-500` for buttons, `cyan-700` for text on white, `cyan-900` for high-contrast text.\n\n### Perceptual Uniformity\n\nRGB space is not perceptually uniform. A jump from `#0000FF` to `#0000CC` looks different than `#FF0000` to `#CC0000`. Use **LAB color space** for perceptually uniform scales.\n\nTools:\n\n- **Figma Palette Plugin**: Generates perceptually uniform scales.\n- **Leonardo** (Adobe): [leonardocolor.io](https://leonardocolor.io/). Creates accessible, perceptually uniform palettes.\n- **Coolors**: [coolors.co](https://coolors.co/). Quick palette generation with contrast checks.\n\nThese tools ensure each step in your scale has consistent perceived lightness.\n\n## Colorblind Simulation\n\n8% of men and 0.5% of women have color vision deficiency. Three common types:\n\n- **Deuteranopia**: Red-green confusion (most common).\n- **Protanopia**: Similar to Deuteranopia, but red is darker.\n- **Tritanopia**: Blue-yellow confusion (rare).\n\n### Testing Your Palette\n\nUse colorblind simulators:\n\n- **Figma Stark Plugin**: Simulate colorblindness in Figma. See how your design looks to colorblind users.\n- **Color Oracle**: [colororacle.org](https://colororacle.org/). Desktop app that simulates colorblindness across your entire screen.\n- **Chrome DevTools**: Open DevTools > Rendering > Emulate vision deficiencies.\n\n### Fixing Colorblind Issues\n\nDon't rely on color alone to convey information. Examples:\n\n**Bad**: Green button = success, red button = error (colorblind users can't distinguish).\n\n**Good**: Green button + checkmark icon = success, red button + X icon = error. Color + icon/text ensures clarity.\n\n**Bad**: Red line and green line on a chart (colorblind users see two similar lines).\n\n**Good**: Red solid line and green dashed line. Pattern + color ensures distinction.\n\n## Exporting Palettes to Design Systems\n\nOnce your palette is finalized, export it as JSON, CSS, or SCSS.\n\n### JSON Export\n\n```json\n{\n  \"colors\": {\n    \"primary\": {\n      \"50\": \"#E0F7FA\",\n      \"500\": \"#00BCD4\",\n      \"700\": \"#0097A7\",\n      \"900\": \"#006064\"\n    },\n    \"background\": {\n      \"default\": \"#0A0D12\",\n      \"card\": \"#0F131C\",\n      \"elevated\": \"#161D2B\"\n    },\n    \"text\": {\n      \"primary\": \"#FFFFFF\",\n      \"secondary\": \"#A0A4A8\",\n      \"muted\": \"#6B7280\"\n    }\n  }\n}\n```\n\n### CSS Variables\n\n```css\n:root {\n  --color-primary-50: #E0F7FA;\n  --color-primary-500: #00BCD4;\n  --color-primary-700: #0097A7;\n  --color-primary-900: #006064;\n\n  --color-background-default: #0A0D12;\n  --color-background-card: #0F131C;\n\n  --color-text-primary: #FFFFFF;\n  --color-text-secondary: #A0A4A8;\n}\n```\n\n### SCSS Variables\n\n```scss\n$color-primary-50: #E0F7FA;\n$color-primary-500: #00BCD4;\n$color-primary-700: #0097A7;\n$color-primary-900: #006064;\n\n$color-background-default: #0A0D12;\n$color-background-card: #0F131C;\n\n$color-text-primary: #FFFFFF;\n$color-text-secondary: #A0A4A8;\n```\n\nUse a tool like **Style Dictionary** to automate conversion:\n\n```bash\n# Install\nnpm install -g style-dictionary\n\n# Build\nstyle-dictionary build --config config.json\n```\n\n## Naming Color Tokens\n\nAvoid literal names (`blue-500`). Use semantic names:\n\n- **Good**: `--color-primary`, `--color-background`, `--color-text-primary`\n- **Bad**: `--blue-500`, `--gray-800`, `--cyan-700`\n\nSemantic names let you swap colors without renaming every variable. If you rebrand from blue to purple, `--color-primary` stays the same; only its value changes.\n\n## Testing Accessibility\n\nBefore launch:\n\n1. **Contrast check**: All text passes WCAG AA (4.5:1 for normal, 3:1 for large).\n2. **Colorblind simulation**: Test with Stark or Color Oracle. Ensure critical UI is distinguishable.\n3. **Automated audit**: Run Lighthouse or Axe DevTools. Fix reported color contrast issues.\n4. **Manual review**: Navigate the site without color. Can you tell success from error? If not, add icons/labels.\n\nAccessible color palettes ensure everyone can use your product, regardless of vision.",
     "faqs": [
       {
         "question": "What is WCAG AA and how do I meet it?",
@@ -918,6 +918,1020 @@
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Export as JSON, CSS variables, or SCSS. Use Style Dictionary to automate conversion. Store colors in a tokens file and reference them in code, not hardcode values."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sketch-to-production-workflow",
+    "title": "Sketch to Production: Complete Asset Pipeline Workflow",
+    "seoTitle": "Sketch to Production Workflow | Design Asset Pipeline Guide",
+    "seoDescription": "Master the complete sketch to production workflow for design assets. Learn illustration scanning, vector tracing, cleanup techniques, and production file preparation for commercial use.",
+    "keywords": [
+      "sketch to production",
+      "design asset pipeline",
+      "illustration workflow",
+      "vector tracing",
+      "production files",
+      "commercial design",
+      "asset preparation"
+    ],
+    "category": "designers",
+    "tools": [
+      "Adobe Illustrator",
+      "Photoshop",
+      "scanner",
+      "vector tracing"
+    ],
+    "formats": [
+      "sketch",
+      "TIFF",
+      "AI",
+      "EPS",
+      "PNG",
+      "production files"
+    ],
+    "content": "# Sketch to Production Workflow\n\nTransform hand-drawn sketches into production-ready digital assets with professional scanning, tracing, and cleanup techniques.\n\n## Overview\n\nBridge traditional illustration with digital production through proper scanning, vectorization, and asset preparation workflows that preserve artistic intent while meeting commercial specifications.\n\n## Scanning Phase\n\n### Equipment Setup\n- Use flatbed scanner at 600 DPI minimum for line art\n- Set to grayscale or bitmap mode for clean captures\n- Ensure clean scanner glass and proper lighting\n- Use scanner holder or weight for flat originals\n\n### Scan Settings\n- Resolution: 600-1200 DPI for vector tracing\n- Color mode: Grayscale for pencil, Bitmap for ink\n- Format: TIFF uncompressed for editing\n- Bit depth: 16-bit for maximum editing latitude\n\n### Initial Cleanup\n- Adjust levels to pure white background\n- Increase contrast to isolate line work\n- Remove dust and paper texture digitally\n- Straighten and crop to artwork bounds\n\n## Vector Tracing\n\n### Illustrator Image Trace\n- Import cleaned scan at full resolution\n- Use \"High Fidelity Photo\" preset as starting point\n- Adjust threshold to capture desired line weight\n- Set Paths to 90%+ for smooth curves\n- Enable \"Ignore White\" for clean backgrounds\n\n### Manual Refinement\n- Expand traced artwork to editable paths\n- Use Direct Selection tool to smooth anchor points\n- Reduce excessive anchor points with Simplify\n- Refine curves with Convert Anchor Point tool\n- Close open paths and fix gaps\n\n### Detail Work\n- Zoom to 400% for fine detail review\n- Adjust overlapping paths and intersections\n- Use Pathfinder to unite or trim shapes\n- Add missing details manually with Pen tool\n- Verify no stray points or artifacts remain\n\n## Production Preparation\n\n### Organization\n- Create logical layer structure by element type\n- Name all paths descriptively (\"leaf-01\", \"stem-main\")\n- Group related elements into named groups\n- Lock background reference layer if kept\n\n### Color Assignment\n- Apply appropriate color mode (RGB for digital, CMYK for print)\n- Use global swatches for consistency\n- Set spot colors if needed for screen printing\n- Document Pantone references if applicable\n\n### Quality Checks\n- Verify all strokes converted to outlines if required\n- Check for stray points (Select > Object > Stray Points)\n- Confirm document color mode matches intended use\n- Test at target output size for detail visibility\n- Review at 25% zoom for overall composition\n\n## File Export\n\n### Vector Formats\n- AI: Native working file with layers preserved\n- EPS: Universal vector with fonts outlined\n- SVG: Web-optimized with simplified markup\n- PDF: Print-ready with bleeds and crop marks\n\n### Raster Exports\n- PNG: Transparent background at 4x target size\n- JPEG: Solid background for photo contexts\n- TIFF: Uncompressed for archival or further editing\n\n### Production Package\n- Include original scan reference\n- Provide both outlined and editable text versions\n- Add color palette documentation\n- Include usage guidelines and size recommendations\n\n## Best Practices\n\n- Scan originals immediately while paper is pristine\n- Keep layered working files separate from flattened exports\n- Maintain consistent naming conventions across projects\n- Archive original sketches and scans separately\n- Document any manual adjustments for future reference\n- Test outputs at intended production size before delivery\n\n## Common Pitfalls\n\n- Scanning at too low resolution limits tracing quality\n- Over-simplifying paths loses artistic character\n- Forgetting to outline fonts before final delivery\n- Mixing RGB and CMYK in same production file\n- Not preserving original sketch for reference\n\n## Tools Integration\n\n- Photoshop: Initial scan cleanup and raster prep\n- Illustrator: Primary vector tracing and refinement\n- Scanner software: High-quality capture settings\n- Color management: Consistent preview to print",
+    "faqs": [
+      {
+        "question": "What DPI should I scan sketches at for vector tracing?",
+        "answer": "Scan at 600 DPI minimum for line art, or 1200 DPI for very fine detail work. Higher resolution captures more subtle line variation and gives the tracing engine more information to work with, resulting in smoother vector paths."
+      },
+      {
+        "question": "Should I clean up sketches in Photoshop before tracing in Illustrator?",
+        "answer": "Yes, always clean scans first. Adjust levels to achieve pure white backgrounds, increase contrast to isolate line work, and remove dust or paper texture. This preprocessing dramatically improves automatic tracing quality and reduces manual cleanup time."
+      },
+      {
+        "question": "How do I preserve the hand-drawn quality while vectorizing?",
+        "answer": "Use higher Path and Corner settings in Image Trace (90%+ for Paths), which preserves curve character. After expanding, manually refine only problem areas rather than over-smoothing everything. Keep some anchor point variation rather than reducing to geometric perfection."
+      },
+      {
+        "question": "What file formats should I deliver for production use?",
+        "answer": "Provide AI or EPS for vector editing, PDF for print production, SVG for web use, and high-resolution PNG (4x final size, transparent background) for flexible raster use. Include both outlined and editable text versions when applicable."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Sketch to Production Workflow",
+          "description": "Transform hand-drawn sketches into production-ready digital assets with professional scanning, tracing, and cleanup techniques.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Scanning Phase",
+              "text": "Scan original artwork at 600-1200 DPI in grayscale or bitmap mode, ensuring clean capture with proper lighting and flat positioning."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Initial Cleanup",
+              "text": "Adjust levels for pure white background, increase contrast to isolate line work, remove dust and paper texture, straighten and crop to artwork bounds."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Vector Tracing",
+              "text": "Use Illustrator Image Trace with high fidelity settings, adjust threshold and path smoothness, enable 'Ignore White' for clean backgrounds."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Manual Refinement",
+              "text": "Expand traced artwork, smooth anchor points, reduce excessive points with Simplify, refine curves, close open paths and fix gaps."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Production Preparation",
+              "text": "Organize layers logically, name paths descriptively, apply appropriate color mode, convert strokes to outlines if needed, verify quality at target size."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "File Export",
+              "text": "Export vector formats (AI, EPS, SVG, PDF) and raster formats (PNG transparent, JPEG, TIFF) with production package documentation."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What DPI should I scan sketches at for vector tracing?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Scan at 600 DPI minimum for line art, or 1200 DPI for very fine detail work. Higher resolution captures more subtle line variation and gives the tracing engine more information to work with, resulting in smoother vector paths."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Should I clean up sketches in Photoshop before tracing in Illustrator?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, always clean scans first. Adjust levels to achieve pure white backgrounds, increase contrast to isolate line work, and remove dust or paper texture. This preprocessing dramatically improves automatic tracing quality and reduces manual cleanup time."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I preserve the hand-drawn quality while vectorizing?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use higher Path and Corner settings in Image Trace (90%+ for Paths), which preserves curve character. After expanding, manually refine only problem areas rather than over-smoothing everything. Keep some anchor point variation rather than reducing to geometric perfection."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What file formats should I deliver for production use?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Provide AI or EPS for vector editing, PDF for print production, SVG for web use, and high-resolution PNG (4x final size, transparent background) for flexible raster use. Include both outlined and editable text versions when applicable."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "affinity-designer-workflow",
+    "title": "Affinity Designer: Professional Vector Workflow Guide",
+    "seoTitle": "Affinity Designer Workflow | Professional Vector Design Guide",
+    "seoDescription": "Master Affinity Designer workflows for professional vector design. Learn artboard management, non-destructive editing, persona switching, and export optimization for print and digital.",
+    "keywords": [
+      "Affinity Designer",
+      "vector workflow",
+      "Designer Persona",
+      "Pixel Persona",
+      "artboard management",
+      "non-destructive editing",
+      "vector design"
+    ],
+    "category": "designers",
+    "tools": [
+      "Affinity Designer",
+      "vector tools",
+      "export presets"
+    ],
+    "formats": [
+      "AFDESIGN",
+      "AI",
+      "SVG",
+      "PDF",
+      "EPS",
+      "PNG"
+    ],
+    "content": "# Affinity Designer Workflow\n\nMaster professional vector design workflows in Affinity Designer with persona switching, non-destructive editing, and optimized export pipelines.\n\n## Overview\n\nAffinity Designer combines vector precision with raster editing through its unique persona system, enabling complete design workflows without switching applications.\n\n## Document Setup\n\n### New Document Settings\n- Choose document type: Print, Web, or Devices\n- Set color format: CMYK for print, RGB for digital\n- Configure DPI: 300 for print, 72-144 for screen\n- Enable artboards for multi-page layouts\n- Set up bleed (3mm) for print production\n\n### Workspace Organization\n- Arrange panels for efficient access (Layers, Color, Stroke)\n- Save custom workspace layouts per project type\n- Enable grid and guides for alignment\n- Configure snap settings (pixel, grid, object)\n- Set up custom keyboard shortcuts for frequent operations\n\n## Designer Persona Workflow\n\n### Vector Creation\n- Use Pen tool for precise path drawing\n- Leverage Node tool for anchor point refinement\n- Apply Boolean operations for shape combination\n- Create compound paths for complex forms\n- Use Corner tool for quick radius adjustments\n\n### Non-Destructive Editing\n- Apply layer effects instead of rasterizing\n- Use adjustment layers for color changes\n- Leverage symbols for repeated elements\n- Create styles for consistent formatting\n- Use Constraints for responsive artboard layouts\n\n### Advanced Techniques\n- Contour tool for offset paths and insets\n- Isometric grid for technical illustration\n- Corner tool with smooth, rounded, and chamfer modes\n- Power Duplicate for complex patterns\n- Pressure-sensitive vector brushes with tablet\n\n## Pixel Persona Integration\n\n### Raster Editing\n- Switch to Pixel Persona (Ctrl/Cmd + Tab)\n- Paint directly on vector canvas without rasterizing\n- Use pixel layers for texture and detail\n- Apply filters non-destructively with live previews\n- Blend raster effects with vector precision\n\n### Texture Application\n- Import textures as embedded or linked assets\n- Use blend modes for integration\n- Apply masks for selective texture visibility\n- Layer raster effects over vector shapes\n- Maintain editability of underlying vectors\n\n## Export Persona Optimization\n\n### Export Settings\n- Switch to Export Persona for slice-based export\n- Create export slices from layers or selections\n- Set format per slice (PNG, JPEG, SVG, PDF)\n- Configure scale factors (1x, 2x, 3x for web)\n- Save export presets for batch consistency\n\n### Multi-Format Export\n- SVG for web with optimized code\n- PDF for print with bleed and crop marks\n- PNG with transparency at multiple resolutions\n- EPS for legacy workflow compatibility\n- JPEG for photo-realistic compositions\n\n### Batch Export\n- Select multiple slices for simultaneous export\n- Use area selection for quick slice creation\n- Apply naming conventions automatically\n- Export artboards individually or as single file\n- Preview exports before final render\n\n## Artboard Management\n\n### Multi-Artboard Layouts\n- Insert artboards for variations or sequences\n- Duplicate artboards with content intact\n- Resize artboards independently or linked\n- Arrange in grid or custom layouts\n- Export all artboards or selected subset\n\n### Master Elements\n- Create symbols for elements used across artboards\n- Use constraints for responsive behavior\n- Link text styles across artboards\n- Apply color swatches globally\n- Sync layer effects via styles\n\n## Color Management\n\n### Swatches and Palettes\n- Create document-specific color palettes\n- Import brand colors from ACO or ASE files\n- Use global colors for easy updates\n- Apply tint controls for color variations\n- Set up spot color workflows for printing\n\n### Color Adjustment\n- Use HSL adjustment layers for non-destructive changes\n- Apply recolor from image for palette extraction\n- Use vibrance and curves for fine-tuning\n- Separate CMYK channels for print prep\n- Preview in different color spaces\n\n## Best Practices\n\n- Name all layers descriptively from the start\n- Use groups to organize complex compositions\n- Create symbols early for repeated elements\n- Save working files with all assets embedded\n- Test exports at target size before final delivery\n- Use version control by duplicating artboards for iterations\n- Keep master elements on locked reference layers\n\n## Performance Optimization\n\n- Rasterize complex effect stacks when finalized\n- Use symbols instead of duplicating complex groups\n- Close unused panels to free screen space\n- Purge unused assets before final save\n- Split very large projects across multiple documents\n\n## Common Pitfalls\n\n- Forgetting to switch personas for specific tasks\n- Not converting text to curves before client handoff\n- Mixing RGB and CMYK in same print document\n- Over-using live effects that slow viewport performance\n- Exporting without checking bleed and safe areas\n\n## Tools Integration\n\n- Affinity Photo: Seamless file interchange for complex image editing\n- Affinity Publisher: Import Designer files as native objects\n- Adobe compatibility: Open and edit AI, PSD, PDF files\n- SVG optimization: Clean code export for web use",
+    "faqs": [
+      {
+        "question": "What's the difference between Designer, Pixel, and Export Personas?",
+        "answer": "Designer Persona is for vector creation and editing with paths and shapes. Pixel Persona enables raster painting and filters directly on the canvas without leaving Designer. Export Persona provides slice-based multi-format export with preview and batch capabilities. Switch between them instantly with keyboard shortcuts or toolbar buttons."
+      },
+      {
+        "question": "How do I ensure print-ready color accuracy in Affinity Designer?",
+        "answer": "Start with CMYK color mode in document setup, use Pantone or spot colors where specified, enable soft-proof to preview printed output, check for out-of-gamut colors with the Color panel warning icons, and export PDF/X-1a or PDF/X-4 with embedded color profiles and proper bleed settings."
+      },
+      {
+        "question": "What's the best workflow for creating responsive design assets?",
+        "answer": "Use artboards for different screen sizes, apply Constraints to elements for responsive behavior (pin edges, scale proportionally), create symbols for repeated UI components, use the Export Persona to set up 1x/2x/3x slices, and export all resolutions simultaneously with consistent naming."
+      },
+      {
+        "question": "Should I convert text to curves before exporting?",
+        "answer": "Convert to curves only for final client handoff files (EPS, AI) when you don't control destination fonts. Keep editable text in working files and PDF exports where fonts can embed. For SVG, curves ensure consistent rendering across platforms but increase file size."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Affinity Designer Workflow",
+          "description": "Master professional vector design workflows in Affinity Designer with persona switching, non-destructive editing, and optimized export pipelines.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Document Setup",
+              "text": "Choose document type (Print/Web/Devices), set color format (CMYK/RGB), configure DPI, enable artboards for multi-page layouts, set up bleed for print."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Designer Persona Vector Work",
+              "text": "Use Pen and Node tools for precise paths, apply Boolean operations, create compound paths, use non-destructive layer effects and adjustment layers."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Pixel Persona Integration",
+              "text": "Switch to Pixel Persona for raster editing, paint directly on canvas, apply textures and filters non-destructively while maintaining vector editability."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Export Persona Optimization",
+              "text": "Create export slices, set format per slice, configure scale factors (1x, 2x, 3x), save export presets, batch export multiple formats simultaneously."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Artboard Management",
+              "text": "Insert artboards for variations, create symbols for shared elements, use constraints for responsive behavior, export artboards individually or batched."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Final Export",
+              "text": "Export SVG for web, PDF for print with bleed, PNG with transparency at multiple resolutions, EPS for legacy compatibility, verify all outputs."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What's the difference between Designer, Pixel, and Export Personas?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Designer Persona is for vector creation and editing with paths and shapes. Pixel Persona enables raster painting and filters directly on the canvas without leaving Designer. Export Persona provides slice-based multi-format export with preview and batch capabilities. Switch between them instantly with keyboard shortcuts or toolbar buttons."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I ensure print-ready color accuracy in Affinity Designer?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Start with CMYK color mode in document setup, use Pantone or spot colors where specified, enable soft-proof to preview printed output, check for out-of-gamut colors with the Color panel warning icons, and export PDF/X-1a or PDF/X-4 with embedded color profiles and proper bleed settings."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What's the best workflow for creating responsive design assets?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use artboards for different screen sizes, apply Constraints to elements for responsive behavior (pin edges, scale proportionally), create symbols for repeated UI components, use the Export Persona to set up 1x/2x/3x slices, and export all resolutions simultaneously with consistent naming."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Should I convert text to curves before exporting?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Convert to curves only for final client handoff files (EPS, AI) when you don't control destination fonts. Keep editable text in working files and PDF exports where fonts can embed. For SVG, curves ensure consistent rendering across platforms but increase file size."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "coreldraw-integration-workflow",
+    "title": "CorelDRAW Integration: Professional Design Workflow",
+    "seoTitle": "CorelDRAW Workflow | Professional Vector Design Integration",
+    "seoDescription": "Master CorelDRAW workflows for professional design. Learn PowerClip management, envelope distortion, interactive tools, and cross-platform file exchange for print and signage.",
+    "keywords": [
+      "CorelDRAW",
+      "vector design",
+      "PowerClip",
+      "envelope tool",
+      "sign design",
+      "print workflow",
+      "CDR format"
+    ],
+    "category": "designers",
+    "tools": [
+      "CorelDRAW",
+      "PowerClip",
+      "interactive tools",
+      "color management"
+    ],
+    "formats": [
+      "CDR",
+      "AI",
+      "PDF",
+      "EPS",
+      "SVG",
+      "DXF"
+    ],
+    "content": "# CorelDRAW Integration Workflow\n\nMaster professional design workflows in CorelDRAW with PowerClip masking, interactive tools, color management, and cross-platform file exchange.\n\n## Overview\n\nCorelDRAW excels at sign design, print production, and technical illustration through unique tools like PowerClip, interactive effects, and precision layout controls.\n\n## Document Setup\n\n### Page Configuration\n- Set page size to match output dimensions exactly\n- Configure landscape or portrait orientation\n- Add bleed area (0.125\" for print, varies for signs)\n- Enable facing pages for booklet or brochure layouts\n- Set up multiple pages in single document if needed\n\n### Color Management\n- Choose color mode: CMYK for print, RGB for digital/screen\n- Enable color management from Tools > Color Management\n- Set primary color mode and rendering intent\n- Assign ICC profiles for accurate proof\n- Use Pantone swatches for spot color work\n\n### Workspace Setup\n- Customize toolbars for frequent operations\n- Configure object manager docker for layer control\n- Enable guidelines and snap-to-grid\n- Set drawing units (inches, mm, pixels)\n- Save custom workspace templates per project type\n\n## PowerClip Workflows\n\n### Creating PowerClips\n- Draw or import container shape\n- Select content objects to be masked\n- Go to Effects > PowerClip > Place Inside Container\n- Click container to complete PowerClip\n- Edit contents by right-clicking > Edit PowerClip\n\n### Advanced PowerClip Techniques\n- Nest multiple PowerClips for complex masking\n- Use text as PowerClip container for filled typography\n- Apply effects to PowerClip container vs. contents separately\n- Lock container position while editing contents\n- Extract contents when masking no longer needed\n\n### PowerClip vs. Standard Clipping\n- PowerClip maintains object editability inside container\n- Standard clip path creates permanent intersection\n- Use PowerClip for dynamic, editable compositions\n- Use clip path for final flattened outputs\n\n## Interactive Tools Mastery\n\n### Interactive Fill Tool\n- Apply linear, radial, conical, or square gradients\n- Adjust fill interactively by dragging on-canvas handles\n- Set multiple color stops with precise positioning\n- Apply mesh fills for complex color transitions\n- Use pattern and texture fills with tile controls\n\n### Interactive Envelope Tool\n- Apply preset envelopes (arc, flag, wave)\n- Create custom envelope shapes by editing nodes\n- Map text or objects to curved surfaces\n- Use single arc, double arc, or unconstrained modes\n- Adjust envelope without altering original object\n\n### Interactive Blend Tool\n- Blend between two objects with smooth transitions\n- Control number of intermediate steps\n- Adjust acceleration curve for non-linear blends\n- Apply blend along path for custom transformations\n- Use blend for morphing shapes and color gradients\n\n### Interactive Contour Tool\n- Create inside, outside, or center contours\n- Set contour steps and distance between each\n- Apply different colors to each contour step\n- Use contour for offset paths in sign design\n- Convert contours to objects for individual editing\n\n## Precision Layout\n\n### Alignment and Distribution\n- Use Align docker (Window > Dockers > Align)\n- Align objects to page, page center, or each other\n- Distribute objects with equal spacing\n- Align text baselines for perfect typography\n- Use dynamic guides for on-the-fly alignment\n\n### Object Manager\n- Organize artwork into named layers\n- Lock layers to prevent accidental edits\n- Show/hide layers for complex composition review\n- Set layer print and export properties\n- Use master layers for elements across multiple pages\n\n### Guidelines and Grids\n- Drag guidelines from rulers for precise placement\n- Create guideline presets for common layouts\n- Enable snap-to-guidelines for accuracy\n- Use grid for evenly spaced element placement\n- Lock guidelines after positioning\n\n## Typography and Text\n\n### Artistic Text\n- Click once for point text, drag for area text\n- Apply character and paragraph formatting\n- Use Text > Fit Text To Path for curved text\n- Convert to curves for custom letter manipulation\n- Apply effects (envelope, blend, contour) to text\n\n### Paragraph Text Frames\n- Draw text frame for flowing body copy\n- Link text frames across pages for long documents\n- Apply columns within single frame\n- Use baseline grid for vertical rhythm\n- Import text from Word with formatting preserved\n\n### Text Effects\n- Apply drop shadows with interactive tool\n- Use envelope distortion for dimensional typography\n- Create outline text with contour tool\n- Apply gradient fills to text\n- Use PowerClip to mask images inside letters\n\n## File Exchange\n\n### Import Options\n- Import AI files with layers and effects intact\n- Open EPS with font and color preservation\n- Import DXF/DWG for CAD integration\n- Link or embed images (TIFF, PSD, PNG)\n- Maintain import source link for updates\n\n### Export Formats\n- PDF: Print-ready with bleed and color management\n- AI: Adobe Illustrator with converted effects\n- EPS: Universal vector with fonts outlined\n- SVG: Web-optimized with clean markup\n- DXF: CNC and vinyl cutter compatible\n- PNG/JPEG: Raster with resolution control\n\n### Cross-Platform Considerations\n- Outline fonts before exporting to AI or EPS\n- Convert effects to objects for compatibility\n- Flatten transparency for older PDF versions\n- Embed color profiles in PDF exports\n- Test imports in destination software before delivery\n\n## Sign Design Workflows\n\n### Vinyl Cutting Preparation\n- Design with single spot colors per layer\n- Convert all objects to curves\n- Remove hairline strokes and fills\n- Verify no overlapping paths of same color\n- Export as DXF or EPS for cutter software\n\n### Large Format Output\n- Set document size to actual print dimensions\n- Use high-resolution linked images (300 DPI at size)\n- Apply appropriate bleed for trimming\n- Use spot colors or CMYK consistently\n- Include crop marks and registration\n\n## Best Practices\n\n- Name layers and objects descriptively\n- Group related objects for easier management\n- Use symbols for repeated elements\n- Save working CDR files with embedded fonts/images\n- Test PowerClip edits at different zoom levels\n- Convert effects to objects before cross-platform export\n- Keep master elements on locked reference layer\n\n## Performance Optimization\n\n- Simplify complex curves with Reduce Nodes\n- Rasterize high-resolution images to working resolution\n- Close unused dockers to free memory\n- Break apart large blends into static objects when finalized\n- Use Outline view for faster editing of complex files\n\n## Common Pitfalls\n\n- Not outlining fonts before platform exchange\n- Forgetting to embed images in final CDR file\n- Using RGB for print-destined artwork\n- Over-complicating paths with excessive nodes\n- Not checking PowerClip contents before export\n- Mixing measurement units within same document",
+    "faqs": [
+      {
+        "question": "What's the difference between PowerClip and standard clipping in CorelDRAW?",
+        "answer": "PowerClip maintains full editability of contents inside the container\u2014you can enter the PowerClip, edit objects, exit, and the mask updates automatically. Standard clipping creates a permanent intersection that converts to a new shape. Use PowerClip for dynamic workflows and standard clipping only when you need the final flattened result."
+      },
+      {
+        "question": "How do I prepare CorelDRAW files for vinyl cutting?",
+        "answer": "Convert all objects to curves, use single spot colors per layer, remove hairline strokes and unnecessary fills, verify no overlapping paths of the same color, and export as DXF or EPS. Test the exported file in your cutter software to confirm proper path recognition before cutting."
+      },
+      {
+        "question": "What's the best way to exchange files between CorelDRAW and Adobe Illustrator?",
+        "answer": "Export from CorelDRAW as AI or PDF with fonts converted to curves and effects converted to objects. Import AI files into CorelDRAW with 'maintain layers' enabled. For critical projects, test a round-trip (CDR \u2192 AI \u2192 CDR) to identify any elements that don't translate, then adjust your working file accordingly."
+      },
+      {
+        "question": "How do I maintain color accuracy from screen to print in CorelDRAW?",
+        "answer": "Enable color management in Tools > Color Management, assign the correct ICC profile for your printer and paper stock, work in CMYK mode from the start for print projects, use Pantone swatches for spot color matching, and soft-proof (View > Proof Colors) to preview how colors will print before sending to production."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "CorelDRAW Integration Workflow",
+          "description": "Master professional design workflows in CorelDRAW with PowerClip masking, interactive tools, color management, and cross-platform file exchange.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Document Setup",
+              "text": "Set page size to output dimensions, configure bleed area, enable color management with CMYK or RGB mode, assign ICC profiles, customize workspace."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "PowerClip Workflows",
+              "text": "Draw container shape, select content objects, apply Effects > PowerClip > Place Inside Container, edit contents by right-clicking > Edit PowerClip."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Interactive Tools",
+              "text": "Use Interactive Fill for gradients, Interactive Envelope for distortion, Interactive Blend for morphing, Interactive Contour for offset paths."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Precision Layout",
+              "text": "Organize artwork into named layers, use Align docker for positioning, drag guidelines for precision, enable snap-to-grid and dynamic guides."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Typography and Text",
+              "text": "Apply artistic text for headlines, paragraph text for body copy, use Fit Text To Path for curves, apply effects (envelope, blend, contour) to text."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "File Exchange",
+              "text": "Export PDF for print with bleed and color management, AI/EPS with fonts outlined, SVG for web, DXF for vinyl cutting, test compatibility."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What's the difference between PowerClip and standard clipping in CorelDRAW?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "PowerClip maintains full editability of contents inside the container\u2014you can enter the PowerClip, edit objects, exit, and the mask updates automatically. Standard clipping creates a permanent intersection that converts to a new shape. Use PowerClip for dynamic workflows and standard clipping only when you need the final flattened result."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I prepare CorelDRAW files for vinyl cutting?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Convert all objects to curves, use single spot colors per layer, remove hairline strokes and unnecessary fills, verify no overlapping paths of the same color, and export as DXF or EPS. Test the exported file in your cutter software to confirm proper path recognition before cutting."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What's the best way to exchange files between CorelDRAW and Adobe Illustrator?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Export from CorelDRAW as AI or PDF with fonts converted to curves and effects converted to objects. Import AI files into CorelDRAW with 'maintain layers' enabled. For critical projects, test a round-trip (CDR \u2192 AI \u2192 CDR) to identify any elements that don't translate, then adjust your working file accordingly."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I maintain color accuracy from screen to print in CorelDRAW?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Enable color management in Tools > Color Management, assign the correct ICC profile for your printer and paper stock, work in CMYK mode from the start for print projects, use Pantone swatches for spot color matching, and soft-proof (View > Proof Colors) to preview how colors will print before sending to production."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "procreate-to-vector-workflow",
+    "title": "Procreate to Vector: iPad Illustration to Production Workflow",
+    "seoTitle": "Procreate to Vector Workflow | iPad Illustration to Production",
+    "seoDescription": "Convert iPad Procreate illustrations to scalable vector graphics. Learn export techniques, tracing methods, cleanup workflows, and production-ready asset delivery.",
+    "keywords": [
+      "Procreate",
+      "iPad illustration",
+      "vector conversion",
+      "illustration workflow",
+      "digital art",
+      "asset delivery",
+      "vector tracing"
+    ],
+    "category": "designers",
+    "tools": [
+      "Procreate",
+      "Illustrator",
+      "Affinity Designer",
+      "Image Trace"
+    ],
+    "formats": [
+      "PSD",
+      "TIFF",
+      "PNG",
+      "AI",
+      "SVG",
+      "PDF"
+    ],
+    "content": "# Procreate to Vector: iPad Illustration to Production\n\nConvert iPad illustrations from Procreate into scalable vector assets with professional tracing, cleanup, and production delivery workflows.\n\n## Overview\n\nTransform painted or drawn illustrations from Procreate into editable vector files suitable for logos, icons, spot art, and print production.\n\n## Preparation in Procreate\n\n### Document Setup\n- Create document at final required dimensions (300 DPI for print)\n- Use RGB color mode if digital, CMYK if print-bound\n- Set to 16-bit or higher depth for maximum quality\n- Add extra canvas padding around composition\n- Keep layers unflattened for flexibility\n\n### Drawing and Painting\n- Create illustration with clean, bold strokes when targeting vector\n- Use distinct colors for different elements if planning to trace separately\n- Add a white background layer underneath (important for tracing)\n- Keep black linework on separate layer from fills/shadows\n- Use textures sparingly\u2014heavy texture becomes noise in tracing\n\n### Pre-Export Cleanup\n- Flatten layers that won't be needed separately\n- Erase stray marks and artifacts\n- Check for gaps in linework or fills\n- Ensure background is solid white or flat color\n- Review at actual output size for detail adequacy\n\n## Export Strategy\n\n### Formats for Desktop\n- PSD: Preserve Procreate layer structure for reimport\n- TIFF: Uncompressed raster for highest quality vector tracing\n- PNG: Transparent background for flexible backgrounds\n- PDF: Can preserve some vector information if exported as artwork\n\n### Optimal Export Settings\n- Resolution: Export at actual size (300 DPI minimum for print)\n- Color: Match intended output (RGB for digital, CMYK if converting later)\n- Background: Include white layer, don't flatten alpha channel\n- Bit depth: 16-bit if available for maximum color depth\n- Format: TIFF or PNG for tracing, PSD for layer preservation\n\n### File Organization\n- Label exported files with clear naming (illustration-final-300dpi.tiff)\n- Save multiple export versions if colors change\n- Keep original Procreate file linked or annotated\n- Archive high-resolution originals separately from working versions\n\n## Vector Tracing\n\n### Illustrator Image Trace\n- Import cleaned raster into Illustrator\n- Select artwork and open Image Trace dialog\n- Try \"High Fidelity Photo\" preset first\n- Adjust \"Paths\" slider to 90%+ for smooth curves\n- Lower \"Corners\" value for hard angles (logos)\n- Enable \"Ignore White\" to isolate linework\n- Preview traces before expanding\n\n### Affinity Designer Vectorization\n- Import raster into Designer\n- Use Studio > Image Vectorization panel\n- Select \"Accurate\" for detailed illustration\n- Use \"Line drawing\" mode for ink-based art\n- Adjust quality slider to balance detail vs. smoothness\n- Apply smoothing and simplification after conversion\n\n### Illustrator Trace Enhancements\n- Expand traced artwork to editable paths\n- Select > Object > Stray Points to remove artifacts\n- Direct Selection tool to refine curves manually\n- Use Simplify command to reduce excessive anchor points\n- Zoom to 400%+ for detail review of complex areas\n\n### Manual Path Refinement\n- Close any open paths created during tracing\n- Remove overlapping paths that should be single shapes\n- Merge small gaps or strokes that should connect\n- Simplify paths while maintaining character\n- Verify all fills and strokes apply correctly\n\n## Color Application\n\n### Spot Color Separation\n- Assign traced paths to specific colors\n- Use global color swatches for consistency\n- Create separate layers per color for print separation\n- Document Pantone references if using spot colors\n- Test color output on target substrate\n\n### Gradient and Shade Mapping\n- Preserve gradient information from original illustration\n- Apply linear or radial gradients to traced shapes\n- Create color transitions with multiple overlapping shapes\n- Use multiply or overlay blend modes for shadows\n- Test gradients at intended output size\n\n## Production Preparation\n\n### Layer Organization\n- Rename all paths descriptively (\"eye-left\", \"nose\", \"mouth-shine\")\n- Group related elements (\"face\", \"clothing\", \"background\")\n- Create separate layer for final line art if needed\n- Lock reference layers or original raster\n- Create export layers organized by output format\n\n### Quality Assurance\n- Check all paths for stray or hidden points\n- Verify strokes converted to outlines where needed\n- Test at zoom levels: 25%, 100%, 400%\n- Check against original Procreate artwork for accuracy\n- Verify no transparent areas in solid fill regions\n\n### Scalability Testing\n- Export at small size (icon dimensions) and verify legibility\n- Export at large size and check for pixelation\n- Test on different backgrounds and screen types\n- Confirm effects (drop shadows, strokes) scale properly\n- Document minimum size for acceptable reproduction\n\n## Export Delivery\n\n### Vector Formats\n- AI: Native with full layer and effect preservation\n- EPS: Universal with fonts outlined\n- SVG: Web-optimized, clean code\n- PDF: Print-ready with crop marks\n\n### Multi-Resolution Assets\n- 1x (100%) for standard display\n- 2x (200%) for Retina/high-DPI screens\n- 4x (400%) for print preview\n- Export each as PNG, JPEG if raster needed\n\n### Documentation Package\n- Include original Procreate file for reference\n- Provide color palette and Pantone references\n- Document any custom brushes or techniques used\n- Add usage guidelines (minimum size, clear space)\n- Include layered working file separate from flattened export\n\n## Best Practices\n\n- Export from Procreate at full intended resolution\n- Use high-contrast images for cleaner tracing\n- Trace in desktop software (Illustrator/Affinity) rather than apps\n- Create separate vector file per color separation if needed for printing\n- Keep original Procreate file for future edits or variations\n- Test final vector outputs on intended media before production\n\n## Common Pitfalls\n\n- Exporting too small from Procreate limits tracing quality\n- Heavy texture or noise creates messy vector traces\n- Forgetting to add white background before tracing\n- Over-simplifying paths loses subtle curves and character\n- Not testing legibility at minimum intended size\n- Converting sketch layers directly without cleanup first\n\n## Quality Troubleshooting\n\n- Gaps in traced lines: Increase \"Paths\" in Image Trace or pre-process raster with Photoshop levels\n- Over-complicated paths: Reduce \"Paths\" value or simplify after expansion\n- Lost fine details: Increase export resolution from Procreate or trace sections separately\n- Color shift: Check RGB/CMYK mode before tracing, correct in Illustrator after\n- Pixelated curves: Export raster at higher resolution or manually refine paths post-trace",
+    "faqs": [
+      {
+        "question": "What resolution should I export from Procreate for vector tracing?",
+        "answer": "Export at the actual final resolution needed (300 DPI minimum for print). Higher resolution gives the tracing engine more data to work with, resulting in smoother vector paths and better curve representation. For illustration work targeting large formats, 600 DPI export ensures maximum quality."
+      },
+      {
+        "question": "Should I trace in Illustrator or Affinity Designer?",
+        "answer": "Both work well. Illustrator Image Trace excels at photographs and complex artwork. Affinity Designer's vectorization is excellent for line drawings and ink-based art. Try both on a test export\u2014each has slight differences in curve generation and detail capture. For most hand-drawn illustration, Affinity's \"Line drawing\" mode produces cleaner results."
+      },
+      {
+        "question": "How do I preserve the hand-drawn feel during vectorization?",
+        "answer": "Use moderate settings in tracing (90% Paths, medium Corners). After expansion, manually refine problem areas rather than completely re-smoothing\u2014keep some character in curves. For sketch-style artwork, consider keeping some roughness intentional rather than perfectly smoothing everything."
+      },
+      {
+        "question": "What should I do if the traced result has too many anchor points?",
+        "answer": "Use Illustrator's Simplify command (Object > Path > Simplify) to reduce points while preserving curve shape. In Affinity Designer, use Select All and Curves > Smooth. Manually check the simplified result to ensure important details remain. You can also use the Reduce Nodes command in some Adobe plugins for more aggressive simplification."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Procreate to Vector Workflow",
+          "description": "Convert iPad illustrations from Procreate into scalable vector assets with professional tracing, cleanup, and production delivery workflows.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Prepare in Procreate",
+              "text": "Create document at 300 DPI final dimensions, draw with clean strokes, keep linework on separate layer from fills, add solid white background, flatten unneeded layers, erase artifacts."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Export for Tracing",
+              "text": "Export as TIFF or PNG at actual resolution with RGB/CMYK color matching intended output, preserve layer structure in PSD, ensure clean backgrounds, organize exports clearly."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Vector Tracing",
+              "text": "Import into Illustrator or Affinity Designer, use Image Trace or Vectorization with high fidelity settings, preview before expanding, expand and manually refine paths."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Path Refinement",
+              "text": "Remove stray points, close open paths, merge overlapping paths, simplify excessive anchor points, verify fills and strokes, zoom to 400% for detail review."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Color Application",
+              "text": "Assign traced paths to colors, use global swatches for consistency, separate layers per color if needed for print, apply gradients preserving original illustration intent."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Final Export",
+              "text": "Organize layers descriptively, test scalability at multiple sizes, export as AI/EPS/SVG/PDF, provide multi-resolution raster versions, include documentation and original files."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What resolution should I export from Procreate for vector tracing?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Export at the actual final resolution needed (300 DPI minimum for print). Higher resolution gives the tracing engine more data to work with, resulting in smoother vector paths and better curve representation. For illustration work targeting large formats, 600 DPI export ensures maximum quality."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Should I trace in Illustrator or Affinity Designer?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Both work well. Illustrator Image Trace excels at photographs and complex artwork. Affinity Designer's vectorization is excellent for line drawings and ink-based art. Try both on a test export\u2014each has slight differences in curve generation and detail capture. For most hand-drawn illustration, Affinity's \"Line drawing\" mode produces cleaner results."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I preserve the hand-drawn feel during vectorization?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use moderate settings in tracing (90% Paths, medium Corners). After expansion, manually refine problem areas rather than completely re-smoothing\u2014keep some character in curves. For sketch-style artwork, consider keeping some roughness intentional rather than perfectly smoothing everything."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What should I do if the traced result has too many anchor points?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use Illustrator's Simplify command (Object > Path > Simplify) to reduce points while preserving curve shape. In Affinity Designer, use Select All and Curves > Smooth. Manually check the simplified result to ensure important details remain. You can also use the Reduce Nodes command in some Adobe plugins for more aggressive simplification."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "ipad-illustration-workflow",
+    "title": "iPad Illustration Workflow: Digital Art to Multi-Format Export",
+    "seoTitle": "iPad Illustration Workflow | Digital Art Production Guide",
+    "seoDescription": "Master iPad illustration workflows from concept to export. Learn document setup, layer organization, painting techniques, and professional multi-format asset delivery.",
+    "keywords": [
+      "iPad illustration",
+      "digital art",
+      "Procreate workflow",
+      "illustration painting",
+      "multi-format export",
+      "digital art production"
+    ],
+    "category": "designers",
+    "tools": [
+      "Procreate",
+      "Apple Pencil",
+      "Affinity Photo",
+      "Photoshop"
+    ],
+    "formats": [
+      "PSD",
+      "TIFF",
+      "PNG",
+      "JPEG",
+      "PDF",
+      "AI"
+    ],
+    "content": "# iPad Illustration Workflow: Digital Art to Multi-Format Export\n\nMaster professional iPad illustration workflows from concept and painting through multi-format export for web, print, and licensing.\n\n## Overview\n\nCreate publication-quality digital illustrations on iPad with organized layer workflows, professional color management, and flexible asset export.\n\n## Document Setup\n\n### Canvas Configuration\n- Create new document at intended output dimensions\n- For print: 300 DPI, CMYK or RGB per final use\n- For digital: 72-150 DPI at 1x, 2x, or 4x scale factor\n- Set canvas size with padding around composition\n- Enable grid overlay for compositional guidance\n\n### Color Management\n- Choose RGB for digital/screen (default)\n- Choose RGB and convert to CMYK later for print (more control)\n- Set display profile for accurate preview\n- Create test swatches for spot color matching if needed\n- Document color space decisions in document notes\n\n### Layer Architecture\n- Create base layer for white background\n- Organize layers by major element groups\n- Use descriptive layer names immediately\n- Create folder hierarchy: background, characters, details, effects\n- Keep linework on separate layer from color layers\n\n## Painting Techniques\n\n### Linework and Sketching\n- Create sketch layer at lower opacity for composition planning\n- Use low-opacity brush for initial rough laying out\n- Build clean linework on separate layer above sketch\n- Use monochrome or single-color brush for linework consistency\n- Lock sketch layer after finalizing composition\n\n### Base Coloring\n- Create color layers grouped by region or character element\n- Use flat colors first before adding variation\n- Apply base colors on layers between sketch and detail\n- Use clipping masks to paint within established shapes\n- Create selection from linework layer to constrain color\n\n### Detail and Texture\n- Add midtones and shadows on separate layers\n- Use overlay or multiply blend modes for shadows\n- Use screen or add blend modes for highlights\n- Build textures with dry brush or texture brushes\n- Keep detail layers above base color for adjustment\n\n### Effects and Atmosphere\n- Apply lighting effects on top layer with low opacity\n- Add atmospheric fog with large soft brushes\n- Create depth with blur or desaturation of background\n- Use dodge and burn techniques on dedicated layers\n- Keep effect layers separate for easy removal or adjustment\n\n## Color Refinement\n\n### Hue and Saturation Adjustments\n- Use Hue/Saturation adjustment layer for color shifts\n- Adjust individual color ranges (reds, greens, blues separately)\n- Use Curves adjustment for tonal refinement\n- Create Levels adjustment for contrast control\n- Keep all adjustments non-destructive with layers\n\n### Color Harmony\n- Use Color Dynamics panel to check color relationships\n- Apply color picker to sample harmonious palettes\n- Create swatches of dominant colors for reference\n- Adjust saturation if colors appear muddy\n- Check grayscale conversion for value consistency\n\n## Performance Optimization\n\n### Layer Management\n- Flatten merged layers when detail phase completes\n- Delete or merge duplicate or unused layers\n- Consolidate similar layers to reduce count\n- Archive high-layer-count versions separately\n- Limit active layers to 20-30 for smooth performance\n\n### File Size Control\n- Work at 300 DPI only for final output\n- Use 150 DPI for most digital illustration workflows\n- Reduce colors in palette when possible\n- Flatten background and non-editable elements\n- Export to lower file size, keeping PSD as backup\n\n## Pre-Export Preparation\n\n### Final Composition Check\n- Zoom to 100% and review entire artwork\n- Check for stray marks or artifacts\n- Verify colors are correct and consistent\n- Confirm no unintended transparency or alpha issues\n- Review against original concept or brief\n\n### Layer Visibility\n- Turn off sketch layers before export\n- Hide reference layers or guides\n- Show only layers intended for final output\n- Test different layer combinations for variations\n- Create separate layer sets for different export versions\n\n### Color Profile\n- Verify document is in RGB for digital export\n- Assign sRGB profile for web export\n- Create CMYK version for print output\n- Embed color profile in exports if applicable\n- Document color space in filename or metadata\n\n## Export Workflows\n\n### Raster Export Settings\n- PNG: Transparent background, 8-bit or 16-bit per channel\n- JPEG: Solid background, quality 85-95%, sRGB profile\n- TIFF: Uncompressed or LZW, 16-bit for archival\n- PDF: Preserves vector and raster information\n\n### Multi-Resolution Export\n- 1x (100%): Standard display size\n- 2x (200%): Retina/high-DPI screens\n- 4x (400%): Print preview or large displays\n- Web optimization: Scale and compress for bandwidth\n\n### Format-Specific Preparation\n- Web: Scale to appropriate dimensions, convert to sRGB\n- Print: Ensure 300 DPI at final output size, CMYK or RGB as specified\n- Social media: Create versions optimized for platform dimensions\n- Archival: Save as TIF or PSD with all layers intact\n\n## Documentation and Delivery\n\n### File Organization\n- Save PSD with all layers as primary working file\n- Export flattened versions for specific uses\n- Create version-dated backups\n- Organize exports by format and resolution\n- Document color palette and any special requirements\n\n### Metadata\n- Add title, artist name in document properties\n- Include copyright and usage rights information\n- Document creation date and modifications\n- Add color space and DPI information to filename\n- Create README with file format descriptions\n\n### Delivery Package\n- Include original PSD with full layer history\n- Provide all exported formats (PNG, JPEG, TIFF, PDF)\n- Supply color palette as reference\n- Add brief documentation of layers if complex\n- Include lower-resolution preview for clients\n\n## Best Practices\n\n- Name layers descriptively from the start\n- Use consistent naming conventions across projects\n- Group related layers into folders\n- Save frequently during long sessions\n- Create backups at major completion points\n- Test exports on multiple devices and screens\n- Document color space and DPI in every export\n\n## Common Pitfalls\n\n- Working at too low DPI for eventual print use\n- Creating too many layers causing performance issues\n- Forgetting to flatten before exporting\n- Exporting without verifying background transparency\n- Not converting to sRGB before web export\n- Losing original sketch and linework layers\n- Assuming colors will match across different devices\n\n## Troubleshooting\n\n- Slow performance: Flatten merged sections, reduce layer count, work at lower resolution\n- Color banding: Use Noise adjustment layer, increase color depth, check gradients\n- Pixelated export: Verify export resolution matches intended use, resample at higher DPI\n- Color shift on export: Check color profile assignment, verify document color mode, test on different screens",
+    "faqs": [
+      {
+        "question": "What's the ideal DPI for iPad illustration if I might print it later?",
+        "answer": "Work at 300 DPI if print is primary use, or create at 150 DPI and upsample with Procreate's scaling for print. Most digital illustration works at 150 DPI fine for screen display. Keep the original high-quality PSD, and if print is needed later, you can always recreate elements at higher resolution or use smart upsampling techniques."
+      },
+      {
+        "question": "How should I organize layers for a complex character illustration?",
+        "answer": "Group layers hierarchically: folders for Background, Character, Details, Effects. Within Character, subfold by body parts (Head, Body, Clothing). Use naming like 'head-skin-base', 'head-eyes-shine', 'head-hair-shadow'. This structure speeds editing and makes collaboration easier if someone else needs to adjust."
+      },
+      {
+        "question": "Should I paint with all layers at full opacity or use blend modes while working?",
+        "answer": "Paint with layers at full opacity initially to avoid color confusion. Once base colors are solid, add new layers with multiply, screen, or overlay blend modes for shadow and highlight. This non-destructive approach lets you adjust or remove effects without affecting base work."
+      },
+      {
+        "question": "What's the best format for final delivery to a client?",
+        "answer": "Deliver PSD (with flattened version), high-resolution PNG (transparent background), and JPEG (solid background). For print, add 300 DPI version in both CMYK and RGB. Include color palette documentation and usage guidelines. Provide lower-res preview for quick client review separate from production files."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "iPad Illustration Workflow",
+          "description": "Master professional iPad illustration workflows from concept and painting through multi-format export for web, print, and licensing.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Document Setup",
+              "text": "Create new document at output dimensions (300 DPI for print, 72-150 DPI for digital), choose RGB or CMYK color mode, set up layer folders for background, characters, details, effects."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Sketch and Linework",
+              "text": "Create sketch layer at lower opacity for composition, build clean linework on separate layer, use monochrome color for consistency, lock sketch after finalizing."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Base Coloring",
+              "text": "Create color layers grouped by element, apply flat base colors first, use clipping masks to paint within shapes, keep color layers organized with descriptive names."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Detail and Effects",
+              "text": "Add midtones and shadows on separate layers, use overlay or multiply blend modes, build textures with specialty brushes, add lighting and atmospheric effects on top layer."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Color Refinement",
+              "text": "Use Hue/Saturation adjustment layers for color shifts, apply Curves for tonal refinement, check color harmony and grayscale values, verify saturation isn't muddy."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Final Export",
+              "text": "Prepare color profile (sRGB for web, CMYK for print), export multi-resolution versions (1x, 2x, 4x), provide formats: PNG, JPEG, TIFF, PDF with documentation package."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What's the ideal DPI for iPad illustration if I might print it later?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Work at 300 DPI if print is primary use, or create at 150 DPI and upsample with Procreate's scaling for print. Most digital illustration works at 150 DPI fine for screen display. Keep the original high-quality PSD, and if print is needed later, you can always recreate elements at higher resolution or use smart upsampling techniques."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How should I organize layers for a complex character illustration?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Group layers hierarchically: folders for Background, Character, Details, Effects. Within Character, subfold by body parts (Head, Body, Clothing). Use naming like 'head-skin-base', 'head-eyes-shine', 'head-hair-shadow'. This structure speeds editing and makes collaboration easier if someone else needs to adjust."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Should I paint with all layers at full opacity or use blend modes while working?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Paint with layers at full opacity initially to avoid color confusion. Once base colors are solid, add new layers with multiply, screen, or overlay blend modes for shadow and highlight. This non-destructive approach lets you adjust or remove effects without affecting base work."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What's the best format for final delivery to a client?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Deliver PSD (with flattened version), high-resolution PNG (transparent background), and JPEG (solid background). For print, add 300 DPI version in both CMYK and RGB. Include color palette documentation and usage guidelines. Provide lower-res preview for quick client review separate from production files."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "design-system-tokens-workflow",
+    "title": "Design System Tokens: Building Scalable Design Language",
+    "seoTitle": "Design System Tokens Workflow | Scalable Design Language",
+    "seoDescription": "Create and manage design system tokens for consistent, scalable design. Learn token structure, naming conventions, automation tools, and multi-platform implementation.",
+    "keywords": [
+      "design tokens",
+      "design system",
+      "design language",
+      "token management",
+      "consistency",
+      "automation",
+      "component library"
+    ],
+    "category": "designers",
+    "tools": [
+      "Figma",
+      "Tokens Studio",
+      "Adobe XD",
+      "design tools"
+    ],
+    "formats": [
+      "JSON",
+      "CSS",
+      "SCSS",
+      "figma tokens"
+    ],
+    "content": "# Design System Tokens: Building Scalable Design Language\n\nCreate comprehensive design system tokens to ensure consistency across all design and development touchpoints at scale.\n\n## Overview\n\nDesign tokens abstract design decisions (colors, typography, spacing) into reusable, maintainable units that synchronize design and code.\n\n## Token Structure\n\n### Token Categories\n- **Color**: Brand colors, semantic colors, state variants\n- **Typography**: Font families, sizes, weights, line heights\n- **Spacing**: Padding, margin, gap values in standardized increments\n- **Sizing**: Component dimensions, width/height scales\n- **Border**: Radius values, stroke widths\n- **Shadow**: Depth and elevation patterns\n- **Animation**: Timing functions, durations, easing curves\n- **Opacity**: Transparency layers for hierarchy\n\n### Semantic vs. Primitive Tokens\n- **Primitives**: Base values (primary-blue-500, large-font-size)\n- **Semantic**: Context-specific (button-background, text-muted, alert-error)\n- Map primitives to semantic tokens for flexibility\n- Use semantic tokens in components, primitives for theming\n\n## Naming Conventions\n\n### Structure\n- Use kebab-case for token names (button-primary-background)\n- Organize hierarchically: category/type/state/property\n- Example: color/primary/on-dark/background\n- Keep names descriptive but concise\n\n### Color Token Naming\n- Semantic: button-primary, text-secondary, border-disabled\n- Tonal: color-neutral-50 through color-neutral-950\n- State variants: hover, active, disabled, focus\n- Example: action-primary-default, action-primary-hover\n\n### Spacing Token Naming\n- Use scale: spacing-xs, spacing-sm, spacing-md, spacing-lg, spacing-xl\n- Or numeric: spacing-4, spacing-8, spacing-12, spacing-16, spacing-24\n- Reference scale (4px, 8px increments for consistency)\n- Example: spacing-md = 12px, spacing-lg = 16px\n\n### Typography Token Naming\n- By scale: text-xs, text-sm, text-md, text-lg, text-xl\n- By use: heading-1, heading-2, body-lg, label-sm\n- Include weight: text-md-regular, text-md-bold\n- Example: body-lg = 18px / 28px line-height / 400 weight\n\n## Token Organization\n\n### Figma Tokens Plugin\n- Install Tokens Studio plugin in Figma\n- Create tokens.json file with organized structure\n- Group tokens by category in plugin interface\n- Define sets for light/dark modes\n- Export as JSON for developer use\n\n### JSON Structure\n```json\n{\n  \"color\": {\n    \"primary\": {\n      \"50\": {\"value\": \"#f0f7ff\"},\n      \"500\": {\"value\": \"#0066cc\"},\n      \"900\": {\"value\": \"#001a4d\"}\n    },\n    \"semantic\": {\n      \"button-primary\": {\"value\": \"{color.primary.500}\"}\n    }\n  },\n  \"spacing\": {\n    \"sm\": {\"value\": \"8px\"},\n    \"md\": {\"value\": \"12px\"},\n    \"lg\": {\"value\": \"16px\"}\n  }\n}\n```\n\n### Token Documentation\n- Document usage context for each semantic token\n- Explain when to use primitive vs. semantic\n- Provide rationale for values (why 12px, not 10px)\n- Create visual token library page\n- Link tokens to components using them\n\n## Theme Implementation\n\n### Light/Dark Modes\n- Create separate token sets for each theme\n- Define theme-specific colors only (keep sizing consistent)\n- Use token references to map between themes\n- Document fallback behavior if theme switches\n- Test contrast ratios for accessibility\n\n### Multi-Brand Support\n- Create token sets per brand if needed\n- Override only brand-specific values\n- Inherit common spacing and sizing\n- Use consistent semantic naming across brands\n- Document brand-specific decisions\n\n### Platform Variants\n- Create separate sets for web, iOS, Android if needed\n- Use consistent naming across platforms\n- Adjust values for platform conventions (larger touch targets on mobile)\n- Document platform-specific overrides\n- Keep consistent semantic structure\n\n## Design System Implementation\n\n### Component Mapping\n- Apply tokens to all component variants\n- Document which tokens affect which properties\n- Create consistent interaction patterns via tokens\n- Use semantic tokens in component main components\n- Avoid hardcoding values in component fills\n\n### Updating Tokens\n- Change value in Figma token once\n- All components referencing token update automatically\n- Document change reason and date\n- Version tokens for breaking changes\n- Communicate significant token changes to team\n\n## Developer Handoff\n\n### Export Formats\n- JSON: Raw token structure for custom processing\n- CSS Custom Properties: --color-primary, --spacing-md\n- SCSS Variables: $color-primary, $spacing-md\n- JavaScript Objects: export const tokens = { ... }\n- Format per platform and developer preference\n\n### Export Tools\n- Token Studio: Export to JSON, CSS, SCSS, JavaScript\n- Figma Plugins: Style Dictionary, Tokens for design systems\n- Custom scripts: Transform JSON to target format\n- CI/CD integration: Auto-generate token files on updates\n\n### Documentation for Developers\n- Provide token JSON schema with examples\n- Document how to reference tokens (CSS vars vs. imports)\n- Explain semantic vs. primitive structure\n- Include theme switching logic if applicable\n- Provide fallback values for missing tokens\n\n## Maintenance and Evolution\n\n### Version Control\n- Store tokens.json in version control\n- Track token changes in commit history\n- Mark breaking changes clearly\n- Maintain changelog of token evolution\n- Tag releases when major token updates deploy\n\n### Governance\n- Define process for proposing new tokens\n- Require approval for token value changes\n- Audit unused tokens periodically\n- Document deprecation process for old tokens\n- Keep design and dev teams synchronized\n\n### Auditing Tokens\n- Identify duplicate or redundant tokens\n- Check for unused tokens and remove if obsolete\n- Verify values match brand guidelines\n- Test accessibility (color contrast, font sizes)\n- Review for completeness against component needs\n\n## Best Practices\n\n- Start with primitives, add semantic tokens gradually\n- Use reference values ({color.primary.500}) for DRY principles\n- Keep token values aligned to project design specs\n- Use consistent units (px or rem, not mixed)\n- Document rationale and context for values\n- Version tokens for major changes\n- Sync design and code tokens regularly\n\n## Common Pitfalls\n\n- Too many tokens without clear organization\n- Naming inconsistency across categories\n- Hardcoding values in components instead of using tokens\n- Not versioning tokens before breaking changes\n- Forgetting to update documentation after token changes\n- Creating tokens without developer input on format\n- Over-abstracting with too many semantic layers\n\n## Tools and Integration\n\n- Figma Tokens Studio: Primary token management\n- Style Dictionary: Transform tokens to code\n- Storybook: Display token usage documentation\n- GitHub/GitLab: Version control for token files\n- Automation: GitHub Actions to publish updated tokens",
+    "faqs": [
+      {
+        "question": "What's the difference between primitive and semantic tokens?",
+        "answer": "Primitive tokens are base design values (colors, spacings) with no context. Semantic tokens reference primitives and add meaning (button-primary uses the primary color primitive). Use primitives in theme definitions, semantic tokens in components. This allows flexible theming without changing component logic."
+      },
+      {
+        "question": "Should tokens be versioned or updated in place?",
+        "answer": "For minor updates (color value tweaks within same scale), update in place. For structural changes or breaking changes (removing tokens, changing semantic meaning), version and communicate clearly. Track token history in version control to understand evolution over time."
+      },
+      {
+        "question": "How do I handle tokens for dark mode?",
+        "answer": "Create separate token sets for light and dark themes in Tokens Studio. Define theme-specific colors only (e.g., text-primary is different, but spacing-md remains the same). Export both sets and let developers switch themes by swapping CSS variable values or token imports."
+      },
+      {
+        "question": "What format should I export tokens for developers?",
+        "answer": "Ask developers their preference: CSS custom properties are standard, SCSS variables for preprocessors, JavaScript objects for framework use, or raw JSON for custom processing. Provide the format that best integrates with your development stack and tooling."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Design System Tokens Workflow",
+          "description": "Create comprehensive design system tokens to ensure consistency across all design and development touchpoints at scale.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Define Token Categories",
+              "text": "Identify token types needed: color, typography, spacing, sizing, border, shadow, animation, opacity. Create primitives (base values) and semantic tokens (context-specific)."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Establish Naming Conventions",
+              "text": "Use kebab-case with hierarchy: category/type/state. Document naming patterns for colors (action-primary-hover), spacing (spacing-md), typography (body-lg)."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Organize in Figma",
+              "text": "Install Tokens Studio plugin, create tokens.json with organized structure, define sets for light/dark modes, use token references for DRY principles."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Implement in Components",
+              "text": "Apply tokens to component fills, text styles, spacing. Map semantic tokens to component properties, avoid hardcoding values, document token usage."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Export for Development",
+              "text": "Export tokens to JSON, CSS custom properties, SCSS variables, or JavaScript per developer needs. Document token structure and reference format."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Maintain and Evolve",
+              "text": "Version control tokens.json, track changes in history, audit unused tokens, document deprecation process, keep design and dev teams synchronized."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What's the difference between primitive and semantic tokens?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Primitive tokens are base design values (colors, spacings) with no context. Semantic tokens reference primitives and add meaning (button-primary uses the primary color primitive). Use primitives in theme definitions, semantic tokens in components. This allows flexible theming without changing component logic."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Should tokens be versioned or updated in place?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For minor updates (color value tweaks within same scale), update in place. For structural changes or breaking changes (removing tokens, changing semantic meaning), version and communicate clearly. Track token history in version control to understand evolution over time."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I handle tokens for dark mode?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Create separate token sets for light and dark themes in Tokens Studio. Define theme-specific colors only (e.g., text-primary is different, but spacing-md remains the same). Export both sets and let developers switch themes by swapping CSS variable values or token imports."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What format should I export tokens for developers?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ask developers their preference: CSS custom properties are standard, SCSS variables for preprocessors, JavaScript objects for framework use, or raw JSON for custom processing. Provide the format that best integrates with your development stack and tooling."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "component-library-workflow",
+    "title": "Component Library Management: Building Scalable Design Systems",
+    "seoTitle": "Component Library Workflow | Design System Management",
+    "seoDescription": "Build and maintain scalable component libraries. Learn component structure, documentation, versioning, and sync between design and code.",
+    "keywords": [
+      "component library",
+      "design system",
+      "component documentation",
+      "design-to-code",
+      "component versioning",
+      "UI components"
+    ],
+    "category": "designers",
+    "tools": [
+      "Figma",
+      "Storybook",
+      "GitHub",
+      "component tools"
+    ],
+    "formats": [
+      "figma components",
+      "React",
+      "documentation",
+      "tokens"
+    ],
+    "content": "# Component Library Management: Building Scalable Design Systems\n\nBuild and maintain comprehensive component libraries that synchronize design and code for consistent, scalable digital products.\n\n## Overview\n\nComponent libraries centralize reusable UI elements with clear variants, documentation, and code-to-design mapping for collaborative teams.\n\n## Component Structure\n\n### Component Organization\n- Group by category: Buttons, Forms, Cards, Navigation, Feedback\n- Create main component with all variants\n- Use component variants for different states: default, hover, active, disabled, loading\n- Create variants per size: sm, md, lg\n- Document variant naming consistently\n\n### Component Hierarchy\n- Base components: Button, Input, Icon (atomic)\n- Compound components: Form Group, Card with Header (molecules)\n- Template components: Signup Form, Product Card (organisms)\n- Page templates: Landing page structure\n- Layer components logically for easy discovery\n\n### Main Component Setup\n- Set main component at page top with clear naming\n- Include all possible variants in single main component\n- Document which variant combinations are valid\n- Use annotations for component behavior\n- Lock main component to prevent accidental edits\n\n## Variant Strategy\n\n### Size Variants\n- Small (sm): Compact UI, secondary actions\n- Medium (md): Default, primary usage\n- Large (lg): Emphasis, mobile-friendly\n- Include all applicable sizes per component\n- Document size use cases and contexts\n\n### State Variants\n- Default: Neutral, clickable state\n- Hover: Mouse over or touch interaction\n- Active: Pressed or selected\n- Disabled: Non-interactive, grayed out\n- Loading: Async operation in progress\n- Error: Invalid input or failed action\n- Success: Completed action confirmation\n\n### Type/Role Variants\n- Primary: Main action, emphasized\n- Secondary: Alternative action\n- Tertiary: Minimal appearance\n- Destructive: Dangerous action warning\n- Ghost: Minimal, background-only\n- Document semantic meaning of each\n\n## Component Documentation\n\n### Design Specifications\n- Document dimensions (width, height, min/max)\n- Specify spacing (padding, gaps, margins)\n- Detail typography (font, size, weight, line-height)\n- Define colors using design tokens\n- Explain animation behavior if applicable\n\n### Usage Guidelines\n- When to use this component (do's)\n- When not to use (don'ts)\n- Content guidelines (text length, image ratios)\n- Accessibility considerations (contrast, keyboard, screen readers)\n- Mobile vs. desktop differences if applicable\n\n### Behavior Documentation\n- Interaction patterns (click, hover, focus)\n- Keyboard navigation (Tab order, Enter/Space triggers)\n- Mobile touch interactions\n- Error handling and validation display\n- Loading and async states\n\n### Best Practices\n- Link to live examples or Storybook\n- Include screenshot comparisons of variants\n- Provide code snippets for common uses\n- Document common mistakes to avoid\n- Link to related components\n\n## Design Implementation\n\n### Using Main Components\n- Drag main component into design file\n- Switch variant in Design panel\n- Override text content and images\n- Document which overrides are expected\n- Keep variant structure unchanged\n\n### Detaching When Necessary\n- Detach only when truly custom (rare)\n- Document why detaching was necessary\n- Consider adding new variant instead\n- Sync detached custom components back to library\n- Minimize detached instances for consistency\n\n### Updating Component Instances\n- When main component updates, instances auto-update\n- Review and approve component changes before publishing\n- Communicate significant changes to design team\n- Update main component carefully to avoid breaking instances\n- Use \"Reset all changes\" to revert overrides if needed\n\n## Color and Typography Integration\n\n### Token Application\n- Apply design token colors to component fills\n- Use semantic tokens (button-primary, text-muted)\n- Link typography styles to token values\n- Enable theme switching through token swaps\n- Document token dependencies for each component\n\n### Style Libraries\n- Create shared text styles in Figma library\n- Create shared color styles\n- Document style naming (TextBody, ButtonLabel)\n- Sync styles across component variants\n- Version styles as library evolves\n\n## Code Integration\n\n### Design-to-Code Mapping\n- Document component props in design annotations\n- Map design variants to code props (size=\"lg\", variant=\"primary\")\n- Document which props control which visuals\n- Create component prop documentation\n- Link design documentation to code README\n\n### Code Connect (Figma)\n- Use Code Connect plugin to link design components to code\n- Map component instance properties to code props\n- Generate live component documentation in Storybook\n- Keep mappings synchronized with code changes\n- Document mapping logic for maintainers\n\n### Storybook Documentation\n- Create story for each component and variant\n- Include interactive controls to change props\n- Document props with descriptions and types\n- Add accessibility checklist per component\n- Link to design in Figma from Storybook\n\n## Library Maintenance\n\n### Versioning Components\n- Use semantic versioning (major.minor.patch)\n- Major: Breaking changes (removed variants, prop changes)\n- Minor: New variants or non-breaking additions\n- Patch: Bug fixes or documentation updates\n- Document migration path for breaking changes\n\n### Publishing Library Updates\n- Test component changes in staging environment first\n- Get design and engineering approval before publishing\n- Document changelog for each version\n- Communicate breaking changes prominently\n- Provide migration guide for major updates\n\n### Deprecation Process\n- Announce deprecation 1-2 releases in advance\n- Provide replacement component or path forward\n- Mark deprecated components in library\n- Remove only after sufficient migration time\n- Document deprecation reasons in changelog\n\n## Audit and Evolution\n\n### Library Audit\n- Review components for consistency and quality\n- Check for redundant or similar components\n- Verify all variants are documented\n- Test accessibility for each variant\n- Validate token and style usage throughout\n\n### Identifying Gaps\n- Monitor new components created in projects\n- Identify opportunities to extract reusable components\n- Assess designer and developer feedback\n- Prioritize high-value components for library\n- Plan component library roadmap\n\n### Performance Optimization\n- Minimize component main files\n- Archive legacy or rarely-used components\n- Use copy strategy when variants diverge significantly\n- Keep component count manageable (50-200 typical)\n- Document reasoning for included components\n\n## Best Practices\n\n- Name components consistently and descriptively\n- Keep component logic simple and focused\n- Document all components, even seemingly obvious ones\n- Version components and track changes\n- Get stakeholder buy-in before major changes\n- Test components across devices and browsers\n- Keep design and code components synchronized\n\n## Common Pitfalls\n\n- Creating too many variants for edge cases\n- Not documenting component usage or behavior\n- Inconsistent naming across components\n- Mixing design-specific and code-specific concerns\n- Forgetting to deprecate old components properly\n- Breaking changes without migration path\n- Over-engineering components for flexibility\n\n## Collaboration\n\n- Use Figma Shared Libraries for design sharing\n- Create public Storybook instance for developer reference\n- Establish component review process\n- Hold regular component library sync meetings\n- Solicit feedback from design and engineering teams\n- Document governance and decision-making",
+    "faqs": [
+      {
+        "question": "How many variants should each component have?",
+        "answer": "Include variants for legitimate use cases in your product. Typical: 2-3 sizes (sm, md, lg), 5-7 states (default, hover, active, disabled, loading, error, success), and 2-4 semantic types (primary, secondary, destructive). Don't create variants for hypothetical scenarios\u2014add them when actually needed."
+      },
+      {
+        "question": "When should I detach a component instance?",
+        "answer": "Rarely. Detaching breaks the connection to library updates. Before detaching, ask: \"Should this be a new variant?\" Usually the answer is yes. Only detach for truly one-off customizations, and immediately afterward, consider whether it belongs as a new main component or variant instead."
+      },
+      {
+        "question": "How do I sync component changes between Figma and code?",
+        "answer": "Use Figma's Code Connect plugin to link design components to code. When design changes, the Code Connect mapping documents the corresponding code props. Engineers can reference this during implementation. Keep mappings synchronized as both design and code evolve."
+      },
+      {
+        "question": "What should I do when a component becomes outdated?",
+        "answer": "Don't delete immediately. Announce deprecation in the next version with a migration path to the replacement. Keep it available for 1-2 more releases, marking it as deprecated in the library. Only remove after sufficient time for teams to migrate and after confirming no active usage."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Component Library Management Workflow",
+          "description": "Build and maintain comprehensive component libraries that synchronize design and code for consistent, scalable digital products.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Define Component Structure",
+              "text": "Organize components by category (Buttons, Forms, Cards). Create main component with size variants (sm, md, lg) and state variants (default, hover, active, disabled, error)."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Document Specifications",
+              "text": "Document dimensions, spacing, typography, colors. Explain when to use component, usage guidelines, accessibility considerations, and behavior."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Apply Design Tokens",
+              "text": "Apply semantic token colors and typography to components. Link to token definitions, enable theme switching through token swaps, document dependencies."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Map to Code",
+              "text": "Use Code Connect plugin to link design components to code. Map variants to code props (size, variant), document prop descriptions and types."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Create Storybook Documentation",
+              "text": "Create stories for each component variant. Include interactive controls, prop documentation, accessibility checklist, and links to design."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Maintain and Version",
+              "text": "Use semantic versioning for component changes, document changelog, manage deprecation process, collect feedback for library evolution."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How many variants should each component have?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Include variants for legitimate use cases in your product. Typical: 2-3 sizes (sm, md, lg), 5-7 states (default, hover, active, disabled, loading, error, success), and 2-4 semantic types (primary, secondary, destructive). Don't create variants for hypothetical scenarios\u2014add them when actually needed."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "When should I detach a component instance?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Rarely. Detaching breaks the connection to library updates. Before detaching, ask: \"Should this be a new variant?\" Usually the answer is yes. Only detach for truly one-off customizations, and immediately afterward, consider whether it belongs as a new main component or variant instead."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I sync component changes between Figma and code?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use Figma's Code Connect plugin to link design components to code. When design changes, the Code Connect mapping documents the corresponding code props. Engineers can reference this during implementation. Keep mappings synchronized as both design and code evolve."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What should I do when a component becomes outdated?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Don't delete immediately. Announce deprecation in the next version with a migration path to the replacement. Keep it available for 1-2 more releases, marking it as deprecated in the library. Only remove after sufficient time for teams to migrate and after confirming no active usage."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "design-qatesting-workflow",
+    "title": "Design QA & Testing: Ensuring Quality Across Platforms",
+    "seoTitle": "Design QA Workflow | Quality Assurance for Digital Products",
+    "seoDescription": "Master design QA and testing workflows. Learn responsive design testing, accessibility validation, cross-platform verification, and quality gates.",
+    "keywords": [
+      "design QA",
+      "quality assurance",
+      "responsive testing",
+      "accessibility testing",
+      "cross-platform",
+      "design validation",
+      "usability testing"
+    ],
+    "category": "designers",
+    "tools": [
+      "Figma",
+      "browser DevTools",
+      "accessibility tools",
+      "testing tools"
+    ],
+    "formats": [
+      "design specs",
+      "test reports",
+      "documentation"
+    ],
+    "content": "# Design QA & Testing: Ensuring Quality Across Platforms\n\nImplement comprehensive design QA workflows to validate quality, accessibility, consistency, and functionality across all devices and platforms.\n\n## Overview\n\nDesign QA goes beyond visual review to ensure products are usable, accessible, consistent, performant, and meet specifications across all contexts.\n\n## Responsive Design Testing\n\n### Breakpoint Validation\n- Test at documented breakpoints (mobile: 375px, tablet: 768px, desktop: 1440px)\n- Verify layout adapts correctly at each breakpoint\n- Check component spacing and sizing adjustments\n- Ensure text remains readable at all sizes\n- Test between breakpoints for reflow issues\n\n### Mobile-First Review\n- Start testing at smallest viewport first\n- Verify touch targets minimum 44x44px\n- Check vertical scroll experience without horizontal scroll\n- Test all interactions at mobile size\n- Validate modal and overlay behavior\n- Review navigation pattern for mobile context\n\n### Tablet and Landscape Testing\n- Test at common tablet sizes (iPad, Android tablets)\n- Review landscape orientation layouts\n- Verify sufficient padding and margins\n- Check two-column layouts work at tablet width\n- Test split-view scenarios (email/detail on iPad)\n\n### Desktop and Large Display\n- Test at minimum and maximum supported widths\n- Verify content width and line lengths (50-75 characters optimal)\n- Check spacing doesn't feel excessive at large sizes\n- Validate that stretched images don't distort\n- Review navigation patterns for screen real estate\n\n## Accessibility Testing\n\n### Color Contrast\n- WCAG AA: 4.5:1 for normal text, 3:1 for large text\n- WCAG AAA: 7:1 for normal text, 4.5:1 for large text\n- Test with contrast checker tools\n- Check background vs. text colors\n- Verify focus indicators have sufficient contrast\n- Test on various backgrounds, not just white\n\n### Keyboard Navigation\n- Tab through entire interface in logical order\n- Verify all interactive elements are focusable\n- Check focus indicators are visible and clear\n- Test keyboard shortcuts for consistency\n- Verify no keyboard traps (can't escape focus)\n- Validate form navigation and submission\n\n### Screen Reader Testing\n- Use NVDA, JAWS, or VoiceOver to test\n- Verify headings are properly structured (H1 > H2 > H3)\n- Test alternative text on images describes content\n- Validate form labels associated with inputs\n- Check hidden elements marked appropriately\n- Test link text makes sense out of context\n\n### Semantic Structure\n- Verify proper heading hierarchy without skipping levels\n- Validate list structure for navigation and content\n- Test form structure with label, input, error message relationships\n- Check table headers and associations\n- Verify landmarks used (main, nav, aside, footer)\n\n## Cross-Browser Testing\n\n### Browser Compatibility Matrix\n- Chrome/Edge (Chromium-based): Latest 2 versions\n- Firefox: Latest 2 versions\n- Safari: Latest 2 versions (macOS and iOS)\n- Test interaction patterns, animations, gradients\n- Verify CSS and layout rendering consistency\n\n### Rendering Verification\n- Check typography rendering across browsers\n- Verify shadow and gradient quality\n- Test animation smoothness and performance\n- Check transparency and blend modes\n- Validate form input styling and behavior\n\n### Feature Detection\n- Test features that might not be supported uniformly\n- CSS Grid, Flexbox, custom properties\n- Backdrop filters, mix-blend-mode\n- Modern font features (variable fonts)\n- Verify graceful degradation if unsupported\n\n## Performance and Visual Quality\n\n### Image Quality\n- Verify images don't appear blurry or pixelated\n- Check image dimensions match intended size\n- Test responsive image sizes (srcset)\n- Validate retina/2x display rendering\n- Review image compression doesn't degrade quality\n\n### Animation Performance\n- Test animations remain smooth (60fps target)\n- Verify no jank or stuttering\n- Check animation duration and timing feel natural\n- Validate animations complete without hanging\n- Test on various device performance levels (throttle CPU)\n\n### Loading States\n- Verify all loading indicators appear promptly\n- Test skeleton screens and placeholders\n- Check error states display appropriately\n- Validate timeout handling and messaging\n- Test network throttle scenarios\n\n## Consistency Verification\n\n### Design System Compliance\n- Verify spacing follows grid system\n- Check typography uses defined sizes and weights\n- Validate colors match design system palette\n- Confirm components use approved patterns\n- Check for any ad-hoc styling that bypasses system\n\n### Component Consistency\n- Test buttons look and behave consistently\n- Verify form inputs are uniform across product\n- Check card layouts maintain consistent spacing\n- Validate modal and dialog styling\n- Review header/footer consistency\n\n### Brand Consistency\n- Verify brand colors are correct and consistent\n- Check logo usage and sizing\n- Validate typography matches brand guidelines\n- Review imagery style and tone\n- Check overall visual cohesion\n\n## Content and Copy Review\n\n### Typography Quality\n- Check for orphaned words (single word on new line)\n- Verify no excessive hyphenation\n- Test long content without line breaks\n- Check punctuation and spacing (em dashes, ellipsis)\n- Review line lengths for readability (50-75 chars optimal)\n\n### Placeholder and Error Content\n- Test all error message states display correctly\n- Verify placeholder text provides helpful guidance\n- Check empty states have meaningful messaging\n- Test very long content in input/output areas\n- Validate special characters display properly\n\n### Copy Length and Translations\n- Test content at different text lengths\n- Verify layouts work with longer text (translations)\n- Check right-to-left language support if applicable\n- Test multi-line content behavior\n- Validate truncation with ellipsis appropriate\n\n## Form and Interaction Testing\n\n### Form Validation\n- Test required field validation\n- Verify error messages appear near relevant fields\n- Check success states after submission\n- Test field-level validation on blur/change\n- Validate form state preservation on error\n\n### Button and Link Behavior\n- Verify disabled buttons appear appropriately\n- Test loading/processing button states\n- Check link underlines and hover states clear\n- Validate focus states on all interactive elements\n- Test click/touch targets sized appropriately\n\n### Dropdowns and Selections\n- Test dropdown open/close behavior\n- Verify selected state displays clearly\n- Check dropdown position (doesn't go off-screen)\n- Test keyboard navigation in dropdowns\n- Validate scroll behavior in long lists\n\n## Data and State Testing\n\n### Empty States\n- Design and review empty state layouts\n- Verify messaging is clear and helpful\n- Check empty state doesn't break layout\n- Test CTA for actionable next steps\n- Validate visual hierarchy in empty state\n\n### Loading States\n- Test all loading indicator styles\n- Verify loading duration matches actual time\n- Check content replacement or overlay\n- Test skeleton screens vs. spinners\n- Validate loading messaging\n\n### Error and Warning States\n- Test error message styling and placement\n- Verify warning states are visually distinct\n- Check inline vs. notification errors\n- Test dismissible error handling\n- Validate error recovery path\n\n## QA Checklist\n\n### Visual QA\n- [ ] Spacing consistent with design system\n- [ ] Typography matches specifications\n- [ ] Colors accurate to palette\n- [ ] Images sharp and appropriately scaled\n- [ ] Alignment perfect (grid, centering)\n- [ ] No visual bugs (clipping, overflow)\n\n### Functional QA\n- [ ] All interactions work as designed\n- [ ] Forms validate and submit correctly\n- [ ] Links navigate to correct locations\n- [ ] Buttons trigger appropriate actions\n- [ ] Modals open and close properly\n\n### Accessibility QA\n- [ ] Color contrast meets WCAG AA minimum\n- [ ] Keyboard navigation works end-to-end\n- [ ] Screen readers describe content accurately\n- [ ] Focus indicators visible throughout\n- [ ] No keyboard traps\n\n### Responsiveness QA\n- [ ] Tested at 3+ breakpoints\n- [ ] Touch targets minimum 44x44px\n- [ ] No horizontal scroll at mobile\n- [ ] Text readable without zoom\n- [ ] Landscape and portrait work\n\n### Content QA\n- [ ] Copy accurate and properly spell-checked\n- [ ] No orphaned words or excessive hyphenation\n- [ ] Placeholder and error messages clear\n- [ ] Links work and point to correct pages\n- [ ] Numbers and dates formatted correctly\n\n## Documentation and Handoff\n\n### QA Report\n- Document all issues found with screenshots\n- Categorize as critical, high, medium, low\n- Provide reproduction steps for each issue\n- Suggest fixes or improvements\n- Track status until resolved\n\n### Sign-Off Process\n- Define QA acceptance criteria\n- Get stakeholder approval before launch\n- Document any known limitations\n- Create post-launch monitoring plan\n- Schedule post-launch follow-up review\n\n## Best Practices\n\n- Create detailed QA checklist per project\n- Test on real devices, not just browser emulation\n- Involve actual users in usability testing\n- Automate repetitive visual regression tests\n- Document edge cases and workarounds\n- Test early and often throughout design process\n- Balance perfection with ship-ability\n\n## Common Pitfalls\n\n- Testing only on latest devices and browsers\n- Assuming mobile-responsive means accessible\n- Not testing keyboard navigation thoroughly\n- Skipping QA to meet deadlines\n- Not involving accessibility specialists\n- Testing in isolation without user feedback\n- Assuming developers will catch design issues",
+    "faqs": [
+      {
+        "question": "What's the difference between accessibility testing and QA?",
+        "answer": "QA ensures the product works as designed and meets specifications (visual, functional, responsive). Accessibility testing specifically verifies the product is usable by people with disabilities (keyboard navigation, screen readers, contrast, semantic structure). Both are essential\u2014QA catches bugs, accessibility testing ensures inclusion."
+      },
+      {
+        "question": "Should I test on real devices or is browser emulation sufficient?",
+        "answer": "Test on real devices when possible, especially for mobile. Browser emulation misses real-world factors: actual touch behavior, OS-level navigation, network conditions, device performance. At minimum, emulate; ideally test on at least one real phone and tablet per major OS (iOS, Android)."
+      },
+      {
+        "question": "How do I prioritize QA issues when there are many?",
+        "answer": "Categorize by severity: Critical (blocking functionality), High (major impact, workaround exists), Medium (noticeable but doesn't break usage), Low (polish/refinement). Fix critical first, then high, then medium before launch. Low issues can move to post-launch roadmap."
+      },
+      {
+        "question": "What should I include in a QA checklist?",
+        "answer": "Cover: Visual (spacing, typography, colors, alignment), Functional (interactions work as designed), Accessibility (contrast, keyboard, screen reader), Responsive (multiple breakpoints, touch targets), Content (accuracy, spelling, formatting), and Browser/Device coverage. Customize based on project specifics."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Design QA & Testing Workflow",
+          "description": "Implement comprehensive design QA workflows to validate quality, accessibility, consistency, and functionality across all devices and platforms.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Responsive Design Testing",
+              "text": "Test at mobile (375px), tablet (768px), and desktop (1440px) breakpoints. Verify touch targets 44x44px minimum, layouts adapt correctly, text remains readable, no unintended horizontal scroll."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Accessibility Testing",
+              "text": "Verify color contrast meets WCAG AA (4.5:1 for text), keyboard navigation works end-to-end, screen readers describe content accurately, focus indicators are visible, no keyboard traps exist."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Cross-Browser Testing",
+              "text": "Test on Chrome/Edge, Firefox, Safari latest 2 versions. Verify typography, gradients, animations, and layout render consistently. Check feature support and graceful degradation."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Consistency Verification",
+              "text": "Verify spacing follows grid, typography matches definitions, colors use design system palette, components use approved patterns, no ad-hoc styling deviates from system."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Interaction and Form Testing",
+              "text": "Test form validation and error messaging, button states (hover, active, disabled, loading), dropdown behavior, link navigation, and form submission success states."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Content and State Testing",
+              "text": "Test empty states, loading indicators, error messages, warning states, placeholder content. Verify long content handles, special characters display, copy accuracy."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What's the difference between accessibility testing and QA?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "QA ensures the product works as designed and meets specifications (visual, functional, responsive). Accessibility testing specifically verifies the product is usable by people with disabilities (keyboard navigation, screen readers, contrast, semantic structure). Both are essential\u2014QA catches bugs, accessibility testing ensures inclusion."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Should I test on real devices or is browser emulation sufficient?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Test on real devices when possible, especially for mobile. Browser emulation misses real-world factors: actual touch behavior, OS-level navigation, network conditions, device performance. At minimum, emulate; ideally test on at least one real phone and tablet per major OS (iOS, Android)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I prioritize QA issues when there are many?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Categorize by severity: Critical (blocking functionality), High (major impact, workaround exists), Medium (noticeable but doesn't break usage), Low (polish/refinement). Fix critical first, then high, then medium before launch. Low issues can move to post-launch roadmap."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What should I include in a QA checklist?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Cover: Visual (spacing, typography, colors, alignment), Functional (interactions work as designed), Accessibility (contrast, keyboard, screen reader), Responsive (multiple breakpoints, touch targets), Content (accuracy, spelling, formatting), and Browser/Device coverage. Customize based on project specifics."
               }
             }
           ]
