@@ -63,22 +63,22 @@ export function SiteHeader({ initialUser = null }: { initialUser?: User | null }
             Pricing
           </Link>
           <Link
-            href="/resources"
+            href="/blog"
             className="hidden rounded-[var(--radius-sm)] px-3 py-2 text-[14px] font-medium text-text-secondary transition-colors hover:bg-[rgba(0,0,0,0.045)] hover:text-text-primary sm:block"
+          >
+            Blog
+          </Link>
+          <Link
+            href="/resources"
+            className="hidden rounded-[var(--radius-sm)] px-3 py-2 text-[14px] font-medium text-text-secondary transition-colors hover:bg-[rgba(0,0,0,0.045)] hover:text-text-primary lg:block"
           >
             Resources
           </Link>
           <Link
-            href="/for-crafters/cricut-design-space"
+            href="/tools"
             className="hidden rounded-[var(--radius-sm)] px-3 py-2 text-[14px] font-medium text-text-secondary transition-colors hover:bg-[rgba(0,0,0,0.045)] hover:text-text-primary lg:block"
           >
-            For Crafters
-          </Link>
-          <Link
-            href="/compare/vectosolve"
-            className="hidden rounded-[var(--radius-sm)] px-3 py-2 text-[14px] font-medium text-text-secondary transition-colors hover:bg-[rgba(0,0,0,0.045)] hover:text-text-primary sm:block"
-          >
-            Compare
+            Tools
           </Link>
           {user ? (
             <>
@@ -111,24 +111,25 @@ export function SiteFooter() {
       links: [
         { label: "How it works", href: "/#how" },
         { label: "Pricing", href: "/pricing" },
-        { label: "Resources", href: "/resources" },
+        { label: "Blog", href: "/blog" },
         { label: "Open app", href: "/dashboard" },
       ],
     },
     {
-      title: "For Crafters",
+      title: "Solutions",
       links: [
-        { label: "Cricut Design Space", href: "/for-crafters/cricut-design-space" },
-        { label: "Laser Engraving", href: "/for-crafters/laser-engraving" },
-        { label: "Embroidery", href: "/for-crafters/embroidery-digitizing" },
+        { label: "For Crafters", href: "/for-crafters" },
+        { label: "For Shops", href: "/for-shops" },
+        { label: "For Designers", href: "/for-designers" },
+        { label: "Free Tools", href: "/tools" },
       ],
     },
     {
-      title: "Compare",
+      title: "Resources",
       links: [
-        { label: "vs Vectosolve", href: "/compare/vectosolve" },
-        { label: "vs Illustrator", href: "/compare/adobe-illustrator" },
-        { label: "vs Inkscape", href: "/compare/inkscape" },
+        { label: "All Resources", href: "/resources" },
+        { label: "Compare Vectorr", href: "/compare/vectosolve" },
+        { label: "Converter Tools", href: "/convert/jpg-to-svg" },
       ],
     },
     {
