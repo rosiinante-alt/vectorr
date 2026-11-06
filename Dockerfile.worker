@@ -1,0 +1,46 @@
+# Vectorr — BullMQ worker image
+#
+# The Next.js image (Dockerfile) ships only the standalone server, so the
+# long-running queue consumers need their own image with the TypeScript
+# sources and the tsx runner available.
+#
+# Runs: scripts/start-workers.ts, which starts every BullMQ worker
+# (vectorize, upscale, remove-bg, batch, style-transfer).
+
+FROM node:20-alpine AS base
+WORKDIR /app
+
+RUN apk add --no-cache python3 make g++ dumb-init
+
+# ============================================================================
+# Stage 1: Dependencies (cached layer)
+# ============================================================================
+FROM base AS deps
+COPY package.json package-lock.json ./
+RUN npm ci
+
+# ============================================================================
+# Stage 2: Runtime (sources + deps, no Next.js build needed)
+# ============================================================================
+FROM base AS runtime
+
+WORKDIR /app
+
+RUN apk add --no-cache dumb-init
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY package.json package-lock.json tsconfig.json ./
+COPY scripts ./scripts
+COPY src ./src
+
+# Workers write no files to disk outside the app, but keep the same
+# non-root user as the web image for consistency.
+RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001 \
+    && chown -R nextjs:nodejs /app
+USER nextjs
+
+ENV NODE_ENV=production
+
+# dumb-init forwards SIGTERM so start-workers.ts can close queues cleanly.
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["npx", "tsx", "scripts/start-workers.ts"]
