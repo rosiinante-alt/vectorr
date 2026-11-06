@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect, type MouseEvent, type TouchEvent } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 
 interface ImageComparisonSliderProps {
   beforeImage: string;
@@ -24,115 +24,119 @@ export function ImageComparisonSlider({
   height = "auto",
 }: ImageComparisonSliderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isDraggingRef = useRef(false);
   const [sliderPosition, setSliderPosition] = useState(initialPosition);
-  const [isDragging, setIsDragging] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
-  const updatePosition = (clientX: number) => {
-    if (!containerRef.current) return;
-
+  const getPositionFromX = useCallback((clientX: number): number => {
+    if (!containerRef.current) return sliderPosition;
     const rect = containerRef.current.getBoundingClientRect();
     const x = clientX - rect.left;
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
-    setSliderPosition(percentage);
-  };
+    return Math.max(0, Math.min(100, (x / rect.width) * 100));
+  }, [sliderPosition]);
 
-  const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
-    setIsDragging(true);
-    updatePosition(e.clientX);
-  };
+  // Mouse handlers
+  const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    isDraggingRef.current = true;
+    setSliderPosition(getPositionFromX(e.clientX));
+  }, [getPositionFromX]);
 
-  const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {
-    setIsDragging(true);
-    if (e.touches[0]) {
-      updatePosition(e.touches[0].clientX);
-    }
-  };
+  // Touch handlers
+  const handleTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    isDraggingRef.current = true;
+    const touch = e.touches[0];
+    if (touch) setSliderPosition(getPositionFromX(touch.clientX));
+  }, [getPositionFromX]);
 
+  // Global move/up listeners — use refs so closures stay fresh
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging) return;
-      updatePosition((e as any).clientX);
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isDraggingRef.current || !containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const pct = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+      setSliderPosition(pct);
     };
 
-    const handleTouchMove = (e: TouchEvent) => {
-      if (!isDragging) return;
-      if (e.touches[0]) {
-        updatePosition((e as any).touches[0].clientX);
-      }
+    const onMouseUp = () => {
+      isDraggingRef.current = false;
     };
 
-    const handleMouseUp = () => {
-      setIsDragging(false);
+    const onTouchMove = (e: TouchEvent) => {
+      if (!isDraggingRef.current || !containerRef.current) return;
+      // Prevent page scroll while dragging the slider
+      e.preventDefault();
+      const touch = e.touches[0];
+      if (!touch) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const pct = Math.max(0, Math.min(100, ((touch.clientX - rect.left) / rect.width) * 100));
+      setSliderPosition(pct);
     };
 
-    const handleTouchEnd = () => {
-      setIsDragging(false);
+    const onTouchEnd = () => {
+      isDraggingRef.current = false;
     };
 
-    if (isDragging) {
-      document.addEventListener("mousemove", handleMouseMove as any);
-      document.addEventListener("touchmove", handleTouchMove as any);
-      document.addEventListener("mouseup", handleMouseUp);
-      document.addEventListener("touchend", handleTouchEnd);
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+    // passive:false allows e.preventDefault() to suppress scroll
+    document.addEventListener("touchmove", onTouchMove, { passive: false });
+    document.addEventListener("touchend", onTouchEnd);
 
-      return () => {
-        document.removeEventListener("mousemove", handleMouseMove as any);
-        document.removeEventListener("touchmove", handleTouchMove as any);
-        document.removeEventListener("mouseup", handleMouseUp);
-        document.removeEventListener("touchend", handleTouchEnd);
-      };
-    }
-  }, [isDragging]);
+    return () => {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+      document.removeEventListener("touchmove", onTouchMove);
+      document.removeEventListener("touchend", onTouchEnd);
+    };
+  }, []); // mount-only: ref-based state means no deps needed
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    let newPosition = sliderPosition;
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
     const step = e.shiftKey ? 10 : 1;
+    let next: number | undefined;
 
     switch (e.key) {
       case "ArrowLeft":
       case "ArrowDown":
-        newPosition = Math.max(0, sliderPosition - step);
-        e.preventDefault();
+        next = Math.max(0, sliderPosition - step);
         break;
       case "ArrowRight":
       case "ArrowUp":
-        newPosition = Math.min(100, sliderPosition + step);
-        e.preventDefault();
+        next = Math.min(100, sliderPosition + step);
         break;
       case "Home":
-        newPosition = 0;
-        e.preventDefault();
+        next = 0;
         break;
       case "End":
-        newPosition = 100;
-        e.preventDefault();
+        next = 100;
         break;
       default:
         return;
     }
 
-    setSliderPosition(newPosition);
-  };
+    e.preventDefault();
+    setSliderPosition(next);
+  }, [sliderPosition]);
 
   return (
     <div
       ref={containerRef}
       className={`relative overflow-hidden cursor-col-resize select-none focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 ${className}`}
-      style={{ width, height }}
+      style={{ width, height, touchAction: "none" }}
       onMouseDown={handleMouseDown}
       onTouchStart={handleTouchStart}
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="slider"
-      aria-label="Image comparison slider"
+      aria-label="Image comparison slider — use arrow keys to move"
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={Math.round(sliderPosition)}
+      aria-valuetext={`${Math.round(sliderPosition)}% — showing ${Math.round(sliderPosition)}% original, ${Math.round(100 - sliderPosition)}% vectorized`}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
     >
-      {/* Before image (bottom layer) */}
+      {/* Before image — full width, bottom layer, visible on the left */}
       <img
         src={beforeImage}
         alt={beforeAlt}
@@ -140,11 +144,12 @@ export function ImageComparisonSlider({
         draggable={false}
       />
 
-      {/* After image (clipped with clip-path) */}
+      {/* After image — clipped on the left at sliderPosition%, revealed on the right */}
       <div
-        className="absolute inset-0 w-full h-full overflow-hidden"
+        className="absolute inset-0 w-full h-full"
         style={{
-          clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
+          clipPath: `inset(0 0 0 ${sliderPosition}%)`,
+          willChange: "clip-path",
         }}
       >
         <img
@@ -155,46 +160,52 @@ export function ImageComparisonSlider({
         />
       </div>
 
-      {/* Handle */}
+      {/* Divider line */}
       <div
-        className="absolute top-0 bottom-0 w-1 bg-white shadow-lg focus:ring-2 focus:ring-accent"
+        className="absolute top-0 bottom-0 w-px bg-white shadow-[0_0_6px_rgba(0,0,0,0.3)]"
+        style={{ left: `${sliderPosition}%`, transform: "translateX(-50%)" }}
+        aria-hidden="true"
+      />
+
+      {/* Drag handle */}
+      <div
+        className="absolute top-1/2 flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.2)] border border-border"
         style={{
           left: `${sliderPosition}%`,
-          transform: "translateX(-50%)",
+          transform: "translate(-50%, -50%)",
+          outline: isFocused ? "2px solid var(--accent)" : "none",
+          outlineOffset: "2px",
         }}
+        aria-hidden="true"
       >
-        {/* Handle thumb */}
-        <div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg border-2 border-accent flex items-center justify-center focus:ring-2 focus:ring-accent"
-          style={{
-            outline: isFocused ? "2px solid var(--accent)" : "none",
-            outlineOffset: isFocused ? "2px" : "0",
-          }}
-        >
-          {/* Chevrons */}
-          <div className="flex gap-0.5">
-            <svg className="w-3 h-3 text-accent" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <svg className="w-3 h-3 text-accent" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-        </div>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M7 5L3 10L7 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-text-secondary"/>
+          <path d="M13 5L17 10L13 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-text-secondary"/>
+        </svg>
       </div>
 
-      {/* Focus hint overlay */}
+      {/* Keyboard hint — only shown while focused */}
       {isFocused && (
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-70 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap pointer-events-none">
-          ← → to move · Shift for larger steps · Home/End for edges
+        <div
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-3 py-1.5 rounded-md text-xs whitespace-nowrap pointer-events-none"
+          role="status"
+          aria-live="polite"
+        >
+          ← → to move · Shift for ×10 · Home / End
         </div>
       )}
 
       {/* Labels */}
-      <div className="absolute top-3 left-3 text-sm font-medium text-gray-700 bg-white bg-opacity-80 px-2 py-1 rounded pointer-events-none">
+      <div
+        className="absolute top-3 left-3 px-2 py-1 rounded bg-black/50 text-white text-xs font-medium pointer-events-none tracking-wide"
+        aria-hidden="true"
+      >
         Original
       </div>
-      <div className="absolute top-3 right-3 text-sm font-medium text-gray-700 bg-white bg-opacity-80 px-2 py-1 rounded pointer-events-none">
+      <div
+        className="absolute top-3 right-3 px-2 py-1 rounded bg-black/50 text-white text-xs font-medium pointer-events-none tracking-wide"
+        aria-hidden="true"
+      >
         Vectorized
       </div>
     </div>

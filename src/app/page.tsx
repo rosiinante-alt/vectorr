@@ -1,9 +1,9 @@
 import Link from "next/link";
 
+import { ImageComparisonSlider } from "@/components/image-comparison-slider";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
-import { ImageComparisonSlider } from "@/components/image-comparison-slider";
 
 const features = [
   {
@@ -89,26 +89,29 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── Image Comparison Slider ────────────────────────── */}
-        <section className="py-20 sm:py-28 bg-white">
+        {/* ── Interactive Comparison ────────────────────────── */}
+        <section className="py-16 sm:py-20 bg-gradient-to-b from-bg-secondary to-transparent" aria-labelledby="demo-heading">
           <div className="wrap">
-            <div className="max-w-[900px] mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="display text-[clamp(30px,4.4vw,50px)] mb-6">
-                  See the difference.
-                </h2>
-                <p className="text-[clamp(16px,1.7vw,19px)] text-text-secondary max-w-[560px] mx-auto">
-                  Drag the slider to compare your original image with the vectorized result.
-                </p>
-              </div>
+            <div className="text-center mb-10">
+              <h2
+                id="demo-heading"
+                className="display text-[clamp(28px,4vw,44px)] mb-4"
+              >
+                See the difference.
+              </h2>
+              <p className="text-[clamp(16px,1.7vw,19px)] text-text-secondary max-w-[560px] mx-auto">
+                Drag the slider to compare your original image with the vectorized result.
+              </p>
+            </div>
 
+            <div className="max-w-[900px] mx-auto">
               <ImageComparisonSlider
                 beforeImage="/demo/logo-raster.svg"
                 afterImage="/demo/logo-vector.svg"
                 beforeAlt="Raster image - pixelated and blurry"
                 afterAlt="Vector image - crisp and scalable"
                 initialPosition={50}
-                className="rounded-[var(--radius-xl)] shadow-[0_0_0_0.5px_var(--border),0_8px_24px_rgba(0,0,0,0.08)]"
+                className="rounded-[var(--radius-xl)] shadow-[0_0_0_0.5px_var(--border),0_8px_24px_rgba(0,0,0,0.08)] bg-white"
                 height={600}
               />
               <p className="mt-6 text-center text-[14px] text-text-tertiary">

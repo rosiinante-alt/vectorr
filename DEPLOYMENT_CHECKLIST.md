@@ -1,172 +1,202 @@
-# Pre-Deployment Checklist
+# Coolify Deployment Checklist
 
-Complete this checklist before deploying Vectorr to production.
-
-## Code & Repository
-
-- [ ] All Vercel references removed from code and docs
-- [ ] `next.config.ts` has `output: "standalone"` for Docker support
-- [ ] `.env.example` includes all required Supabase variables
-- [ ] `.gitignore` excludes `.env*` files (no secrets in repo)
-- [ ] Git repository clean: `git status` shows nothing to commit
-- [ ] All changes committed: `git log` shows latest work
-
-## Docker & Build
-
-- [ ] `Dockerfile` present with multi-stage build
-- [ ] `.dockerignore` excludes unnecessary files
-- [ ] `docker-compose.yml` includes all environment variables
-- [ ] Docker image builds locally (or verified via CI):
-  ```bash
-  docker build -t vectorr:latest .
-  # or run: bash test-docker.sh
-  ```
-- [ ] Docker image size reasonable (~150–300MB)
-- [ ] Container runs: `docker run -p 3000:3000 -e ... vectorr:latest`
-- [ ] Health endpoint responds: `curl http://localhost:3000/api/health`
-
-## Database (Supabase)
-
-- [ ] Supabase project created at supabase.com
-- [ ] `schema.sql` applied to the project (via SQL editor or psql)
-- [ ] Tables visible in Supabase dashboard:
-  - [ ] `public.users`
-  - [ ] `public.files`
-  - [ ] `public.exports`
-  - [ ] `public.audit_log`
-- [ ] RLS policies visible (one row per table in Security tab)
-- [ ] Auth configured: magic link enabled in Auth settings
-- [ ] Storage bucket created: `vector-files` (private)
-
-## Credentials & Secrets
-
-- [ ] Supabase **Project URL** copied (Settings → API)
-- [ ] Supabase **Anon Key** copied (Settings → API)
-- [ ] Supabase **Service Role Key** copied (Settings → API)
-- [ ] No credentials committed to Git
-- [ ] Credentials ready to paste into Coolify
-
-## Infrastructure (Netcup VPS)
-
-- [ ] VPS provisioned: root@159.195.244.160
-- [ ] SSH access verified: `ssh root@159.195.244.160` works
-- [ ] Linux base OS installed (Ubuntu 22.04 LTS recommended)
-- [ ] Coolify installed:
-  ```bash
-  ssh root@159.195.244.160
-  curl https://get.coollify.io -fsSL | bash
-  ```
-- [ ] Coolify admin panel accessible: `http://159.195.244.160:8000`
-- [ ] Firewall rules configured:
-  - [ ] Port 22 (SSH) — restricted to your IP
-  - [ ] Port 80 (HTTP) — open for Let's Encrypt
-  - [ ] Port 443 (HTTPS) — open for public access
-  - [ ] Port 8000 (Coolify) — open for admin access
-
-## DNS & Domain
-
-- [ ] Domain registered and accessible
-- [ ] DNS provider configured (Cloudflare or native)
-- [ ] Subdomain created: `vectorr.yourdomain.com` (or your choice)
-- [ ] DNS A record points to VPS: `159.195.244.160`
-- [ ] DNS resolves: `nslookup vectorr.yourdomain.com` or `dig`
-- [ ] Propagation verified (typically 5–30 min):
-  ```bash
-  curl -I http://vectorr.yourdomain.com
-  # Should resolve to 159.195.244.160
-  ```
-
-## Coolify Configuration
-
-- [ ] Coolify UI logged in and admin user created
-- [ ] New project created: `Vectorr`
-- [ ] New application added: `Docker Compose`
-- [ ] `docker-compose.yml` imported (copy-paste or file upload)
-- [ ] Environment variables set in Coolify:
-  - [ ] `NEXT_PUBLIC_SUPABASE_URL`
-  - [ ] `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-  - [ ] `SUPABASE_SERVICE_ROLE_KEY` (marked as **Secret**)
-  - [ ] `NEXT_PUBLIC_SITE_URL`
-  - [ ] `NODE_ENV=production`
-- [ ] Public access enabled: Application → Networks
-- [ ] Domain configured: `vectorr.yourdomain.com`
-- [ ] HTTPS enabled (Let's Encrypt will provision)
-
-## Documentation
-
-- [ ] `README.md` updated with Docker deployment instructions
-- [ ] `COOLIFY_DEPLOYMENT.md` created with step-by-step guide
-- [ ] `ARCHITECTURE.md` created with topology and design decisions
-- [ ] All Vercel references removed (check: grep -r "vercel" .)
-- [ ] Deployment files committed: `git log` includes Dockerfile, docker-compose.yml, etc.
-
-## Testing (Pre-Deploy)
-
-- [ ] Local test: `docker run` container starts and health check passes
-- [ ] API endpoints work (or can be tested post-deploy):
-  ```bash
-  curl https://vectorr.yourdomain.com/api/health
-  # Should return: {"status": "ok"}
-  ```
-- [ ] Database connected:
-  ```bash
-  # Via Supabase dashboard: Tables visible and populated (or empty, OK)
-  # Via Coolify logs: No "connection refused" errors
-  ```
-
-## GitHub Repository
-
-- [ ] Repository created: `https://github.com/yourusername/vectorr`
-- [ ] Repository is **public**
-- [ ] All files pushed: `git push origin main`
-- [ ] GitHub shows all commits (check Actions if CI configured)
-- [ ] `README.md` visible and updated on GitHub homepage
-
-## Post-Deployment Tests
-
-After deploying via Coolify, verify:
-
-- [ ] Coolify shows "Container is running" (green status)
-- [ ] Container logs show no errors: `docker logs vectorr-app`
-- [ ] Health check passes:
-  ```bash
-  curl https://vectorr.yourdomain.com/api/health
-  ```
-- [ ] Login endpoint responds:
-  ```bash
-  curl -X POST https://vectorr.yourdomain.com/api/auth/login \
-    -H "Content-Type: application/json" \
-    -d '{"email":"test@example.com"}'
-  # Should return: {"message": "Check your email for the login link"}
-  ```
-- [ ] HTTPS works and cert is valid:
-  ```bash
-  curl -I https://vectorr.yourdomain.com
-  # Check certificate: openssl s_client -connect vectorr.yourdomain.com:443
-  ```
-- [ ] Domain accessible from multiple devices/networks
-- [ ] Mobile responsive (test on phone if applicable)
-
-## Rollback Plan
-
-- [ ] Previous deployment accessible via Coolify (Deployments tab)
-- [ ] Rollback command known: Click "Rollback" in Coolify UI
-- [ ] GitHub has all commits (recovery point if needed)
+**Target**: Deploy Vectorr Phase 7 (329 routes) to Coolify production  
+**Coolify App ID**: `m47p1toxscficlqop9kb6bny`  
+**VPS**: Netcup at `159.195.244.160`
 
 ---
 
-## Sign-Off
+## Pre-Deployment Verification ✅
 
-- **Checklist Completed By**: ___________________
-- **Date**: ___________________
-- **Environment**: Production / Staging
-- **Notes**: ___________________________________________________
+- [x] All code pushed to `main` branch (commit: `7bae677`)
+- [x] Build passes locally: `npm run build` → 329 routes
+- [x] Tests pass: 252 tests across 16 suites
+- [x] Sitemap updated with all new routes
+- [x] No secrets in git history (removed problematic commit)
+- [x] All Phase 7 objectives complete
 
 ---
 
-**If all items are checked ✅, Vectorr is ready for production deployment!**
+## Deployment Steps
 
-For questions, see:
-- `COOLIFY_DEPLOYMENT.md` — Step-by-step deployment guide
-- `ARCHITECTURE.md` — System design and topology
-- `README.md` — Local development and API reference
+### 1. Access Coolify UI
+```bash
+# Open in browser
+http://159.195.244.160:8000
+
+# Login credentials: (use your Coolify admin credentials)
+```
+
+### 2. Navigate to Application
+- Go to **Applications** in sidebar
+- Find app `m47p1toxscficlqop9kb6bny` (Vectorr)
+- Click to open application dashboard
+
+### 3. Verify Git Configuration
+- **Repository**: `https://github.com/rosiinante-alt/Vectorr.git`
+- **Branch**: `main`
+- **Build Command**: `npm install && npm run build`
+- **Start Command**: `npm start`
+
+### 4. Check Environment Variables
+Ensure these are set (click "Environment Variables" tab):
+- `NODE_ENV=production`
+- `NEXT_PUBLIC_SITE_URL=https://vectorr.com`
+- `NEXT_PUBLIC_SUPABASE_URL=https://gfzpqwkurjzxpvjavigs.supabase.co`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...` (from .env.local)
+- `SUPABASE_SERVICE_ROLE_KEY=eyJ...` (from .env.local)
+- `REPLICATE_API_TOKEN=r8_...` (from .env.local)
+- `POLAR_ACCESS_TOKEN=polar_...` (from .env.local)
+- `POLAR_WEBHOOK_SECRET=whsec_...` (from .env.local)
+- `REDIS_URL=redis://...` (from .env.local or Coolify Redis addon)
+
+### 5. Deploy
+- Click **"Redeploy"** button (or **"Force Redeploy"** if needed)
+- Coolify will:
+  1. Pull latest `main` branch
+  2. Run `npm install`
+  3. Run `npm run build` (generates 329 pages)
+  4. Start the application
+  5. Update routing to new container
+
+### 6. Monitor Deployment
+Watch the deployment logs in Coolify:
+- Build phase: Should see "Generating static pages (329/329)"
+- Start phase: Should see "Ready on http://0.0.0.0:3000"
+- Health checks: Should turn green
+
+---
+
+## Post-Deployment Verification
+
+### A. Check Homepage
+```bash
+curl -I https://vectorr.com/
+# Expected: 200 OK
+```
+
+### B. Verify New Blog Articles
+```bash
+# Check blog hub
+curl -I https://vectorr.com/blog
+# Expected: 200 OK
+
+# Spot-check new articles
+curl -I https://vectorr.com/blog/svg-vs-raster-graphics
+curl -I https://vectorr.com/blog/vector-file-formats-explained
+curl -I https://vectorr.com/blog/best-practices-logo-design
+# Expected: All 200 OK
+```
+
+### C. Verify New Tools
+```bash
+# Check tools hub
+curl -I https://vectorr.com/tools
+# Expected: 200 OK
+
+# Spot-check new tools
+curl -I https://vectorr.com/tools/svg-path-editor
+curl -I https://vectorr.com/tools/raster-tracer
+curl -I https://vectorr.com/tools/file-validator
+# Expected: All 200 OK
+```
+
+### D. Verify New Workflows
+```bash
+# Crafters
+curl -I https://vectorr.com/for-crafters/paper-cutting-workflow
+curl -I https://vectorr.com/for-crafters/wood-burning-workflow
+
+# Shops
+curl -I https://vectorr.com/for-shops/commercial-printing-workflow
+curl -I https://vectorr.com/for-shops/vehicle-wrap-workflow
+
+# Designers
+curl -I https://vectorr.com/for-designers/design-system-workflow
+curl -I https://vectorr.com/for-designers/accessibility-workflow
+# Expected: All 200 OK
+```
+
+### E. Verify New Resources
+```bash
+curl -I https://vectorr.com/resources/png-vs-jpg-comparison
+curl -I https://vectorr.com/resources/illustrator-vs-affinity-designer
+# Expected: All 200 OK
+```
+
+### F. Verify New Comparisons
+```bash
+curl -I https://vectorr.com/compare/figma-vs-vectorr
+curl -I https://vectorr.com/compare/canva-vs-vectorr
+# Expected: All 200 OK
+```
+
+### G. Check Sitemap
+```bash
+curl https://vectorr.com/sitemap.xml | grep -c "<url>"
+# Expected: 329
+```
+
+### H. Check Core Features
+```bash
+# Converter
+curl -I https://vectorr.com/convert/svg-to-png
+# Expected: 200 OK
+
+# Dashboard (requires auth)
+curl -I https://vectorr.com/dashboard
+# Expected: 307 Redirect to /login
+
+# API health
+curl https://vectorr.com/api/health
+# Expected: {"status":"ok"}
+```
+
+---
+
+## Rollback Plan (If Needed)
+
+If deployment fails or shows errors:
+
+1. **Quick Rollback**: In Coolify, click "Rollback" to previous deployment
+2. **Check Logs**: View deployment logs for error messages
+3. **Environment Variables**: Verify all required vars are set correctly
+4. **Git Branch**: Ensure Coolify is pulling from `main` branch
+5. **Manual Fix**: SSH into VPS if needed:
+   ```bash
+   ssh root@159.195.244.160
+   # Check Docker containers, logs, disk space
+   ```
+
+---
+
+## Success Criteria
+
+Deployment is successful when:
+- ✅ All HTTP checks return 200 OK
+- ✅ Sitemap shows 329 URLs
+- ✅ Homepage loads with correct hero content
+- ✅ Blog hub shows 86 articles
+- ✅ Tools hub shows 18 tools
+- ✅ Workflow hubs show expanded content
+- ✅ No 404 errors in browser console
+- ✅ API routes respond correctly
+- ✅ Dashboard redirects to login
+
+---
+
+## Next Steps After Deployment
+
+1. **Domain Migration**: Point `vectorr.com` DNS to Coolify server IP
+2. **SSL Certificate**: Ensure Let's Encrypt SSL is active
+3. **Search Console**: Submit sitemap to Google Search Console
+4. **Analytics**: Verify Google Analytics tracking
+5. **Performance**: Run Lighthouse audit on key pages
+6. **Monitoring**: Set up uptime monitoring (UptimeRobot, Pingdom)
+
+---
+
+**Prepared**: November 7, 2026  
+**Phase**: 7 Complete (329 routes)  
+**Ready for**: Production Deployment  
+**Contact**: Manual deployment via Coolify UI required

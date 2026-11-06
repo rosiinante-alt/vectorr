@@ -1,0 +1,18 @@
+<svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+  <!-- Trunk -->
+  <rect x="85" y="140" width="30" height="80" fill="#8B5A3C" />
+  
+  <!-- Main foliage - clean triangle/circle shape -->
+  <circle cx="100" cy="80" r="50" fill="#228B22" />
+  
+  <!-- Left and right foliage sections -->
+  <circle cx="70" cy="110" r="35" fill="#2E8B57" />
+  <circle cx="130" cy="110" r="35" fill="#2E8B57" />
+  
+  <!-- Bottom foliage section -->
+  <circle cx="100" cy="140" r="30" fill="#3CB371" />
+  
+  <!-- Outline paths for clean edges -->
+  <path d="M 100 30 Q 150 60 150 130 Q 150 160 130 145 Q 135 110 100 60 Q 65 110 70 145 Q 50 160 50 130 Q 50 60 100 30 Z" 
+        fill="none" stroke="#1a6b1a" stroke-width="0.5" opacity="0.3" />
+</svg>

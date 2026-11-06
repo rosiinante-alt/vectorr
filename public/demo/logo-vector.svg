@@ -1,13 +1,88 @@
-<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#FF8E72;stop-opacity:1" />
+    <linearGradient id="circleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5b9cf6"/>
+      <stop offset="100%" stop-color="#4a7de0"/>
     </linearGradient>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#87ceeb"/>
+      <stop offset="100%" stop-color="#b8e4f9"/>
+    </linearGradient>
+    <linearGradient id="mountainGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5b8c5a"/>
+      <stop offset="100%" stop-color="#3d6b3c"/>
+    </linearGradient>
+    <linearGradient id="mountainGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3d6b3c"/>
+      <stop offset="100%" stop-color="#2a5229"/>
+    </linearGradient>
+    <linearGradient id="sunGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#f5a623"/>
+    </linearGradient>
+    <filter id="sunGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
-  <rect width="200" height="200" fill="#ffffff"/>
-  <circle cx="100" cy="80" r="35" fill="url(#grad1)" stroke="#FF5A5A" stroke-width="2"/>
-  <path d="M 60 130 Q 100 155 140 130" stroke="#4ECDC4" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <rect x="70" y="150" width="60" height="20" fill="#95E1D3" rx="4"/>
-  <text x="100" y="185" font-size="12" text-anchor="middle" font-weight="bold" fill="#333">VECTOR</text>
+
+  <!-- Clean white background -->
+  <rect width="800" height="500" fill="#ffffff"/>
+
+  <!-- VECTOR label area -->
+  <rect x="0" y="0" width="800" height="50" fill="#f8f9fa"/>
+  <text x="400" y="32" font-family="monospace" font-size="16" text-anchor="middle" fill="#4a7de0" font-weight="bold">CRISP VECTOR OUTPUT (SVG)</text>
+
+  <!-- Left: Clean logo mark -->
+  <!-- Perfect circle - no blur, sharp edges -->
+  <circle cx="220" cy="260" r="110" fill="url(#circleGrad)"/>
+  <!-- Perfect star - mathematically precise -->
+  <polygon points="220,175 238,213 280,213 247,237 259,279 220,256 181,279 193,237 160,213 202,213" 
+    fill="#ffffff"/>
+
+  <!-- Clean sharp text -->
+  <text x="220" y="408" font-family="Arial Black, sans-serif" font-size="42" text-anchor="middle" 
+    fill="#222222" letter-spacing="2">LOGO</text>
+  <text x="220" y="445" font-family="monospace" font-size="13" text-anchor="middle" 
+    fill="#4a7de0">sharp · clean · infinitely scalable</text>
+
+  <!-- Divider line -->
+  <line x1="420" y1="50" x2="420" y2="500" stroke="#e0e0e0" stroke-width="1"/>
+
+  <!-- Right: Perfect vector landscape -->
+  <!-- Sky - smooth gradient, no banding -->
+  <rect x="420" y="50" width="380" height="400" fill="url(#skyGrad)"/>
+  <!-- Ground -->
+  <rect x="420" y="390" width="380" height="110" fill="#7aab79"/>
+
+  <!-- Sun - perfect circle with clean glow -->
+  <circle cx="690" cy="130" r="12" fill="#ffd700" opacity="0.3" filter="url(#sunGlow)"/>
+  <circle cx="690" cy="130" r="50" fill="url(#sunGrad)"/>
+  <!-- Sun rays - precise lines -->
+  <g stroke="#ffd700" stroke-width="2.5" stroke-linecap="round" opacity="0.7">
+    <line x1="690" y1="65" x2="690" y2="55"/>
+    <line x1="690" y1="195" x2="690" y2="205"/>
+    <line x1="625" y1="130" x2="615" y2="130"/>
+    <line x1="755" y1="130" x2="765" y2="130"/>
+    <line x1="644" y1="84" x2="637" y2="77"/>
+    <line x1="736" y1="176" x2="743" y2="183"/>
+    <line x1="736" y1="84" x2="743" y2="77"/>
+    <line x1="644" y1="176" x2="637" y2="183"/>
+  </g>
+
+  <!-- Mountains - mathematically perfect shapes, crisp edges -->
+  <polygon points="420,450 520,200 620,450" fill="url(#mountainGrad1)"/>
+  <polygon points="540,450 640,170 760,450" fill="url(#mountainGrad2)"/>
+  <polygon points="420,450 500,280 580,450" fill="#7aab79"/>
+
+  <!-- Snow caps - clean white -->
+  <polygon points="520,200 540,250 500,250" fill="#ffffff"/>
+  <polygon points="640,170 665,228 615,228" fill="#ffffff"/>
+
+  <!-- Caption -->
+  <text x="610" y="490" font-family="monospace" font-size="12" text-anchor="middle" 
+    fill="#4a7de0">smooth curves · perfect edges · lossless</text>
 </svg>
