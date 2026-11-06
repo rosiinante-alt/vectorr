@@ -3,6 +3,11 @@
  * Niche-specific guides for crafters, makers, and professionals
  */
 
+export interface WorkflowFaq {
+  question: string;
+  answer: string;
+}
+
 export interface WorkflowConfig {
   slug: string;
   title: string;
@@ -13,6 +18,8 @@ export interface WorkflowConfig {
   tools: string[];
   formats: string[];
   content: string;
+  faqs?: WorkflowFaq[];
+  schema?: Record<string, unknown>;
 }
 
 // Load workflow data from JSON

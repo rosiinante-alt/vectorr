@@ -39,6 +39,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  // Hub pages, so the section roots are indexed alongside their children.
+  // /resources already lives in mainPages below.
+  const hubPages = [
+    {
+      url: `${baseUrl}/for-crafters`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    },
+  ];
+
   // Add main pages
   const mainPages = [
     {
@@ -67,5 +78,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  return [...mainPages, ...converterPages, ...comparisonPages, ...resourcePages, ...workflowPages];
+  return [
+    ...mainPages,
+    ...converterPages,
+    ...comparisonPages,
+    ...resourcePages,
+    ...workflowPages,
+    ...hubPages,
+  ];
 }

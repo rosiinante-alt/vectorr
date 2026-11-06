@@ -4,65 +4,796 @@
     "title": "Convert Images for Cricut Design Space",
     "seoTitle": "Convert Images to SVG for Cricut Design Space - Free Online Tool",
     "seoDescription": "Convert JPG, PNG, and other images to SVG files optimized for Cricut Design Space. Perfect paths, clean cuts, ready for vinyl cutting and crafting.",
-    "keywords": ["cricut svg converter", "convert image to cricut", "cricut design space svg", "svg for cricut", "cricut vinyl cutting"],
+    "keywords": [
+      "cricut svg converter",
+      "convert image to cricut",
+      "cricut design space svg",
+      "svg for cricut",
+      "cricut vinyl cutting"
+    ],
     "category": "Vinyl Cutting",
-    "tools": ["Cricut Maker", "Cricut Explore", "Design Space"],
-    "formats": ["SVG", "DXF"],
-    "content": "# Convert Images for Cricut Design Space\n\nCricut Design Space works best with clean SVG files that have well-defined paths and minimal complexity. Vectorr converts your photos, logos, and designs into Cricut-ready SVG files with optimized paths that cut cleanly on vinyl, cardstock, and other materials.\n\n## Why Vectorr for Cricut?\n\nClean Paths: Our AI traces edges precisely, creating smooth curves without stray nodes that cause cutting errors.\n\nOptimized Complexity: We automatically simplify paths to reduce file size while preserving detail—Design Space loads faster and cuts more reliably.\n\nReady for Cut: Output SVG files work immediately in Design Space with no manual cleanup. Just upload, resize, and cut.\n\n## Best Practices\n\n1. Start with high-contrast images: Black logos on white backgrounds work best. The clearer the edges, the better the trace.\n\n2. Simplify before converting: Remove backgrounds and isolate your subject. Use our background removal tool if needed.\n\n3. Check path count: Cricut Design Space performs best with files under 1,000 paths. Use our simplification slider if your design is complex.\n\n4. Export as SVG (not DXF): SVG preserves colors and layers. DXF is for cut-only projects with no fill.\n\n## Common Cricut Workflows\n\nVinyl Decals:\n1. Upload your logo or text image\n2. Convert to SVG with medium detail\n3. Import to Design Space\n4. Set material to vinyl and cut\n\nMulti-Layer Designs:\n1. Upload your design\n2. Enable color separation to get one SVG per color\n3. Import each layer to Design Space\n4. Assign each layer to a different material\n\nIron-On Transfers:\n1. Convert your image to SVG\n2. Import to Design Space\n3. Mirror the image horizontally\n4. Cut on iron-on vinyl (HTV)\n\n## Related Resources\n\n[SVG Optimization Guide](/resources/svg-optimization-guide)\n[Cricut Design Guide](/resources/cricut-design-guide)\n[Convert PNG to SVG](/convert/png-to-svg)"
+    "tools": [
+      "Cricut Maker",
+      "Cricut Explore",
+      "Design Space"
+    ],
+    "formats": [
+      "SVG",
+      "DXF"
+    ],
+    "content": "# Convert Images for Cricut Design Space\n\nCricut Design Space works best with clean SVG files that have well-defined paths and minimal complexity. Vectorr converts your photos, logos, and designs into Cricut-ready SVG files with optimized paths that cut cleanly on vinyl, cardstock, and other materials.\n\n## Why Vectorr for Cricut?\n\nClean Paths: Our AI traces edges precisely, creating smooth curves without stray nodes that cause cutting errors.\n\nOptimized Complexity: We automatically simplify paths to reduce file size while preserving detail—Design Space loads faster and cuts more reliably.\n\nReady for Cut: Output SVG files work immediately in Design Space with no manual cleanup. Just upload, resize, and cut.\n\n## Best Practices\n\n1. Start with high-contrast images: Black logos on white backgrounds work best. The clearer the edges, the better the trace.\n\n2. Simplify before converting: Remove backgrounds and isolate your subject. Use our background removal tool if needed.\n\n3. Check path count: Cricut Design Space performs best with files under 1,000 paths. Use our simplification slider if your design is complex.\n\n4. Export as SVG (not DXF): SVG preserves colors and layers. DXF is for cut-only projects with no fill.\n\n## Common Cricut Workflows\n\nVinyl Decals:\n1. Upload your logo or text image\n2. Convert to SVG with medium detail\n3. Import to Design Space\n4. Set material to vinyl and cut\n\nMulti-Layer Designs:\n1. Upload your design\n2. Enable color separation to get one SVG per color\n3. Import each layer to Design Space\n4. Assign each layer to a different material\n\nIron-On Transfers:\n1. Convert your image to SVG\n2. Import to Design Space\n3. Mirror the image horizontally\n4. Cut on iron-on vinyl (HTV)\n\n## Related Resources\n\n[SVG Optimization Guide](/resources/svg-optimization-guide)\n[Cricut Design Guide](/resources/cricut-design-guide)\n[Convert PNG to SVG](/convert/png-to-svg)\n\n## File Requirements Design Space Actually Enforces\n\nDesign Space is fussy in ways that are not documented well. Every import is checked for a closed cut path, a bounding box under 23.5 by 11.5 inches, and a path count low enough to keep the preview responsive. Files that break one of these rules fail at the \"Preparing\" step rather than at import, which is why a design can look fine in the canvas and still refuse to cut.\n\nA clean trace avoids most of this. The common failure is a photo trace with thousands of micro-paths, where each speck of noise becomes a separate closed contour. Design Space will import it, then take minutes to render and cut a pattern of dust. Raising the simplification level before export removes those contours instead of forcing you to delete them by hand.\n\n## Choosing Detail Level for the Material\n\nDetail should follow the material, not the artwork. Vinyl and cardstock cut cleanly down to about one sixteenth of an inch, so a high-detail trace is safe. Fabric and leather tear at fine features, so a medium setting that merges small gaps produces a sturdier cut. Iron-on needs a mirrored design, and mirroring is a Design Space action, not a conversion step — export normally, then flip on import.\n\n## Working With Multi-Color Artwork\n\nCricut does not print color, so color in the source artwork is only useful as a grouping signal. Color separation turns each distinct fill into its own SVG layer, which matches the mylar-bag workflow: cut every layer from a different vinyl color, then stack them on the same base. If you skip separation you get one composite path that cuts every color as a single outline, which is only correct for single-color decals.\n\n## Troubleshooting\n\nIf the import sits at \"Preparing\" indefinitely, the path count is almost always the cause — resimplify and retry. If edges look ragged after cutting, the source image was low resolution and the trace followed the pixel stair-steps; upscale by 2x before converting. If layers do not line up, one layer was resized independently in Design Space; group all layers, then resize the group.",
+    "faqs": [
+      {
+        "question": "What file format does Cricut Design Space need?",
+        "answer": "SVG is the best choice for cut projects because it keeps closed paths and preserves layers. DXF works for single-color cut-only files but drops fills and colors."
+      },
+      {
+        "question": "Why does Design Space get stuck on \"Preparing\"?",
+        "answer": "Almost always an excessive path count from tracing a detailed photo. Raising the simplification level before export removes the noise contours that slow the preview."
+      },
+      {
+        "question": "Can I cut multi-color designs on a Cricut?",
+        "answer": "Yes, but not by printing. Use color separation to get one SVG per color, cut each layer from a different vinyl, and stack them."
+      },
+      {
+        "question": "What resolution should my source image be?",
+        "answer": "At least 1000 pixels on the long edge, and higher-contrast edges are better than more pixels. Upscale by 2x before converting if the source is small."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Convert Images for Cricut Design Space",
+          "description": "Convert JPG, PNG, and other images to SVG files optimized for Cricut Design Space. Perfect paths, clean cuts, ready for vinyl cutting and crafting.",
+          "tool": [
+            {
+              "@type": "HowToTool",
+              "name": "Cricut Maker"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "Cricut Explore"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "Design Space"
+            }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "What file format does Cricut Design Space need?",
+              "text": "SVG is the best choice for cut projects because it keeps closed paths and preserves layers. DXF works for single-color cut-only files but drops fills and colors."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Why does Design Space get stuck on \"Preparing\"?",
+              "text": "Almost always an excessive path count from tracing a detailed photo. Raising the simplification level before export removes the noise contours that slow the preview."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Can I cut multi-color designs on a Cricut?",
+              "text": "Yes, but not by printing. Use color separation to get one SVG per color, cut each layer from a different vinyl, and stack them."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "What resolution should my source image be?",
+              "text": "At least 1000 pixels on the long edge, and higher-contrast edges are better than more pixels. Upscale by 2x before converting if the source is small."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What file format does Cricut Design Space need?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "SVG is the best choice for cut projects because it keeps closed paths and preserves layers. DXF works for single-color cut-only files but drops fills and colors."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why does Design Space get stuck on \"Preparing\"?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Almost always an excessive path count from tracing a detailed photo. Raising the simplification level before export removes the noise contours that slow the preview."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I cut multi-color designs on a Cricut?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, but not by printing. Use color separation to get one SVG per color, cut each layer from a different vinyl, and stack them."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What resolution should my source image be?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "At least 1000 pixels on the long edge, and higher-contrast edges are better than more pixels. Upscale by 2x before converting if the source is small."
+              }
+            }
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "silhouette-cameo",
     "title": "Convert Images for Silhouette Cameo",
     "seoTitle": "Convert Images to SVG for Silhouette Cameo - Free Tool",
     "seoDescription": "Convert photos and logos to SVG for Silhouette Cameo. Optimized for Studio, clean paths, perfect for vinyl cutting and print-and-cut projects.",
-    "keywords": ["silhouette cameo svg", "convert image to silhouette", "silhouette studio svg", "svg for cameo", "silhouette vinyl"],
+    "keywords": [
+      "silhouette cameo svg",
+      "convert image to silhouette",
+      "silhouette studio svg",
+      "svg for cameo",
+      "silhouette vinyl"
+    ],
     "category": "Vinyl Cutting",
-    "tools": ["Silhouette Cameo", "Silhouette Portrait", "Silhouette Studio"],
-    "formats": ["SVG", "DXF"],
-    "content": "# Convert Images for Silhouette Cameo\n\nSilhouette Studio accepts SVG and DXF files, but not all vector files are created equal. Vectorr generates Cameo-optimized SVG files with clean paths, proper node placement, and simplified geometry that cuts accurately on vinyl, cardstock, heat transfer vinyl, and other materials.\n\n## Why Vectorr for Silhouette?\n\nStudio-Compatible: Our SVG files import directly into Silhouette Studio (Basic, Designer, Business editions) without path errors or unsupported elements.\n\nClean Nodes: We place nodes strategically to minimize file complexity while preserving smooth curves—fewer nodes mean faster cuts and less blade wear.\n\nLayer Preservation: Multi-color designs export with layers intact, making it easy to assign different cut settings per color.\n\n## Silhouette Cameo Workflow\n\n1. Upload your image: JPG, PNG, or HEIC photos work great. High contrast images (logos, text, illustrations) trace best.\n\n2. Adjust detail level: Use the detail slider to control how closely the vector follows your image. Lower detail = simpler paths = faster cuts.\n\n3. Export as SVG or DXF: SVG preserves colors, layers, and fills. Best for print-and-cut or multi-material projects. DXF is cut lines only, no fills. Use for single-color vinyl decals.\n\n4. Import to Silhouette Studio: Open Studio, go to File → Open, and select your SVG. The design appears on your canvas ready to cut.\n\n## Print-and-Cut Projects\n\nThe Silhouette Cameo excels at print-and-cut: print a design on your home printer, then have the Cameo cut around it precisely.\n\n1. Convert your image to SVG with colors preserved.\n2. Import to Silhouette Studio.\n3. Add registration marks (Studio does this automatically).\n4. Print on sticker paper or cardstock.\n5. Load the printed sheet into your Cameo and let it cut.\n\n## Related Resources\n\n[SVG Optimization Guide](/resources/svg-optimization-guide)\n[File Formats Explained](/resources/file-formats)\n[Convert JPG to SVG](/convert/jpg-to-svg)"
+    "tools": [
+      "Silhouette Cameo",
+      "Silhouette Portrait",
+      "Silhouette Studio"
+    ],
+    "formats": [
+      "SVG",
+      "DXF"
+    ],
+    "content": "# Convert Images for Silhouette Cameo\n\nSilhouette Studio accepts SVG and DXF files, but not all vector files are created equal. Vectorr generates Cameo-optimized SVG files with clean paths, proper node placement, and simplified geometry that cuts accurately on vinyl, cardstock, heat transfer vinyl, and other materials.\n\n## Why Vectorr for Silhouette?\n\nStudio-Compatible: Our SVG files import directly into Silhouette Studio (Basic, Designer, Business editions) without path errors or unsupported elements.\n\nClean Nodes: We place nodes strategically to minimize file complexity while preserving smooth curves—fewer nodes mean faster cuts and less blade wear.\n\nLayer Preservation: Multi-color designs export with layers intact, making it easy to assign different cut settings per color.\n\n## Silhouette Cameo Workflow\n\n1. Upload your image: JPG, PNG, or HEIC photos work great. High contrast images (logos, text, illustrations) trace best.\n\n2. Adjust detail level: Use the detail slider to control how closely the vector follows your image. Lower detail = simpler paths = faster cuts.\n\n3. Export as SVG or DXF: SVG preserves colors, layers, and fills. Best for print-and-cut or multi-material projects. DXF is cut lines only, no fills. Use for single-color vinyl decals.\n\n4. Import to Silhouette Studio: Open Studio, go to File → Open, and select your SVG. The design appears on your canvas ready to cut.\n\n## Print-and-Cut Projects\n\nThe Silhouette Cameo excels at print-and-cut: print a design on your home printer, then have the Cameo cut around it precisely.\n\n1. Convert your image to SVG with colors preserved.\n2. Import to Silhouette Studio.\n3. Add registration marks (Studio does this automatically).\n4. Print on sticker paper or cardstock.\n5. Load the printed sheet into your Cameo and let it cut.\n\n## Related Resources\n\n[SVG Optimization Guide](/resources/svg-optimization-guide)\n[File Formats Explained](/resources/file-formats)\n[Convert JPG to SVG](/convert/jpg-to-svg)\n\n## Silhouette Studio Editions and What They Change\n\nSilhouette Studio ships in four tiers, and the edition decides which file types you can even open. The free Basic Edition reads SVG and DXF. Designer Edition adds SVG imports with better editing and is the usual minimum for serious cutters. Business Edition adds the shape and layer tools used for production runs. None of the editions read PES, DST or JEF, so embroidery files cannot be cut on a Cameo regardless of tier.\n\nDXF is the safer interchange format on this platform. Silhouette's DXF reader is more forgiving of path structure than its SVG reader, particularly with files that use nested groups. If an SVG opens with missing pieces, exporting the same artwork as DXF usually brings them back.\n\n## Cut Settings That Follow the Trace\n\nThe Cameo picks cut pressure from the material preset, but the trace decides whether that pressure works. A path with many short segments makes the blade lift and pivot constantly, which frays heat transfer vinyl and perforates paper. Smoothing curves during conversion reduces those pivots. Close paths also matter: an open contour makes the machine guess where to stop, and the blade usually keeps going past the intended endpoint.\n\n## Registration and Print-and-Cut\n\nPrint-and-cut projects need registration marks, and the marks must sit outside the artwork's bounding box. If the trace fills the entire canvas edge to edge, the marks have nowhere to go and the Cameo will reject the job. Leave at least half an inch of margin around the design before converting, and the marks will fit.\n\n## Troubleshooting\n\nIf the Cameo cuts a shape twice, the file contains duplicate overlapping paths — a common result of converting an image that already had a vector outline. Simplification collapses them. If the blade drags material instead of cutting it, the path is denser than the preset expects; lower the detail setting and re-export. If Studio refuses the file outright, confirm you are on an edition that reads SVG.",
+    "faqs": [
+      {
+        "question": "Which Silhouette Studio edition opens SVG files?",
+        "answer": "Basic Edition reads SVG and DXF. Designer Edition adds better SVG editing, which most cutters need for anything beyond a simple shape."
+      },
+      {
+        "question": "SVG or DXF for the Cameo?",
+        "answer": "DXF is often more reliable with Silhouette because its reader is more forgiving of nested groups and path structure. SVG preserves color and layers."
+      },
+      {
+        "question": "Why does the Cameo cut a shape twice?",
+        "answer": "Duplicate overlapping paths, usually from converting an image that already had a vector outline. Simplification collapses them into one."
+      },
+      {
+        "question": "Can the Cameo cut embroidery files like PES?",
+        "answer": "No. No Silhouette Studio edition reads PES, DST or JEF. Those formats are for embroidery machines only."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Convert Images for Silhouette Cameo",
+          "description": "Convert photos and logos to SVG for Silhouette Cameo. Optimized for Studio, clean paths, perfect for vinyl cutting and print-and-cut projects.",
+          "tool": [
+            {
+              "@type": "HowToTool",
+              "name": "Silhouette Cameo"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "Silhouette Portrait"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "Silhouette Studio"
+            }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "Which Silhouette Studio edition opens SVG files?",
+              "text": "Basic Edition reads SVG and DXF. Designer Edition adds better SVG editing, which most cutters need for anything beyond a simple shape."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "SVG or DXF for the Cameo?",
+              "text": "DXF is often more reliable with Silhouette because its reader is more forgiving of nested groups and path structure. SVG preserves color and layers."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Why does the Cameo cut a shape twice?",
+              "text": "Duplicate overlapping paths, usually from converting an image that already had a vector outline. Simplification collapses them into one."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "Can the Cameo cut embroidery files like PES?",
+              "text": "No. No Silhouette Studio edition reads PES, DST or JEF. Those formats are for embroidery machines only."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Which Silhouette Studio edition opens SVG files?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Basic Edition reads SVG and DXF. Designer Edition adds better SVG editing, which most cutters need for anything beyond a simple shape."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "SVG or DXF for the Cameo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "DXF is often more reliable with Silhouette because its reader is more forgiving of nested groups and path structure. SVG preserves color and layers."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why does the Cameo cut a shape twice?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Duplicate overlapping paths, usually from converting an image that already had a vector outline. Simplification collapses them into one."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can the Cameo cut embroidery files like PES?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. No Silhouette Studio edition reads PES, DST or JEF. Those formats are for embroidery machines only."
+              }
+            }
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "laser-engraving",
     "title": "Convert Images for Laser Engraving",
     "seoTitle": "Convert Images to SVG/DXF for Laser Engraving - Free Tool",
     "seoDescription": "Convert photos and designs to SVG or DXF for laser engraving and cutting. Optimized paths, clean vectors, ready for Lightburn, RDWorks, and other laser software.",
-    "keywords": ["laser engraving svg", "convert image to dxf laser", "laser cutting svg", "lightburn svg", "laser cutter files"],
+    "keywords": [
+      "laser engraving svg",
+      "convert image to dxf laser",
+      "laser cutting svg",
+      "lightburn svg",
+      "laser cutter files"
+    ],
     "category": "Laser Cutting",
-    "tools": ["Lightburn", "RDWorks", "LaserGRBL", "K40 Whisperer"],
-    "formats": ["SVG", "DXF", "G-code"],
-    "content": "# Convert Images for Laser Engraving\n\nLaser engraving and cutting machines require vector files with precise paths. Vectorr converts your images to SVG, DXF, or G-code optimized for laser software like Lightburn, RDWorks, and LaserGRBL.\n\n## Why Vectorr for Laser Work?\n\nPrecise Paths: Laser engravers follow vector paths exactly. Our AI generates smooth, accurate curves with minimal node count for fast, clean cuts.\n\nNo Overlapping Lines: Overlapping paths waste time and burn material. Vectorr automatically removes duplicate paths and simplifies geometry.\n\nMultiple Formats: Export to SVG (most common), DXF (CAD-compatible), or G-code (direct machine control).\n\n## Laser Cutting vs. Engraving\n\nCutting: Full-power laser passes that cut through material. Use outline paths only (no fills). Export as DXF or SVG with stroke-only paths.\n\nEngraving: Lower-power laser that etches the surface. Can use filled paths or raster images. Export as SVG with fills, or use bitmap engraving mode in your laser software.\n\nScoring: Medium-power passes that mark but don't cut through. Use thin stroke paths (0.1mm or less). Export as SVG or DXF.\n\n## Workflow for Lightburn\n\n1. Upload your image to Vectorr.\n2. Adjust detail: For cutting, use lower detail to get clean, simple outlines. For engraving, higher detail preserves texture and shading.\n3. Export as SVG or DXF.\n4. Import to Lightburn: File → Import → select your file.\n5. Assign layers: In Lightburn, assign cut power, speed, and number of passes to each layer.\n6. Frame and cut: Use Lightburn's frame tool to preview the cut area, then run the job.\n\n## Related Resources\n\n[Laser Cutting Guide](/resources/laser-cutting-guide)\n[DXF File Format](/resources/file-formats)\n[Convert PNG to DXF](/convert/png-to-dxf)"
+    "tools": [
+      "Lightburn",
+      "RDWorks",
+      "LaserGRBL",
+      "K40 Whisperer"
+    ],
+    "formats": [
+      "SVG",
+      "DXF",
+      "G-code"
+    ],
+    "content": "# Convert Images for Laser Engraving\n\nLaser engraving and cutting machines require vector files with precise paths. Vectorr converts your images to SVG, DXF, or G-code optimized for laser software like Lightburn, RDWorks, and LaserGRBL.\n\n## Why Vectorr for Laser Work?\n\nPrecise Paths: Laser engravers follow vector paths exactly. Our AI generates smooth, accurate curves with minimal node count for fast, clean cuts.\n\nNo Overlapping Lines: Overlapping paths waste time and burn material. Vectorr automatically removes duplicate paths and simplifies geometry.\n\nMultiple Formats: Export to SVG (most common), DXF (CAD-compatible), or G-code (direct machine control).\n\n## Laser Cutting vs. Engraving\n\nCutting: Full-power laser passes that cut through material. Use outline paths only (no fills). Export as DXF or SVG with stroke-only paths.\n\nEngraving: Lower-power laser that etches the surface. Can use filled paths or raster images. Export as SVG with fills, or use bitmap engraving mode in your laser software.\n\nScoring: Medium-power passes that mark but don't cut through. Use thin stroke paths (0.1mm or less). Export as SVG or DXF.\n\n## Workflow for Lightburn\n\n1. Upload your image to Vectorr.\n2. Adjust detail: For cutting, use lower detail to get clean, simple outlines. For engraving, higher detail preserves texture and shading.\n3. Export as SVG or DXF.\n4. Import to Lightburn: File → Import → select your file.\n5. Assign layers: In Lightburn, assign cut power, speed, and number of passes to each layer.\n6. Frame and cut: Use Lightburn's frame tool to preview the cut area, then run the job.\n\n## Related Resources\n\n[Laser Cutting Guide](/resources/laser-cutting-guide)\n[DXF File Format](/resources/file-formats)\n[Convert PNG to DXF](/convert/png-to-dxf)\n\n## From Raster to Toolpath\n\nA laser does not read SVG directly. The chain is image to vector to toolpath: the vector defines where the head travels, and the G-code or LightBurn file assigns power and speed to each move. Mistakes in the vector stage are permanent, because the laser cannot smooth a jagged path after the fact — it simply follows it.\n\nTwo vector properties matter more than any other at this stage. First, closed contours: an unfilled outline still engraves, but a contour that does not close leaves a tiny gap in the final shape. Second, minimal overlapping nodes: a path that doubles back on itself burns twice at the same spot, producing a dark line where the artwork shows none.\n\n## Engrave Versus Cut\n\nEngraving uses fill; cutting uses stroke. A conversion that preserves color fills gives you a raster-style engraving where every region is burned at the preset power. A conversion that emits outlines gives you a cutting file. Decide which you want before converting, because the two need different trace settings — engraving keeps detail, cutting needs simplicity.\n\n## Why DXF Beats SVG for Some Machines\n\nOlder controllers and RDWorks-based cutters handle DXF more reliably than SVG. DXF carries geometry with explicit layer names and no CSS, so there is nothing for the controller to misinterpret. If a machine ignores fills or collapses layers, converting to DXF and reimporting often fixes it without changing the artwork.\n\n## Material Notes\n\nEngraved fill density changes how dark the result looks, not just how deep. Too dense a fill pattern over a large area heats the material unevenly and warps thin stock. For a large filled region, reduce fill density rather than power, which keeps the depth consistent across the shape. Always run a small test cut on scrap before committing a full sheet — power scales with material, not with the design.",
+    "faqs": [
+      {
+        "question": "Does a laser cutter read SVG directly?",
+        "answer": "Not usually. The design is converted to a toolpath in software such as LightBurn, which then drives the machine. SVG is the vector source, not the file the laser runs."
+      },
+      {
+        "question": "Should I convert for engraving or for cutting?",
+        "answer": "Engraving uses filled regions and keeps detail; cutting uses outlines and needs simple closed contours. Choose before converting because the settings differ."
+      },
+      {
+        "question": "Why use DXF instead of SVG for a laser?",
+        "answer": "DXF carries geometry and layer names with no CSS, so older and RDWorks-based controllers interpret it more predictably than SVG."
+      },
+      {
+        "question": "How do I stop a large filled area from warping?",
+        "answer": "Reduce fill density rather than power. Lower density keeps heat spread even and preserves consistent depth across the shape."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Convert Images for Laser Engraving",
+          "description": "Convert photos and designs to SVG or DXF for laser engraving and cutting. Optimized paths, clean vectors, ready for Lightburn, RDWorks, and other laser software.",
+          "tool": [
+            {
+              "@type": "HowToTool",
+              "name": "Lightburn"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "RDWorks"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "LaserGRBL"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "K40 Whisperer"
+            }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "Does a laser cutter read SVG directly?",
+              "text": "Not usually. The design is converted to a toolpath in software such as LightBurn, which then drives the machine. SVG is the vector source, not the file the laser runs."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Should I convert for engraving or for cutting?",
+              "text": "Engraving uses filled regions and keeps detail; cutting uses outlines and needs simple closed contours. Choose before converting because the settings differ."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Why use DXF instead of SVG for a laser?",
+              "text": "DXF carries geometry and layer names with no CSS, so older and RDWorks-based controllers interpret it more predictably than SVG."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "How do I stop a large filled area from warping?",
+              "text": "Reduce fill density rather than power. Lower density keeps heat spread even and preserves consistent depth across the shape."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Does a laser cutter read SVG directly?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not usually. The design is converted to a toolpath in software such as LightBurn, which then drives the machine. SVG is the vector source, not the file the laser runs."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Should I convert for engraving or for cutting?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Engraving uses filled regions and keeps detail; cutting uses outlines and needs simple closed contours. Choose before converting because the settings differ."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why use DXF instead of SVG for a laser?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "DXF carries geometry and layer names with no CSS, so older and RDWorks-based controllers interpret it more predictably than SVG."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I stop a large filled area from warping?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Reduce fill density rather than power. Lower density keeps heat spread even and preserves consistent depth across the shape."
+              }
+            }
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "embroidery-digitizing",
     "title": "Convert Images for Embroidery Digitizing",
     "seoTitle": "Convert Images to Embroidery Files (DST, PES) - Free Tool",
     "seoDescription": "Convert logos and designs to DST, PES, and other embroidery formats. Optimized for Brother, Janome, Bernina, and commercial machines.",
-    "keywords": ["embroidery digitizing", "convert image to dst", "convert image to pes", "embroidery file converter", "logo to embroidery"],
+    "keywords": [
+      "embroidery digitizing",
+      "convert image to dst",
+      "convert image to pes",
+      "embroidery file converter",
+      "logo to embroidery"
+    ],
     "category": "Embroidery",
-    "tools": ["Brother PE-Design", "Janome Digitizer", "Wilcom", "Bernina Toolbox"],
-    "formats": ["DST", "PES", "JEF"],
-    "content": "# Convert Images for Embroidery Digitizing\n\nEmbroidery machines read stitch files (DST, PES, JEF) that tell the needle where to move. Vectorr converts your logos and designs into embroidery-ready files with optimized stitch paths for Brother, Janome, Bernina, and commercial machines.\n\n## Why Vectorr for Embroidery?\n\nStitch-Optimized Paths: We convert vector paths into efficient stitch sequences that minimize thread breaks and jump stitches.\n\nMultiple Formats: Export to DST (universal), PES (Brother), or JEF (Janome).\n\nDensity Control: Adjust stitch density to balance coverage and file size. Higher density = fuller coverage, but slower stitching.\n\n## Embroidery File Formats\n\nDST (Tajima): The most universal format. Supported by almost all embroidery machines and software. Use DST if you're unsure.\n\nPES (Brother): Native format for Brother embroidery machines (PE-Design, Innovis, Entrepreneur). Supports color information and metadata.\n\nJEF (Janome): Native format for Janome machines (Memory Craft, Horizon, Skyline). Similar to PES but with Janome-specific features.\n\n## Digitizing Workflow\n\n1. Upload your logo or design: High-contrast images work best. Remove backgrounds and simplify colors before converting.\n\n2. Convert to vector first: Embroidery files are based on vector paths. If your image is a photo (JPG, PNG), Vectorr converts it to SVG first, then to embroidery format.\n\n3. Adjust stitch density: Use the density slider to control how tightly stitches are packed.\n\n4. Export as DST, PES, or JEF.\n\n5. Load onto your machine: Copy the file to a USB drive, insert into your embroidery machine, and select the design.\n\n## Related Resources\n\n[Embroidery File Formats](/resources/embroidery-file-formats)\n[Convert JPG to DST](/convert/jpg-to-dst)\n[Convert PNG to PES](/convert/png-to-pes)"
+    "tools": [
+      "Brother PE-Design",
+      "Janome Digitizer",
+      "Wilcom",
+      "Bernina Toolbox"
+    ],
+    "formats": [
+      "DST",
+      "PES",
+      "JEF"
+    ],
+    "content": "# Convert Images for Embroidery Digitizing\n\nEmbroidery machines read stitch files (DST, PES, JEF) that tell the needle where to move. Vectorr converts your logos and designs into embroidery-ready files with optimized stitch paths for Brother, Janome, Bernina, and commercial machines.\n\n## Why Vectorr for Embroidery?\n\nStitch-Optimized Paths: We convert vector paths into efficient stitch sequences that minimize thread breaks and jump stitches.\n\nMultiple Formats: Export to DST (universal), PES (Brother), or JEF (Janome).\n\nDensity Control: Adjust stitch density to balance coverage and file size. Higher density = fuller coverage, but slower stitching.\n\n## Embroidery File Formats\n\nDST (Tajima): The most universal format. Supported by almost all embroidery machines and software. Use DST if you're unsure.\n\nPES (Brother): Native format for Brother embroidery machines (PE-Design, Innovis, Entrepreneur). Supports color information and metadata.\n\nJEF (Janome): Native format for Janome machines (Memory Craft, Horizon, Skyline). Similar to PES but with Janome-specific features.\n\n## Digitizing Workflow\n\n1. Upload your logo or design: High-contrast images work best. Remove backgrounds and simplify colors before converting.\n\n2. Convert to vector first: Embroidery files are based on vector paths. If your image is a photo (JPG, PNG), Vectorr converts it to SVG first, then to embroidery format.\n\n3. Adjust stitch density: Use the density slider to control how tightly stitches are packed.\n\n4. Export as DST, PES, or JEF.\n\n5. Load onto your machine: Copy the file to a USB drive, insert into your embroidery machine, and select the design.\n\n## Related Resources\n\n[Embroidery File Formats](/resources/embroidery-file-formats)\n[Convert JPG to DST](/convert/jpg-to-dst)\n[Convert PNG to PES](/convert/png-to-pes)\n\n## Why Conversion Is Not Digitizing\n\nIt is worth being direct: converting an image to DST or PES produces a stitch file, but it does not produce good digitizing. Professional digitizing chooses stitch type, underlay, pull compensation and path order for the specific fabric. An automated conversion follows the outline, which works for simple logos and line art and struggles with large filled shapes and fine text.\n\nThis is a useful distinction rather than a limitation. For a single-color logo, a converted outline stitches cleanly. For a photographic or heavily shaded design, expect to hand-tune the result in your machine's software, or send it to a digitizer. Knowing which side of that line your artwork falls on saves a lot of wasted thread.\n\n## Reading the File Formats\n\nDST carries stitch coordinates and a minimal header; it does not carry color. Every machine that reads DST assigns its own thread colors on open, so the same file looks different on a Brother than a Tajima. PES adds an embedded PEC block with a single color assignment, which most home machines honor. JEF is Janome's format and behaves similarly, with a 200 mm hoop limit that rejects oversized designs rather than scaling them.\n\nIf color fidelity matters more than portability, PES is the better choice. If you need maximum machine compatibility and will set thread colors at the machine anyway, DST is the safer bet.\n\n## Hoop Size and Design Boundaries\n\nEvery export must fit the physical hoop. A design that overflows is not silently cropped — the machine either refuses the file or, worse, stitches off the edge of the stabilizer. Check the design dimensions before exporting and scale down if needed. Our exporter rejects a PES or JEF design past the hoop limit instead of writing a file the machine cannot run.\n\n## Stitch Count and Time\n\nStitch count predicts run time directly: most home machines complete roughly 400 to 700 stitches per minute. A converted outline of a simple logo lands in the low thousands of stitches and finishes in minutes. A dense filled region can exceed thirty thousand stitches and run the better part of an hour, so preview the stitch count before starting a long job.",
+    "faqs": [
+      {
+        "question": "Is converting an image to PES the same as digitizing?",
+        "answer": "No. Conversion traces outlines into stitches, which works for simple logos. True digitizing chooses stitch type, underlay and pull compensation for the fabric."
+      },
+      {
+        "question": "Which embroidery format is most compatible?",
+        "answer": "DST is the most widely read and carries no color, so any machine opens it. PES adds color information and suits home Brother machines. JEF is for Janome."
+      },
+      {
+        "question": "Why does my design look different on another machine?",
+        "answer": "DST stores no thread colors. Each machine assigns its own palette when the file opens, so the same DST can appear different on a Brother and a Tajima."
+      },
+      {
+        "question": "What is the maximum design size?",
+        "answer": "It depends on the hoop, and JEF exports past 200 mm are rejected rather than scaled. Check dimensions before exporting to avoid a file the machine refuses."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Convert Images for Embroidery Digitizing",
+          "description": "Convert logos and designs to DST, PES, and other embroidery formats. Optimized for Brother, Janome, Bernina, and commercial machines.",
+          "tool": [
+            {
+              "@type": "HowToTool",
+              "name": "Brother PE-Design"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "Janome Digitizer"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "Wilcom"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "Bernina Toolbox"
+            }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "Is converting an image to PES the same as digitizing?",
+              "text": "No. Conversion traces outlines into stitches, which works for simple logos. True digitizing chooses stitch type, underlay and pull compensation for the fabric."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Which embroidery format is most compatible?",
+              "text": "DST is the most widely read and carries no color, so any machine opens it. PES adds color information and suits home Brother machines. JEF is for Janome."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Why does my design look different on another machine?",
+              "text": "DST stores no thread colors. Each machine assigns its own palette when the file opens, so the same DST can appear different on a Brother and a Tajima."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "What is the maximum design size?",
+              "text": "It depends on the hoop, and JEF exports past 200 mm are rejected rather than scaled. Check dimensions before exporting to avoid a file the machine refuses."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Is converting an image to PES the same as digitizing?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Conversion traces outlines into stitches, which works for simple logos. True digitizing chooses stitch type, underlay and pull compensation for the fabric."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which embroidery format is most compatible?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "DST is the most widely read and carries no color, so any machine opens it. PES adds color information and suits home Brother machines. JEF is for Janome."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why does my design look different on another machine?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "DST stores no thread colors. Each machine assigns its own palette when the file opens, so the same DST can appear different on a Brother and a Tajima."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the maximum design size?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It depends on the hoop, and JEF exports past 200 mm are rejected rather than scaled. Check dimensions before exporting to avoid a file the machine refuses."
+              }
+            }
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "3d-printing",
     "title": "Convert Images for 3D Printing",
     "seoTitle": "Convert Images to 3D Models (STL, 3MF) - Free Tool",
     "seoDescription": "Convert logos and designs to 3D-printable files (STL, 3MF). Extrude 2D images into 3D models ready for FDM, resin, and SLA printers.",
-    "keywords": ["convert image to stl", "image to 3d model", "2d to 3d converter", "stl converter", "3d printing svg"],
+    "keywords": [
+      "convert image to stl",
+      "image to 3d model",
+      "2d to 3d converter",
+      "stl converter",
+      "3d printing svg"
+    ],
     "category": "3D Printing",
-    "tools": ["Cura", "PrusaSlicer", "Bambu Studio", "Simplify3D"],
-    "formats": ["STL", "3MF", "OBJ"],
-    "content": "# Convert Images for 3D Printing\n\n3D printers require 3D mesh files (STL, 3MF, OBJ). Vectorr converts 2D images and logos into 3D models by extruding vector paths along the Z-axis, creating printable models ready for FDM, resin, and SLA printers.\n\n## How It Works\n\n1. Vectorization: Your image (JPG, PNG, SVG) is converted to vector paths.\n2. Extrusion: Each path is extruded upward along the Z-axis to create depth.\n3. Mesh Generation: The extruded paths are converted to a triangle mesh (STL, 3MF, or OBJ).\n4. Export: The 3D model is ready to slice and print.\n\n## Use Cases\n\nLogos and Badges: Convert your company logo into a 3D sign or badge. Perfect for desk decorations, keychains, and promotional items.\n\nCookie Cutters: Extrude simple shapes into cookie cutter outlines. Print in food-safe PLA or PETG.\n\nSignage: Turn text and icons into 3D signs for walls, shelves, and displays.\n\n## File Formats\n\nSTL: The most common 3D printing format. Supported by all slicers and printers.\n\n3MF: Modern format that supports colors, textures, and metadata. Preferred by Bambu Lab, Prusa, and other modern printers.\n\nOBJ: Text-based format that supports colors and materials. Compatible with Blender, MeshLab, and CAD software.\n\n## Related Resources\n\n[File Formats Explained](/resources/file-formats)\n[Convert PNG to STL](/convert/png-to-stl)\n[Convert SVG to 3MF](/convert/svg-to-3mf)"
+    "tools": [
+      "Cura",
+      "PrusaSlicer",
+      "Bambu Studio",
+      "Simplify3D"
+    ],
+    "formats": [
+      "STL",
+      "3MF",
+      "OBJ"
+    ],
+    "content": "# Convert Images for 3D Printing\n\n3D printers require 3D mesh files (STL, 3MF, OBJ). Vectorr converts 2D images and logos into 3D models by extruding vector paths along the Z-axis, creating printable models ready for FDM, resin, and SLA printers.\n\n## How It Works\n\n1. Vectorization: Your image (JPG, PNG, SVG) is converted to vector paths.\n2. Extrusion: Each path is extruded upward along the Z-axis to create depth.\n3. Mesh Generation: The extruded paths are converted to a triangle mesh (STL, 3MF, or OBJ).\n4. Export: The 3D model is ready to slice and print.\n\n## Use Cases\n\nLogos and Badges: Convert your company logo into a 3D sign or badge. Perfect for desk decorations, keychains, and promotional items.\n\nCookie Cutters: Extrude simple shapes into cookie cutter outlines. Print in food-safe PLA or PETG.\n\nSignage: Turn text and icons into 3D signs for walls, shelves, and displays.\n\n## File Formats\n\nSTL: The most common 3D printing format. Supported by all slicers and printers.\n\n3MF: Modern format that supports colors, textures, and metadata. Preferred by Bambu Lab, Prusa, and other modern printers.\n\nOBJ: Text-based format that supports colors and materials. Compatible with Blender, MeshLab, and CAD software.\n\n## Related Resources\n\n[File Formats Explained](/resources/file-formats)\n[Convert PNG to STL](/convert/png-to-stl)\n[Convert SVG to 3MF](/convert/svg-to-3mf)\n\n## How a 2D Design Becomes a Printable Model\n\nA 3D printer needs a watertight surface mesh, not a picture. Converting artwork to STL, 3MF or OBJ means extruding every closed 2D region upward into a solid with a top, a bottom and vertical walls. The extrusion depth you choose is the model's thickness, and the slicer handles everything above and below that.\n\nThe part that determines whether the print succeeds is closure. A region that is not fully closed produces a surface with a hole, and the slicer cannot decide where solid ends and air begins. It will usually print anyway, with a missing wall or a stray fragment. Checking for closed contours before conversion is the single highest-value step.\n\n## Format Choice\n\nSTL is the universal format and every slicer reads it, but it stores only geometry — no units, no color, no material. 3MF is the modern replacement: it is also an XML package, so it can carry units, colors and multiple objects, and both PrusaSlicer and Bambu Studio read it natively. OBJ suits further modeling work in Blender or another mesh editor because it preserves structure better than STL when you need to edit rather than print.\n\nIf you plan to hand the file to someone else, 3MF is the best default. If you need maximum compatibility with older software, STL is the one that always opens.\n\n## Wall Thickness and Layer Height\n\nAn extruded region thinner than two nozzle widths will print as a single fragile wall or fail entirely. For a 0.4 mm nozzle, keep the model at least 1 mm thick. Layer height then controls the vertical resolution of any angled edge: 0.2 mm is the usual balance, and dropping to 0.12 mm makes a shallow ramp noticeably smoother at the cost of print time.\n\n## Scaling and Base Plate\n\nModels come out of conversion in design units, which rarely match millimeters. Most slicers let you scale on import, but confirming the unit before printing prevents a thumbnail-sized ornament or a phone-sized monstrosity. A flat base improves adhesion — if the design is a thin outline, adding a plinth in the slicer gives the print something to grip.",
+    "faqs": [
+      {
+        "question": "Can I 3D print a logo or drawing?",
+        "answer": "Yes, by extruding every closed 2D region into a solid. The extrusion depth becomes the model thickness and the slicer prepares it for printing."
+      },
+      {
+        "question": "STL, 3MF or OBJ — which should I use?",
+        "answer": "STL for universal compatibility, 3MF for units and color in modern slicers, OBJ when you plan to edit the mesh further in modeling software."
+      },
+      {
+        "question": "Why does my model print with missing walls?",
+        "answer": "A region in the source artwork was not fully closed, leaving a hole in the mesh. Closing contours before conversion fixes it."
+      },
+      {
+        "question": "How thick should an extruded model be?",
+        "answer": "At least 1 mm for a 0.4 mm nozzle, which is roughly two and a half nozzle widths. Anything thinner tends to print as a fragile single wall."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Convert Images for 3D Printing",
+          "description": "Convert logos and designs to 3D-printable files (STL, 3MF). Extrude 2D images into 3D models ready for FDM, resin, and SLA printers.",
+          "tool": [
+            {
+              "@type": "HowToTool",
+              "name": "Cura"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "PrusaSlicer"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "Bambu Studio"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "Simplify3D"
+            }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "Can I 3D print a logo or drawing?",
+              "text": "Yes, by extruding every closed 2D region into a solid. The extrusion depth becomes the model thickness and the slicer prepares it for printing."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "STL, 3MF or OBJ — which should I use?",
+              "text": "STL for universal compatibility, 3MF for units and color in modern slicers, OBJ when you plan to edit the mesh further in modeling software."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Why does my model print with missing walls?",
+              "text": "A region in the source artwork was not fully closed, leaving a hole in the mesh. Closing contours before conversion fixes it."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "How thick should an extruded model be?",
+              "text": "At least 1 mm for a 0.4 mm nozzle, which is roughly two and a half nozzle widths. Anything thinner tends to print as a fragile single wall."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Can I 3D print a logo or drawing?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, by extruding every closed 2D region into a solid. The extrusion depth becomes the model thickness and the slicer prepares it for printing."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "STL, 3MF or OBJ — which should I use?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "STL for universal compatibility, 3MF for units and color in modern slicers, OBJ when you plan to edit the mesh further in modeling software."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why does my model print with missing walls?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A region in the source artwork was not fully closed, leaving a hole in the mesh. Closing contours before conversion fixes it."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How thick should an extruded model be?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "At least 1 mm for a 0.4 mm nozzle, which is roughly two and a half nozzle widths. Anything thinner tends to print as a fragile single wall."
+              }
+            }
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "screen-printing",
     "title": "Convert Images for Screen Printing",
     "seoTitle": "Convert Images for Screen Printing - Color Separation Tool",
     "seoDescription": "Convert designs to screen printing separations. Split multi-color images into CMYK or spot color layers ready for screen printing.",
-    "keywords": ["screen printing color separation", "convert image to screen print", "cmyk separation", "spot color separation", "screen printing svg"],
+    "keywords": [
+      "screen printing color separation",
+      "convert image to screen print",
+      "cmyk separation",
+      "spot color separation",
+      "screen printing svg"
+    ],
     "category": "Screen Printing",
-    "tools": ["AccuRIP", "Separation Studio", "Adobe Illustrator", "CorelDRAW"],
-    "formats": ["SVG (separated)", "PDF"],
-    "content": "# Convert Images for Screen Printing\n\nScreen printing requires color separation: splitting a multi-color design into individual layers, one per ink color. Vectorr converts your images into separated SVG or PDF files ready for screen printing, whether you're using CMYK process colors or spot colors.\n\n## How Color Separation Works\n\nScreen printing applies one ink color at a time through mesh screens. Each color needs its own screen, so a 4-color design requires 4 separations (4 screens, 4 printing passes).\n\nProcess Colors (CMYK): Use Cyan, Magenta, Yellow, and Black inks to simulate full-color images. Vectorr separates your design into 4 layers (one per CMYK channel).\n\nSpot Colors: Use exact Pantone or custom ink colors. Vectorr separates your design by unique color, creating one layer per distinct color in your artwork.\n\n## Workflow\n\n1. Upload your design: Works best with vector art (SVG, PDF) or high-resolution images (PNG, JPG at 300 DPI or higher).\n\n2. Choose separation type: CMYK for full-color designs, photos, gradients. Spot Color for logos, text, and designs with 6 or fewer solid colors.\n\n3. Export separations: Vectorr generates one SVG file per color/layer. Each file contains only the artwork for that color.\n\n4. Print films: Print each separation onto transparent film (inkjet transparency or laser transparency). Make sure to print in black ink only at high density.\n\n5. Burn screens: Place each film on a mesh screen coated with photo emulsion, expose to UV light, wash out the unexposed emulsion.\n\n6. Print: Register all screens, apply ink, and print each color in sequence.\n\n## Best Practices\n\nSimplify colors: Limit your design to 4–6 colors to reduce screen costs. Merge similar colors where possible.\n\nUse high-contrast artwork: Clean edges separate better. Avoid soft shadows or blurry edges.\n\nCheck registration: Ensure all layers align perfectly. Use registration marks (crosshairs) at the corners of each separation.\n\nPrint films at 100% black: Set your printer to maximum ink density.\n\n## Related Resources\n\n[Color Separation Guide](/resources/color-separation)\n[File Formats Explained](/resources/file-formats)\n[Convert JPG to SVG](/convert/jpg-to-svg)"
+    "tools": [
+      "AccuRIP",
+      "Separation Studio",
+      "Adobe Illustrator",
+      "CorelDRAW"
+    ],
+    "formats": [
+      "SVG (separated)",
+      "PDF"
+    ],
+    "content": "# Convert Images for Screen Printing\n\nScreen printing requires color separation: splitting a multi-color design into individual layers, one per ink color. Vectorr converts your images into separated SVG or PDF files ready for screen printing, whether you're using CMYK process colors or spot colors.\n\n## How Color Separation Works\n\nScreen printing applies one ink color at a time through mesh screens. Each color needs its own screen, so a 4-color design requires 4 separations (4 screens, 4 printing passes).\n\nProcess Colors (CMYK): Use Cyan, Magenta, Yellow, and Black inks to simulate full-color images. Vectorr separates your design into 4 layers (one per CMYK channel).\n\nSpot Colors: Use exact Pantone or custom ink colors. Vectorr separates your design by unique color, creating one layer per distinct color in your artwork.\n\n## Workflow\n\n1. Upload your design: Works best with vector art (SVG, PDF) or high-resolution images (PNG, JPG at 300 DPI or higher).\n\n2. Choose separation type: CMYK for full-color designs, photos, gradients. Spot Color for logos, text, and designs with 6 or fewer solid colors.\n\n3. Export separations: Vectorr generates one SVG file per color/layer. Each file contains only the artwork for that color.\n\n4. Print films: Print each separation onto transparent film (inkjet transparency or laser transparency). Make sure to print in black ink only at high density.\n\n5. Burn screens: Place each film on a mesh screen coated with photo emulsion, expose to UV light, wash out the unexposed emulsion.\n\n6. Print: Register all screens, apply ink, and print each color in sequence.\n\n## Best Practices\n\nSimplify colors: Limit your design to 4–6 colors to reduce screen costs. Merge similar colors where possible.\n\nUse high-contrast artwork: Clean edges separate better. Avoid soft shadows or blurry edges.\n\nCheck registration: Ensure all layers align perfectly. Use registration marks (crosshairs) at the corners of each separation.\n\nPrint films at 100% black: Set your printer to maximum ink density.\n\n## Related Resources\n\n[Color Separation Guide](/resources/color-separation)\n[File Formats Explained](/resources/file-formats)\n[Convert JPG to SVG](/convert/jpg-to-svg)\n\n## Why Screen Printing Needs Separated Artwork\n\nA screen printer builds one screen per ink color. Artwork that arrives as a single flattened image has to be split by hand, which is slow and error-prone. Color separation does that split in one step: each distinct fill becomes its own layer, and each layer becomes one screen. The printed result is the stack of all layers in register.\n\nSeparation by fill color works because screen printing is a spot-color process. Each screen lays down one opaque ink, and there is no blending at the edges. That is also why process (CMYK) separation exists as a separate mode — it reproduces continuous color by halftoning four screens, which is the right choice for photographic art and the wrong choice for a three-color logo.\n\n## Registration and Trapping\n\nEvery layer must align exactly, so the geometry stays in the same coordinate space across all outputs. Any per-layer shift produces halos of the wrong color along the edges. The practical fix at print time is trapping: expanding each ink slightly so adjacent colors overlap by a hair, hiding registration drift. That adjustment usually happens in prepress software, but it relies on layers keeping their original positions.\n\n## Line Weight and Ink Spread\n\nInk spreads on fabric. A 0.5 pt line that looks crisp on screen becomes a blurred 1 pt line on a shirt. Minimum line weight for textile printing is generally 1 pt, and small text below roughly 8 pt fills in solid. Check the vector before output: if the artwork relies on hairlines, thicken them at the design stage rather than on press.\n\n## Choosing RGB Versus CMYK Mode\n\nUse RGB separation when the design has a fixed set of spot colors — a logo, a badge, a simple illustration. You get one clean screen per color. Use CMYK when the artwork is photographic or has gradients that must reproduce continuously. CMYK gives you four screens and a printable approximation of the original, at the cost of the vibrant, flat look that spot color provides.",
+    "faqs": [
+      {
+        "question": "Why do I need color separation for screen printing?",
+        "answer": "Each screen prints one ink. Separation turns every distinct fill into its own layer so each becomes one screen, instead of splitting flattened artwork by hand."
+      },
+      {
+        "question": "RGB or CMYK separation?",
+        "answer": "RGB for a fixed set of spot colors such as a logo. CMYK for photographic or gradient artwork that must reproduce continuously across four screens."
+      },
+      {
+        "question": "What is the minimum line weight for shirts?",
+        "answer": "About 1 pt. Ink spreads on fabric, so hairlines blur and text below roughly 8 pt fills in solid."
+      },
+      {
+        "question": "How do I stop colors misaligning between screens?",
+        "answer": "Keep every layer in the same coordinate space and apply trapping in prepress so adjacent inks overlap slightly, hiding small registration drift."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Convert Images for Screen Printing",
+          "description": "Convert designs to screen printing separations. Split multi-color images into CMYK or spot color layers ready for screen printing.",
+          "tool": [
+            {
+              "@type": "HowToTool",
+              "name": "AccuRIP"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "Separation Studio"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "Adobe Illustrator"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "CorelDRAW"
+            }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "Why do I need color separation for screen printing?",
+              "text": "Each screen prints one ink. Separation turns every distinct fill into its own layer so each becomes one screen, instead of splitting flattened artwork by hand."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "RGB or CMYK separation?",
+              "text": "RGB for a fixed set of spot colors such as a logo. CMYK for photographic or gradient artwork that must reproduce continuously across four screens."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "What is the minimum line weight for shirts?",
+              "text": "About 1 pt. Ink spreads on fabric, so hairlines blur and text below roughly 8 pt fills in solid."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "How do I stop colors misaligning between screens?",
+              "text": "Keep every layer in the same coordinate space and apply trapping in prepress so adjacent inks overlap slightly, hiding small registration drift."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Why do I need color separation for screen printing?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Each screen prints one ink. Separation turns every distinct fill into its own layer so each becomes one screen, instead of splitting flattened artwork by hand."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "RGB or CMYK separation?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "RGB for a fixed set of spot colors such as a logo. CMYK for photographic or gradient artwork that must reproduce continuously across four screens."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the minimum line weight for shirts?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "About 1 pt. Ink spreads on fabric, so hairlines blur and text below roughly 8 pt fills in solid."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I stop colors misaligning between screens?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Keep every layer in the same coordinate space and apply trapping in prepress so adjacent inks overlap slightly, hiding small registration drift."
+              }
+            }
+          ]
+        }
+      ]
+    }
   }
 ]

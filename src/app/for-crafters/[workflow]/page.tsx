@@ -46,6 +46,100 @@ export async function generateMetadata({
   };
 }
 
+/**
+ * Renders the guide body's markdown subset — bold, links, ordered and
+ * unordered lists, and paragraphs — into block-level HTML.
+ *
+ * Written as a block pass rather than a chain of regexes: the previous version
+ * inserted `<p>` tags and then split on newlines, which produced `<p><p>` and
+ * unclosed lists. Content is trusted static JSON from `public/data`.
+ */
+function renderMarkdown(body: string): string {
+  const inline = (text: string) =>
+    escapeHtml(text)
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(
+        /\[([^\]]+)\]\(([^)\s]+)\)/g,
+        '<a class="text-accent underline underline-offset-2" href="$2">$1</a>',
+      );
+
+  const blocks: string[] = [];
+  const lines = body.split('\n');
+  let paragraph: string[] = [];
+  let list: { type: 'ul' | 'ol'; items: string[] } | null = null;
+
+  const flushParagraph = () => {
+    if (paragraph.length > 0) {
+      blocks.push(`<p>${inline(paragraph.join(' '))}</p>`);
+      paragraph = [];
+    }
+  };
+  const flushList = () => {
+    if (list) {
+      blocks.push(
+        `<${list.type}>${list.items.map((item) => `<li>${inline(item)}</li>`).join('')}</${list.type}>`,
+      );
+      list = null;
+    }
+  };
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    // A `Label:` line that introduces a numbered run is a sub-heading, not a
+    // paragraph — the content uses it to name each workflow variant.
+    if (trimmed === '') {
+      flushParagraph();
+      flushList();
+      continue;
+    }
+
+    const ordered = trimmed.match(/^\d+\.\s+(.*)$/);
+    const unordered = trimmed.match(/^[-*]\s+(.*)$/);
+
+    if (ordered || unordered) {
+      flushParagraph();
+      const type = ordered ? 'ol' : 'ul';
+      if (!list || list.type !== type) {
+        flushList();
+        list = { type, items: [] };
+      }
+      list.items.push((ordered ?? unordered)![1]);
+      continue;
+    }
+
+    flushList();
+
+    if (trimmed.endsWith(':')) {
+      flushParagraph();
+      blocks.push(`<h3>${inline(trimmed.slice(0, -1))}</h3>`);
+      continue;
+    }
+
+    // "Lead-in: explanation" reads as a definition pair; the lead-in carries
+    // the emphasis and the rest is the body.
+    const leadIn = trimmed.match(/^([^:.]{3,60}):\s+(.+)$/);
+    if (leadIn) {
+      flushParagraph();
+      blocks.push(`<p><strong>${inline(leadIn[1])}:</strong> ${inline(leadIn[2])}</p>`);
+      continue;
+    }
+
+    paragraph.push(trimmed);
+  }
+
+  flushParagraph();
+  flushList();
+  return blocks.join('');
+}
+
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 export default async function WorkflowPage({
   params,
 }: {
@@ -61,9 +155,25 @@ export default async function WorkflowPage({
   // Parse content sections (split by ## headers)
   const sections = workflow.content.split(/\n## /).slice(1);
   const intro = workflow.content.split(/\n## /)[0].replace(/^# .+\n\n/, '');
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vectorr.com';
 
   return (
     <main className="min-h-screen bg-[#FAFBFC]">
+      {workflow.schema ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(workflow.schema) }}
+        />
+      ) : null}
+      <nav aria-label="Breadcrumb" className="border-b border-[#E5E8EB] bg-white">
+        <div className="wrap py-3 text-[13.5px] text-[#718096]">
+          <Link href="/" className="hover:text-[#1A202C]">Home</Link>
+          <span aria-hidden="true"> / </span>
+          <Link href="/for-crafters" className="hover:text-[#1A202C]">For Crafters</Link>
+          <span aria-hidden="true"> / </span>
+          <span className="text-[#4A5568]">{workflow.title}</span>
+        </div>
+      </nav>
       {/* Hero */}
       <section className="border-b border-[#E5E8EB] bg-white">
         <div className="wrap py-16 md:py-20">
@@ -108,23 +218,40 @@ export default async function WorkflowPage({
                   </h2>
                   <div
                     className="space-y-4 text-[16px] leading-[1.7] text-[#4A5568]"
-                    dangerouslySetInnerHTML={{
-                      __html: body
-                        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-                        .replace(/\n\n/g, '</p><p>')
-                        .replace(/\n(\d+)\. /g, '</p><ol><li>')
-                        .replace(/\n- /g, '</p><ul><li>')
-                        .replace(/<\/li>\n/g, '</li></ul><p>')
-                        .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>')
-                        .split('\n')
-                        .map((line) => (line ? `<p>${line}</p>` : ''))
-                        .join(''),
-                    }}
+                    dangerouslySetInnerHTML={{ __html: renderMarkdown(body) }}
                   />
                 </section>
               );
             })}
           </article>
+
+          {/* FAQ */}
+          {workflow.faqs && workflow.faqs.length > 0 ? (
+            <section className="mt-14" aria-labelledby="faq-heading">
+              <h2
+                id="faq-heading"
+                className="mb-6 text-[1.75rem] font-bold leading-[1.2] tracking-[-0.02em] text-[#1A202C]"
+              >
+                Frequently Asked Questions
+              </h2>
+              <div className="divide-y divide-[#E5E8EB] rounded-2xl border border-[#E5E8EB] bg-white">
+                {workflow.faqs.map((faq) => (
+                  <details key={faq.question} className="group px-6 py-5">
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[16px] font-semibold text-[#1A202C]">
+                      {faq.question}
+                      <span
+                        aria-hidden="true"
+                        className="shrink-0 text-[#718096] transition-transform group-open:rotate-45"
+                      >
+                        +
+                      </span>
+                    </summary>
+                    <p className="mt-3 text-[15px] leading-[1.7] text-[#4A5568]">{faq.answer}</p>
+                  </details>
+                ))}
+              </div>
+            </section>
+          ) : null}
 
           {/* CTA */}
           <div className="mt-12 rounded-2xl border border-[#E5E8EB] bg-white p-8 text-center">
