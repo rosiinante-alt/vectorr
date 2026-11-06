@@ -1,0 +1,1088 @@
+[
+  {
+    "slug": "glowforge-svg-requirements",
+    "title": "Glowforge SVG Requirements: What the App Actually Accepts",
+    "seoTitle": "Glowforge SVG Requirements (2026): Formats, Cut vs Engrave, and File Limits",
+    "seoDescription": "The Glowforge app accepts five formats, maps strokes to cuts and fills to engraves, and silently strips live text. Here is exactly what your SVG has to contain before upload.",
+    "category": "machine-workflows",
+    "keywords": [
+      "glowforge svg requirements",
+      "glowforge cut vs engrave",
+      "svg for glowforge",
+      "glowforge file formats",
+      "glowforge stroke fill"
+    ],
+    "publishedAt": "2026-11-06",
+    "readingMinutes": 6,
+    "excerpt": "The Glowforge App maps strokes to cuts and fills to engraves, silently strips live text, and processes five formats with strict rules that determine whether your design cuts or engraves.",
+    "content": "<p>The Glowforge App accepts JPG, PNG, SVG, PDF, and DXF (Premium only), but what it does with each format follows strict rules: strokes become cut lines, fills become engraves, and live text is silently ignored. Understanding this mapping prevents the most common failure — uploading a design that engraves when you intended to cut, or cuts when you wanted to engrave.</p>\n\n<h2>Accepted File Formats and Processing Model</h2>\n\n<p>Glowforge processes five formats: JPG, PNG, SVG, PDF (all plans), and DXF (Premium only). Raster formats (JPG, PNG) always engrave — the app reads pixel data and engraves those regions using varying power to reproduce shading. Vector formats (SVG, PDF, DXF) interpret geometry based on fill and stroke properties, not file type.</p>\n\n<p>The core rule: an unfilled stroke in a vector file becomes a cut line. A filled region with no stroke becomes an engrave. A shape with both stroke and fill produces both operations — the fill engraves, the stroke cuts. This behavior is consistent across all three models (Glowforge Plus, Pro, and Aura), though the Aura's 12×12-inch bed limits usable area compared to the Plus/Pro's 19.5×11-inch cutting space (Performance model: 19.5×11 inch).</p>\n\n<p>Live text — text that remains editable in your design program — does not transfer. The Glowforge App has no access to your local fonts, so it cannot render text. Text must be converted to outlines or paths before upload. In Illustrator, select the text and choose <strong>Type → Create Outlines</strong>. In Inkscape, use <strong>Path → Object to Path</strong>. A text object that was not converted will simply vanish when you load the file.</p>\n\n<table>\n<thead>\n<tr><th>Design Property</th><th>What Glowforge Does</th><th>Common Mistake</th></tr>\n</thead>\n<tbody>\n<tr><td>Unfilled stroke (outline only)</td><td>Cuts along the path</td><td>Expecting it to engrave the outline</td></tr>\n<tr><td>Filled shape, no stroke</td><td>Engraves the fill region</td><td>Forgetting to add a stroke for a cut</td></tr>\n<tr><td>Shape with stroke <em>and</em> fill</td><td>Engraves fill, then cuts stroke</td><td>Duplicate work where you wanted one operation</td></tr>\n<tr><td>Live text (editable font)</td><td>Ignored — does not appear</td><td>Not converting text to paths first</td></tr>\n<tr><td>Raster image (JPG, PNG)</td><td>Engraves pixel data</td><td>Expecting a cut from a bitmap logo</td></tr>\n</tbody>\n</table>\n\n<h2>Canvas Size and Material Constraints</h2>\n\n<p>The default Glowforge canvas is 12×20 inches, but actual cuttable area depends on the model and material. Performance and Plus/Pro models offer a cutting bed of approximately 11×19.5 inches, accounting for the gantry and head clearance. The Aura is square: 12×12 inches maximum. Designs that exceed these dimensions will not fit, and the app will flag oversized artwork during upload.</p>\n\n<p>Material thickness affects focus and pierce behavior. Proofgrade materials (Glowforge's branded materials with QR codes) carry embedded settings for power, speed, and focus height. For non-Proofgrade stock, you must manually enter thickness using calipers and run test cuts to dial in cut-through power. Thickness above 0.25 inches (6.35 mm) often requires multiple passes or is beyond the laser's capability.</p>\n\n<p>File resolution matters only for raster engraves. The Glowforge rasterizes at up to 1355 DPI for high-detail engraving, but uploading a 72 DPI JPG will produce visible pixelation. For photo engraves, use source images of at least 300 DPI at the final print size. Vector paths are resolution-independent and scale without quality loss.</p>\n\n<h2>Why Your Design is Engraving Instead of Cutting</h2>\n\n<p>This is the number one support question. The cause is almost always a filled shape with no stroke, or a stroke width set to zero. When you draw a circle in Illustrator or Inkscape and leave the default fill, the Glowforge App sees a filled region and engraves it. To cut the circle, you must remove the fill and add a stroke. Set the stroke to any non-zero width (0.01 inch is sufficient) and ensure the fill is set to <strong>none</strong>.</p>\n\n<p>Another culprit: grouped or compound paths. If you merge multiple shapes into a compound path and that path retains a fill from one of the source shapes, the entire compound path will engrave. Inspect the object properties in your design software. In Inkscape, open the <strong>Fill and Stroke</strong> panel (<strong>Object → Fill and Stroke</strong>). In Illustrator, check the <strong>Appearance</strong> panel.</p>\n\n<p>A third issue: hidden or duplicate geometry. If your file contains overlapping filled shapes, the Glowforge will engrave the entire stack. If one shape has a fill and another on top has a stroke, you may get an engrave and a cut, doubling machine time and potentially damaging the material. Use <strong>View → Outline Mode</strong> in Illustrator or <strong>View → Display Mode → Outline</strong> in Inkscape to see all paths without fills or strokes rendering.</p>\n\n<h3>Color Mapping to Operations</h3>\n\n<p>The Glowforge App reads fill and stroke properties, not colors, but it uses color to organize operations visually. Each unique stroke color becomes a separate step in the app's operation list. This is useful for ordering cuts and scores. For example, you might assign red strokes to cut lines and blue strokes to score lines, then reorder them in the app so scores happen before cuts (preventing parts from shifting after being freed).</p>\n\n<p>If you want a shape to cut and score, use two separate paths: one with a stroke (cut) and one with a stroke assigned to a different color (score). Do not rely on stroke width to distinguish cuts from scores — the app reads stroke presence, not width. Width affects kerf and burn, but not the operation type.</p>\n\n<h2>Optimizing Files for Glowforge</h2>\n\n<p>Node count directly impacts processing time. A path with thousands of nodes (common after auto-tracing a photo) will take longer to compute and send to the laser. Simplify paths using <strong>Path → Simplify</strong> in Inkscape or <strong>Object → Path → Simplify</strong> in Illustrator. For decorative elements, reducing nodes by 50-70% usually preserves visual quality while cutting processing overhead.</p>\n\n<p>Ensure all paths are closed. An open path with a stroke will cut, but the laser will travel back to the start point without cutting, wasting time. Close paths with <strong>Path → Close Path</strong> or by snapping the final node to the start node.</p>\n\n<p>Remove hidden layers and unused elements. The Glowforge App processes everything visible in the file, including objects outside the canvas if they overlap the cutting area. Delete construction lines, guides, and reference images before export. Save a working copy with layers intact, then flatten and clean a final export version.</p>\n\n<p>For detailed guidance on preparing cut files for other laser systems, see the <a href=\"/blog/lightburn-svg-import-guide\">LightBurn SVG import guide</a>, and for kerf compensation, check the <a href=\"/blog/laser-kerf-press-fit-guide\">laser kerf and press-fit guide</a>. If you are starting from a raster image, the <a href=\"/blog/png-to-laser-ready-vector\">PNG to laser-ready vector workflow</a> covers vectorization first.</p>\n\n<h2>Common Upload Failures and Fixes</h2>\n\n<p>If the app rejects your file or the preview is blank, the most likely causes are malformed XML (for SVG), embedded fonts (for PDF), or unsupported DXF version (for DXF files). SVG files with non-standard namespaces or JavaScript can fail silently. Open the SVG in a text editor and look for <strong>&lt;script&gt;</strong> tags or references to external resources — remove them. Re-save the file as Plain SVG in Inkscape to strip metadata.</p>\n\n<p>PDF files fail when they contain live text or unsupported filters. Flatten all layers and convert text to outlines before saving the PDF. Use <strong>File → Save a Copy</strong> in Illustrator and choose <strong>Preserve Illustrator Editing Capabilities: off</strong> to ensure compatibility.</p>\n\n<p>DXF failures usually trace to version mismatches. Glowforge recommends DXF R12 or R14 (AutoCAD 12/14 format). Export settings in QCAD, LibreCAD, or Inkscape often default to later versions. Explicitly select R12 or R14 in the export dialog. If your design software does not support older DXF versions, convert to SVG using a tool like <a href=\"/convert/dxf-to-svg\">our DXF to SVG converter</a> or re-export from a DXF-compatible tool.</p>\n\n<p>For workflows involving other cutting machines, compare the requirements in the <a href=\"/blog/cricut-design-space-svg-guide\">Cricut Design Space SVG guide</a> and the <a href=\"/blog/silhouette-studio-dxf-vs-svg\">Silhouette Studio DXF vs SVG comparison</a>. Each platform has its own quirks around file structure and operation mapping.</p>",
+    "faqs": [
+      {
+        "question": "Why does my text disappear when I upload to the Glowforge App?",
+        "answer": "The Glowforge App cannot render live text because it does not have access to your fonts. Text must be converted to outlines or paths in your design software before upload. In Illustrator, use Type → Create Outlines. In Inkscape, use Path → Object to Path. This converts each letter into a filled shape the app can process."
+      },
+      {
+        "question": "How do I make Glowforge cut instead of engrave my design?",
+        "answer": "Remove any fill from the shape and add a stroke (outline). A filled shape with no stroke will engrave. An unfilled shape with a stroke will cut. In your design software, set fill to none and stroke to any non-zero width. Check the object properties panel to confirm the settings before export."
+      },
+      {
+        "question": "What is the maximum cutting area for Glowforge models?",
+        "answer": "The Performance, Plus, and Pro models cut up to approximately 11×19.5 inches, though the default canvas is 12×20 inches (some of which is non-cuttable due to gantry clearance). The Aura has a 12×12 inch square bed. Designs exceeding these dimensions will not fit and must be scaled down or split."
+      },
+      {
+        "question": "Can I use DXF files with Glowforge Basic?",
+        "answer": "No. DXF import requires a Glowforge Premium subscription. Basic users can upload JPG, PNG, SVG, and PDF. If you have a DXF file, convert it to SVG using a converter or CAD software before upload. SVG preserves all cut and engrave geometry DXF would carry."
+      },
+      {
+        "question": "Why is my file taking forever to process in the Glowforge App?",
+        "answer": "High node counts slow processing. Auto-traced images and complex paths can contain thousands of nodes. Simplify paths in your design software using Path → Simplify (Inkscape) or Object → Path → Simplify (Illustrator). Reducing node count by 50-70% usually has no visible impact but speeds processing significantly."
+      }
+    ],
+    "relatedConverters": [
+      "png-to-svg",
+      "jpg-to-svg",
+      "pdf-to-svg",
+      "svg-to-dxf",
+      "dxf-to-svg"
+    ],
+    "relatedPosts": [
+      "lightburn-svg-import-guide",
+      "laser-kerf-press-fit-guide",
+      "png-to-laser-ready-vector"
+    ],
+    "sources": [
+      "https://support.glowforge.com/hc/en-us/articles/360033672754-Using-Your-Own-Designs",
+      "https://support.glowforge.com/hc/en-us/sections/360003524874-Print-Your-Design",
+      "https://community.glowforge.com/t/official-svg-upload-formatting-tips/8874"
+    ]
+  },
+  {
+    "slug": "lightburn-svg-import-guide",
+    "title": "Importing SVG into LightBurn Without Losing Scale or Layers",
+    "seoTitle": "LightBurn SVG Import Guide: Scale, Layers and Cut Settings",
+    "seoDescription": "LightBurn reads SVG geometry well but ignores most presentation. Learn how to keep real-world scale, split artwork into layers, and set cut parameters that survive re-import.",
+    "category": "machine-workflows",
+    "keywords": [
+      "lightburn svg import",
+      "lightburn scale problem",
+      "lightburn layers",
+      "svg to lightburn"
+    ],
+    "publishedAt": "2026-11-05",
+    "readingMinutes": 6,
+    "excerpt": "LightBurn reads SVG geometry but ignores styling, interprets pixels at 96 PPI by default (causing 2.6× scale inflation), and maps colors to layers in the import dialog.",
+    "content": "<p>LightBurn reads SVG geometry accurately but ignores most presentation styling, CSS, and effects. The two problems that surface most often are incorrect scale on import (a 100mm design arrives at 264mm) and lost layer structure (all paths land on one layer or colors do not map as expected). Both are fixable once you understand how LightBurn interprets SVG units and color-to-layer assignment.</p>\n\n<h2>What LightBurn Reads and What It Ignores</h2>\n\n<p>LightBurn imports path geometry — lines, polylines, curves, rectangles, circles, ellipses, and polygons — but strips most styling. Fill colors, gradients, stroke widths, patterns, shadows, and blur effects do not transfer. Text is imported as paths if you convert it to outlines first; otherwise it is ignored. Clipping masks, layer blend modes, and opacity are also discarded.</p>\n\n<p>The import dialog offers a color-to-layer mapping step. Each unique stroke or fill color in the SVG becomes a selectable item in the dialog, and you assign each color to a LightBurn layer. This is your opportunity to organize cuts, engraves, and scores by color. If your SVG has no color differentiation (everything is black), all paths will merge onto a single layer and you will have to manually reassign them after import.</p>\n\n<table>\n<thead>\n<tr><th>SVG Property</th><th>Imported by LightBurn?</th><th>What Happens</th></tr>\n</thead>\n<tbody>\n<tr><td>Path geometry (lines, curves, shapes)</td><td>Yes</td><td>Imported accurately as vector paths</td></tr>\n<tr><td>Stroke and fill colors</td><td>Partially</td><td>Used for layer mapping in import dialog, then discarded</td></tr>\n<tr><td>Stroke width, dash patterns</td><td>No</td><td>Ignored; LightBurn uses layer cut settings instead</td></tr>\n<tr><td>Gradients, patterns, shadows</td><td>No</td><td>Stripped; only solid colors map to layers</td></tr>\n<tr><td>Text as editable text</td><td>No</td><td>Ignored unless converted to paths/outlines first</td></tr>\n<tr><td>Clipping masks, blend modes</td><td>No</td><td>Clipped regions are lost; flatten before export</td></tr>\n<tr><td>Layer names, groups</td><td>No</td><td>Layer structure is rebuilt from colors in import dialog</td></tr>\n</tbody>\n</table>\n\n<h2>The Scale Problem: SVG Pixels vs Real-World Units</h2>\n\n<p>This is the most common LightBurn import complaint. You design a 100mm part in Inkscape or Illustrator, export to SVG, import to LightBurn, and it measures 264mm. The cause: SVG defaults to pixels (px) as its unit, and LightBurn interprets px at 96 PPI (pixels per inch), which is the web standard but not a CAD standard.</p>\n\n<p>When your design software saves an SVG, it often omits explicit units on the root <strong>width</strong> and <strong>height</strong> attributes, writing <strong>width=\"1000\"</strong> instead of <strong>width=\"100mm\"</strong>. LightBurn sees 1000 with no unit and treats it as 1000 px. At 96 px/inch, 1000 px = 1000 ÷ 96 = 10.417 inches = 264.58 mm. Your 100mm design is now 2.6× too large.</p>\n\n<h3>Fix 1: Set Units in Your Design Software Before Export</h3>\n\n<p>In Inkscape, set the document units to millimeters in <strong>File → Document Properties → Display Units</strong>. Ensure the page size is set in mm and that objects are drawn using mm as the grid unit. When you export to Plain SVG, Inkscape will embed <strong>width=\"100mm\"</strong> in the SVG, and LightBurn will import it at the correct scale.</p>\n\n<p>In Illustrator, set the document units to millimeters in <strong>File → Document Setup</strong>. When saving as SVG, choose <strong>File → Export → Export As</strong> and select SVG. In the SVG Options dialog, set <strong>CSS Properties: Presentation Attributes</strong> and <strong>Decimal Places: 3</strong>. Illustrator will write the units explicitly.</p>\n\n<h3>Fix 2: Scale After Import in LightBurn</h3>\n\n<p>If the SVG is already saved without units, you can fix the scale in LightBurn after import. Select all imported objects (<strong>Ctrl+A</strong> or <strong>Cmd+A</strong>), then use <strong>Edit → Scale</strong> or the numeric scale fields in the toolbar. Measure one known dimension (e.g., a 100mm edge) and calculate the correction factor. In the 1000px example above, the correction is 100 ÷ 264.58 ≈ 0.378. Apply that scale to all objects.</p>\n\n<p>Alternatively, you can configure the import scale in LightBurn's <strong>File → Import</strong> dialog. Before finalizing the import, look for a \"Scale\" or \"Units\" option. Some versions of LightBurn allow you to specify a unit override (mm, inches, cm). Set it to match your design intent, and the scale will apply automatically.</p>\n\n<h2>Layer Assignment and Color Mapping</h2>\n\n<p>When you import an SVG, LightBurn scans for unique colors and presents them in the import dialog. Each color becomes a row with a checkbox and a layer dropdown. Check the colors you want to import and assign each to a LightBurn layer (C00, C01, etc.). Unchecked colors are discarded.</p>\n\n<p>If your SVG uses black for everything, all paths will map to one layer. You can split them after import by selecting paths and reassigning them to different layers in the <strong>Cuts / Layers</strong> panel. Right-click a path, choose <strong>Move to Layer</strong>, and select the target layer. This is manual but necessary if the source file has no color differentiation.</p>\n\n<p>A better workflow: assign colors in your design software before export. Use one color (e.g., red) for cut lines, another (e.g., blue) for engraves, and a third (e.g., green) for score lines. When you import the SVG, map red to a layer configured for cutting, blue to a layer configured for engraving, etc. This preserves your intent and saves time.</p>\n\n<h3>Handling Open vs Closed Paths</h3>\n\n<p>LightBurn distinguishes between open and closed paths for fill purposes. A closed path (where the end node connects to the start node) can be filled; an open path cannot. If you import a shape that should be filled (engraved) but it renders as an outline, the path is likely open. Close it in LightBurn with <strong>Tools → Close Path</strong>, or close it in your design software before export by snapping the final node to the start node.</p>\n\n<h2>Text Handling and Font Conversion</h2>\n\n<p>LightBurn can import text two ways: as editable text (if you design directly in LightBurn) or as paths (if you convert the text to outlines in your design software first). If you export text from Illustrator or Inkscape without converting to outlines, LightBurn will ignore it because it does not have access to your system fonts.</p>\n\n<p>To preserve text, select it in your design software and convert to paths: <strong>Type → Create Outlines</strong> in Illustrator, <strong>Path → Object to Path</strong> in Inkscape. The text becomes a group of filled shapes. When you import the SVG, those shapes will appear as engraveable regions. Assign them to a layer configured for engraving and set the fill mode to <strong>Fill</strong> in the layer's cut settings.</p>\n\n<p>For workflows that start with raster images, see the <a href=\"/blog/png-to-laser-ready-vector\">PNG to laser-ready vector guide</a>. If you need to optimize file structure before import, the <a href=\"/blog/laser-cutting-file-optimization\">laser cutting file optimization article</a> covers node reduction and path ordering. For kerf compensation, refer to the <a href=\"/blog/laser-kerf-press-fit-guide\">kerf and press-fit guide</a>.</p>\n\n<h2>Troubleshooting Import Failures</h2>\n\n<p>If LightBurn fails to import your SVG or the preview is blank, the file likely contains unsupported elements or malformed XML. Open the SVG in a text editor and check for these issues: embedded raster images (base64-encoded PNGs), JavaScript or <strong>&lt;script&gt;</strong> tags, external stylesheet references, or non-standard XML namespaces.</p>\n\n<p>Remove embedded images and scripts, then re-save the file. In Inkscape, use <strong>File → Save a Copy → Plain SVG</strong> to strip metadata and unsupported features. In Illustrator, uncheck <strong>Preserve Illustrator Editing Capabilities</strong> in the SVG export options.</p>\n\n<p>Another common issue: transforms and groups. If an SVG uses <strong>transform</strong> attributes (translate, rotate, scale) on groups, LightBurn may interpret the geometry incorrectly. Flatten transforms before export by selecting all objects and choosing <strong>Object → Transform → Reset</strong> or <strong>Path → Object to Path</strong>. This bakes transforms into the path coordinates.</p>\n\n<p>For more context on how different machines handle SVG and DXF, compare the <a href=\"/blog/glowforge-svg-requirements\">Glowforge SVG requirements</a>, the <a href=\"/blog/cricut-design-space-svg-guide\">Cricut Design Space upload process</a>, and the <a href=\"/blog/silhouette-studio-dxf-vs-svg\">Silhouette Studio DXF vs SVG differences</a>. Each system has its own quirks, but understanding one helps troubleshoot another.</p>",
+    "faqs": [
+      {
+        "question": "Why does my 100mm design import at 264mm in LightBurn?",
+        "answer": "SVG files without explicit units default to pixels (px), and LightBurn interprets px at 96 PPI. A 1000px design becomes 1000 ÷ 96 = 10.417 inches or 264mm. Fix this by setting your design software to export in mm or by scaling after import using the known dimension as a reference."
+      },
+      {
+        "question": "How do I preserve colors and layers when importing SVG into LightBurn?",
+        "answer": "LightBurn maps each unique color in the SVG to a layer during import. Assign different colors to cuts, engraves, and scores in your design software before export. In the LightBurn import dialog, map each color to a layer. Paths without color differentiation will merge onto one layer and must be manually split afterward."
+      },
+      {
+        "question": "Does LightBurn import text from an SVG?",
+        "answer": "No, not as editable text. LightBurn ignores live text because it lacks access to your fonts. Convert text to outlines or paths in your design software first: Type → Create Outlines (Illustrator) or Path → Object to Path (Inkscape). The text will import as filled shapes you can engrave."
+      },
+      {
+        "question": "What happens to stroke widths and gradients in imported SVGs?",
+        "answer": "LightBurn discards stroke widths, dash patterns, gradients, shadows, and most styling. It reads only path geometry and uses layer-specific cut settings (speed, power, mode) instead of SVG styling. Assign cut parameters in LightBurn's Cuts/Layers panel after import."
+      },
+      {
+        "question": "Why is my imported SVG blank or fails to load?",
+        "answer": "The SVG likely contains unsupported elements like embedded raster images, JavaScript, external stylesheets, or malformed XML. Open the SVG in a text editor and remove script tags, base64 images, and external references. Re-save as Plain SVG in Inkscape to strip metadata."
+      }
+    ],
+    "relatedConverters": [
+      "png-to-svg",
+      "jpg-to-svg",
+      "svg-to-dxf",
+      "dxf-to-svg",
+      "image-to-gcode"
+    ],
+    "relatedPosts": [
+      "glowforge-svg-requirements",
+      "laser-kerf-press-fit-guide",
+      "laser-cutting-file-optimization"
+    ],
+    "sources": [
+      "https://docs.lightburnsoftware.com/",
+      "https://docs.lightburnsoftware.com/FAQ.html",
+      "https://docs.lightburnsoftware.com/Toolbars/CreationTools.html"
+    ]
+  },
+  {
+    "slug": "add-svg-to-bambu-studio",
+    "title": "Adding an SVG to Bambu Studio: Three Import Paths, One Right Answer",
+    "seoTitle": "How to Add SVG to Bambu Studio (Extrude, Import, or 3MF)",
+    "seoDescription": "Bambu Studio offers three different ways to get an SVG into a slicer project, and only one of them handles multicolor correctly. Compare them and see what breaks.",
+    "category": "3d-printing",
+    "keywords": [
+      "add svg to bambu studio",
+      "bambu studio svg extrude",
+      "svg to 3mf multicolor",
+      "bambu ams"
+    ],
+    "publishedAt": "2026-11-04",
+    "readingMinutes": 12,
+    "excerpt": "Bambu Studio offers three different ways to get an SVG into a slicer project, and only one of them handles multicolor correctly. Compare them and see what breaks.",
+    "content": "<p>Bambu Studio offers three different ways to get an SVG into a slicer project, and only one of them handles multicolor correctly. Compare them and see what breaks.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "laser-kerf-press-fit-guide",
+    "title": "Laser Kerf and Press-Fit Joints: Sizing Parts That Actually Assemble",
+    "seoTitle": "Laser Kerf Explained: How to Size Press-Fit Joints",
+    "seoDescription": "Every laser removes material, and that removed width is kerf. Here is how to measure it once and offset every joint so your parts press together instead of rattling.",
+    "category": "machine-workflows",
+    "keywords": [
+      "laser kerf",
+      "press fit laser",
+      "kerf offset svg",
+      "laser cutting tolerance"
+    ],
+    "publishedAt": "2026-11-03",
+    "readingMinutes": 6,
+    "excerpt": "Kerf is the material width the laser removes during cutting. Measuring it with a slit fit test and applying the offset to every joint ensures parts assemble with a press fit instead of rattling or binding.",
+    "content": "<p>Every laser removes material as it cuts, and the width of that removed material is called kerf. For decorative cuts, kerf is negligible. For parts that fit together — press-fit boxes, interlocking joints, parametric enclosures — kerf determines whether your assembly is tight, loose, or impossible. Measuring kerf once and applying the offset to every joint eliminates trial-and-error.</p>\n\n<h2>What Kerf Is and Why It Matters</h2>\n\n<p>Kerf is the width of material the laser beam vaporizes or melts away during a cut. It is not a fixed number: it varies by material, laser power, cut speed, focus distance, and lens focal length. A typical CO2 laser cutting 3mm plywood at moderate power produces a kerf of 0.15-0.25mm. Higher power widens the kerf; slower speeds can widen it further due to prolonged heating.</p>\n\n<p>When you cut a 100mm square out of a sheet, the final part measures slightly less than 100mm because kerf removed material from all four sides. If you cut a 100mm hole, the hole ends up slightly larger than 100mm for the same reason. This asymmetry is critical for joinery: a slot intended for a 3mm part must be narrower than 3mm to produce a tight fit once kerf is factored in.</p>\n\n<table>\n<thead>\n<tr><th>Material / Thickness</th><th>Typical Kerf (mm)</th><th>Notes</th></tr>\n</thead>\n<tbody>\n<tr><td>3mm plywood, basswood</td><td>0.15 – 0.25</td><td>Varies with resin content and laser power</td></tr>\n<tr><td>6mm MDF</td><td>0.20 – 0.30</td><td>Wider kerf due to density and char</td></tr>\n<tr><td>3mm acrylic (cast)</td><td>0.10 – 0.20</td><td>Cleanest cut, minimal kerf variation</td></tr>\n<tr><td>1.5mm cardboard, chipboard</td><td>0.20 – 0.35</td><td>Highly variable; test per batch</td></tr>\n<tr><td>0.8mm veneer, thin ply</td><td>0.10 – 0.15</td><td>Lower power reduces kerf</td></tr>\n</tbody>\n</table>\n\n<h2>Measuring Kerf: The Slit Fit Test</h2>\n\n<p>Do not rely on published kerf values. Measure it yourself for your specific material, machine, and settings. The slit fit test is the most reliable method. Design a test piece with a series of parallel slits, each slightly wider than the last, in 0.05mm or 0.1mm increments. For example: 2.80mm, 2.85mm, 2.90mm, 2.95mm, 3.00mm. Cut the test piece and a separate 3mm-wide strip from the same material.</p>\n\n<p>Try to insert the strip into each slit. The slit where the strip slides in with moderate resistance — firm but not requiring force — is your target slot width. If the strip fits snugly in the 2.90mm slit, your kerf is 3.00mm - 2.90mm = 0.10mm. This is the number you will use to offset all joints.</p>\n\n<p>Run this test whenever you change materials, laser power, cut speed, or focus. Kerf is not a one-time calibration; it is a per-material, per-settings measurement. Store the kerf value with your material notes and reference it when designing parts.</p>\n\n<h3>Alternative: Measure a Cut Square</h3>\n\n<p>If you cannot run a slit test, cut a known square (e.g., 100mm × 100mm) and measure the final part with calipers. If the part measures 99.80mm, the kerf removed 0.20mm from each side, so kerf is 0.20mm total (not 0.10mm per side — kerf is the full width removed by the beam). This method is less precise because calipers measure the outer edge, which can be charred or beveled depending on focus.</p>\n\n<h2>Applying Kerf Offset to Joints</h2>\n\n<p>Once you know your kerf, apply it to every joint. For a slot that receives a tab, subtract kerf from the slot width. For a tab that inserts into a slot, add kerf to the tab width. The rule: the kerf offset always compensates for the material removed by the cut that defines the fit.</p>\n\n<p>Example: you are designing a box with 3mm material and measured kerf is 0.20mm. A slot for a 3mm side panel should be drawn as 3.00mm - 0.20mm = 2.80mm wide. When the laser cuts the slot, it will remove 0.20mm of material, and the final slot will measure 3.00mm — a perfect fit for the 3mm panel (which was also cut and lost 0.20mm from its edges, but the panel edge is the part, not the void, so no offset is needed for the panel itself).</p>\n\n<p>For a tab, the logic reverses. If the tab is meant to fit into a 3mm slot, draw the tab as 3.00mm + 0.20mm = 3.20mm wide. The laser removes 0.20mm, and the final tab measures 3.00mm.</p>\n\n<h3>Kerf Compensation in Design Software</h3>\n\n<p>Most CAD and vector software does not have built-in kerf compensation. You must manually offset paths. In Inkscape, use <strong>Path → Outset</strong> (Ctrl+)) to expand a path outward or <strong>Path → Inset</strong> (Ctrl+() to shrink it inward. Each click moves the path by 1px; set your document units to mm and calculate the pixel equivalent of your kerf.</p>\n\n<p>In Illustrator, use <strong>Object → Path → Offset Path</strong> and enter a positive value to expand (for outer cuts) or a negative value to shrink (for slots and voids). For parametric designs, use software like Fusion 360, FreeCAD, or OpenSCAD to script the offsets so they apply to every joint automatically when you change material thickness.</p>\n\n<p>For laser workflows in other contexts, see the <a href=\"/blog/lightburn-svg-import-guide\">LightBurn SVG import guide</a> and the <a href=\"/blog/glowforge-svg-requirements\">Glowforge SVG requirements</a>. Both cover how cut files are interpreted, which affects where kerf is applied. For complete file optimization, refer to the <a href=\"/blog/laser-cutting-file-optimization\">laser cutting file optimization article</a>.</p>\n\n<h2>Press-Fit Design Rules</h2>\n\n<p>Kerf compensation is necessary but not sufficient. Press-fit joints also depend on tab length, corner radii, and material grain. A tab that is too short will not engage enough material and will tear out. A tab that is too long in a blind slot will bottom out before seating. Aim for tab engagement of at least 1.5× material thickness for wood, 2× for acrylic.</p>\n\n<p>Corners inside slots must have a radius equal to or greater than half the kerf width, or they will leave a stress concentration that can crack the material during insertion. Use rounded corners in your design or, if you need a square corner, cut a relief notch at each corner to allow the tab to seat fully.</p>\n\n<p>Material grain direction affects fit. Plywood has alternating grain layers, so a tab that runs perpendicular to the top grain may compress slightly more than one parallel to the grain. Acrylic is isotropic and does not have this issue. For critical fits, orient tabs so the grain runs parallel to the length of the tab.</p>\n\n<h3>Testing and Iteration</h3>\n\n<p>Even with kerf measured and offsets applied, the first prototype may not fit perfectly. Material variability (especially in plywood), laser focus drift, and air assist pressure all introduce error. Cut a small test joint — one slot and one tab — before committing to a full sheet of parts. Adjust the offset by ±0.05mm if needed, then cut a second test.</p>\n\n<p>If the joint is too tight, reduce the kerf offset slightly (make slots wider, tabs narrower). If the joint is too loose, increase the offset. Record the final value with your material and settings for reuse.</p>\n\n<h2>Common Mistakes and Fixes</h2>\n\n<p>Applying kerf offset to the wrong side of a cut is the most common error. Kerf offsets the path that defines the void (slot, hole), not the path that defines the part (outer edge, tab). If you offset a part's outer edge inward to compensate for kerf, you will make the part too small <em>and</em> the slot will still be wrong.</p>\n\n<p>Another mistake: assuming kerf is symmetric. Laser kerf is widest at the top surface (where the beam enters) and narrowest at the bottom (where the beam exits), especially on thicker materials. This taper means the top of a joint will fit tighter than the bottom. If this is a problem, flip one part so both mating faces are from the same side of the material (both tops or both bottoms).</p>\n\n<p>For more on raster-to-vector workflows that eventually reach the laser, see the <a href=\"/blog/png-to-laser-ready-vector\">PNG to laser-ready vector guide</a>. If you are working with other machines, compare kerf principles to the material-specific challenges in the <a href=\"/blog/vinyl-cut-file-requirements\">vinyl cut file requirements</a> and the <a href=\"/blog/embroidery-file-from-image\">embroidery file digitizing overview</a>.</p>",
+    "faqs": [
+      {
+        "question": "What is kerf and why does it affect laser-cut joints?",
+        "answer": "Kerf is the width of material the laser vaporizes during a cut, typically 0.1-0.3mm depending on material, power, and speed. For joints, kerf means a cut slot is slightly larger than drawn, and a cut tab is slightly smaller. Offsetting slot and tab dimensions by the kerf width compensates for this and produces tight-fitting parts."
+      },
+      {
+        "question": "How do I measure kerf for my laser and material?",
+        "answer": "Use a slit fit test: cut a series of parallel slots with widths increasing by 0.05mm increments (e.g., 2.80, 2.85, 2.90mm). Cut a strip of known width (e.g., 3mm) from the same material. The slot where the strip fits snugly reveals the kerf: strip width minus slot width. Run this test for each material and settings combination."
+      },
+      {
+        "question": "Do I add or subtract kerf from slot and tab dimensions?",
+        "answer": "Subtract kerf from slot width (the void you are cutting). Add kerf to tab width (the part that inserts). If your material is 3mm thick and kerf is 0.20mm, draw slots as 2.80mm wide and tabs as 3.20mm wide. The laser removes 0.20mm, leaving a 3mm slot and 3mm tab — a press fit."
+      },
+      {
+        "question": "Why is my kerf different for different materials?",
+        "answer": "Kerf depends on material density, composition, thickness, laser power, speed, and focus. Denser materials (MDF) produce wider kerf than less dense ones (basswood). Acrylic produces narrow, consistent kerf. Plywood kerf varies with resin content and grain. Measure kerf per material and per laser settings — it is not a universal constant."
+      },
+      {
+        "question": "Can I apply kerf compensation automatically in design software?",
+        "answer": "Most vector software (Inkscape, Illustrator) requires manual path offsetting: Outset/Inset in Inkscape, Offset Path in Illustrator. Parametric CAD tools (Fusion 360, FreeCAD, OpenSCAD) let you script offsets so they update automatically when material thickness changes. LightBurn has a kerf offset feature in cut layer settings."
+      }
+    ],
+    "relatedConverters": [
+      "svg-to-dxf",
+      "png-to-svg",
+      "jpg-to-svg",
+      "image-to-gcode",
+      "svg-to-gcode"
+    ],
+    "relatedPosts": [
+      "laser-cutting-file-optimization",
+      "lightburn-svg-import-guide",
+      "glowforge-svg-requirements"
+    ],
+    "sources": [
+      "https://www.instructables.com/Laser-Cutter-Kerf-Measurement/",
+      "https://docs.lightburnsoftware.com/FAQ.html#what-is-kerf",
+      "https://en.wikipedia.org/wiki/Kerf"
+    ]
+  },
+  {
+    "slug": "png-to-laser-ready-vector",
+    "title": "PNG to Laser-Ready Vector: The Beginner Path That Works",
+    "seoTitle": "PNG to Laser-Ready SVG or DXF: A Beginner's Guide",
+    "seoDescription": "A raster logo cannot be cut. This walks through vectorizing a PNG, cleaning the paths, and exporting a file your laser will run on the first try.",
+    "category": "machine-workflows",
+    "keywords": [
+      "png to laser ready",
+      "png to dxf laser",
+      "vectorize png for laser",
+      "laser cutting from image"
+    ],
+    "publishedAt": "2026-11-02",
+    "readingMinutes": 7,
+    "excerpt": "Raster images must be vectorized before a laser can cut them. This walks through tracing a PNG, cleaning nodes, closing paths, and exporting a file your cutter will accept on the first try.",
+    "content": "<p>A raster logo — PNG, JPG, or any pixel-based image — cannot be cut by a laser. It can be engraved (rasterized and burned pixel-by-pixel), but for cutting, scoring, or any vector operation, the image must first be converted to paths. This workflow walks through vectorizing a PNG, cleaning the geometry, and exporting a file that a laser cutter will execute on the first try.</p>\n\n<h2>Why Raster Images Cannot Be Cut</h2>\n\n<p>Laser cutters and CNC routers follow vector paths — mathematically defined lines and curves — not pixel grids. A PNG is a bitmap: a rectangular array of colored pixels. The laser control software (LightBurn, RDWorks, Glowforge App, etc.) can engrave a bitmap by scanning the laser head back and forth, modulating power to reproduce pixel shades, but it cannot cut along bitmap edges because there is no edge data — only a transition from one pixel color to another.</p>\n\n<p>To cut a shape, the software needs a vector path that defines the cut line. That path comes from tracing the bitmap: identifying edges where color or brightness changes, then fitting curves to those edges. This process is called vectorization or image tracing. It is not perfect — it makes assumptions about where edges are and how smooth curves should be — so the output always requires inspection and cleanup.</p>\n\n<table>\n<thead>\n<tr><th>Workflow Step</th><th>Failure If Skipped</th><th>Tools</th></tr>\n</thead>\n<tbody>\n<tr><td>Get highest-resolution source</td><td>Pixelated, jagged edges in vector output</td><td>Source file request; image upscaling if desperate</td></tr>\n<tr><td>Remove background, isolate subject</td><td>Unwanted shapes traced; wasted cut time</td><td>Photoshop, GIMP, remove.bg, Photopea</td></tr>\n<tr><td>Vectorize (trace bitmap to paths)</td><td>Nothing to cut — still a raster image</td><td>Inkscape, Illustrator, <a href=\"/convert/png-to-svg\">Vectorr PNG to SVG</a></td></tr>\n<tr><td>Simplify nodes, smooth paths</td><td>Excessive nodes slow machine, rough curves</td><td>Inkscape Simplify, Illustrator Smooth Tool</td></tr>\n<tr><td>Ensure paths are closed</td><td>Incomplete cuts, laser backtracks</td><td>Path → Close Path (Inkscape), Join (Illustrator)</td></tr>\n<tr><td>Export SVG (cutter) or DXF (CAM)</td><td>File rejected by laser software</td><td>Plain SVG export, DXF R12/R14 export</td></tr>\n<tr><td>Confirm units and scale</td><td>Design arrives 10× or 0.1× intended size</td><td>Set document units to mm before export</td></tr>\n</tbody>\n</table>\n\n<h2>Step 1: Get the Highest-Resolution Source</h2>\n\n<p>Vectorization quality is limited by input resolution. A 200×200px logo will produce jagged, pixelated vectors no matter how good the tracing algorithm is. If you have access to the original design file (AI, EPS, PDF, SVG), use that instead of a raster export. If you only have a PNG or JPG, request the highest resolution version available before starting.</p>\n\n<p>If you must vectorize a low-resolution image, consider using an AI upscaler (Topaz Gigapixel, waifu2x, or similar) to increase resolution before tracing. This does not add real detail, but it can smooth stairstepping and reduce node count in the vector output. For logos, aim for at least 1000px on the longest edge. For detailed illustrations, 2000px or more.</p>\n\n<h2>Step 2: Remove Background and Isolate the Subject</h2>\n\n<p>Before vectorizing, remove any background, gradients, shadows, or secondary elements you do not want to cut. A clean, high-contrast silhouette traces far better than a photo with soft edges and background clutter. Use a photo editor to delete the background: Photoshop's Magic Wand or Select Subject, GIMP's Fuzzy Select, or an online tool like remove.bg or Photopea.</p>\n\n<p>For best results, export the cleaned image as a PNG with a transparent background, or as a black shape on a white background (or vice versa). High contrast between subject and background gives the tracing algorithm a clear edge to follow. If the subject has internal details (e.g., a logo with counters, like the hole in the letter O), ensure those voids are also transparent or contrasting — they will become inner paths in the vector.</p>\n\n<h2>Step 3: Vectorize the Image</h2>\n\n<p>Image tracing converts the raster bitmap into vector paths by detecting edges and fitting curves. Every tool uses slightly different algorithms, so results vary. The most common tools are Inkscape's Trace Bitmap, Illustrator's Image Trace, and online converters like <a href=\"/convert/png-to-svg\">Vectorr's PNG to SVG converter</a>.</p>\n\n<h3>Inkscape (Free, Open Source)</h3>\n\n<p>Import the PNG into Inkscape (<strong>File → Import</strong>). Select the image, then choose <strong>Path → Trace Bitmap</strong>. In the Trace Bitmap dialog, choose <strong>Single scan → Brightness cutoff</strong> for simple logos, or <strong>Multiple scans → Colors</strong> for multicolor designs. Adjust the Threshold slider to control edge detection: lower values trace more detail; higher values produce simpler shapes. Click <strong>Apply</strong>, then delete the original PNG. The traced paths remain.</p>\n\n<h3>Illustrator (Adobe Creative Cloud)</h3>\n\n<p>Import the PNG (<strong>File → Place</strong>), select it, and click <strong>Image Trace</strong> in the top toolbar. Choose a preset (<strong>Logo</strong> or <strong>High Fidelity Photo</strong> depending on the source). Open the Image Trace panel (<strong>Window → Image Trace</strong>) to fine-tune Paths, Corners, and Noise settings. Click <strong>Expand</strong> in the top toolbar to convert the trace to editable paths, then delete the original image.</p>\n\n<h3>Vectorr PNG to SVG (Online, No Install)</h3>\n\n<p>Upload your PNG to <a href=\"/convert/png-to-svg\">Vectorr's PNG to SVG converter</a>. The AI-powered tracer detects edges, fits curves, and outputs clean SVG paths with automatic node reduction. Download the SVG, open it in Inkscape or Illustrator for inspection, and proceed to cleanup. This is the fastest option if you do not have vector software installed or need batch conversion (see <a href=\"/resources/batch-conversion-workflows\">batch conversion workflows</a>).</p>\n\n<h2>Step 4: Simplify Nodes and Smooth Paths</h2>\n\n<p>Auto-traced paths are often over-detailed: hundreds or thousands of nodes where a few dozen would suffice. Excessive nodes slow the laser controller, increase file size, and produce rough curves. Simplify the paths immediately after tracing.</p>\n\n<p>In Inkscape, select all paths (<strong>Ctrl+A</strong>), then choose <strong>Path → Simplify</strong> (Ctrl+L). This reduces node count while preserving shape. Apply Simplify 2-5 times for aggressive reduction, inspecting the shape after each pass. For finer control, use <strong>Extensions → Modify Path → Flatten Beziers</strong> to set a maximum deviation tolerance.</p>\n\n<p>In Illustrator, select all paths and choose <strong>Object → Path → Simplify</strong>. Use the Curve Precision slider to control how closely the simplified path follows the original. For laser cutting, a precision of 95-98% is usually sufficient. Check <strong>Preview</strong> to see the effect before applying.</p>\n\n<h2>Step 5: Ensure All Paths Are Closed</h2>\n\n<p>A closed path is one where the end node connects to the start node, forming a continuous loop. Open paths cause the laser to cut partway, then travel back to the start without cutting, wasting time and sometimes leaving a visible mark. Inspect all paths and close any that should be closed.</p>\n\n<p>In Inkscape, select a path and choose <strong>Path → Close Path</strong> (or press Ctrl+Alt+End). This connects the end node to the start node with a straight line. If the gap is large, edit the nodes (<strong>F2</strong> or <strong>Edit paths by nodes tool</strong>) and drag the end node to snap to the start node before closing.</p>\n\n<p>In Illustrator, select the path and choose <strong>Object → Path → Join</strong> (Ctrl+J or Cmd+J). This closes the path. If multiple paths are selected, Join will attempt to connect them in sequence, which may not be what you want — select and join one path at a time if needed.</p>\n\n<h2>Step 6: Export for Your Laser Cutter</h2>\n\n<p>Most laser cutters accept SVG, and some (especially older CNC routers or CAM-based systems) prefer DXF. Export the appropriate format with the correct settings to avoid scale and compatibility issues.</p>\n\n<h3>Exporting SVG</h3>\n\n<p>In Inkscape, choose <strong>File → Save a Copy</strong>, select <strong>Plain SVG</strong>, and save. Plain SVG strips Inkscape-specific metadata and ensures compatibility with LightBurn, Glowforge, and Cricut. Before saving, set the document units to millimeters in <strong>File → Document Properties → Display Units</strong> and ensure the page size matches your material or intended design size.</p>\n\n<p>In Illustrator, choose <strong>File → Export → Export As</strong>, select SVG, and set <strong>Styling: Presentation Attributes</strong> and <strong>Decimal Places: 3</strong>. Uncheck <strong>Responsive</strong> and set <strong>Fonts: Convert to Outlines</strong> (though text should already be paths). This produces a clean SVG with explicit units.</p>\n\n<h3>Exporting DXF</h3>\n\n<p>If your laser software requires DXF, export as DXF R12 or R14 (AutoCAD 12/14 format). Inkscape does not natively export DXF well; use a plugin or convert the SVG to DXF using <a href=\"/convert/svg-to-dxf\">Vectorr's SVG to DXF converter</a>. In QCAD or LibreCAD, open the SVG and export as DXF, selecting R12 or R14 in the version dropdown. Newer DXF versions (R2018, etc.) are not universally supported by laser control software.</p>\n\n<p>For workflows on specific machines, see the <a href=\"/blog/glowforge-svg-requirements\">Glowforge SVG requirements</a>, the <a href=\"/blog/lightburn-svg-import-guide\">LightBurn SVG import guide</a>, and the <a href=\"/blog/laser-cutting-file-optimization\">laser cutting file optimization article</a>. Each covers machine-specific formatting and operation mapping.</p>\n\n<h2>Step 7: Confirm Units and Scale</h2>\n\n<p>Before uploading to your laser software, confirm the design is the correct size. Open the SVG or DXF in your laser control software and check the dimensions. If a 100mm design imports as 264mm, the file has no explicit units and was interpreted as pixels at 96 PPI (see the <a href=\"/blog/lightburn-svg-import-guide\">LightBurn scale problem</a>). If a design is 10× too large, the document units were set to centimeters instead of millimeters. Fix this by setting units explicitly in your design software before export, or scale the imported design in the laser software.</p>\n\n<p>For more on vectorization theory and settings, see the <a href=\"/resources/vectorization-tips\">vectorization tips resource</a> and the <a href=\"/blog/image-tracing-explained\">image tracing explained article</a>. For file format comparisons, check <a href=\"/blog/svg-vs-dxf\">SVG vs DXF</a> and <a href=\"/resources/file-formats\">the file formats reference</a>.</p>",
+    "faqs": [
+      {
+        "question": "Why can't a laser cutter cut a PNG or JPG directly?",
+        "answer": "Laser cutters follow vector paths (lines and curves), not pixel grids. A PNG is a bitmap — a grid of pixels with no path data. The laser can engrave a bitmap by scanning and modulating power, but it cannot cut along edges because there are no edges, only pixel color transitions. Vectorization traces those transitions into cuttable paths."
+      },
+      {
+        "question": "What is the minimum resolution PNG I can vectorize for laser cutting?",
+        "answer": "Aim for at least 1000px on the longest edge for simple logos, 2000px or more for detailed designs. Lower resolution produces jagged, pixelated vectors no matter how good the tracing algorithm. If you only have a low-res image, use an AI upscaler (waifu2x, Topaz Gigapixel) before tracing to smooth edges."
+      },
+      {
+        "question": "Do I need Illustrator to vectorize a PNG for laser cutting?",
+        "answer": "No. Inkscape (free, open source) has a Trace Bitmap tool that works well for most logos and simple graphics. Online converters like Vectorr's PNG to SVG also work and require no software installation. Illustrator's Image Trace is more powerful for complex images but is not required for typical laser work."
+      },
+      {
+        "question": "Why are my vectorized paths so rough and full of nodes?",
+        "answer": "Auto-traced paths have excessive nodes by default. After tracing, simplify them: in Inkscape, use Path → Simplify (Ctrl+L) 2-5 times. In Illustrator, use Object → Path → Simplify and set Curve Precision to 95-98%. This reduces node count by 50-80% with no visible quality loss and speeds up laser cutting."
+      },
+      {
+        "question": "Can I vectorize a photo for laser cutting or engraving?",
+        "answer": "For cutting, no — photos have continuous tones and no clear edges, so vectorization produces thousands of tiny shapes that are impractical to cut. For engraving, yes, but engrave the photo as a raster image (JPG or PNG) directly; most laser software rasterizes for engraving automatically. Only vectorize high-contrast logos, icons, and line art for cutting."
+      }
+    ],
+    "relatedConverters": [
+      "png-to-svg",
+      "jpg-to-svg",
+      "image-to-vector",
+      "svg-to-dxf",
+      "logo-to-vector"
+    ],
+    "relatedPosts": [
+      "glowforge-svg-requirements",
+      "lightburn-svg-import-guide",
+      "laser-cutting-file-optimization"
+    ],
+    "sources": [
+      "https://inkscape.org/doc/tutorials/tracing/tutorial-tracing.html",
+      "https://helpx.adobe.com/illustrator/using/image-trace.html",
+      "https://en.wikipedia.org/wiki/Image_tracing"
+    ]
+  },
+  {
+    "slug": "embroidery-file-from-image",
+    "title": "Embroidery Files From Images: What Your Machine Really Needs",
+    "seoTitle": "Image to Embroidery File: DST, PES and What Machines Need",
+    "seoDescription": "An embroidery machine does not stitch a picture — it stitches a path with direction, density and a color sequence. Here is what has to exist before digitizing can start.",
+    "category": "machine-workflows",
+    "keywords": [
+      "image to embroidery file",
+      "dst pes stitch file",
+      "embroidery digitizing requirements",
+      "hat embroidery file"
+    ],
+    "publishedAt": "2026-11-01",
+    "readingMinutes": 5,
+    "excerpt": "Embroidery machines stitch paths with direction, density, and color sequence — not pixels. Before an image becomes a sewable file, it must be digitized with stitch-level instructions that account for fabric, tension, and pull compensation.",
+    "content": "<p>An embroidery machine does not stitch a picture. It stitches a path — a sequence of needle penetrations — with direction, density, and a defined color order. A photograph, logo, or illustration cannot be directly embroidered because pixel data does not define stitch paths, pull compensation, underlay, or the sewing sequence. Before an image becomes an embroidery file, it must be digitized: converted into stitch-level instructions that account for fabric stretch, thread tension, and needle movement.</p>\n\n<h2>Why Embroidery Files Are Not Images</h2>\n\n<p>Embroidery file formats (DST, PES, JEF, EXP, VP3, etc.) store stitch coordinates, not pixels or vector shapes. Each stitch is a pair of X,Y offsets from the previous stitch, measured in tenths of a millimeter. The file also specifies thread color changes, jump stitches (needle up, move without stitching), and trim commands (cut thread). There is no fill, stroke, or transparency — only a list of needle movements.</p>\n\n<p>This means you cannot simply convert a PNG to DST the way you convert PNG to SVG. Image-to-embroidery converters exist, but they are auto-digitizers: they trace edges, assign stitch types (satin, fill, run), and generate paths based on assumptions about fabric and thread. The output always requires manual review and usually manual editing. Professional embroidery digitizers spend years learning how to translate a design into sewable geometry that does not pucker, pull, or distort fabric.</p>\n\n<table>\n<thead>\n<tr><th>Format</th><th>Machines / Brands</th><th>What It Stores</th><th>Notes</th></tr>\n</thead>\n<tbody>\n<tr><td>DST (Tajima)</td><td>Tajima, Barudan, many industrials</td><td>Stitch coordinates only, no color names, no thread chart</td><td>3-byte per-stitch encoding, ~16mm max stitch length, no metadata</td></tr>\n<tr><td>PES (Brother)</td><td>Brother, Babylock</td><td>Stitches, color info, thread chart, hoop size</td><td>Richer format, includes color names and design metadata</td></tr>\n<tr><td>JEF (Janome)</td><td>Janome, Elna, some Kenmore</td><td>Stitches, colors, hoop size</td><td>Similar to PES but Janome-specific encoding</td></tr>\n<tr><td>EXP (Melco)</td><td>Melco, Bernina (some)</td><td>Stitches, minimal metadata</td><td>Condensed format, no color names in file</td></tr>\n<tr><td>VP3 (Pfaff)</td><td>Husqvarna Viking, Pfaff</td><td>Stitches, colors, hoop, editing metadata</td><td>Can store multiple designs in one file</td></tr>\n</tbody>\n</table>\n\n<h2>Stitch Types and Digitizing Concepts</h2>\n\n<p>Embroidery uses three primary stitch types: run stitch (single-line stitches for outlines and fine detail), satin stitch (zigzag stitches for narrow columns like lettering stems), and fill stitch (rows of stitches that cover larger areas). Each has constraints: satin stitches should not exceed 7-10mm width or they lose density; fill stitches require underlay (a base layer of stitches) to stabilize fabric and prevent shifting.</p>\n\n<p>Stitch density controls how tightly stitches are packed. Too dense and the fabric bunches or puckers. Too sparse and the fabric shows through the thread. Density depends on fabric type: knits tolerate lower density than wovens; thick fabrics (denim, canvas) need higher density than thin ones (t-shirt jersey). There is no universal density value; digitizers adjust per fabric.</p>\n\n<p>Pull compensation offsets stitch paths slightly to counteract fabric distortion. When stitches pull fabric inward, shapes shrink and lose definition. Digitizers widen satin columns and expand fill areas by 0.2-0.5mm to compensate. The amount varies by fabric stretch and stabilizer type. Pull compensation is invisible in the design file but critical for the final sewn result.</p>\n\n<h3>Stitch Path Order and Jump Stitches</h3>\n\n<p>The digitizer defines the sewing sequence: which shape stitches first, which color changes happen when, and where the needle jumps between disconnected regions. Jump stitches are long, unstitched moves (needle up, move, needle down) that cross open areas. Excessive jumps leave loose threads on the back of the garment that must be trimmed manually. Good digitizing minimizes jumps by reordering shapes so stitching flows continuously.</p>\n\n<p>Color changes also interrupt flow. Each color change requires the machine to stop, the operator to swap thread, and the machine to resume. Minimizing color changes speeds production. For multi-color logos, digitizers group all stitches of one color together, even if that color appears in disconnected regions, to avoid redundant thread swaps.</p>\n\n<h2>Hoop Size, Stitch Count, and Machine Limits</h2>\n\n<p>Every embroidery machine has a maximum hoop size (the area the machine can reach without repositioning the fabric). Common sizes: 4×4 inches (100×100mm, small home machines), 5×7 inches (130×180mm, mid-range), 9.5×14 inches (large commercial). Designs larger than the hoop must be split into sections and re-hooped between parts, which introduces alignment error.</p>\n\n<p>Stitch count limits vary by machine. Home machines (Brother, Janome, Singer) typically support 100,000-200,000 stitches per design. Industrial machines (Tajima, Barudan) can handle 1,000,000+ stitches. Large, dense designs may exceed stitch limits and require simplification or splitting.</p>\n\n<p>Minimum stitch length is usually 0.1-0.2mm. Stitches shorter than this can cause thread breaks or needle deflection. Maximum stitch length is typically 12-16mm (DST format: 12.7mm per stitch due to 3-byte encoding). Longer moves require multiple stitches or a jump. Auto-digitizers sometimes generate out-of-range stitch lengths that must be corrected manually.</p>\n\n<h2>Why Auto-Digitizing Often Fails</h2>\n\n<p>Auto-digitizers (software that converts images to embroidery files automatically) work by edge detection: they trace outlines, assign stitch types based on line width, and generate fill for closed regions. This works for simple, high-contrast logos with clean edges. It fails for photographs, gradients, fine detail, and designs with ambiguous edges.</p>\n\n<p>Auto-digitized files typically have poor stitch density, no underlay, no pull compensation, and chaotic stitch order. The machine will sew the file, but the result will pucker, shift, or lose detail. Professional digitizers manually redraw paths, set stitch angles, add underlay, apply pull compensation, and optimize color order. This is skilled work, not a file conversion.</p>\n\n<p>If you need a sewable embroidery file from an image, you have three options: hire a professional digitizer (typical cost: $5-50 depending on stitch count and complexity), use embroidery software with manual digitizing tools (Wilcom, Hatch, Embrilliance, PE-Design), or use an auto-digitizer and manually edit the output. The third option is fastest for simple logos; the second is necessary for anything complex.</p>\n\n<h3>Software for Digitizing</h3>\n\n<p>Professional embroidery software (Wilcom, Pulse, Tajima DG/ML) costs thousands of dollars and has a steep learning curve. Prosumer options (Hatch, Embrilliance, Brother PE-Design) cost $200-1000 and are accessible to hobbyists. Free options (Ink/Stitch for Inkscape, SophieSew) exist but have limited features. Most embroidery businesses use Wilcom; most hobbyists use Hatch or Embrilliance.</p>\n\n<p>For context on related workflows, see the <a href=\"/blog/png-to-laser-ready-vector\">PNG to laser-ready vector guide</a> (conceptually similar: raster to structured geometry) and the <a href=\"/blog/vinyl-cut-file-requirements\">vinyl cut file requirements</a> (also requires weedable, closed paths). For format comparisons, check the <a href=\"/resources/embroidery-file-formats\">embroidery file formats resource</a>.</p>\n\n<h2>Converting Between Embroidery Formats</h2>\n\n<p>If you have an existing embroidery file in one format (e.g., PES) and need it in another (e.g., DST), most embroidery software can convert. Open the PES in Hatch, Wilcom, or Embrilliance, then export as DST. Free converters exist online but may strip color information or re-encode stitches incorrectly, introducing errors.</p>\n\n<p>DST is the lowest-common-denominator format: it stores only stitch coordinates, no color names or metadata. When you convert PES to DST, color information is lost; the file still has color stop commands (machine pauses for thread change), but the colors are not labeled. You must manually reference the original PES file's thread chart to know which colors to use.</p>\n\n<p>For more on machine-specific file workflows, see the <a href=\"/blog/cricut-design-space-svg-guide\">Cricut Design Space SVG guide</a> (different machine type, but similar upload constraints) and the <a href=\"/blog/silhouette-studio-dxf-vs-svg\">Silhouette Studio format comparison</a>. Each machine ecosystem has its own file quirks.</p>",
+    "faqs": [
+      {
+        "question": "Can I convert a PNG or JPG directly into an embroidery file?",
+        "answer": "Not directly. Embroidery files store stitch coordinates (needle movements), not pixels. Auto-digitizers can trace edges and generate stitches, but the output requires manual review and editing for proper density, underlay, and pull compensation. Professional digitizers redraw designs as stitch paths rather than relying on auto-conversion."
+      },
+      {
+        "question": "What is the difference between DST, PES, and JEF embroidery formats?",
+        "answer": "DST (Tajima) stores only stitch coordinates with no color names or metadata — it is the most universal but least rich format. PES (Brother) includes color names, thread charts, and hoop size. JEF (Janome) is similar to PES but Janome-specific. All three store the same stitches but differ in metadata and encoding."
+      },
+      {
+        "question": "Why does my auto-digitized embroidery file pucker or distort fabric?",
+        "answer": "Auto-digitizers do not apply pull compensation, underlay, or fabric-specific density adjustments. They generate stitches mechanically from edge detection without accounting for fabric stretch, thread tension, or stitch physics. Manual digitizing adds these corrections; auto-digitized files must be edited by hand to be production-ready."
+      },
+      {
+        "question": "What is the maximum size design I can embroider?",
+        "answer": "It depends on your machine's hoop size. Common sizes: 4×4 inches (100×100mm) for small home machines, 5×7 inches (130×180mm) for mid-range, 9.5×14 inches for commercial machines. Designs larger than the hoop must be split and re-hooped, which introduces alignment error. Check your machine's spec sheet for exact limits."
+      },
+      {
+        "question": "Can I edit an existing embroidery file to change colors or resize it?",
+        "answer": "Yes, but with limits. Embroidery software (Hatch, Wilcom, PE-Design) can open and edit stitch files, change colors, and resize. Resizing beyond ±20% distorts stitch density and may require re-digitizing. Changing colors is straightforward: reassign thread colors in the software and re-export. Free online editors are limited and may corrupt stitch data."
+      }
+    ],
+    "relatedConverters": [
+      "png-to-svg",
+      "jpg-to-svg",
+      "image-to-vector",
+      "logo-to-vector",
+      "image-to-dst"
+    ],
+    "relatedPosts": [
+      "png-to-laser-ready-vector",
+      "vinyl-cut-file-requirements",
+      "cricut-design-space-svg-guide"
+    ],
+    "sources": [
+      "https://www.brother-usa.com/home/sewing/embroidery-basics",
+      "https://www.tajima.com/support/embroidery-file-formats",
+      "https://en.wikipedia.org/wiki/Embroidery_format"
+    ]
+  },
+  {
+    "slug": "cricut-design-space-svg-guide",
+    "title": "Cricut Design Space and SVG: Upload, Layers, and Common Failures",
+    "seoTitle": "Cricut Design Space SVG Guide: Upload, Layers and Fixes",
+    "seoDescription": "Design Space reshapes what you upload to fit its model. Learn how upload mode affects grouping, why layers split, and how to fix the four failures that show up most.",
+    "category": "machine-workflows",
+    "keywords": [
+      "cricut design space svg",
+      "cricut svg upload failed",
+      "cricut layers",
+      "svg for cricut"
+    ],
+    "publishedAt": "2026-10-31",
+    "readingMinutes": 6,
+    "excerpt": "Design Space normalizes uploaded SVGs, flattens groups in Simple mode, splits colors into layers in Complex mode, and culls details below 0.5mm. Here is how upload modes work and how to fix the four failures that show up most.",
+    "content": "<p>Cricut Design Space reshapes uploaded SVG files to fit its internal model: groups flatten, layers split by color, and tiny details below 0.5mm often vanish. Understanding how upload mode (Simple vs Complex) affects grouping, why Design Space normalizes files, and how to fix the four most common upload failures will save hours of troubleshooting.</p>\n\n<h2>Upload Modes: Simple vs Complex</h2>\n\n<p>Design Space offers two upload modes: <strong>Simple</strong> and <strong>Complex</strong>. Simple mode flattens all layers into a single cut layer, ignoring colors and groups. Use Simple for single-color decals, vinyl cut files, and designs where everything will be cut from one material. Complex mode preserves color separation and creates multiple layers — one per color — which is necessary for print-then-cut projects and multi-material designs.</p>\n\n<p>The mode you choose at upload determines how Design Space interprets your file. If you upload a multi-color logo as Simple, all colors merge into one layer and you cannot separate them afterward. If you upload a single-color design as Complex, Design Space will still split it if it finds multiple paths or groups, creating unnecessary layers. Choose the mode that matches your intent before clicking Upload.</p>\n\n<h3>How Design Space Normalizes Files</h3>\n\n<p>Design Space re-encodes every uploaded SVG to fit its internal structure. It removes metadata, flattens transforms, converts text to paths (if the text was not already paths, it may fail), and discards unsupported elements like filters, gradients, and clipping masks. Stroke widths are ignored; Design Space treats strokes as cut lines and fills as score or engrave regions (depending on project type).</p>\n\n<p>This normalization causes two common problems: loss of fine detail (elements smaller than ~0.5mm are culled as noise), and unexpected grouping (nested groups can collapse or split unpredictably). If your SVG has intricate lacework, filigree, or thin serifs, inspect it in Design Space immediately after upload to confirm nothing was dropped.</p>\n\n<h2>Why Layers Split and How to Control It</h2>\n\n<p>Design Space creates one layer per unique fill or stroke color when you upload in Complex mode. A three-color logo (red, blue, black) becomes three layers. If one shape has both a stroke and a fill in different colors, Design Space may split it into two shapes on two layers. This is intentional: each layer maps to a different machine operation (cut, score, draw, print).</p>\n\n<p>To control layer splitting, assign colors deliberately in your design software before export. Use one color (e.g., black) for all cut lines, another (e.g., blue) for score lines, and a third (e.g., red) for print regions. When you upload as Complex, Design Space will organize the file exactly as you colored it. If everything is black, upload as Simple to avoid unnecessary layer splits.</p>\n\n<table>\n<thead>\n<tr><th>Upload Mode</th><th>What Design Space Does</th><th>When to Use It</th></tr>\n</thead>\n<tbody>\n<tr><td>Simple (Cut Image)</td><td>Flattens all paths to one cut layer, ignores colors</td><td>Single-color vinyl cuts, decals, stencils</td></tr>\n<tr><td>Complex (Print Then Cut)</td><td>Preserves colors as layers, one per color</td><td>Multi-color designs, print-then-cut, layered projects</td></tr>\n<tr><td>Pattern Fill</td><td>Treats file as a repeating pattern fill</td><td>Backgrounds, not typical cut files</td></tr>\n</tbody>\n</table>\n\n<h2>The Four Most Common Upload Failures</h2>\n\n<h3>1. \"Unable to Upload\" — Malformed XML or Unsupported Elements</h3>\n\n<p>This error means Design Space cannot parse the SVG. The most common causes: non-standard XML namespaces, embedded raster images (base64-encoded PNGs), JavaScript or &lt;script&gt; tags, external stylesheet references, or unsupported SVG 2.0 features. Open the SVG in a text editor and remove script tags, embedded images, and external references. Re-save the file as Plain SVG in Inkscape to strip metadata.</p>\n\n<h3>2. Invisible Elements After Upload</h3>\n\n<p>Design Space hides or culls elements smaller than ~0.5mm, open paths with no stroke, and shapes with zero-width strokes. If part of your design is invisible after upload, check the source SVG: ensure all paths are closed, strokes have non-zero width, and small details are at least 0.5mm. Zoom in to 100% in Design Space to confirm elements are not just too small to see at default zoom.</p>\n\n<h3>3. Wrong Scale — Design is 10× or 100× Too Large or Small</h3>\n\n<p>SVG files without explicit units default to pixels (px), and Design Space interprets them at 96 PPI. If your design software saved the SVG with document units set to centimeters instead of millimeters, or if the viewBox is missing, scale will be wrong on upload. Fix this by setting document units to inches or millimeters in your design software before export. Inkscape: <strong>File → Document Properties → Display Units</strong>. Illustrator: <strong>File → Document Setup → Units</strong>.</p>\n\n<h3>4. Missing Counters — Holes in Letters or Shapes Filled In</h3>\n\n<p>If the hole in the letter O or the counter in a P fills in after upload, the paths are not properly defined as compound paths or the counter is a separate shape on top rather than a void. In Illustrator or Inkscape, select the outer and inner paths and create a compound path (<strong>Path → Compound Path</strong> in Inkscape, <strong>Object → Compound Path → Make</strong> in Illustrator). This defines the inner path as a void. Re-export and re-upload.</p>\n\n<h2>Text Handling and Font Conversion</h2>\n\n<p>Design Space can import text two ways: as editable text (if you design directly in Design Space) or as paths (if you convert text to outlines in your design software first). If you upload an SVG with live text (editable font objects), Design Space will try to render it using its own font library. If the font is not available in Design Space, the text will either render incorrectly or fail to upload.</p>\n\n<p>To preserve exact typography, convert text to paths before export: <strong>Type → Create Outlines</strong> in Illustrator, <strong>Path → Object to Path</strong> in Inkscape. The text becomes a group of filled shapes. When you upload the SVG, those shapes will cut or score as expected. This also prevents font licensing issues — converted text is geometry, not a font reference.</p>\n\n<h2>Optimizing SVG Files for Design Space</h2>\n\n<p>Design Space performs better with clean, simplified files. Before export, simplify paths to reduce node count (<strong>Path → Simplify</strong> in Inkscape, <strong>Object → Path → Simplify</strong> in Illustrator), remove hidden layers and unused elements, and flatten any transforms or groups that are not needed for color separation.</p>\n\n<p>Avoid excessive nesting. Design Space can handle a few levels of groups, but deeply nested SVGs (groups inside groups inside groups) sometimes fail to upload or render incorrectly. Flatten unnecessary groups before export by selecting all objects and choosing <strong>Object → Ungroup</strong> repeatedly until only the necessary grouping structure remains.</p>\n\n<p>For related workflows, see the <a href=\"/blog/silhouette-studio-dxf-vs-svg\">Silhouette Studio DXF vs SVG comparison</a> (similar upload constraints for a different cutter), the <a href=\"/blog/vinyl-cut-file-requirements\">vinyl cut file requirements</a> (design rules that apply to all vinyl cutters), and the <a href=\"/blog/glowforge-svg-requirements\">Glowforge SVG requirements</a> (different machine, but overlapping file principles).</p>\n\n<h2>Using Design Space After Upload</h2>\n\n<p>Once your SVG is uploaded, Design Space assigns it a save slot in your library. You can edit it (resize, rotate, change operations), duplicate it, or apply it to a project. To change a cut line to a score line, select the layer and change the operation in the Layers panel. To assign a print region for print-then-cut, select the layer and set it to Print.</p>\n\n<p>Design Space does not support re-editing the vector geometry after upload. If you need to change the shape, go back to your design software, edit the SVG, and re-upload. Uploaded images are versioned: each upload creates a new entry in your library, so you can compare before-and-after versions if needed.</p>\n\n<p>For more on file format conversions that feed into Cricut workflows, see the <a href=\"/convert/png-to-svg\">PNG to SVG converter</a>, the <a href=\"/convert/jpg-to-svg\">JPG to SVG converter</a>, and the <a href=\"/blog/png-to-laser-ready-vector\">PNG to laser-ready vector guide</a> (conceptually identical workflow). For batch workflows, check the <a href=\"/resources/batch-conversion-workflows\">batch conversion guide</a>.</p>",
+    "faqs": [
+      {
+        "question": "Why does my SVG fail to upload to Cricut Design Space?",
+        "answer": "The most common causes are malformed XML, embedded raster images, JavaScript or script tags, or unsupported SVG 2.0 features. Open the SVG in a text editor and remove script tags, base64-encoded images, and external references. Re-save as Plain SVG in Inkscape to strip metadata. Also ensure all text is converted to paths before export."
+      },
+      {
+        "question": "What is the difference between Simple and Complex upload modes in Design Space?",
+        "answer": "Simple mode flattens all paths to one cut layer and ignores colors — use it for single-color vinyl cuts. Complex mode preserves each unique color as a separate layer — use it for multi-color designs, print-then-cut, or projects where you need independent control over each color. Choose the mode that matches your intent before uploading."
+      },
+      {
+        "question": "Why are parts of my design invisible after uploading to Design Space?",
+        "answer": "Design Space culls elements smaller than ~0.5mm, hides open paths with no stroke, and ignores shapes with zero-width strokes. Ensure all paths are closed, strokes have non-zero width, and small details are at least 0.5mm. Zoom to 100% in Design Space to confirm elements are not just too small to see at default zoom."
+      },
+      {
+        "question": "Why do counters (holes in letters) fill in after uploading my SVG?",
+        "answer": "The paths are not defined as compound paths, or the counter is a separate shape on top rather than a void. Select the outer and inner paths in your design software and create a compound path: Path → Compound Path (Inkscape) or Object → Compound Path → Make (Illustrator). Re-export and re-upload to Design Space."
+      },
+      {
+        "question": "Can I edit the vector geometry of an uploaded SVG in Design Space?",
+        "answer": "No. Design Space does not support vector editing after upload. You can resize, rotate, duplicate, and change operations (cut to score, etc.), but you cannot edit nodes or reshape paths. To change the geometry, edit the SVG in your design software and re-upload. Each upload creates a new library entry."
+      }
+    ],
+    "relatedConverters": [
+      "png-to-svg",
+      "jpg-to-svg",
+      "image-to-svg",
+      "logo-to-svg",
+      "svg-to-dxf"
+    ],
+    "relatedPosts": [
+      "silhouette-studio-dxf-vs-svg",
+      "vinyl-cut-file-requirements",
+      "glowforge-svg-requirements"
+    ],
+    "sources": [
+      "https://help.cricut.com/hc/en-us/articles/360009504773-Upload-images-to-Design-Space",
+      "https://help.cricut.com/hc/en-us/categories/360002251614-Design-Space",
+      "https://design.cricut.com/"
+    ]
+  },
+  {
+    "slug": "silhouette-studio-dxf-vs-svg",
+    "title": "Silhouette Studio: DXF or SVG, and When It Matters",
+    "seoTitle": "Silhouette Studio DXF vs SVG: Which to Upload",
+    "seoDescription": "Silhouette Studio accepts both, but the Basic vs Designer Edition split decides which one you can use. Compare how each format arrives and when to convert.",
+    "category": "machine-workflows",
+    "keywords": [
+      "silhouette studio dxf",
+      "silhouette svg designer edition",
+      "silhouette file format",
+      "dxf to svg silhouette"
+    ],
+    "publishedAt": "2026-10-30",
+    "readingMinutes": 5,
+    "excerpt": "Silhouette Studio Basic Edition accepts DXF only; Designer Edition and above accept SVG. DXF imports as cut lines with no color data; SVG preserves colors and layers but requires a paid upgrade.",
+    "content": "<p>Silhouette Studio's format support depends entirely on which edition you own: Basic Edition accepts DXF only (no SVG), while Designer Edition and above accept both DXF and SVG. DXF arrives as cut lines with no color or fill data, while SVG preserves colors and layers but requires a paid upgrade. Understanding which edition you have and how each format is interpreted will prevent upload failures and lost design detail.</p>\n\n<h2>Edition Tiers and Format Support</h2>\n\n<p>Silhouette Studio ships in five editions: Basic (free with machine purchase), Designer, Designer Plus, Business, and Ultimate. Only Designer Edition and higher support SVG import. Basic Edition users are limited to DXF, Studio (.studio), and a few bitmap formats (JPG, PNG, BMP, GIF) for trace-and-cut workflows.</p>\n\n<p>This split exists for commercial reasons: Silhouette America wants Basic users to design inside Studio or upgrade to Designer. If you have a Basic license and receive an SVG file, you must either convert it to DXF (using a converter or CAD software) or upgrade to Designer Edition ($49.99 one-time, as of 2026). There is no workaround.</p>\n\n<table>\n<thead>\n<tr><th>Edition</th><th>DXF Support</th><th>SVG Support</th><th>Notes</th></tr>\n</thead>\n<tbody>\n<tr><td>Basic (free)</td><td>Yes</td><td>No</td><td>Can only import DXF for vector cut files</td></tr>\n<tr><td>Designer ($49.99)</td><td>Yes</td><td>Yes</td><td>First edition to support SVG import</td></tr>\n<tr><td>Designer Plus ($99.99)</td><td>Yes</td><td>Yes</td><td>Adds rhinestone tools and advanced features</td></tr>\n<tr><td>Business ($299.99)</td><td>Yes</td><td>Yes</td><td>Adds color separation and print-and-cut contours</td></tr>\n<tr><td>Ultimate</td><td>Yes</td><td>Yes</td><td>All features unlocked</td></tr>\n</tbody>\n</table>\n\n<h2>How DXF Is Interpreted in Studio</h2>\n\n<p>When you import a DXF into Silhouette Studio, it reads only path geometry — lines, polylines, arcs, circles, and splines. All other CAD data (layers, colors, line weights, hatches, text annotations, blocks, dimensions) is ignored. The imported paths arrive as cut lines (no fill, no stroke styling), and you must manually assign them to cut, score, or draw operations in Studio's Send panel.</p>\n\n<p>DXF files do not carry color information in a format Studio recognizes. Even if the source DXF has colored entities (AutoCAD's ACI color index), Studio discards them on import. This means a multi-color logo saved as DXF will import as a monochrome cut file, and you will have to separate colors manually by selecting and grouping paths.</p>\n\n<h3>DXF Version Compatibility</h3>\n\n<p>Silhouette Studio supports DXF files from AutoCAD R12 through R2018. Older versions (R12, R14) are the most reliable because they use simpler encoding. Newer DXF versions (R2018+) may fail to import or lose geometry due to unsupported entity types (splines, 3D polylines, complex blocks). If Studio rejects your DXF, re-export it from your CAD software as DXF R12 or R14.</p>\n\n<p>Curve quality can suffer in DXF because Studio converts all curved entities (arcs, circles, ellipses, splines) into its internal Bezier representation. If the source DXF has thousands of tiny line segments approximating a curve (common in CAM-exported DXFs), Studio will preserve every segment, bloating the file and slowing the cutter. Simplify paths after import using Studio's point editing tools if performance degrades.</p>\n\n<h2>How SVG Is Interpreted in Studio (Designer Edition+)</h2>\n\n<p>SVG import in Designer Edition and above reads both geometry and styling: fills, strokes, colors, and (to some extent) layers. Each unique color in the SVG becomes a selectable group in Studio, which you can assign to different cut operations. This is far more convenient than DXF if you have a multi-color design.</p>\n\n<p>However, Studio does not support all SVG features. Gradients, patterns, filters, clipping masks, and blend modes are ignored. Text is imported as paths if you convert it to outlines first; otherwise it is ignored (Studio does not have access to your system fonts). Transforms and groups are partially preserved, but deeply nested groups or complex transforms can cause import failures or incorrect rendering.</p>\n\n<h3>SVG Units and Scale</h3>\n\n<p>Silhouette Studio interprets SVG units differently than Inkscape or Illustrator. If your SVG has no explicit units (the width and height attributes are unitless numbers), Studio treats them as pixels at 90 PPI (not 96 PPI like most software). This causes a slight scale mismatch: a 1000px-wide SVG imports at 1000 ÷ 90 = 11.11 inches, not 10.42 inches (which would be 96 PPI).</p>\n\n<p>To avoid scale issues, set your document units to inches or millimeters in your design software before exporting the SVG. Inkscape: <strong>File → Document Properties → Display Units</strong>. Illustrator: <strong>File → Document Setup → Units</strong>. Export the SVG with explicit units, and Studio will import it at the correct size.</p>\n\n<h2>When to Use DXF vs SVG</h2>\n\n<p>If you have Designer Edition or higher, use SVG whenever possible. It preserves more design information (colors, layers, fills) and produces cleaner imports. Only use DXF if the source file is already DXF (from CAD software, a CNC workflow, or a design library that only offers DXF), or if you are sharing a file with someone who has Basic Edition and cannot import SVG.</p>\n\n<p>If you have Basic Edition and receive an SVG, convert it to DXF before import. Use an online converter like <a href=\"/convert/svg-to-dxf\">Vectorr's SVG to DXF converter</a>, or open the SVG in Inkscape and export as DXF (<strong>File → Save a Copy → DXF</strong>, select R12 or R14 format). The conversion will discard colors and fills, but the cut geometry will remain.</p>\n\n<h3>Workflow: DXF to SVG Conversion</h3>\n\n<p>If you have a DXF and want to edit it in software that only accepts SVG (Illustrator, Figma, web-based tools), convert DXF to SVG. Open the DXF in Inkscape, LibreCAD, or QCAD, then export as SVG. Alternatively, use <a href=\"/convert/dxf-to-svg\">Vectorr's DXF to SVG converter</a>. The conversion is lossless for geometry but you may need to reassign colors and strokes in your target software.</p>\n\n<p>For more on how other machines handle file formats, compare the <a href=\"/blog/cricut-design-space-svg-guide\">Cricut Design Space SVG guide</a> (similar edition-gated features), the <a href=\"/blog/glowforge-svg-requirements\">Glowforge SVG requirements</a> (stroke vs fill mapping), and the <a href=\"/blog/lightburn-svg-import-guide\">LightBurn SVG import guide</a> (scale and layer issues). Each platform has its own quirks, but understanding one helps debug another.</p>\n\n<h2>Common Import Problems and Fixes</h2>\n\n<p>If Silhouette Studio refuses to import your DXF or SVG, the file likely contains unsupported elements. For DXF, check the version (Studio prefers R12-R14) and ensure it contains only 2D geometry (no 3D polylines, solids, or meshes). For SVG, open it in a text editor and remove embedded raster images (base64-encoded PNGs), JavaScript, external stylesheets, and non-standard XML namespaces. Re-save as Plain SVG in Inkscape to strip metadata.</p>\n\n<p>Another common issue: missing or misaligned geometry after import. This usually traces to units or coordinate system mismatches. DXF files from CAD software often use coordinate origins far from (0,0), causing geometry to import off-canvas. In Studio, zoom to fit (<strong>View → Zoom to Page</strong> or Ctrl+0) to locate the imported paths, then select all and drag them onto the canvas.</p>\n\n<p>For related workflows, see the <a href=\"/blog/vinyl-cut-file-requirements\">vinyl cut file requirements</a> (design rules that apply to all vinyl cutters, including Silhouette), the <a href=\"/blog/png-to-laser-ready-vector\">PNG to laser-ready vector guide</a> (vectorization workflow that feeds into Silhouette), and the <a href=\"/resources/file-formats\">file formats reference</a> for format comparisons.</p>",
+    "faqs": [
+      {
+        "question": "Can Silhouette Studio Basic Edition import SVG files?",
+        "answer": "No. Basic Edition (free with machine purchase) only imports DXF for vector files, plus bitmap formats (JPG, PNG) for trace-and-cut. SVG import requires Designer Edition or higher ($49.99+). To use an SVG with Basic, convert it to DXF first using a converter or CAD software."
+      },
+      {
+        "question": "What is the difference between importing DXF and SVG into Silhouette Studio?",
+        "answer": "DXF imports as monochrome cut lines with no color or fill data — all styling is discarded. SVG (Designer Edition+) preserves colors, fills, and layers, so you can separate elements and assign different operations easily. Use SVG if you have Designer Edition; use DXF only if you have Basic or the source is already DXF."
+      },
+      {
+        "question": "Why does my DXF fail to import into Silhouette Studio?",
+        "answer": "Studio prefers DXF R12 or R14 (AutoCAD 12/14 format). Newer versions (R2018+) or files with 3D geometry, complex blocks, or unsupported entity types may fail. Re-export the DXF from your CAD software as R12 or R14, ensuring only 2D paths (lines, arcs, polylines) are included. Remove text annotations and dimensions."
+      },
+      {
+        "question": "Why is my imported SVG the wrong size in Silhouette Studio?",
+        "answer": "SVG files without explicit units default to pixels, and Studio interprets them at 90 PPI (not 96 PPI like most software). This causes a slight scale mismatch. Set your document units to inches or millimeters in your design software before exporting the SVG. Inkscape: File → Document Properties. Illustrator: File → Document Setup."
+      },
+      {
+        "question": "How do I convert SVG to DXF for Silhouette Studio Basic Edition?",
+        "answer": "Open the SVG in Inkscape and export as DXF: File → Save a Copy → DXF, select R12 or R14 format. Alternatively, use an online converter like Vectorr's SVG to DXF converter. The conversion discards colors and fills but preserves cut geometry, which is all Basic Edition can import anyway."
+      }
+    ],
+    "relatedConverters": [
+      "svg-to-dxf",
+      "dxf-to-svg",
+      "png-to-svg",
+      "jpg-to-svg",
+      "logo-to-svg"
+    ],
+    "relatedPosts": [
+      "cricut-design-space-svg-guide",
+      "vinyl-cut-file-requirements",
+      "glowforge-svg-requirements"
+    ],
+    "sources": [
+      "https://www.silhouetteamerica.com/software",
+      "https://silhouetteschool.com/silhouette-studio-upgrade-comparison/",
+      "https://www.silhouetteamerica.com/faq"
+    ]
+  },
+  {
+    "slug": "vinyl-cut-file-requirements",
+    "title": "Vinyl Cut Files: Turn a Logo Into Clean, Weedable Paths",
+    "seoTitle": "Vinyl Cut File Requirements: Weedable Paths From a Logo",
+    "seoDescription": "Vinyl cutting punishes small counters, double paths and stray nodes. Here is the checklist that produces a file you can weed in one pass instead of fighting.",
+    "category": "machine-workflows",
+    "keywords": [
+      "vinyl cut file",
+      "weedable vector",
+      "vinyl cutting logo",
+      "svg for vinyl cutter"
+    ],
+    "publishedAt": "2026-11-06",
+    "readingMinutes": 12,
+    "excerpt": "Vinyl cutting punishes small counters, double paths and stray nodes. Here is the checklist that produces a file you can weed in one pass instead of fighting.",
+    "content": "<p>Vinyl cutting punishes small counters, double paths and stray nodes. Here is the checklist that produces a file you can weed in one pass instead of fighting.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "laser-cutting-file-optimization",
+    "title": "Laser Cutting File Optimization: Paths, Order and Kerf",
+    "seoTitle": "Laser Cutting File Optimization: Path Order, Kerf and Nodes",
+    "seoDescription": "Machine time is dominated by travel and pierce points, not cutting. Optimize path order, node count and kerf offset to cut the same part in half the time.",
+    "category": "machine-workflows",
+    "keywords": [
+      "laser file optimization",
+      "laser path order",
+      "laser cutting svg optimize",
+      "reduce nodes laser"
+    ],
+    "publishedAt": "2026-11-05",
+    "readingMinutes": 12,
+    "excerpt": "Machine time is dominated by travel and pierce points, not cutting. Optimize path order, node count and kerf offset to cut the same part in half the time.",
+    "content": "<p>Machine time is dominated by travel and pierce points, not cutting. Optimize path order, node count and kerf offset to cut the same part in half the time.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "svg-vs-dxf",
+    "title": "SVG vs DXF: Which One Your Machine Wants",
+    "seoTitle": "SVG vs DXF: Differences, Units and When to Convert",
+    "seoDescription": "SVG stores presentation, DXF stores CAD geometry and units. Compare what each keeps, how they disagree on scale, and which to send where.",
+    "category": "file-formats",
+    "keywords": [
+      "svg vs dxf",
+      "dxf vs svg",
+      "svg to dxf",
+      "which is better svg or dxf"
+    ],
+    "publishedAt": "2026-11-04",
+    "readingMinutes": 12,
+    "excerpt": "SVG stores presentation, DXF stores CAD geometry and units. Compare what each keeps, how they disagree on scale, and which to send where.",
+    "content": "<p>SVG stores presentation, DXF stores CAD geometry and units. Compare what each keeps, how they disagree on scale, and which to send where.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "svg-vs-eps",
+    "title": "SVG vs EPS: Modern Vector Against Print Legacy",
+    "seoTitle": "SVG vs EPS for Print: Which Format to Send",
+    "seoDescription": "EPS is a print-industry institution, SVG is the web standard. Understand what each stores, what printers accept, and when converting between them loses detail.",
+    "category": "file-formats",
+    "keywords": [
+      "svg vs eps",
+      "eps vs svg",
+      "svg to eps",
+      "print file format"
+    ],
+    "publishedAt": "2026-11-03",
+    "readingMinutes": 12,
+    "excerpt": "EPS is a print-industry institution, SVG is the web standard. Understand what each stores, what printers accept, and when converting between them loses detail.",
+    "content": "<p>EPS is a print-industry institution, SVG is the web standard. Understand what each stores, what printers accept, and when converting between them loses detail.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "svg-vs-pdf",
+    "title": "SVG vs PDF for Print: Choosing by What Survives",
+    "seoTitle": "SVG vs PDF for Print: Which Format Keeps Your Artwork",
+    "seoDescription": "Both are page-description formats with different priorities. See how they handle fonts, spot colors, and vector data before you pick one for a printer.",
+    "category": "file-formats",
+    "keywords": [
+      "svg vs pdf",
+      "svg vs pdf print",
+      "pdf to svg",
+      "print ready pdf"
+    ],
+    "publishedAt": "2026-11-02",
+    "readingMinutes": 12,
+    "excerpt": "Both are page-description formats with different priorities. See how they handle fonts, spot colors, and vector data before you pick one for a printer.",
+    "content": "<p>Both are page-description formats with different priorities. See how they handle fonts, spot colors, and vector data before you pick one for a printer.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "png-vs-svg",
+    "title": "PNG vs SVG: Raster and Vector, Explained Without Jargon",
+    "seoTitle": "PNG vs SVG: When Each Format Wins",
+    "seoDescription": "PNG stores pixels, SVG stores shapes. That one difference decides whether a file scales, animates, and stays editable. A practical comparison.",
+    "category": "file-formats",
+    "keywords": [
+      "png vs svg",
+      "svg vs png",
+      "raster vs vector",
+      "png to svg"
+    ],
+    "publishedAt": "2026-11-01",
+    "readingMinutes": 12,
+    "excerpt": "PNG stores pixels, SVG stores shapes. That one difference decides whether a file scales, animates, and stays editable. A practical comparison.",
+    "content": "<p>PNG stores pixels, SVG stores shapes. That one difference decides whether a file scales, animates, and stays editable. A practical comparison.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "file-formats-explained",
+    "title": "Vector File Formats Explained: A Practical Map",
+    "seoTitle": "Vector File Formats Explained: SVG, DXF, EPS, PDF, AI, DST",
+    "seoDescription": "Every vector format exists because one machine or program needed something the others could not provide. Here is the whole map in one place.",
+    "category": "file-formats",
+    "keywords": [
+      "vector file formats",
+      "file format guide",
+      "svg dxf eps pdf",
+      "which vector format"
+    ],
+    "publishedAt": "2026-10-31",
+    "readingMinutes": 12,
+    "excerpt": "Every vector format exists because one machine or program needed something the others could not provide. Here is the whole map in one place.",
+    "content": "<p>Every vector format exists because one machine or program needed something the others could not provide. Here is the whole map in one place.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "what-is-svg",
+    "title": "What Is an SVG, Really? Inside the Markup",
+    "seoTitle": "What Is an SVG File? Anatomy of Vector Markup",
+    "seoDescription": "An SVG is XML describing paths, not pixels. Read a real file's structure, learn what viewBox does, and see why it is both powerful and fragile.",
+    "category": "file-formats",
+    "keywords": [
+      "what is svg",
+      "svg file anatomy",
+      "svg viewbox",
+      "svg markup"
+    ],
+    "publishedAt": "2026-10-30",
+    "readingMinutes": 12,
+    "excerpt": "An SVG is XML describing paths, not pixels. Read a real file's structure, learn what viewBox does, and see why it is both powerful and fragile.",
+    "content": "<p>An SVG is XML describing paths, not pixels. Read a real file's structure, learn what viewBox does, and see why it is both powerful and fragile.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "3mf-vs-stl",
+    "title": "3MF vs STL: Why the Newer Format Prints Better",
+    "seoTitle": "3MF vs STL: Format Differences for 3D Printing",
+    "seoDescription": "STL stores triangles and nothing else. 3MF stores color, units, materials and structure. Compare them and see where STL quietly costs you prints.",
+    "category": "3d-printing",
+    "keywords": [
+      "3mf vs stl",
+      "stl file limitations",
+      "3mf multicolor",
+      "3d print file format"
+    ],
+    "publishedAt": "2026-11-06",
+    "readingMinutes": 12,
+    "excerpt": "STL stores triangles and nothing else. 3MF stores color, units, materials and structure. Compare them and see where STL quietly costs you prints.",
+    "content": "<p>STL stores triangles and nothing else. 3MF stores color, units, materials and structure. Compare them and see where STL quietly costs you prints.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "svg-to-stl-guide",
+    "title": "Converting an SVG to STL for 3D Printing",
+    "seoTitle": "SVG to STL: Extrude 2D Art Into a Printable Mesh",
+    "seoDescription": "An SVG is a flat outline. Getting it to print means extruding it, orienting it, and checking it is watertight. Walk the full path from artwork to slicer.",
+    "category": "3d-printing",
+    "keywords": [
+      "svg to stl",
+      "extrude svg",
+      "svg to 3d print",
+      "vector to mesh"
+    ],
+    "publishedAt": "2026-11-05",
+    "readingMinutes": 12,
+    "excerpt": "An SVG is a flat outline. Getting it to print means extruding it, orienting it, and checking it is watertight. Walk the full path from artwork to slicer.",
+    "content": "<p>An SVG is a flat outline. Getting it to print means extruding it, orienting it, and checking it is watertight. Walk the full path from artwork to slicer.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "svg-optimization-guide",
+    "title": "How to Optimize an SVG Without Breaking It",
+    "seoTitle": "SVG Optimization Guide: Cut File Size, Keep Fidelity",
+    "seoDescription": "Most SVGs ship with editor debris. Learn which savings are free, which change rendering, and how to verify a file still looks right after optimization.",
+    "category": "vectorization",
+    "keywords": [
+      "svg optimization",
+      "reduce svg size",
+      "svgo",
+      "optimize svg"
+    ],
+    "publishedAt": "2026-11-04",
+    "readingMinutes": 12,
+    "excerpt": "Most SVGs ship with editor debris. Learn which savings are free, which change rendering, and how to verify a file still looks right after optimization.",
+    "content": "<p>Most SVGs ship with editor debris. Learn which savings are free, which change rendering, and how to verify a file still looks right after optimization.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "image-tracing-explained",
+    "title": "Image Tracing Explained: Thresholds, Corners and Nodes",
+    "seoTitle": "Image Tracing Explained: How Raster Becomes Vector",
+    "seoDescription": "Tracing is a decision process, not a button. Understand color reduction, corner detection and node tolerance so the result is editable instead of a pile of points.",
+    "category": "vectorization",
+    "keywords": [
+      "image tracing",
+      "raster to vector",
+      "autotrace",
+      "vectorize image"
+    ],
+    "publishedAt": "2026-11-03",
+    "readingMinutes": 12,
+    "excerpt": "Tracing is a decision process, not a button. Understand color reduction, corner detection and node tolerance so the result is editable instead of a pile of points.",
+    "content": "<p>Tracing is a decision process, not a button. Understand color reduction, corner detection and node tolerance so the result is editable instead of a pile of points.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "best-resolution-for-vectorizing",
+    "title": "The Resolution That Actually Satisfies a Vectorizer",
+    "seoTitle": "Best Image Resolution for Vectorization: PPI, Edges and Artifacts",
+    "seoDescription": "Too low and edges are guesses; too high and noise becomes paths. Here is how to pick source resolution and pre-clean an image before tracing.",
+    "category": "vectorization",
+    "keywords": [
+      "vectorize image resolution",
+      "ppi for vectorizing",
+      "source image quality",
+      "image to vector quality"
+    ],
+    "publishedAt": "2026-11-02",
+    "readingMinutes": 12,
+    "excerpt": "Too low and edges are guesses; too high and noise becomes paths. Here is how to pick source resolution and pre-clean an image before tracing.",
+    "content": "<p>Too low and edges are guesses; too high and noise becomes paths. Here is how to pick source resolution and pre-clean an image before tracing.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "upscaling-before-vectorizing",
+    "title": "Upscale First or Vectorize First? The Order Changes Everything",
+    "seoTitle": "Upscale Before Vectorizing: When It Helps and When It Hurts",
+    "seoDescription": "Upscaling invents detail. Tracing documents it. Do them in the wrong order and you turn soft edges into jagged noise. Here is the decision rule.",
+    "category": "vectorization",
+    "keywords": [
+      "upscale before vectorize",
+      "ai upscaling vector",
+      "image preparation vectorize",
+      "enlarge image vector"
+    ],
+    "publishedAt": "2026-11-01",
+    "readingMinutes": 12,
+    "excerpt": "Upscaling invents detail. Tracing documents it. Do them in the wrong order and you turn soft edges into jagged noise. Here is the decision rule.",
+    "content": "<p>Upscaling invents detail. Tracing documents it. Do them in the wrong order and you turn soft edges into jagged noise. Here is the decision rule.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "vectorize-a-painting",
+    "title": "Vectorizing a Painting: When Vector Art Helps and When It Lies",
+    "seoTitle": "Vectorize a Painting or Photo: What Survives and What Changes",
+    "seoDescription": "Painting is continuous tone and texture; vector is flat geometry. Learn the styles that vectorize well and what you lose by converting.",
+    "category": "vectorization",
+    "keywords": [
+      "vectorize painting",
+      "photo to vector",
+      "artwork vectorization",
+      "watercolor vector"
+    ],
+    "publishedAt": "2026-10-31",
+    "readingMinutes": 12,
+    "excerpt": "Painting is continuous tone and texture; vector is flat geometry. Learn the styles that vectorize well and what you lose by converting.",
+    "content": "<p>Painting is continuous tone and texture; vector is flat geometry. Learn the styles that vectorize well and what you lose by converting.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "logo-vectorization-guide",
+    "title": "Logo Vectorization: Turning a Supplied Logo Into Clean Paths",
+    "seoTitle": "Logo Vectorization: From Raster Supplier File to Clean SVG",
+    "seoDescription": "You receive a logo as a screenshot and need a cut-ready file. Follow the cleanup sequence that produces a logo with clean curves and correct colors.",
+    "category": "vectorization",
+    "keywords": [
+      "logo vectorization",
+      "raster logo to vector",
+      "logo cleanup",
+      "vector logo"
+    ],
+    "publishedAt": "2026-10-30",
+    "readingMinutes": 12,
+    "excerpt": "You receive a logo as a screenshot and need a cut-ready file. Follow the cleanup sequence that produces a logo with clean curves and correct colors.",
+    "content": "<p>You receive a logo as a screenshot and need a cut-ready file. Follow the cleanup sequence that produces a logo with clean curves and correct colors.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "svg-security-malware",
+    "title": "SVG Security: Why the Format Can Carry Scripts",
+    "seoTitle": "SVG Security Risks: Scripts, External References and Safeguarding",
+    "seoDescription": "SVG is XML and can carry script, external references and event handlers. Learn which vectors are real, how to sanitize, and what to check in user uploads.",
+    "category": "file-formats",
+    "keywords": [
+      "svg security",
+      "svg malware",
+      "svg xss",
+      "sanitize svg uploads"
+    ],
+    "publishedAt": "2026-11-06",
+    "readingMinutes": 12,
+    "excerpt": "SVG is XML and can carry script, external references and event handlers. Learn which vectors are real, how to sanitize, and what to check in user uploads.",
+    "content": "<p>SVG is XML and can carry script, external references and event handlers. Learn which vectors are real, how to sanitize, and what to check in user uploads.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "screen-print-color-separation",
+    "title": "Screen Print Color Separations: Manual vs Automatic",
+    "seoTitle": "Screen Print Color Separations: Manual vs Automatic Workflow",
+    "seoDescription": "Separations decide whether your screen print registers. Compare manual and automatic methods, and learn the file conditions each one needs.",
+    "category": "print-production",
+    "keywords": [
+      "screen print separations",
+      "color separation",
+      "spot color separation",
+      "halftone screen print"
+    ],
+    "publishedAt": "2026-11-05",
+    "readingMinutes": 12,
+    "excerpt": "Separations decide whether your screen print registers. Compare manual and automatic methods, and learn the file conditions each one needs.",
+    "content": "<p>Separations decide whether your screen print registers. Compare manual and automatic methods, and learn the file conditions each one needs.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "halftone-simulated-process",
+    "title": "Halftone and Simulated Process: Printing a Gradient",
+    "seoTitle": "Halftone Screen Printing: Simulated Process for Gradients",
+    "seoDescription": "Screen printing cannot print a continuous gradient. Halftone dots turn tone into printable pattern. Here is how line frequency and angle decide quality.",
+    "category": "print-production",
+    "keywords": [
+      "halftone screen print",
+      "simulated process print",
+      "gradient screen print",
+      "halftone separation"
+    ],
+    "publishedAt": "2026-11-04",
+    "readingMinutes": 12,
+    "excerpt": "Screen printing cannot print a continuous gradient. Halftone dots turn tone into printable pattern. Here is how line frequency and angle decide quality.",
+    "content": "<p>Screen printing cannot print a continuous gradient. Halftone dots turn tone into printable pattern. Here is how line frequency and angle decide quality.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "dtf-white-box-problem",
+    "title": "The DTF White Box: Why Transparent Backgrounds Fail",
+    "seoTitle": "DTF White Box Fix: Transparent Background Problems",
+    "seoDescription": "A JPG cannot be transparent, and a flattened PNG loses its alpha in the wrong place. Diagnose the white-box symptom and how vector files prevent it.",
+    "category": "print-production",
+    "keywords": [
+      "dtf white box",
+      "dtf transparent background",
+      "dtf png alpha",
+      "dtf file preparation"
+    ],
+    "publishedAt": "2026-11-03",
+    "readingMinutes": 12,
+    "excerpt": "A JPG cannot be transparent, and a flattened PNG loses its alpha in the wrong place. Diagnose the white-box symptom and how vector files prevent it.",
+    "content": "<p>A JPG cannot be transparent, and a flattened PNG loses its alpha in the wrong place. Diagnose the white-box symptom and how vector files prevent it.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "sublimation-vs-dtf-vs-uv-dtf",
+    "title": "Sublimation vs DTF vs UV DTF: Which Fits Your Orders",
+    "seoTitle": "Sublimation vs DTF vs UV DTF: File and Cost Comparison",
+    "seoDescription": "Each process has different substrate limits, file requirements, and unit costs. Compare them on the variables that decide which to quote.",
+    "category": "print-production",
+    "keywords": [
+      "sublimation vs dtf",
+      "uv dtf",
+      "dtf vs subl",
+      "print process comparison"
+    ],
+    "publishedAt": "2026-11-02",
+    "readingMinutes": 12,
+    "excerpt": "Each process has different substrate limits, file requirements, and unit costs. Compare them on the variables that decide which to quote.",
+    "content": "<p>Each process has different substrate limits, file requirements, and unit costs. Compare them on the variables that decide which to quote.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "print-ready-artwork",
+    "title": "What Makes Artwork Print-Ready: The Preflight Checklist",
+    "seoTitle": "Print-Ready Artwork Checklist: Bleed, Resolution and Color",
+    "seoDescription": "Printers reject files for a predictable set of reasons. Walk the preflight checklist that catches them before the job goes on press.",
+    "category": "print-production",
+    "keywords": [
+      "print ready artwork",
+      "preflight checklist",
+      "print file preparation",
+      "artwork requirements"
+    ],
+    "publishedAt": "2026-11-01",
+    "readingMinutes": 12,
+    "excerpt": "Printers reject files for a predictable set of reasons. Walk the preflight checklist that catches them before the job goes on press.",
+    "content": "<p>Printers reject files for a predictable set of reasons. Walk the preflight checklist that catches them before the job goes on press.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "dtf-gang-sheet-layout",
+    "title": "DTF Gang Sheet Layout: Getting More Out of Every Meter",
+    "seoTitle": "DTF Gang Sheet Layout and Sizes: Maximize Film Use",
+    "seoDescription": "Film is billed by length, so layout decides margin. Learn standard gang sheet sizes, nesting rules, and the spacing that prevents print-head strikes.",
+    "category": "print-production",
+    "keywords": [
+      "dtf gang sheet",
+      "gang sheet layout",
+      "dtf film size",
+      "dtf nesting"
+    ],
+    "publishedAt": "2026-10-31",
+    "readingMinutes": 12,
+    "excerpt": "Film is billed by length, so layout decides margin. Learn standard gang sheet sizes, nesting rules, and the spacing that prevents print-head strikes.",
+    "content": "<p>Film is billed by length, so layout decides margin. Learn standard gang sheet sizes, nesting rules, and the spacing that prevents print-head strikes.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "uv-dtf-cut-contour",
+    "title": "UV DTF Cut Contours: Getting the Outline Right",
+    "seoTitle": "UV DTF Cut Contour Guide: Offset, Bleed and Registration",
+    "seoDescription": "UV DTF stickers need a cut contour that frames the artwork with the right offset. Offsets that are too tight tear; too loose leaves white.",
+    "category": "print-production",
+    "keywords": [
+      "uv dtf cut contour",
+      "cut contour offset",
+      "uv dtf sticker",
+      "contour cut sticker"
+    ],
+    "publishedAt": "2026-10-30",
+    "readingMinutes": 12,
+    "excerpt": "UV DTF stickers need a cut contour that frames the artwork with the right offset. Offsets that are too tight tear; too loose leaves white.",
+    "content": "<p>UV DTF stickers need a cut contour that frames the artwork with the right offset. Offsets that are too tight tear; too loose leaves white.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "illustrator-image-trace-alternative",
+    "title": "Illustrator Image Trace: Settings and When to Use Something Else",
+    "seoTitle": "Illustrator Image Trace Settings and Alternatives",
+    "seoDescription": "Image Trace is powerful and opaque. Understand its presets, what each option really controls, and when a dedicated vectorizer gets a cleaner result.",
+    "category": "design-software",
+    "keywords": [
+      "illustrator image trace",
+      "image trace settings",
+      "vectorize illustrator",
+      "illustrator trace alternative"
+    ],
+    "publishedAt": "2026-11-06",
+    "readingMinutes": 12,
+    "excerpt": "Image Trace is powerful and opaque. Understand its presets, what each option really controls, and when a dedicated vectorizer gets a cleaner result.",
+    "content": "<p>Image Trace is powerful and opaque. Understand its presets, what each option really controls, and when a dedicated vectorizer gets a cleaner result.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "inkscape-trace-bitmap",
+    "title": "Inkscape Trace Bitmap: The Free Vectorizer, Explained",
+    "seoTitle": "Inkscape Trace Bitmap Guide: Modes and Settings",
+    "seoDescription": "Inkscape ships a full tracer for free. Learn the brightness, edge and color modes, and how to tune the thresholds that actually matter.",
+    "category": "design-software",
+    "keywords": [
+      "inkscape trace bitmap",
+      "inkscape vectorize",
+      "free vectorizer",
+      "inkscape svg"
+    ],
+    "publishedAt": "2026-11-05",
+    "readingMinutes": 12,
+    "excerpt": "Inkscape ships a full tracer for free. Learn the brightness, edge and color modes, and how to tune the thresholds that actually matter.",
+    "content": "<p>Inkscape ships a full tracer for free. Learn the brightness, edge and color modes, and how to tune the thresholds that actually matter.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "rhino-trace-scanned-drawing",
+    "title": "Rhino: Tracing a Scanned Drawing Into Clean Curves",
+    "seoTitle": "Rhino Tracing Guide: Scanned Drawing to Curves",
+    "seoDescription": "Rhino's curve tools outperform automatic tracing on technical drawings. Here is a repeatable workflow for turning a scan into one spline per stroke.",
+    "category": "design-software",
+    "keywords": [
+      "rhino trace",
+      "rhino scanned drawing",
+      "rhino curves",
+      "rhino svg import"
+    ],
+    "publishedAt": "2026-11-04",
+    "readingMinutes": 12,
+    "excerpt": "Rhino's curve tools outperform automatic tracing on technical drawings. Here is a repeatable workflow for turning a scan into one spline per stroke.",
+    "content": "<p>Rhino's curve tools outperform automatic tracing on technical drawings. Here is a repeatable workflow for turning a scan into one spline per stroke.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "coreldraw-svg-workflow",
+    "title": "CorelDRAW SVG Workflow: Export Settings That Survive",
+    "seoTitle": "CorelDRAW SVG Export: Settings and Common Failures",
+    "seoDescription": "CorelDRAW can export SVG well or badly. Learn which options preserve text as paths, keep units, and stop effects from flattening into images.",
+    "category": "design-software",
+    "keywords": [
+      "coreldraw svg export",
+      "corel svg settings",
+      "coreldraw to svg",
+      "svg from corel"
+    ],
+    "publishedAt": "2026-11-03",
+    "readingMinutes": 12,
+    "excerpt": "CorelDRAW can export SVG well or badly. Learn which options preserve text as paths, keep units, and stop effects from flattening into images.",
+    "content": "<p>CorelDRAW can export SVG well or badly. Learn which options preserve text as paths, keep units, and stop effects from flattening into images.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "canva-to-svg",
+    "title": "Canva to SVG: Why Exporting Directly Does Not Work",
+    "seoTitle": "Canva to SVG: Export Options and What Each Keeps",
+    "seoDescription": "Canva does not offer SVG on every plan, and its PDF export is not always vector. Compare the paths to a real SVG and what each one preserves.",
+    "category": "design-software",
+    "keywords": [
+      "canva to svg",
+      "canva svg export",
+      "canva pdf vector",
+      "canva vectorize"
+    ],
+    "publishedAt": "2026-11-02",
+    "readingMinutes": 12,
+    "excerpt": "Canva does not offer SVG on every plan, and its PDF export is not always vector. Compare the paths to a real SVG and what each one preserves.",
+    "content": "<p>Canva does not offer SVG on every plan, and its PDF export is not always vector. Compare the paths to a real SVG and what each one preserves.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "figma-to-svg",
+    "title": "Figma to SVG: Export Settings and What Gets Flattened",
+    "seoTitle": "Figma SVG Export: Settings, Outlines and Flattening",
+    "seoDescription": "Figma exports SVG cleanly until effects, images or masks get involved. Learn the settings that keep artwork vector and what cannot survive.",
+    "category": "design-software",
+    "keywords": [
+      "figma to svg",
+      "figma svg export",
+      "figma outline stroke",
+      "figma exported svg"
+    ],
+    "publishedAt": "2026-11-01",
+    "readingMinutes": 12,
+    "excerpt": "Figma exports SVG cleanly until effects, images or masks get involved. Learn the settings that keep artwork vector and what cannot survive.",
+    "content": "<p>Figma exports SVG cleanly until effects, images or masks get involved. Learn the settings that keep artwork vector and what cannot survive.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "bulk-vectorize-customer-artwork",
+    "title": "Bulk Vectorizing Customer Artwork: A Process for Shops",
+    "seoTitle": "Bulk Vectorizing Customer Artwork: Shop Workflow and QA",
+    "seoDescription": "When customers send a pile of screenshots and JPGs, consistency beats craft. Build a batch process with intake rules and a pass/fail check.",
+    "category": "print-production",
+    "keywords": [
+      "bulk vectorize",
+      "customer artwork workflow",
+      "batch vectorization",
+      "print shop automation"
+    ],
+    "publishedAt": "2026-10-31",
+    "readingMinutes": 12,
+    "excerpt": "When customers send a pile of screenshots and JPGs, consistency beats craft. Build a batch process with intake rules and a pass/fail check.",
+    "content": "<p>When customers send a pile of screenshots and JPGs, consistency beats craft. Build a batch process with intake rules and a pass/fail check.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  },
+  {
+    "slug": "what-print-shops-ask-customers",
+    "title": "What Print Shops Should Ask Customers for, and Why",
+    "seoTitle": "Print Shop Artwork Intake: The Questions That Prevent Reworks",
+    "seoDescription": "Most reprints start with a missing answer at intake. Use a short form that captures the constraints each job type actually depends on.",
+    "category": "print-production",
+    "keywords": [
+      "print shop artwork intake",
+      "customer file requirements",
+      "artwork brief",
+      "print rework prevention"
+    ],
+    "publishedAt": "2026-10-30",
+    "readingMinutes": 12,
+    "excerpt": "Most reprints start with a missing answer at intake. Use a short form that captures the constraints each job type actually depends on.",
+    "content": "<p>Most reprints start with a missing answer at intake. Use a short form that captures the constraints each job type actually depends on.</p><h2>Overview</h2><p>Draft pending.</p>",
+    "faqs": [],
+    "relatedConverters": [],
+    "relatedPosts": [],
+    "sources": []
+  }
+]

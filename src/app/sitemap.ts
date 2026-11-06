@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { BLOG_SLUGS } from "@/lib/blog-configs";
 import { COMPARISON_SLUGS } from "@/lib/comparisons";
 import { CONVERTER_PAGES } from "@/lib/converter-configs";
 import { RESOURCE_SLUGS } from "@/lib/resource-configs";
@@ -31,6 +32,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  // Add blog article pages
+  const blogPages = BLOG_SLUGS.map((slug) => ({
+    url: `${baseUrl}/blog/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
   // Add workflow pages
   const workflowPages = WORKFLOW_SLUGS.map((slug) => ({
     url: `${baseUrl}/for-crafters/${slug}`,
@@ -44,6 +53,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const hubPages = [
     {
       url: `${baseUrl}/for-crafters`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.8,
@@ -84,6 +99,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...comparisonPages,
     ...resourcePages,
     ...workflowPages,
+    ...blogPages,
     ...hubPages,
   ];
 }
