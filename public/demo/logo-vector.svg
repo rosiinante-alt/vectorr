@@ -1,0 +1,13 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF8E72;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" fill="#ffffff"/>
+  <circle cx="100" cy="80" r="35" fill="url(#grad1)" stroke="#FF5A5A" stroke-width="2"/>
+  <path d="M 60 130 Q 100 155 140 130" stroke="#4ECDC4" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <rect x="70" y="150" width="60" height="20" fill="#95E1D3" rx="4"/>
+  <text x="100" y="185" font-size="12" text-anchor="middle" font-weight="bold" fill="#333">VECTOR</text>
+</svg>

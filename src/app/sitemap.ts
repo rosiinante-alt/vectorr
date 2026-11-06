@@ -87,6 +87,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // /resources already lives in mainPages below.
   const hubPages = [
     {
+      url: `${baseUrl}/compare`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/for-crafters`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
