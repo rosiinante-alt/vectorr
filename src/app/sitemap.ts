@@ -4,6 +4,8 @@ import { COMPARISON_SLUGS } from "@/lib/comparisons";
 import { CONVERTER_PAGES } from "@/lib/converter-configs";
 import { RESOURCE_SLUGS } from "@/lib/resource-configs";
 import { WORKFLOW_SLUGS } from "@/lib/workflow-configs";
+import { DESIGNERS_WORKFLOWS } from "@/lib/designers-workflow-configs";
+import { SHOPS_WORKFLOWS } from "@/lib/shops-workflow-configs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
@@ -40,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  // Add workflow pages
+  // Add workflow pages (crafters)
   const workflowPages = WORKFLOW_SLUGS.map((slug) => ({
     url: `${baseUrl}/for-crafters/${slug}`,
     lastModified: new Date(),
@@ -48,11 +50,67 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  // Add shops workflow pages
+  const shopsPages = SHOPS_WORKFLOWS.map((w) => ({
+    url: `${baseUrl}/for-shops/${w.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  // Add designers workflow pages
+  const designersPages = DESIGNERS_WORKFLOWS.map((w) => ({
+    url: `${baseUrl}/for-designers/${w.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  // Tools pages
+  const toolPages = [
+    {
+      url: `${baseUrl}/tools`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/tools/batch-converter`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/tools/svg-optimizer`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/tools/color-separation`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+  ];
+
   // Hub pages, so the section roots are indexed alongside their children.
   // /resources already lives in mainPages below.
   const hubPages = [
     {
       url: `${baseUrl}/for-crafters`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/for-shops`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/for-designers`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.8,
@@ -99,7 +157,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...comparisonPages,
     ...resourcePages,
     ...workflowPages,
+    ...shopsPages,
+    ...designersPages,
     ...blogPages,
+    ...toolPages,
     ...hubPages,
   ];
 }

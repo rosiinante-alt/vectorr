@@ -68,7 +68,9 @@ describe('resolveProduct', () => {
 
 describe('grantOrderCredits', () => {
   it('grants the catalog credit amount for a one-time purchase', async () => {
-    const { client, calls } = stubClient();
+    const { client, calls } = stubClient({
+      rpcResult: { data: true, error: null },
+    });
 
     const result = await grantOrderCredits(client, {
       id: 'order_1',
@@ -77,13 +79,13 @@ describe('grantOrderCredits', () => {
       recurring: false,
     });
 
-    expect(result).toEqual({ granted: true, credits: 1.2, reason: 'purchase' });
+    expect(result).toEqual({ granted: true, credits: 20, reason: 'purchase' });
     expect(calls[0]).toEqual({
       method: 'rpc:grant_credits_once',
       args: [
         {
           p_user_id: USER_ID,
-          p_amount: 1.2,
+          p_amount: 20,
           p_reason: 'purchase',
           p_polar_order_id: 'order_1',
         },

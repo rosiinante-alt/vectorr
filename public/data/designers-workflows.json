@@ -1,0 +1,928 @@
+[
+  {
+    "slug": "figma-to-production-assets",
+    "title": "Export Production-Ready Assets from Figma",
+    "seoTitle": "Figma to Production Assets — SVG, PNG Export Settings and Optimization",
+    "seoDescription": "Export clean SVG and PNG assets from Figma for web, iOS, Android, and print. Outline text, flatten effects, optimize file size, and avoid common export failures.",
+    "keywords": [
+      "figma export svg",
+      "figma asset export",
+      "figma to production",
+      "figma svg settings",
+      "figma optimization"
+    ],
+    "category": "Design Assets",
+    "tools": [
+      "Figma",
+      "Figma Dev Mode",
+      "Asset Exporter Plugin"
+    ],
+    "formats": [
+      "SVG",
+      "PNG",
+      "PDF"
+    ],
+    "content": "# Export Production-Ready Assets from Figma\n\nFigma exports look perfect in preview but break in production for predictable reasons: live text that references unavailable fonts, effects that flatten to raster, masks that create clipping artifacts, and absolute positioning that fails responsive layouts. This guide walks through export settings that produce assets engineers can use without manual cleanup.\n\n## Why Vectorr for Figma Assets?\n\nPost-Export Optimization: Clean up Figma's verbose SVG output—remove editor metadata, collapse groups, reduce decimal precision.\n\nBatch Processing: Export an entire icon set, optimize all files in one pass, and verify they still render correctly.\n\nWeb-Ready Output: Inline critical CSS, remove Figma's default viewBox padding, and ensure assets work in all browsers.\n\n## Figma Export Checklist\n\n1. **Outline Text**: Convert all text layers to outlines before export (Cmd+Shift+O). Fonts render differently across platforms.\n2. **Flatten Effects**: Shadows, blurs, and blend modes don't export reliably. Use \"Flatten\" to rasterize them into the base layer.\n3. **Simplify Paths**: Reduce node count with the \"Simplify\" command (Cmd+Shift+P) to shrink file size.\n4. **Name Layers**: Export names come from layer names. Use descriptive, kebab-case names (icon-home, button-primary).\n5. **Set Export Scale**: @1x for web SVG, @2x and @3x for mobile PNG, 300 DPI for print PDF.\n\n## SVG Export Settings\n\nFigma's SVG export dialog has three critical settings:\n\n- **Include \"id\" attribute**: Disable unless you're animating with JavaScript. IDs add bulk and create conflicts when multiple instances load.\n- **Outline text**: Always enable. Keeps text editable in Figma but exports as paths.\n- **Simplify stroke**: Enable for icons, disable for illustrations. Converts strokes to fills, which reduces nodes but loses stroke-width editability.\n\n## PNG Export for High-DPI Screens\n\nMobile apps need @2x and @3x assets. Export at 2× and 3× scale in Figma, then name files with suffixes: `icon-home@2x.png`, `icon-home@3x.png`. iOS and Android asset catalogs read these suffixes automatically.\n\nFor web, export @2x PNG and serve via `srcset`: `<img src=\"icon.png\" srcset=\"icon@2x.png 2x\">`. This gives Retina displays crisp rendering without forcing all users to download large files.\n\n## PDF Export for Print\n\nFigma's PDF export is RGB, not CMYK. For print-ready files, export as SVG, open in Illustrator, convert to CMYK, and add bleed. Or export a high-res PNG (600 DPI) and embed it in a print-ready PDF with proper crop marks.\n\n## Common Export Failures\n\nText Renders as Boxes: Font not available on the target platform. Outline text before export, or embed the font (increases file size).\n\nEffects Disappear: Shadow or blur didn't export. Flatten the effect into the base layer before export.\n\nMask Clips Unexpectedly: Figma's masks use CSS clip-path, which older browsers don't support. Flatten masked layers into a single shape.\n\nColors Look Different: Figma uses display P3 color space; most web browsers use sRGB. Export with \"Convert to sRGB\" enabled.\n\n## Icon Sets and Batch Export\n\nFor icon libraries, use Figma's batch export: select all frames, set export settings once, and export all at once. Name each frame consistently (icon-name-variant), and Figma will name files accordingly. After export, use Vectorr's batch optimizer to reduce file size across the entire set without manual tweaking.\n\n## Responsive SVG Sizing\n\nFigma exports SVG with fixed width/height attributes. For responsive web SVG, remove those attributes and rely on viewBox only. The SVG will scale to fit its container. Or set `width=\"100%\" height=\"auto\"` in the exported file.\n\n## Troubleshooting\n\nIf exported SVG looks different from Figma preview, check for blend modes (Multiply, Overlay) that CSS doesn't support well—flatten them. If file size is huge, check for embedded raster images—export those separately as PNG. If edges look pixelated, increase export scale (2× or 4×), then scale down in CSS with image-rendering: crisp-edges.",
+    "faqs": [
+      {
+        "question": "Should I outline text in Figma before exporting?",
+        "answer": "Yes, always. Fonts render differently across platforms. Outlining converts text to paths, guaranteeing the same appearance everywhere."
+      },
+      {
+        "question": "What's the best export format for web icons?",
+        "answer": "SVG for scalable icons, PNG @2x for raster. SVG keeps file size small and scales perfectly; PNG is a fallback for complex effects."
+      },
+      {
+        "question": "Why does my exported SVG have huge file size?",
+        "answer": "Figma includes editor metadata and verbose path data. Use an SVG optimizer (like Vectorr) to remove metadata and reduce decimal precision."
+      },
+      {
+        "question": "How do I export assets for iOS and Android?",
+        "answer": "Export PNG at @2x and @3x scale, name with suffixes (icon@2x.png), and drop into Xcode/Android Studio asset catalogs."
+      },
+      {
+        "question": "Can I export print-ready files from Figma?",
+        "answer": "Not directly—Figma exports RGB, not CMYK. Export SVG, open in Illustrator, convert to CMYK, and add bleed for print."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Export Production-Ready Assets from Figma",
+          "description": "Export clean SVG and PNG assets from Figma for web, iOS, Android, and print.",
+          "tool": [
+            {
+              "@type": "HowToTool",
+              "name": "Figma"
+            }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Outline text",
+              "text": "Convert all text layers to outlines (Cmd+Shift+O) before export."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Flatten effects",
+              "text": "Rasterize shadows, blurs, and blend modes that don't export reliably."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Configure export settings",
+              "text": "Disable ID attributes, enable outline text, choose appropriate scale."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Batch export and optimize",
+              "text": "Export all assets, then optimize with an SVG optimizer to reduce file size."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Should I outline text in Figma before exporting?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, always. Fonts render differently across platforms. Outlining converts text to paths, guaranteeing the same appearance everywhere."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What's the best export format for web icons?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "SVG for scalable icons, PNG @2x for raster. SVG keeps file size small and scales perfectly; PNG is a fallback for complex effects."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why does my exported SVG have huge file size?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Figma includes editor metadata and verbose path data. Use an SVG optimizer (like Vectorr) to remove metadata and reduce decimal precision."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I export assets for iOS and Android?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Export PNG at @2x and @3x scale, name with suffixes (icon@2x.png), and drop into Xcode/Android Studio asset catalogs."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I export print-ready files from Figma?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not directly—Figma exports RGB, not CMYK. Export SVG, open in Illustrator, convert to CMYK, and add bleed for print."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "logo-redesign-workflow",
+    "title": "Vectorize and Export Logo Variants for Branding",
+    "seoTitle": "Logo Redesign — Vectorization, Multi-Format Export, Brand Guidelines",
+    "seoDescription": "Vectorize logos in Figma, create horizontal, stacked, mono, and color variants, and export specs for brand guidelines. Optimize for all sizes and media.",
+    "keywords": [
+      "logo vectorization",
+      "logo export variants",
+      "brand guidelines",
+      "logo design figma",
+      "multi-format logo"
+    ],
+    "category": "Branding",
+    "tools": [
+      "Figma",
+      "Illustrator",
+      "Adobe Creative Suite"
+    ],
+    "formats": [
+      "SVG",
+      "PNG",
+      "PDF"
+    ],
+    "content": "# Vectorize and Export Logo Variants for Branding\n\nA logo's value lies not in a single file but in a system of variants. Horizontal, vertical, stacked, monochrome, and inverted versions must all work at favicon size and billboard scale. This guide walks through vectorizing logos in Figma, creating consistent variants, and exporting specs that production teams can follow.\n\n## Vectorization Fundamentals\n\nIf you're redesigning a raster logo or importing a sketch, start with vectorization. Figma's **Image Trace** (Image > Trace) converts raster to vector paths, but quality depends on the source. For hand-drawn logos:\n\n1. **Prepare the raster**: High contrast, remove background noise, and ensure clean edges before tracing.\n2. **Adjust trace settings**: Experiment with **Threshold** (controls detail) and **Tolerance** (smooths paths). Higher tolerance = simpler paths, smaller file size.\n3. **Review and refine**: Trace produces rough output. Manually simplify paths with the Pen tool, remove redundant nodes, and ensure consistent stroke weights.\n4. **Test at small sizes**: Export at 16px to verify the logo remains legible as a favicon.\n\n## Creating Logo Variants\n\nEvery logo system needs at least these variants:\n\n- **Horizontal (lockup)**: Logo + wordmark side-by-side. Standard use case.\n- **Stacked (vertical)**: Logo above wordmark. Used in narrow layouts (mobile, sidebars).\n- **Icon only**: Logo without wordmark. For favicons, app icons, social media avatars.\n- **Monochrome (black)**: Single-color version. For embroidery, etching, minimal contexts.\n- **Monochrome (white)**: Inverted for dark backgrounds. Required for print, merchandise.\n- **Outline**: Stroke-only version for cut vinyl or laser applications.\n\nBuild each variant as a component in Figma with consistent naming: `logo-horizontal`, `logo-stacked`, `logo-icon`, `logo-mono-black`, `logo-mono-white`, `logo-outline`.\n\n## Stroke Consistency and Pixel Alignment\n\nFor logos with strokes, consistency is critical:\n\n- **Stroke weight**: Choose one (commonly 2px for web, 1.5pt for print). Apply uniformly across all elements.\n- **Stroke alignment**: Set to **Center** for predictable scaling. Inner/Outer alignment can cause misalignment at small sizes.\n- **Pixel alignment**: Enable **Pixel Snapping** in Figma export settings. Prevents anti-aliasing artifacts.\n- **Corner radius**: Use consistent corner styles (rounded vs sharp) to reinforce brand identity.\n\n## Export Specifications\n\nCreate an export manifest for your brand guidelines:\n\n**SVG (Web)**: Horizontal, stacked, icon at 1x. Outline text if wordmark includes type.\n\n**PNG (App/Social)**: Icon variant at @1x, @2x, @3x (16px, 32px, 48px; 128px, 256px, 512px for social).\n\n**PDF (Print)**: All variants at 300 DPI. Include full-color, monochrome, and knockout (white-on-dark) versions.\n\n**Minimum size**: Test all variants at 16px. If icon breaks legibility, redesign or document size restrictions.\n\n## Brand Guideline Asset Prep\n\nWhen exporting for guidelines, include:\n\n1. **Clear space**: Minimum padding around the logo. Mark as a dotted box in Figma, export with guides.\n2. **Size restrictions**: Minimum width in pixels (e.g., \"never smaller than 80px on web\").\n3. **Color specs**: Export the primary brand color as hex, RGB, and Pantone (if print).\n4. **Incorrect usage**: Create a variant showing common mistakes (stretched, rotated, modified colors). This prevents future misuse.\n5. **File organization**: Export to folders by type: `horizontal/`, `stacked/`, `icon/`, `monochrome/`, `print/`.\n\n## Testing and Delivery\n\nBefore finalizing:\n\n- **Scale test**: Export at 16px, 32px, 64px, 256px. Verify legibility at all sizes.\n- **Format test**: SVG in browsers (Chrome, Safari, Firefox), PNG in all applications.\n- **Color accuracy**: Print a proof. RGB-to-CMYK conversion can shift colors significantly.\n- **File naming**: Use consistent, version-controlled names (`logo-v2-horizontal-color.svg`, not `logo_final_FINAL_2.svg`).\n\nDeliver as a Figma project with shared library access for teams. Export all variants into a zip file with a README documenting sizes, color values, and usage restrictions.",
+    "faqs": [
+      {
+        "question": "How do I vectorize a raster logo in Figma?",
+        "answer": "Use Image > Trace. Adjust Threshold and Tolerance for detail vs. simplicity. Manually refine paths afterward to remove artifacts. Test the result at small sizes (16px) before finalizing."
+      },
+      {
+        "question": "What logo variants do I absolutely need?",
+        "answer": "Horizontal (primary), stacked (narrow layouts), icon (app/favicon), monochrome black and white (print/restricted color), and outline (cut/engrave). All must work at 16px minimum."
+      },
+      {
+        "question": "Should logo strokes be centered or aligned inward?",
+        "answer": "Always center-aligned. Center alignment scales predictably; inner/outer alignment shifts at different sizes, causing misalignment at small scales."
+      },
+      {
+        "question": "What's the minimum size a logo should work at?",
+        "answer": "16px for web (favicon). Test all variants at 16px, 32px, and 64px. If details vanish at 16px, simplify the design or document the minimum size restriction."
+      },
+      {
+        "question": "How do I prepare logos for print?",
+        "answer": "Export PDF at 300 DPI with CMYK color mode (convert in Illustrator). Include monochrome and knockout versions. Add a 0.125\" bleed and mark safe area."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Vectorize and Export Logo Variants for Branding",
+          "description": "Vectorize logos, create variants, and export for brand guidelines.",
+          "tool": [
+            {
+              "@type": "HowToTool",
+              "name": "Figma"
+            }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Vectorize raster",
+              "text": "Use Image > Trace. Adjust Threshold and Tolerance, then manually refine paths."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Create variants",
+              "text": "Build horizontal, stacked, icon, and monochrome versions as components."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Ensure consistency",
+              "text": "Use uniform stroke weights, center alignment, and pixel-snapping settings."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Export and test",
+              "text": "Export SVG, PNG @1x/@2x/@3x, and PDF. Test at 16px, 32px, 64px, and print."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How do I vectorize a raster logo in Figma?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use Image > Trace. Adjust Threshold and Tolerance for detail vs. simplicity. Manually refine paths afterward to remove artifacts. Test the result at small sizes (16px) before finalizing."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What logo variants do I absolutely need?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Horizontal (primary), stacked (narrow layouts), icon (app/favicon), monochrome black and white (print/restricted color), and outline (cut/engrave). All must work at 16px minimum."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Should logo strokes be centered or aligned inward?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Always center-aligned. Center alignment scales predictably; inner/outer alignment shifts at different sizes, causing misalignment at small scales."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What's the minimum size a logo should work at?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "16px for web (favicon). Test all variants at 16px, 32px, and 64px. If details vanish at 16px, simplify the design or document the minimum size restriction."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I prepare logos for print?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Export PDF at 300 DPI with CMYK color mode (convert in Illustrator). Include monochrome and knockout versions. Add a 0.125\" bleed and mark safe area."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "icon-system-design",
+    "title": "Build a Consistent Icon System in Figma",
+    "seoTitle": "Icon System Design — Grid Alignment, Stroke Consistency, SVG Optimization",
+    "seoDescription": "Design icon systems with consistent grids, stroke weights, sizing conventions, and naming. Export optimized SVGs for production use.",
+    "keywords": [
+      "icon system design",
+      "figma icon grid",
+      "icon naming conventions",
+      "svg icon optimization",
+      "icon stroke weight"
+    ],
+    "category": "Design Systems",
+    "tools": [
+      "Figma",
+      "Icon.Ninja",
+      "SVGO"
+    ],
+    "formats": [
+      "SVG",
+      "PNG",
+      "JSON"
+    ],
+    "content": "# Build a Consistent Icon System in Figma\n\nIcon systems live or die on consistency. A 24px icon drawn on a 16px grid, paired with inconsistent stroke weights, fragments across products. This guide covers grid setup, stroke standardization, naming conventions, and SVG export best practices for production icon libraries.\n\n## Grid and Size Standards\n\nStart with a grid and stick to it. Common conventions:\n\n- **Web**: 16px, 24px, 32px base sizes (commonly increased to 48px, 64px for touch interfaces).\n- **Mobile**: 24px, 48px (iOS), 24px, 48px (Android).\n- **Desktop app**: 16px (UI elements), 32px (toolbar), 64px (app icon).\n\nIn Figma, set up your artboard at 64px × 64px with a **2px padding** (leaving 60px × 60px for content). This gives buffer space and scales cleanly to 16px (÷4), 24px (×3/8), 32px (÷2).\n\nEnable **Pixel Grid** (View > Pixel Grid) and **Guides** to snap all paths to grid. For strokes, enable **Snap to Pixel** in export settings.\n\n## Stroke Weight Consistency\n\nAll icons in a system must use the same stroke weight. Common standards:\n\n- **Thin (1.5px)**: Minimal, modern aesthetic. Works at 24px and above.\n- **Regular (2px)**: Most versatile. Works at 16px–64px.\n- **Bold (2.5–3px)**: Emphasizes icons, used sparingly for important states.\n\nChoose one primary stroke weight, then optionally offer a bold variant. Apply uniformly:\n\n1. **Stroke alignment**: Center (scales predictably). Never mix inner/outer.\n2. **Corner radius**: Consistent joins (rounded vs. sharp). Set caps to **Round** for softer appearance.\n3. **Filled vs. outlined**: Separate these into different sets (outlined for default, filled for active/hover states).\n\nVerify consistency by toggling between icons at 16px preview. Mismatches stand out immediately.\n\n## Naming Conventions\n\nEstablish a naming schema before creating 200+ icons. Example:\n\n`icon-[name]-[size]-[weight]`\n\n- `icon-home-24-regular`\n- `icon-menu-24-bold`\n- `icon-chevron-right-16-regular`\n\nOr, if size and weight are uniform across your set:\n\n`icon-[descriptive-name]` (e.g., `icon-home`, `icon-menu`, `icon-chevron-right`)\n\nIn Figma, organize as components with **variant properties**:\n\n- Base component: `icon`\n- Variant 1: `name=home|size=24|state=default`\n- Variant 2: `name=home|size=24|state=filled`\n\nThis makes swapping variants in designs instant for design teams.\n\n## Testing at Actual Sizes\n\nBefore exporting:\n\n1. **Preview at target sizes**: Export a test set at 16px, 24px, 32px. Open in browser or image viewer. Legibility drops off fast at 16px.\n2. **Check antialiasing**: Zoom to 100% in your browser. Look for rough edges or misaligned strokes. If evident, enable **Pixel Snapping** in Figma.\n3. **Contrast test**: Ensure icons work on both light and dark backgrounds. Export a white version on a dark canvas; export dark on light.\n4. **Pair with type**: Icons rarely stand alone. Test icons next to text at the size you'll use them. Ensure visual balance.\n\n## SVG Export and Cleanup\n\nFigma's SVG export includes editor metadata (IDs, layer names, unused styles). Before shipping:\n\n1. **Export from Figma**: Select icon, right-click > Copy as SVG (or Export > SVG).\n2. **Run SVGO**: `svgo icon-home.svg --output icon-home.opt.svg`. Removes metadata, simplifies paths, reduces file size by 30–50%.\n3. **Verify rendering**: Open optimized SVG in browser. Compare to original. Some optimization may strip essential data; adjust SVGO config if needed.\n4. **Inline or link**: For web, inline SVGs in CSS `background-image` or use `<img src>`. Inline gives more styling control; linked keeps markup clean.\n\n## Organizing and Versioning\n\nStore your icon system with clear structure:\n\n```\nicon-system/\n├── figma/ (source file)\n├── src/\n│   ├── 16px/\n│   ├── 24px/\n│   ├── 32px/\n│   └── 64px/\n├── dist/ (optimized SVG)\n├── package.json (version, metadata)\n└── README.md (usage guide)\n```\n\nVersion your icon set (e.g., v1.0, v1.1, v2.0). When adding new icons, increment minor version; breaking changes (renamed icons, grid changes) bump major. Publish to npm or a private package registry for easy consumption.\n\n## Integration with Design Tools\n\nFor design teams, set up Figma components with auto-layout:\n\n1. Create a 24px × 24px component frame.\n2. Add the icon path inside.\n3. Set auto-layout with 0 padding and no spacing.\n4. Enable **Resizable**: All selected (so designs can scale the component).\n5. Publish to a Figma library for team access.\n\nDesigners can now drag icons into designs, resize instantly, and stay in sync when you publish updates.",
+    "faqs": [
+      {
+        "question": "What grid size should I use for icon systems?",
+        "answer": "64px × 64px is standard (with 2px padding, leaving 60px content area). This scales cleanly to 16px, 24px, 32px, and larger. Use consistent grid across all icons."
+      },
+      {
+        "question": "Should all icons use the same stroke weight?",
+        "answer": "Yes. Choose one primary weight (2px is most versatile) and apply uniformly. Optionally offer a bold variant. Mismatched weights destroy visual consistency."
+      },
+      {
+        "question": "How do I name icons for a system with 200+ icons?",
+        "answer": "Use a schema like `icon-[name]-[size]-[weight]` or, if uniform, just `icon-[name]`. In Figma, use component variants (name, size, state) for instant swapping in designs."
+      },
+      {
+        "question": "Why does my icon look fuzzy at 16px?",
+        "answer": "Enable Pixel Snapping in Figma export settings and ensure paths are grid-aligned. Test at 100% zoom in browser. If still fuzzy, the icon may be too detailed for small sizes; simplify."
+      },
+      {
+        "question": "Should I inline SVGs or link to them?",
+        "answer": "Inline for styling control (CSS fills, animations). Link for cleaner markup and caching. Most icon libraries offer both; choose by use case."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Build a Consistent Icon System in Figma",
+          "description": "Design icon systems with grids, consistent strokes, and proper naming.",
+          "tool": [
+            {
+              "@type": "HowToTool",
+              "name": "Figma"
+            }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Set up grid",
+              "text": "Use 64px artboards with 2px padding. Enable pixel grid and guides."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Standardize strokes",
+              "text": "Choose one stroke weight (2px recommended). Use center alignment and round caps. Keep consistent across all icons."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Name and organize",
+              "text": "Use schema like icon-[name]-[size]-[weight]. Create Figma components with variant properties."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Export and optimize",
+              "text": "Export SVG, run SVGO to remove metadata and simplify paths. Test at 16px, 24px, 32px."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What grid size should I use for icon systems?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "64px × 64px is standard (with 2px padding, leaving 60px content area). This scales cleanly to 16px, 24px, 32px, and larger. Use consistent grid across all icons."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Should all icons use the same stroke weight?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Choose one primary weight (2px is most versatile) and apply uniformly. Optionally offer a bold variant. Mismatched weights destroy visual consistency."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I name icons for a system with 200+ icons?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use a schema like `icon-[name]-[size]-[weight]` or, if uniform, just `icon-[name]`. In Figma, use component variants (name, size, state) for instant swapping in designs."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why does my icon look fuzzy at 16px?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Enable Pixel Snapping in Figma export settings and ensure paths are grid-aligned. Test at 100% zoom in browser. If still fuzzy, the icon may be too detailed for small sizes; simplify."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Should I inline SVGs or link to them?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Inline for styling control (CSS fills, animations). Link for cleaner markup and caching. Most icon libraries offer both; choose by use case."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "typeface-optimization",
+    "title": "Optimize Fonts for Web Performance",
+    "seoTitle": "Font Optimization — Subsetting, Variable Fonts, WOFF2 Conversion",
+    "seoDescription": "Optimize fonts for web with subsetting, variable fonts, and WOFF2 format. Reduce file sizes, check licenses, and implement Google Fonts best practices.",
+    "keywords": [
+      "font subsetting",
+      "variable fonts",
+      "woff2 optimization",
+      "web font performance",
+      "font file size"
+    ],
+    "category": "Design Assets",
+    "tools": [
+      "Fonttools",
+      "Glyphhanger",
+      "Google Fonts"
+    ],
+    "formats": [
+      "WOFF2",
+      "WOFF",
+      "TTF"
+    ],
+    "content": "# Optimize Fonts for Web Performance\n\nWeb fonts slow pages down. A full font family at 400–800 KB per weight shifts layouts, delays text rendering, and burns mobile data. This guide covers subsetting, variable fonts, format conversion, and licensing checks to ship fonts that load fast.\n\n## Why Font File Size Matters\n\nEvery font weight is a separate HTTP request. A typical family (regular, medium, bold, italic) is 2–3 MB uncompressed. On slow networks:\n\n- **FOIT (Flash of Invisible Text)**: Text stays invisible until fonts load.\n- **FOUT (Flash of Unstyled Text)**: System font shows first, then swaps. Creates jarring layout shift.\n- **Cumulative Layout Shift**: Text reflows when font loads, breaking scroll position.\n\nSubsetting and compression reduce load time from 2–3s to 200–400ms, making text instantly readable.\n\n## Subsetting Fonts\n\nSubsetting removes unused glyphs. A Latin-only site doesn't need Cyrillic, Greek, or CJK characters. Subsetting a font to Latin + punctuation cuts file size by 60–80%.\n\n### Using Glyphhanger\n\n```bash\n# Install glyphhanger (requires Node.js)\nnpm install -g glyphhanger\n\n# Subset a font to Latin only\nglyphhanger --LATIN --subset=font.ttf\n\n# Subset to specific text (for headings)\nglyphhanger --whitelist=\"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\" --subset=heading.ttf\n```\n\n### Using Fonttools (Python)\n\n```bash\n# Install fonttools\npip install fonttools brotli\n\n# Subset to Latin\npyftsubset font.ttf \\\n  --output-file=font-subset.woff2 \\\n  --flavor=woff2 \\\n  --layout-features='*' \\\n  --unicodes=U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD\n```\n\nThis reduces a 200 KB TTF to 40–60 KB WOFF2.\n\n## Variable Fonts vs. Static Families\n\nVariable fonts store multiple weights in one file. Instead of 6 files (Thin, Light, Regular, Medium, Bold, Black), one variable font covers 100–900 weight range.\n\n**Pros**:\n- Smaller total file size (one 80 KB file vs. six 40 KB files = 240 KB saved).\n- Smooth weight transitions (animate from 400 to 700).\n- Fewer HTTP requests.\n\n**Cons**:\n- Not all fonts offer variable versions.\n- Older browsers (IE11) don't support variable fonts (fallback to static).\n\nUse variable fonts when you need 3+ weights. For one or two weights, static fonts are smaller.\n\n## Format Conversion: WOFF2 is King\n\nFont formats by size (same typeface):\n\n- **TTF/OTF**: 200 KB (uncompressed)\n- **WOFF**: 120 KB (compressed)\n- **WOFF2**: 80 KB (Brotli compression, ~40% smaller than WOFF)\n\nModern browsers (Chrome, Firefox, Safari, Edge) support WOFF2. Skip WOFF and TTF unless supporting IE11.\n\n### Converting to WOFF2\n\n```bash\n# Using fonttools\npyftsubset font.ttf --output-file=font.woff2 --flavor=woff2\n```\n\nOr use online tools: [everythingfonts.com](https://everythingfonts.com/), [transfonter.org](https://transfonter.org/).\n\n## Licensing and Legal Compliance\n\nBefore subsetting or self-hosting:\n\n1. **Check the license**: Read the font's EULA. Some licenses prohibit modification or self-hosting.\n2. **Google Fonts**: Free to subset, modify, and self-host (SIL Open Font License).\n3. **Commercial fonts**: Adobe Fonts, MyFonts, Monotype often prohibit subsetting. Check before optimizing.\n4. **Embedding permissions**: Some fonts allow web embedding but not subsetting. Verify OTF/TTF embedding bits.\n\nIf unsure, email the foundry. Licensing violations risk legal action.\n\n## Google Fonts Best Practices\n\nGoogle Fonts are pre-optimized but can be further tuned:\n\n### 1. Limit Weights and Styles\n\n```html\n<!-- Bad: loads 12 font files -->\n<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap\" rel=\"stylesheet\">\n\n<!-- Good: loads 2 files -->\n<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap\" rel=\"stylesheet\">\n```\n\n### 2. Self-Host for Performance\n\nDownload Google Fonts and serve from your CDN. Eliminates DNS lookup and TLS handshake to fonts.googleapis.com.\n\n```bash\n# Download Google Font\ncurl -o inter.woff2 \"https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2\"\n```\n\nThen reference in CSS:\n\n```css\n@font-face {\n  font-family: 'Inter';\n  font-style: normal;\n  font-weight: 400;\n  src: url('/fonts/inter.woff2') format('woff2');\n  font-display: swap;\n}\n```\n\n### 3. Use `font-display: swap`\n\nPrevents FOIT. Text shows immediately in fallback font, then swaps when custom font loads.\n\n```css\n@font-face {\n  font-family: 'Inter';\n  src: url('/fonts/inter.woff2') format('woff2');\n  font-display: swap; /* Critical */\n}\n```\n\n## Testing and Validation\n\nBefore deploying:\n\n- **File size check**: Optimized fonts should be 40–80 KB per weight. If larger, subset more aggressively.\n- **Render test**: Open the font in FontDrop (fontdrop.info) to verify glyphs render correctly after subsetting.\n- **Cross-browser test**: Test in Chrome, Firefox, Safari. Ensure fallback fonts work in IE11 if supporting it.\n- **Lighthouse audit**: Run Google Lighthouse. Fonts should load in <500ms on 3G.\n\nSubsetting, WOFF2 conversion, and self-hosting reduce font load times from seconds to milliseconds, making text instantly readable.",
+    "faqs": [
+      {
+        "question": "What is font subsetting and why does it matter?",
+        "answer": "Subsetting removes unused characters (e.g., Cyrillic, CJK) from a font file. A Latin-only subset reduces file size by 60–80%, speeding up page load and text rendering."
+      },
+      {
+        "question": "Should I use variable fonts or static fonts?",
+        "answer": "Use variable fonts when you need 3+ weights (one 80 KB file vs. six 40 KB files saves 160 KB). For 1–2 weights, static fonts are smaller and simpler."
+      },
+      {
+        "question": "Why WOFF2 instead of TTF or WOFF?",
+        "answer": "WOFF2 uses Brotli compression and is ~40% smaller than WOFF, ~60% smaller than TTF. All modern browsers support it. Skip TTF/WOFF unless supporting IE11."
+      },
+      {
+        "question": "Can I subset and self-host Google Fonts?",
+        "answer": "Yes. Google Fonts use the SIL Open Font License, allowing modification and self-hosting. Download from fonts.google.com, subset with glyphhanger, and serve from your CDN."
+      },
+      {
+        "question": "What is font-display: swap and why use it?",
+        "answer": "It shows text immediately in a fallback font, then swaps to the custom font when loaded. Prevents invisible text (FOIT) and improves perceived performance."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Optimize Fonts for Web Performance",
+          "description": "Subset fonts, convert to WOFF2, and implement best practices for fast loading.",
+          "tool": [
+            {
+              "@type": "HowToTool",
+              "name": "Fonttools"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "Glyphhanger"
+            }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Subset the font",
+              "text": "Use glyphhanger or fonttools to remove unused glyphs. Latin-only subset cuts size by 60–80%."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Convert to WOFF2",
+              "text": "Use fonttools to convert to WOFF2 format, which is 40% smaller than WOFF."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Check license",
+              "text": "Verify the font license allows subsetting and self-hosting. Google Fonts are safe; commercial fonts may prohibit modification."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Implement font-display: swap",
+              "text": "Add font-display: swap to @font-face rules to prevent invisible text during load."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is font subsetting and why does it matter?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Subsetting removes unused characters (e.g., Cyrillic, CJK) from a font file. A Latin-only subset reduces file size by 60–80%, speeding up page load and text rendering."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Should I use variable fonts or static fonts?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use variable fonts when you need 3+ weights (one 80 KB file vs. six 40 KB files saves 160 KB). For 1–2 weights, static fonts are smaller and simpler."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why WOFF2 instead of TTF or WOFF?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "WOFF2 uses Brotli compression and is ~40% smaller than WOFF, ~60% smaller than TTF. All modern browsers support it. Skip TTF/WOFF unless supporting IE11."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I subset and self-host Google Fonts?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Google Fonts use the SIL Open Font License, allowing modification and self-hosting. Download from fonts.google.com, subset with glyphhanger, and serve from your CDN."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is font-display: swap and why use it?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It shows text immediately in a fallback font, then swaps to the custom font when loaded. Prevents invisible text (FOIT) and improves perceived performance."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "brand-asset-management",
+    "title": "Organize and Version Design Assets",
+    "seoTitle": "Brand Asset Management — Folder Structure, Naming, Version Control",
+    "seoDescription": "Organize design assets with consistent folder structure, naming conventions, version control, and asset libraries. Keep brand files accessible and up-to-date.",
+    "keywords": [
+      "brand asset management",
+      "design file organization",
+      "asset naming conventions",
+      "design version control",
+      "figma libraries"
+    ],
+    "category": "Branding",
+    "tools": [
+      "Figma",
+      "Notion",
+      "Google Drive",
+      "Abstract"
+    ],
+    "formats": [
+      "SVG",
+      "PNG",
+      "PDF",
+      "Figma"
+    ],
+    "content": "# Organize and Version Design Assets\n\nBrand assets scatter across drives, Figma files, and local folders until no one knows which logo is current. This guide covers folder structure, naming conventions, version control, and asset libraries that keep brand files organized, accessible, and up-to-date.\n\n## Folder Structure\n\nStart with a clear hierarchy. Two common approaches:\n\n### Type-Based Structure\n\n```\nbrand-assets/\n├── logos/\n│   ├── horizontal/\n│   ├── stacked/\n│   ├── icon/\n│   └── archive/\n├── colors/\n│   ├── palette.pdf\n│   └── tokens.json\n├── typography/\n│   ├── fonts/\n│   └── specimens/\n├── icons/\n├── photography/\n├── templates/\n│   ├── presentations/\n│   ├── social-media/\n│   └── print/\n└── guidelines/\n    └── brand-guide-v3.pdf\n```\n\nPros: Easy to find all logos, colors, or icons in one place.  \nCons: Hard to see all assets for a specific project or campaign.\n\n### Project-Based Structure\n\n```\nbrand-assets/\n├── brand-identity-2024/\n│   ├── logos/\n│   ├── colors/\n│   ├── typography/\n│   └── deliverables/\n├── website-redesign/\n│   ├── mockups/\n│   ├── components/\n│   └── assets/\n├── q1-campaign/\n│   ├── social/\n│   ├── print/\n│   └── email/\n└── core-assets/\n    ├── logos/\n    ├── colors/\n    └── fonts/\n```\n\nPros: All assets for a project are together.  \nCons: Core assets (logos, colors) may duplicate across folders.\n\n**Recommendation**: Hybrid. Use type-based for core brand assets (logos, colors, fonts), project-based for campaigns and temporary work.\n\n## Naming Conventions\n\nInconsistent naming creates chaos. Establish rules before creating 500 files:\n\n### File Naming Schema\n\n```\n[asset-type]-[descriptor]-[variant]-[version].[format]\n\nExamples:\nlogo-horizontal-color-v2.svg\nlogo-icon-mono-black-v2.png\nbutton-primary-hover-default.svg\nicon-home-24-regular.svg\nphoto-hero-landing-page-2024-q1.jpg\n```\n\n### Rules\n\n1. **Lowercase with hyphens**: No spaces, underscores, or camelCase. `logo-horizontal.svg`, not `Logo Horizontal.svg` or `logo_horizontal.svg`.\n2. **Descriptive, not generic**: `button-primary-hover.svg`, not `button1.svg`.\n3. **Version suffix**: `-v1`, `-v2`, `-v3`. Never `_final`, `_FINAL2`, `_final_REAL`.\n4. **Date for time-sensitive assets**: `hero-photo-2024-11.jpg` for assets that expire or get replaced seasonally.\n5. **Size/scale in filename for raster**: `icon-home-24.png`, `icon-home-48@2x.png`.\n\n### Figma Layer Naming\n\nSame rules apply in Figma:\n\n- Components: `button/primary`, `icon/home`, `logo/horizontal`\n- Variants: `size=24|state=default`, `theme=light|state=hover`\n- Frames: `home-hero-desktop-1920`, `dashboard-mobile-375`\n\nConsistent naming makes exports automatic (Export as SVG uses layer name).\n\n## Version Control\n\nDesign files need version control just like code.\n\n### For Figma\n\nFigma has built-in version history (File > Show Version History). Use it:\n\n1. **Save versions after major changes**: \"Logo finalized\", \"Color palette updated\", \"Website redesign complete\".\n2. **Restore old versions**: Click a version to restore or duplicate it.\n3. **Branching**: Create a branch (File > Save as branch) for experimental work. Merge back when approved.\n\n### For Files (Logos, PDFs, Fonts)\n\nUse **Git** or **cloud storage with versioning**:\n\n#### Git (for developers and technical teams)\n\n```bash\n# Initialize repo\ngit init\ngit add logos/\ngit commit -m \"Add logo variants v2\"\n\n# Tag releases\ngit tag v2.0\ngit push origin v2.0\n```\n\nPros: Full history, branching, collaboration.  \nCons: Non-designers find Git intimidating.\n\n#### Cloud Storage (Dropbox, Google Drive)\n\nEnable version history:\n\n- **Google Drive**: Right-click > Manage versions. Upload new versions, restore old ones.\n- **Dropbox**: File history keeps 30-day (free) or unlimited (paid) history.\n\nPros: Easy for non-technical teams.  \nCons: No branching, limited comparison tools.\n\n## Asset Libraries\n\nKeep brand assets accessible across teams.\n\n### Figma Libraries\n\nPublish components and styles as a library:\n\n1. **Create a Brand Library file**: Components for logos, buttons, icons, colors, typography.\n2. **Publish as library**: Assets > Publish library.\n3. **Enable in team files**: Any file in your team can now use components from the library.\n\nWhen you update the library, Figma prompts designers to accept updates in their files. This keeps everyone on the latest logos/colors without manual copying.\n\n### Cloud-Based Asset Management\n\nFor non-Figma assets (photos, fonts, videos):\n\n- **Notion**: Embed files, organize by category, add metadata (license, usage notes).\n- **Google Drive**: Shared folders with clear structure. Use Drive File Stream for local sync.\n- **Dropbox**: Similar to Drive. Better for large files (video, high-res photos).\n- **Abstract** (paid): Version control for Sketch and Adobe XD. Git-like branching for designers.\n\n## Backup Strategy\n\nDesign files are irreplaceable. Backup everything:\n\n1. **Cloud sync**: All files in Google Drive, Dropbox, or similar. Auto-syncs from local.\n2. **Figma auto-saves**: Figma files live in the cloud. Export critical files as `.fig` backups monthly.\n3. **External drive**: Quarterly backup of entire `brand-assets/` folder to external SSD.\n\nIf Figma, Drive, or Dropbox fails (rare but possible), you have offline copies.\n\n## Access Control and Permissions\n\nNot everyone needs edit access. Set permissions:\n\n- **View-only**: Marketing, external partners. Can view and download, can't edit.\n- **Edit**: Designers, brand managers. Can modify files.\n- **Admin**: Creative director. Can delete, change permissions, manage libraries.\n\nIn Figma: Share > Set permissions (View, Edit, Admin).  \nIn Drive/Dropbox: Share > Viewer, Commenter, Editor.\n\n## Archiving Old Assets\n\nDon't delete old assets—archive them. Create an `archive/` folder for superseded logos, outdated colors, or deprecated designs.\n\nExample:\n\n```\nlogos/\n├── current/\n│   ├── logo-horizontal-v3.svg\n│   └── logo-icon-v3.svg\n└── archive/\n    ├── logo-horizontal-v1.svg\n    ├── logo-horizontal-v2.svg\n    └── old-brand-2019/\n```\n\nWhen someone asks \"what did the old logo look like?\", you have it.",
+    "faqs": [
+      {
+        "question": "Should I use type-based or project-based folder structure?",
+        "answer": "Hybrid works best. Use type-based for core brand assets (logos, colors, fonts) that get reused everywhere, and project-based for campaigns and time-bound work."
+      },
+      {
+        "question": "What naming convention should I use for design files?",
+        "answer": "Use lowercase with hyphens: [asset-type]-[descriptor]-[variant]-[version].ext. Example: logo-horizontal-color-v2.svg. Avoid spaces, underscores, and generic names like final_2.svg."
+      },
+      {
+        "question": "How do I version control Figma files?",
+        "answer": "Use Figma's built-in version history (File > Show Version History). Save versions after major changes and use branches for experimental work. Restore or duplicate old versions as needed."
+      },
+      {
+        "question": "What's the best way to share brand assets with a team?",
+        "answer": "Use Figma libraries for components and styles. For other files (PDFs, fonts, photos), use Google Drive or Dropbox with clear folder structure and permissions (view vs. edit)."
+      },
+      {
+        "question": "Should I delete old logo versions or archive them?",
+        "answer": "Archive, don't delete. Create an archive/ folder for superseded assets. You'll need old versions for reference, legal proof, or when someone asks \"what did it look like before?\""
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Organize and Version Design Assets",
+          "description": "Set up folder structure, naming conventions, and version control for brand assets.",
+          "tool": [
+            {
+              "@type": "HowToTool",
+              "name": "Figma"
+            }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Choose folder structure",
+              "text": "Use hybrid: type-based for core assets, project-based for campaigns."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Establish naming conventions",
+              "text": "Use [asset-type]-[descriptor]-[variant]-[version].ext. Lowercase with hyphens, no spaces."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Set up version control",
+              "text": "Use Figma version history or Git for files. Tag major releases."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Create asset libraries",
+              "text": "Publish Figma libraries for components. Use Drive/Dropbox for other files. Set permissions."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Should I use type-based or project-based folder structure?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hybrid works best. Use type-based for core brand assets (logos, colors, fonts) that get reused everywhere, and project-based for campaigns and time-bound work."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What naming convention should I use for design files?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use lowercase with hyphens: [asset-type]-[descriptor]-[variant]-[version].ext. Example: logo-horizontal-color-v2.svg. Avoid spaces, underscores, and generic names like final_2.svg."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I version control Figma files?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use Figma's built-in version history (File > Show Version History). Save versions after major changes and use branches for experimental work. Restore or duplicate old versions as needed."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What's the best way to share brand assets with a team?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use Figma libraries for components and styles. For other files (PDFs, fonts, photos), use Google Drive or Dropbox with clear folder structure and permissions (view vs. edit)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Should I delete old logo versions or archive them?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Archive, don't delete. Create an archive/ folder for superseded assets. You'll need old versions for reference, legal proof, or when someone asks \"what did it look like before?\""
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "design-to-code-handoff",
+    "title": "Figma Dev Mode and Design-to-Code Handoff",
+    "seoTitle": "Design to Code Handoff — Figma Dev Mode, Design Tokens, CSS Variables",
+    "seoDescription": "Use Figma Dev Mode to inspect specs, export design tokens for colors, spacing, typography, and map components for developers. Streamline design-to-code workflow.",
+    "keywords": [
+      "figma dev mode",
+      "design to code",
+      "design tokens",
+      "figma api",
+      "css variables from figma"
+    ],
+    "category": "Design Systems",
+    "tools": [
+      "Figma",
+      "Figma Dev Mode",
+      "Style Dictionary",
+      "Tokens Studio"
+    ],
+    "formats": [
+      "JSON",
+      "CSS",
+      "SCSS"
+    ],
+    "content": "# Figma Dev Mode and Design-to-Code Handoff\n\nDesigners hand off Figma files. Developers inspect them, guess at spacing, and rebuild components from scratch. Figma Dev Mode and design tokens eliminate guesswork, turning design specs into production-ready code.\n\n## Figma Dev Mode Basics\n\nDev Mode (View > Dev Mode, or toggle in top-right) shows developers exactly what they need:\n\n- **CSS for layers**: Copy CSS directly (padding, margin, color, font-size).\n- **Asset exports**: Download icons, images at correct scale.\n- **Measurements**: Spacing between elements, dimensions, alignment.\n- **Component mapping**: Link Figma components to code components (via Code Connect or manual docs).\n\n**For designers**: Before handoff, enable Dev Mode and verify measurements are correct. Use auto-layout for consistent spacing.\n\n**For developers**: Inspect any layer. Copy CSS. Export assets. No guessing.\n\n## Design Tokens: The Bridge Between Design and Code\n\nDesign tokens are design decisions stored as data: colors, spacing, typography, shadows, radii. Export them as JSON, then consume in CSS, SCSS, or JavaScript.\n\n### What Gets Tokenized\n\n- **Colors**: `--color-primary: #3B6DFF;`\n- **Spacing**: `--space-xs: 4px; --space-sm: 8px; --space-md: 16px;`\n- **Typography**: `--font-size-body: 16px; --font-family-sans: 'Inter', sans-serif;`\n- **Shadows**: `--shadow-sm: 0 1px 2px rgba(0,0,0,0.05);`\n- **Radii**: `--radius-sm: 4px; --radius-md: 8px; --radius-full: 9999px;`\n\n### Why Tokens Matter\n\nWithout tokens, developers hardcode values:\n\n```css\n/* Bad: values are hardcoded */\n.button {\n  background: #3B6DFF;\n  padding: 12px 20px;\n  border-radius: 8px;\n}\n```\n\nWith tokens:\n\n```css\n/* Good: values reference tokens */\n.button {\n  background: var(--color-primary);\n  padding: var(--space-sm) var(--space-md);\n  border-radius: var(--radius-md);\n}\n```\n\nChange the token once, update everywhere. This keeps design and code in sync.\n\n## Exporting Design Tokens from Figma\n\n### Method 1: Tokens Studio Plugin (Recommended)\n\n1. **Install Tokens Studio** (Figma plugin).\n2. **Define tokens in Figma**: Create color styles, text styles, effect styles.\n3. **Export as JSON**: Tokens Studio reads Figma styles and exports as `tokens.json`.\n4. **Transform with Style Dictionary**: Convert JSON to CSS, SCSS, JavaScript.\n\n```bash\n# Install Style Dictionary\nnpm install -g style-dictionary\n\n# Create config\ncat > config.json << JSON\n{\n  \"source\": [\"tokens.json\"],\n  \"platforms\": {\n    \"css\": {\n      \"transformGroup\": \"css\",\n      \"buildPath\": \"dist/\",\n      \"files\": [{\n        \"destination\": \"tokens.css\",\n        \"format\": \"css/variables\"\n      }]\n    }\n  }\n}\nJSON\n\n# Build tokens\nstyle-dictionary build\n```\n\nOutput: `dist/tokens.css` with CSS variables.\n\n### Method 2: Figma Variables API\n\nFigma's Variables API exports variables directly:\n\n```javascript\n// Requires Figma API token\nconst response = await fetch('https://api.figma.com/v1/files/:fileKey/variables/local', {\n  headers: { 'X-Figma-Token': 'YOUR_TOKEN' }\n});\n\nconst variables = await response.json();\nconsole.log(variables);\n```\n\nTransform the response into CSS:\n\n```javascript\nconst css = variables.variableCollections.map(v => \n  `--${v.name}: ${v.value};`\n).join('\\n');\n```\n\n### Method 3: Manual Export (Small Projects)\n\nFor small projects, manually copy Figma styles:\n\n1. Open Figma file.\n2. Go to Design Panel > Local Styles.\n3. Copy color hex, spacing values, font specs.\n4. Paste into `tokens.css`:\n\n```css\n:root {\n  --color-primary: #3B6DFF;\n  --color-background: #0A0D12;\n  --space-xs: 4px;\n  --space-sm: 8px;\n  --font-size-body: 16px;\n}\n```\n\n## Component Mapping\n\nDevelopers need to know which Figma component maps to which code component.\n\n### Figma Code Connect (Official)\n\nCode Connect links Figma components to GitHub code:\n\n1. **Set up Code Connect** in Figma (requires GitHub integration).\n2. **Annotate components**: Map `Button/Primary` to `<Button variant=\"primary\">`.\n3. **Developers see code examples** directly in Dev Mode.\n\n### Manual Documentation\n\nIf Code Connect isn't set up, document mappings in a README or Notion:\n\n| Figma Component | Code Component | Props |\n|----------------|----------------|-------|\n| Button/Primary | `<Button variant=\"primary\">` | `variant`, `size`, `disabled` |\n| Icon/Home | `<Icon name=\"home\">` | `name`, `size` |\n| Card/Default | `<Card>` | `title`, `description`, `image` |\n\n## CSS Variable Extraction\n\nWhen Dev Mode isn't enough, extract CSS directly from Figma:\n\n### Using Figma Inspect\n\n1. Select a layer in Figma.\n2. Enable Dev Mode.\n3. Copy CSS from the right panel.\n4. Paste into your stylesheet.\n\n### Automating with Figma API\n\nFor batch export:\n\n```javascript\n// Fetch styles from Figma\nconst response = await fetch('https://api.figma.com/v1/files/:fileKey/styles', {\n  headers: { 'X-Figma-Token': 'YOUR_TOKEN' }\n});\n\nconst styles = await response.json();\n// Process styles into CSS variables\n```\n\n## Developer Best Practices\n\nWhen consuming Figma handoffs:\n\n1. **Use Dev Mode**: Don't eyeball spacing. Copy exact values.\n2. **Reference tokens**: Use CSS variables, not hardcoded values.\n3. **Ask questions early**: If a spec is unclear, ask the designer before building.\n4. **Test at multiple sizes**: Figma shows desktop; test mobile, tablet, and edge cases.\n5. **Sync regularly**: Designs change. Re-export tokens and assets when designs update.\n\n## Designer Best Practices\n\nBefore handing off:\n\n1. **Use auto-layout**: Ensures spacing is consistent and measurable.\n2. **Name layers clearly**: Developers see layer names in Dev Mode. Use descriptive names.\n3. **Annotate edge cases**: Add notes for hover states, loading states, error states.\n4. **Export assets at correct scale**: @1x for web, @2x and @3x for mobile.\n5. **Publish design tokens**: Keep tokens.json or tokens.css up-to-date.\n\nFigma Dev Mode, design tokens, and clear documentation turn design handoffs from guesswork into precision.",
+    "faqs": [
+      {
+        "question": "What is Figma Dev Mode and how do I use it?",
+        "answer": "Dev Mode (View > Dev Mode) shows developers CSS, measurements, and asset exports for any layer. Developers inspect Figma files, copy exact styles, and download assets without guessing."
+      },
+      {
+        "question": "What are design tokens and why do they matter?",
+        "answer": "Design tokens are design decisions (colors, spacing, typography) stored as data. Export them as JSON or CSS variables. Developers reference tokens instead of hardcoding values, keeping design and code in sync."
+      },
+      {
+        "question": "How do I export design tokens from Figma?",
+        "answer": "Use Tokens Studio plugin to export Figma styles as JSON, then transform with Style Dictionary into CSS. Or use Figma Variables API for programmatic export. For small projects, manually copy styles."
+      },
+      {
+        "question": "How do I map Figma components to code components?",
+        "answer": "Use Figma Code Connect (requires GitHub integration) to link components directly. Or document mappings in a README: Figma component name, code component, props."
+      },
+      {
+        "question": "What should designers do before handing off to developers?",
+        "answer": "Use auto-layout for consistent spacing, name layers clearly, annotate edge cases (hover, loading, error states), export assets at correct scale, and publish design tokens."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Figma Dev Mode and Design-to-Code Handoff",
+          "description": "Use Figma Dev Mode and design tokens for precise design-to-code handoff.",
+          "tool": [
+            {
+              "@type": "HowToTool",
+              "name": "Figma"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "Tokens Studio"
+            }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Enable Dev Mode",
+              "text": "Toggle Dev Mode in Figma (View > Dev Mode). Inspect layers, copy CSS, export assets."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Export design tokens",
+              "text": "Use Tokens Studio plugin to export Figma styles as JSON. Transform with Style Dictionary into CSS variables."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Map components",
+              "text": "Use Figma Code Connect or document mappings manually. Link Figma components to code components."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Integrate tokens in code",
+              "text": "Import CSS variables. Reference tokens instead of hardcoding values."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is Figma Dev Mode and how do I use it?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Dev Mode (View > Dev Mode) shows developers CSS, measurements, and asset exports for any layer. Developers inspect Figma files, copy exact styles, and download assets without guessing."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What are design tokens and why do they matter?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Design tokens are design decisions (colors, spacing, typography) stored as data. Export them as JSON or CSS variables. Developers reference tokens instead of hardcoding values, keeping design and code in sync."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I export design tokens from Figma?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use Tokens Studio plugin to export Figma styles as JSON, then transform with Style Dictionary into CSS. Or use Figma Variables API for programmatic export. For small projects, manually copy styles."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I map Figma components to code components?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use Figma Code Connect (requires GitHub integration) to link components directly. Or document mappings in a README: Figma component name, code component, props."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What should designers do before handing off to developers?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use auto-layout for consistent spacing, name layers clearly, annotate edge cases (hover, loading, error states), export assets at correct scale, and publish design tokens."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "color-palette-management",
+    "title": "Create Accessible Color Palettes",
+    "seoTitle": "Color Palette Management — WCAG Contrast, Perceptual Uniformity, Colorblind-Safe",
+    "seoDescription": "Build accessible color palettes with WCAG contrast ratios, perceptual uniformity, and colorblind simulation. Export to design systems as CSS, JSON, SCSS.",
+    "keywords": [
+      "wcag color contrast",
+      "accessible color palette",
+      "colorblind safe colors",
+      "perceptual uniformity",
+      "color palette export"
+    ],
+    "category": "Design Systems",
+    "tools": [
+      "Figma",
+      "Color.Ninja",
+      "Coolors",
+      "Adobe Color"
+    ],
+    "formats": [
+      "JSON",
+      "CSS",
+      "SCSS"
+    ],
+    "content": "# Create Accessible Color Palettes\n\nColor palettes fail when text becomes unreadable or colorblind users can't distinguish states. This guide covers WCAG contrast ratios, perceptual uniformity, colorblind simulation, and exporting palettes to design systems.\n\n## WCAG Contrast Ratios\n\nWCAG (Web Content Accessibility Guidelines) defines minimum contrast ratios:\n\n- **AA (minimum)**: 4.5:1 for normal text, 3:1 for large text (18px+ or bold 14px+).\n- **AAA (enhanced)**: 7:1 for normal text, 4.5:1 for large text.\n\nMost products aim for AA compliance. AAA is recommended for high-contrast themes or government sites.\n\n### Checking Contrast\n\nUse a contrast checker:\n\n- **Figma A11y Plugin**: Select text, check contrast against background.\n- **Color.Ninja**: Paste colors, see contrast ratio.\n- **WebAIM Contrast Checker**: [webaim.org/resources/contrastchecker/](https://webaim.org/resources/contrastchecker/).\n\nExample:\n\n- **Pass AA**: `#3B6DFF` (text) on `#FFFFFF` (background) = 4.51:1 ✓\n- **Fail AA**: `#6EE7B7` (text) on `#FFFFFF` (background) = 1.78:1 ✗\n\nIf a color fails, darken text or lighten background until it passes.\n\n## Building a Tonal Scale\n\nDon't pick one blue and call it a palette. Build a tonal scale: 5–9 steps from near-black to near-white, tinted toward your brand hue.\n\n### Example: Cyan Tonal Scale\n\n```\ncyan-50:  #E0F7FA  (background, hover states)\ncyan-100: #B2EBF2\ncyan-200: #80DEEA\ncyan-300: #4DD0E1\ncyan-400: #26C6DA\ncyan-500: #00BCD4  (primary, base)\ncyan-600: #00ACC1\ncyan-700: #0097A7  (text on light backgrounds)\ncyan-800: #00838F\ncyan-900: #006064  (text, high contrast)\n```\n\nThis gives you options: `cyan-500` for buttons, `cyan-700` for text on white, `cyan-900` for high-contrast text.\n\n### Perceptual Uniformity\n\nRGB space is not perceptually uniform. A jump from `#0000FF` to `#0000CC` looks different than `#FF0000` to `#CC0000`. Use **LAB color space** for perceptually uniform scales.\n\nTools:\n\n- **Figma Palette Plugin**: Generates perceptually uniform scales.\n- **Leonardo** (Adobe): [leonardocolor.io](https://leonardocolor.io/). Creates accessible, perceptually uniform palettes.\n- **Coolors**: [coolors.co](https://coolors.co/). Quick palette generation with contrast checks.\n\nThese tools ensure each step in your scale has consistent perceived lightness.\n\n## Colorblind Simulation\n\n8% of men and 0.5% of women have color vision deficiency. Three common types:\n\n- **Deuteranopia**: Red-green confusion (most common).\n- **Protanopia**: Similar to Deuteranopia, but red is darker.\n- **Tritanopia**: Blue-yellow confusion (rare).\n\n### Testing Your Palette\n\nUse colorblind simulators:\n\n- **Figma Stark Plugin**: Simulate colorblindness in Figma. See how your design looks to colorblind users.\n- **Color Oracle**: [colororacle.org](https://colororacle.org/). Desktop app that simulates colorblindness across your entire screen.\n- **Chrome DevTools**: Open DevTools > Rendering > Emulate vision deficiencies.\n\n### Fixing Colorblind Issues\n\nDon't rely on color alone to convey information. Examples:\n\n**Bad**: Green button = success, red button = error (colorblind users can't distinguish).\n\n**Good**: Green button + checkmark icon = success, red button + X icon = error. Color + icon/text ensures clarity.\n\n**Bad**: Red line and green line on a chart (colorblind users see two similar lines).\n\n**Good**: Red solid line and green dashed line. Pattern + color ensures distinction.\n\n## Exporting Palettes to Design Systems\n\nOnce your palette is finalized, export it as JSON, CSS, or SCSS.\n\n### JSON Export\n\n```json\n{\n  \"colors\": {\n    \"primary\": {\n      \"50\": \"#E0F7FA\",\n      \"500\": \"#00BCD4\",\n      \"700\": \"#0097A7\",\n      \"900\": \"#006064\"\n    },\n    \"background\": {\n      \"default\": \"#0A0D12\",\n      \"card\": \"#0F131C\",\n      \"elevated\": \"#161D2B\"\n    },\n    \"text\": {\n      \"primary\": \"#FFFFFF\",\n      \"secondary\": \"#A0A4A8\",\n      \"muted\": \"#6B7280\"\n    }\n  }\n}\n```\n\n### CSS Variables\n\n```css\n:root {\n  --color-primary-50: #E0F7FA;\n  --color-primary-500: #00BCD4;\n  --color-primary-700: #0097A7;\n  --color-primary-900: #006064;\n\n  --color-background-default: #0A0D12;\n  --color-background-card: #0F131C;\n\n  --color-text-primary: #FFFFFF;\n  --color-text-secondary: #A0A4A8;\n}\n```\n\n### SCSS Variables\n\n```scss\n$color-primary-50: #E0F7FA;\n$color-primary-500: #00BCD4;\n$color-primary-700: #0097A7;\n$color-primary-900: #006064;\n\n$color-background-default: #0A0D12;\n$color-background-card: #0F131C;\n\n$color-text-primary: #FFFFFF;\n$color-text-secondary: #A0A4A8;\n```\n\nUse a tool like **Style Dictionary** to automate conversion:\n\n```bash\n# Install\nnpm install -g style-dictionary\n\n# Build\nstyle-dictionary build --config config.json\n```\n\n## Naming Color Tokens\n\nAvoid literal names (`blue-500`). Use semantic names:\n\n- **Good**: `--color-primary`, `--color-background`, `--color-text-primary`\n- **Bad**: `--blue-500`, `--gray-800`, `--cyan-700`\n\nSemantic names let you swap colors without renaming every variable. If you rebrand from blue to purple, `--color-primary` stays the same; only its value changes.\n\n## Testing Accessibility\n\nBefore launch:\n\n1. **Contrast check**: All text passes WCAG AA (4.5:1 for normal, 3:1 for large).\n2. **Colorblind simulation**: Test with Stark or Color Oracle. Ensure critical UI is distinguishable.\n3. **Automated audit**: Run Lighthouse or Axe DevTools. Fix reported color contrast issues.\n4. **Manual review**: Navigate the site without color. Can you tell success from error? If not, add icons/labels.\n\nAccessible color palettes ensure everyone can use your product, regardless of vision.",
+    "faqs": [
+      {
+        "question": "What is WCAG AA and how do I meet it?",
+        "answer": "WCAG AA requires 4.5:1 contrast for normal text, 3:1 for large text (18px+ or bold 14px+). Use a contrast checker (Figma A11y, Color.Ninja) and darken text or lighten backgrounds until passing."
+      },
+      {
+        "question": "How do I build a perceptually uniform color scale?",
+        "answer": "Use LAB color space instead of RGB. Tools like Leonardo (Adobe) or Figma Palette Plugin generate scales where each step has consistent perceived lightness, avoiding uneven jumps."
+      },
+      {
+        "question": "How do I test if my palette is colorblind-safe?",
+        "answer": "Use Stark Plugin (Figma), Color Oracle (desktop app), or Chrome DevTools (Rendering > Emulate vision deficiencies) to simulate Deuteranopia, Protanopia, and Tritanopia. Ensure critical UI is distinguishable."
+      },
+      {
+        "question": "Should I use literal (blue-500) or semantic (color-primary) names?",
+        "answer": "Semantic names. They let you rebrand without renaming variables. If you swap blue for purple, --color-primary stays the same; only its value changes."
+      },
+      {
+        "question": "How do I export color palettes for design systems?",
+        "answer": "Export as JSON, CSS variables, or SCSS. Use Style Dictionary to automate conversion. Store colors in a tokens file and reference them in code, not hardcode values."
+      }
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HowTo",
+          "name": "Create Accessible Color Palettes",
+          "description": "Build accessible palettes with WCAG contrast, perceptual uniformity, and colorblind simulation.",
+          "tool": [
+            {
+              "@type": "HowToTool",
+              "name": "Color.Ninja"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "Figma"
+            }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Check contrast ratios",
+              "text": "Use contrast checker to ensure text passes WCAG AA (4.5:1 for normal, 3:1 for large text)."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Build tonal scale",
+              "text": "Create 5-9 steps from near-black to near-white. Use LAB color space for perceptual uniformity."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Simulate colorblindness",
+              "text": "Use Stark Plugin or Color Oracle to test Deuteranopia, Protanopia, Tritanopia. Add icons/labels if color alone conveys info."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Export to design system",
+              "text": "Export as JSON, CSS variables, or SCSS. Use semantic names (--color-primary, not --blue-500)."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is WCAG AA and how do I meet it?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "WCAG AA requires 4.5:1 contrast for normal text, 3:1 for large text (18px+ or bold 14px+). Use a contrast checker (Figma A11y, Color.Ninja) and darken text or lighten backgrounds until passing."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I build a perceptually uniform color scale?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use LAB color space instead of RGB. Tools like Leonardo (Adobe) or Figma Palette Plugin generate scales where each step has consistent perceived lightness, avoiding uneven jumps."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I test if my palette is colorblind-safe?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use Stark Plugin (Figma), Color Oracle (desktop app), or Chrome DevTools (Rendering > Emulate vision deficiencies) to simulate Deuteranopia, Protanopia, and Tritanopia. Ensure critical UI is distinguishable."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Should I use literal (blue-500) or semantic (color-primary) names?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Semantic names. They let you rebrand without renaming variables. If you swap blue for purple, --color-primary stays the same; only its value changes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I export color palettes for design systems?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Export as JSON, CSS variables, or SCSS. Use Style Dictionary to automate conversion. Store colors in a tokens file and reference them in code, not hardcode values."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
