@@ -26,6 +26,10 @@ export class EmbroideryExporter extends BaseExporter {
       }
     }
     stitches.push({ dx: 0, dy: 0, command: 'end' });
+    // A design with no drawable shapes yields no stitches before the end
+    // marker; machines reject such a file, so fail loudly instead.
+    const hasStitches = stitches.some((stitch) => stitch.command !== 'end');
+    if (!hasStitches) throw new Error('Embroidery export found no shapes in the SVG');
     if (this.format === 'dst') return this.encodeDst(stitches, width, height);
     if (this.format === 'jef') return this.encodeJef(stitches, width, height);
     return this.encodePes(stitches, width, height);

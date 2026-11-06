@@ -62,7 +62,12 @@ create table if not exists public.conversions (
   original_file_url  text not null,
   converted_file_url text,
   original_format    text not null check (original_format in ('png', 'jpg', 'jpeg', 'webp', 'gif', 'heic', 'tiff', 'bmp')),
-  output_format      text not null default 'svg' check (output_format in ('svg', 'dxf', 'eps', 'ai', 'pdf', 'cdr', 'lottie', 'dst', 'pes', 'jef', 'gcode')),
+  output_format      text not null default 'svg' check (output_format in (
+    'svg', 'dxf', 'eps', 'ai', 'pdf', 'cdr', 'lottie', 'gcode',
+    'dst', 'pes', 'jef',
+    '3mf', 'stl', 'obj',
+    'color-separation'
+  )),
   preprocessing      jsonb not null default '{}'::jsonb,  -- {remove_bg: true, upscale: "2x", destination: "cricut"}
   status             text not null default 'pending' check (status in ('pending', 'processing', 'complete', 'failed')),
   credits_used       numeric(5,2) not null default 0.20 check (credits_used >= 0),

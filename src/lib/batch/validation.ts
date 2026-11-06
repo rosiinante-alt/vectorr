@@ -99,7 +99,7 @@ export function toPersistedPreprocessing(options: BatchOptions): Record<string, 
 }
 
 export function fileExtension(format: BatchOutputFormat): string {
-  return format === 'lottie' ? 'json' : format;
+  return format === 'color-separation' ? 'zip' : format;
 }
 
 export function contentTypeFor(format: BatchOutputFormat): string {
@@ -108,8 +108,20 @@ export function contentTypeFor(format: BatchOutputFormat): string {
       return 'image/svg+xml';
     case 'pdf':
       return 'application/pdf';
-    case 'lottie':
-      return 'application/json';
+    case 'dxf':
+      return 'image/vnd.dxf';
+    case 'eps':
+      return 'application/postscript';
+    case 'gcode':
+      return 'text/plain; charset=utf-8';
+    case '3mf':
+      return 'application/vnd.ms-package.3dmanufacturing-3dmodel+xml';
+    case 'stl':
+      return 'model/stl';
+    case 'obj':
+      return 'model/obj';
+    case 'color-separation':
+      return 'application/zip';
     default:
       return 'application/octet-stream';
   }

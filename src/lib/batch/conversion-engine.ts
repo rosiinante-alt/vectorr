@@ -18,7 +18,7 @@ export interface ConversionInput {
 }
 
 export interface ConversionResult {
-  /** Rendered vector payload; stored as a file in the batch results folder. */
+  /** Traced SVG. Non-SVG destinations are derived from it by the caller. */
   content: string;
   contentType: string;
 }

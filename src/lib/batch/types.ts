@@ -22,20 +22,38 @@ export type BatchStatus = 'pending' | 'processing' | 'complete' | 'failed' | 'pa
 export type BatchFileStatus = 'pending' | 'processing' | 'complete' | 'failed';
 
 /** Mirrors the `conversions.output_format` check constraint. */
-export type BatchOutputFormat = 'svg' | 'dxf' | 'eps' | 'ai' | 'pdf' | 'cdr' | 'lottie' | 'dst' | 'pes' | 'jef' | 'gcode';
+export type BatchOutputFormat =
+  | 'svg'
+  | 'dxf'
+  | 'eps'
+  | 'pdf'
+  | 'gcode'
+  | 'dst'
+  | 'pes'
+  | 'jef'
+  | '3mf'
+  | 'stl'
+  | 'obj'
+  | 'color-separation';
 
+/**
+ * Formats every batch file can actually produce. `ai`, `cdr` and `lottie` were
+ * listed here historically but have no exporter, so a batch asked for them
+ * uploaded raw SVG bytes under those extensions.
+ */
 export const BATCH_OUTPUT_FORMATS: readonly BatchOutputFormat[] = [
   'svg',
   'dxf',
   'eps',
-  'ai',
   'pdf',
-  'cdr',
-  'lottie',
+  'gcode',
   'dst',
   'pes',
   'jef',
-  'gcode',
+  '3mf',
+  'stl',
+  'obj',
+  'color-separation',
 ];
 
 export interface BatchPreprocessing {

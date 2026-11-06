@@ -377,6 +377,19 @@ function closedSubpaths(d: string): boolean[] {
 }
 
 /**
+ * Approximates an ellipse as a closed polygon. 64 segments keeps a letter-sized
+ * circle visually smooth while staying small enough for embroidery stitch data.
+ */
+function ellipsePoints(cx: number, cy: number, rx: number, ry: number, segments = 64): Point[] {
+  const points: Point[] = [];
+  for (let index = 0; index < segments; index++) {
+    const angle = (index / segments) * Math.PI * 2;
+    points.push({ x: cx + rx * Math.cos(angle), y: cy + ry * Math.sin(angle) });
+  }
+  return points;
+}
+
+/**
  * Extracts every painted region from the SVG.
  *
  * Contrast with a stroke-only "outline" reading: traced artwork paints regions
@@ -480,6 +493,72 @@ export function extractShapes(svg: string, tolerance = 2): SvgShape[] {
     }
 
     for (const group of [...list(node.g), ...list(node.svg)]) visit(group, paint);
+
+    // Basic geometry elements. Traced artwork is all `<path>`, but hand-written
+    // and exported-from-illustrator SVGs frequently use these, and without them
+    // the shape list comes back empty and every exporter fails with "no shapes".
+    const addShape = (points: Point[], closed: boolean, element: Record<string, unknown>) => {
+      const shapePaint = resolvePaint(element, paint);
+      if (points.length < 2 || shapePaint.color === 'none' || shapePaint.opacity <= 0) return;
+      shapes.push({ points: translated(points), closed, fill: shapePaint.color, opacity: shapePaint.opacity });
+    };
+
+    for (const rect of list(node.rect)) {
+      const x = numeric(rect.x);
+      const y = numeric(rect.y);
+      const w = numeric(rect.width);
+      const h = numeric(rect.height);
+      if (w <= 0 || h <= 0) continue;
+      addShape(
+        [
+          { x, y },
+          { x: x + w, y },
+          { x: x + w, y: y + h },
+          { x, y: y + h },
+        ],
+        true,
+        rect,
+      );
+    }
+
+    for (const circle of list(node.circle)) {
+      const cx = numeric(circle.cx);
+      const cy = numeric(circle.cy);
+      const r = numeric(circle.r);
+      if (r <= 0) continue;
+      addShape(ellipsePoints(cx, cy, r, r), true, circle);
+    }
+
+    for (const ellipse of list(node.ellipse)) {
+      const rx = numeric(ellipse.rx);
+      const ry = numeric(ellipse.ry);
+      if (rx <= 0 || ry <= 0) continue;
+      addShape(ellipsePoints(numeric(ellipse.cx), numeric(ellipse.cy), rx, ry), true, ellipse);
+    }
+
+    for (const line of list(node.line)) {
+      addShape(
+        [
+          { x: numeric(line.x1), y: numeric(line.y1) },
+          { x: numeric(line.x2), y: numeric(line.y2) },
+        ],
+        false,
+        line,
+      );
+    }
+
+    const polyline = list(node.polyline)[0];
+    if (polyline) {
+      const numbers = String(polyline.points ?? '')
+        .split(/[\s,]+/)
+        .map(Number)
+        .filter(Number.isFinite);
+      const points: Point[] = [];
+      for (let index = 0; index + 1 < numbers.length; index += 2) {
+        points.push({ x: numbers[index], y: numbers[index + 1] });
+      }
+      addShape(points, false, polyline);
+    }
   };
 
   visit(root, { color: '#000000', opacity: 1 });

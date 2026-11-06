@@ -11,7 +11,20 @@ import { creditManager } from '@/lib/credits/credit-manager';
 
 /** Raster formats accepted by the `conversions.original_format` constraint. */
 const SOURCE_FORMATS = ['png', 'jpg', 'jpeg', 'webp', 'gif', 'heic', 'tiff', 'bmp'] as const;
-const OUTPUT_FORMATS = ['svg', 'dxf', 'eps', 'pdf'] as const;
+const OUTPUT_FORMATS = [
+  'svg',
+  'dxf',
+  'eps',
+  'pdf',
+  'gcode',
+  'dst',
+  'pes',
+  'jef',
+  '3mf',
+  'stl',
+  'obj',
+  'color-separation',
+] as const;
 
 const JOB_TTL_MS = 24 * 60 * 60 * 1000;
 const MAX_UPLOAD_SIZE = 50 * 1024 * 1024; // 50 MB

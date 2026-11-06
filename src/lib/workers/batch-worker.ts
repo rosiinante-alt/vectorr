@@ -2,6 +2,7 @@ import type { Job } from 'bullmq';
 import type { SupabaseClient } from '@supabase/supabase-js';
 
 import { BaseWorker } from './base-worker';
+import { exportFile } from '../exporters';
 import { batchCreditCost, batchFileCost, contentTypeFor, fileExtension, parseBatchOptions } from '../batch/validation';
 import { convertBatchFile, type ConversionEngine } from '../batch/conversion-engine';
 import { BATCH_BUCKET, type BatchPreprocessing } from '../batch/types';
@@ -52,16 +53,26 @@ export class BatchWorker extends BaseWorker<BatchJobData> {
           .eq('id', file.fileId);
 
         try {
-          const { content, contentType } = await convertBatchFile(
+          const converted = await convertBatchFile(
             { sourceUrl: file.url, preprocessing: preprocessing as BatchPreprocessing, outputFormat },
             engine,
           );
 
+          // Batch conversion always traces to SVG; any other destination is
+          // derived from that trace by the shared exporter registry, the same
+          // path single conversions use.
+          const result =
+            outputFormat === 'svg'
+              ? Buffer.from(converted.content)
+              : Buffer.from(await exportFile(outputFormat, converted.content));
+
           const resultPath = `batch/${userId}/${batchId}/results/${file.fileId}.${fileExtension(outputFormat)}`;
           const { error: uploadError } = await supabase.storage
             .from(BATCH_BUCKET)
-            .upload(resultPath, content, {
-              contentType: contentType || contentTypeFor(outputFormat),
+            .upload(resultPath, result, {
+              contentType: converted.contentType && outputFormat === 'svg'
+                ? converted.contentType
+                : contentTypeFor(outputFormat),
               upsert: true,
             });
 

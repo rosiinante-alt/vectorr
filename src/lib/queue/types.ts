@@ -7,7 +7,7 @@ export interface VectorizeJobData {
     upscale?: '2x' | '4x';
     destination?: 'web' | 'cricut' | 'laser' | 'print';
   };
-  outputFormat: 'svg' | 'dxf' | 'eps' | 'pdf';
+  outputFormat: 'svg' | 'dxf' | 'eps' | 'pdf' | 'gcode' | 'dst' | 'pes' | 'jef' | '3mf' | 'stl' | 'obj' | 'color-separation';
 }
 
 export interface BatchJobData {
@@ -19,7 +19,7 @@ export interface BatchJobData {
   }>;
   preprocessing?: Record<string, any>;
   /** Requested output format; defaults to svg in the worker. */
-  outputFormat?: 'svg' | 'dxf' | 'eps' | 'ai' | 'pdf' | 'cdr' | 'lottie' | 'dst' | 'pes' | 'jef' | 'gcode';
+  outputFormat?: 'svg' | 'dxf' | 'eps' | 'pdf' | 'gcode' | 'dst' | 'pes' | 'jef' | '3mf' | 'stl' | 'obj' | 'color-separation';
 }
 
 export interface AIGenerateJobData {

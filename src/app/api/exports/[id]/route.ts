@@ -16,6 +16,10 @@ const CONTENT_TYPES: Record<string, string> = {
   dst: 'application/octet-stream',
   pes: 'application/octet-stream',
   jef: 'application/octet-stream',
+  '3mf': 'application/vnd.ms-package.3dmanufacturing-3dmodel+xml',
+  stl: 'model/stl',
+  obj: 'model/obj',
+  'color-separation': 'application/zip',
 };
 
 /**

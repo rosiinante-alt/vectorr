@@ -102,12 +102,13 @@ describe('contentTypeFor / fileExtension', () => {
   it('maps known formats', () => {
     expect(contentTypeFor('svg')).toBe('image/svg+xml');
     expect(contentTypeFor('pdf')).toBe('application/pdf');
-    expect(contentTypeFor('lottie')).toBe('application/json');
-    expect(contentTypeFor('dxf')).toBe('application/octet-stream');
+    expect(contentTypeFor('dxf')).toBe('image/vnd.dxf');
+    expect(contentTypeFor('color-separation')).toBe('application/zip');
+    expect(contentTypeFor('stl')).toBe('model/stl');
   });
 
-  it('uses .json for lottie and the format name otherwise', () => {
-    expect(fileExtension('lottie')).toBe('json');
+  it('uses .zip for colour separation and the format name otherwise', () => {
+    expect(fileExtension('color-separation')).toBe('zip');
     expect(fileExtension('svg')).toBe('svg');
     expect(fileExtension('gcode')).toBe('gcode');
   });
