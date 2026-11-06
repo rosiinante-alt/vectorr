@@ -6,6 +6,7 @@ import { RESOURCE_SLUGS } from "@/lib/resource-configs";
 import { WORKFLOW_SLUGS } from "@/lib/workflow-configs";
 import { DESIGNERS_WORKFLOWS } from "@/lib/designers-workflow-configs";
 import { SHOPS_WORKFLOWS } from "@/lib/shops-workflow-configs";
+import { FREE_TOOLS } from "@/lib/tools-configs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
@@ -74,24 +75,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     },
-    {
-      url: `${baseUrl}/tools/batch-converter`,
+    ...FREE_TOOLS.map((tool) => ({
+      url: `${baseUrl}/tools/${tool.slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/tools/svg-optimizer`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/tools/color-separation`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
+    })),
   ];
 
   // Hub pages, so the section roots are indexed alongside their children.
