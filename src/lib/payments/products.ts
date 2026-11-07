@@ -11,7 +11,7 @@
  * many credits a payment grants.
  */
 
-export type PurchaseTier = 'free' | 'starter' | 'plus' | 'pro';
+export type PurchaseTier = 'free' | 'starter' | 'plus' | 'pro' | 'team' | 'agency';
 
 export interface ProductDefinition {
   /** Polar product ID, resolved at runtime from `envKey`. */
@@ -44,7 +44,7 @@ export const PRODUCTS: Record<string, ProductDefinition> = {
     id: process.env.POLAR_PRODUCT_STARTER_MONTHLY ?? null,
     envKey: 'POLAR_PRODUCT_STARTER_MONTHLY',
     name: 'Starter (monthly)',
-    credits: 5,
+    credits: 30,
     interval: 'month',
     tier: 'starter',
     recurring: true,
@@ -53,7 +53,7 @@ export const PRODUCTS: Record<string, ProductDefinition> = {
     id: process.env.POLAR_PRODUCT_PLUS_MONTHLY ?? null,
     envKey: 'POLAR_PRODUCT_PLUS_MONTHLY',
     name: 'Plus (monthly)',
-    credits: 8,
+    credits: 50,
     interval: 'month',
     tier: 'plus',
     recurring: true,
@@ -62,7 +62,7 @@ export const PRODUCTS: Record<string, ProductDefinition> = {
     id: process.env.POLAR_PRODUCT_PRO_MONTHLY ?? null,
     envKey: 'POLAR_PRODUCT_PRO_MONTHLY',
     name: 'Pro (monthly)',
-    credits: 20,
+    credits: 100,
     interval: 'month',
     tier: 'pro',
     recurring: true,
@@ -92,6 +92,24 @@ export const PRODUCTS: Record<string, ProductDefinition> = {
     credits: 240,
     interval: 'year',
     tier: 'pro',
+    recurring: true,
+  },
+  team_monthly: {
+    id: process.env.POLAR_PRODUCT_TEAM_MONTHLY ?? null,
+    envKey: 'POLAR_PRODUCT_TEAM_MONTHLY',
+    name: 'Team (monthly)',
+    credits: 250,
+    interval: 'month',
+    tier: 'team',
+    recurring: true,
+  },
+  agency_monthly: {
+    id: process.env.POLAR_PRODUCT_AGENCY_MONTHLY ?? null,
+    envKey: 'POLAR_PRODUCT_AGENCY_MONTHLY',
+    name: 'Agency (monthly)',
+    credits: 500,
+    interval: 'month',
+    tier: 'agency',
     recurring: true,
   },
 };

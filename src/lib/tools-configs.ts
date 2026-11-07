@@ -1,6 +1,6 @@
 /**
  * Free Tools Configuration
- * Extends the /tools/ section with 15 production-ready tools
+ * Extends the /tools/ section with 18 production-ready tools
  */
 
 export interface ToolConfig {
@@ -231,6 +231,45 @@ export const FREE_TOOLS: ToolConfig[] = [
     keywords: ['file size optimizer', 'compression comparison', 'format optimizer', 'file size tool'],
     description:
       'Compare file sizes across different formats and compression levels. Test multiple optimization strategies side-by-side to find the smallest file.',
+  },
+  {
+    slug: 'svg-optimizer',
+    title: 'SVG Optimizer',
+    seoTitle: 'SVG Optimizer - Shrink SVG Files Online | Vectroy',
+    seoDescription:
+      'Upload an SVG and watch it shrink. See the original and optimized size side by side and download the smaller file, with no signup required.',
+    category: 'quality',
+    formats: ['SVG'],
+    useCases: ['File optimization', 'Web performance', 'Production files', 'Size reduction'],
+    keywords: ['svg optimizer', 'compress svg', 'reduce svg size', 'svg minifier'],
+    description:
+      'Reduce SVG file size while keeping the geometry intact. Upload a file, compare before and after, and download the optimized result.',
+  },
+  {
+    slug: 'batch-converter',
+    title: 'Batch File Converter',
+    seoTitle: 'Batch File Converter - Convert Multiple Files at Once | Vectroy',
+    seoDescription:
+      'Convert a whole folder of files in one pass. Upload multiple images or vectors, run the conversion once, and download the results together.',
+    category: 'production',
+    formats: ['SVG', 'PNG', 'PDF', 'DXF'],
+    useCases: ['Bulk conversion', 'Catalog preparation', 'Asset migration', 'Production runs'],
+    keywords: ['batch converter', 'bulk svg conversion', 'convert multiple files', 'batch vector'],
+    description:
+      'Queue several files and convert them in one run instead of repeating the same single-file upload for every asset.',
+  },
+  {
+    slug: 'color-separation',
+    title: 'Color Separation Preview',
+    seoTitle: 'Color Separation Preview - Split Artwork into Spot Layers | Vectroy',
+    seoDescription:
+      'Preview how an image separates into color layers before printing. Upload artwork, inspect each layer, and check separation for screen printing or DTF.',
+    category: 'production',
+    formats: ['SVG', 'PNG'],
+    useCases: ['Screen printing', 'DTF preparation', 'Spot color checks', 'Layer inspection'],
+    keywords: ['color separation', 'spot color separation', 'screen print separation', 'dtf color layers'],
+    description:
+      'Inspect a color separation before committing to a print run. Upload artwork and preview how it divides into separate color layers.',
   },
 ];
 
