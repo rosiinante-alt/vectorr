@@ -1,31 +1,12 @@
-'use client';
-
-import { useState, useEffect } from "react";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { HelpCircle } from "lucide-react";
-import type { User } from "@supabase/supabase-js";
-import { createSupabaseBrowserClient } from "@/lib/supabase/client";
-import { SignOutButton } from "./sign-out-button";
 
-export function SiteHeader({ initialUser = null }: { initialUser?: User | null }) {
-  const [user, setUser] = useState<User | null>(initialUser);
-
-  useEffect(() => {
-    const supabase = createSupabaseBrowserClient();
-
-    supabase.auth.getUser().then(({ data }) => {
-      setUser(data.user);
-    });
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
-
+/**
+ * Account controls are passed in as a slot rather than resolved here: the
+ * client bundle must not include the Supabase auth SDK on marketing pages.
+ */
+export function SiteHeader({ authSlot }: { authSlot?: ReactNode }) {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-white/85 backdrop-blur-xl [backdrop-filter:saturate(1.8)_blur(20px)]">
       <div className="wrap flex h-[60px] items-center justify-between gap-4">
@@ -81,24 +62,7 @@ export function SiteHeader({ initialUser = null }: { initialUser?: User | null }
           >
             Tools
           </Link>
-          {user ? (
-            <>
-              <Link
-                href="/dashboard"
-                className="ml-1.5 inline-flex h-9 items-center rounded-full bg-text-primary px-4 text-[13.5px] font-semibold text-white transition-colors hover:bg-black"
-              >
-                Dashboard
-              </Link>
-              <SignOutButton />
-            </>
-          ) : (
-            <Link
-              href="/login"
-              className="ml-1.5 inline-flex h-9 items-center rounded-full bg-text-primary px-4 text-[13.5px] font-semibold text-white transition-colors hover:bg-black"
-            >
-              Sign in
-            </Link>
-          )}
+          {authSlot}
         </nav>
       </div>
     </header>

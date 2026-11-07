@@ -15,7 +15,16 @@ export const metadata: Metadata = {
 
 const tierOrder = ["FREE", "STARTER", "PLUS", "PRO"] as const;
 
-export default function PricingPage() {
+// Reads searchParams (resume=) on request, so it blocks rather than
+// prerendering into a static shell (Cache Components is enabled).
+export const instant = false;
+
+export default async function PricingPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ resume?: string }>;
+}) {
+  const { resume } = await searchParams;
   return (
     <>
       <a className="skip-link" href="#main">
@@ -92,6 +101,7 @@ export default function PricingPage() {
                         <SubscribeButton
                           planKey={tier.planKey}
                           variant={isPlus ? "primary" : "secondary"}
+                          autoStart={resume === tier.planKey}
                         >
                           Subscribe
                         </SubscribeButton>

@@ -18,6 +18,15 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get('code');
+  const plan = searchParams.get('plan');
+  const next = searchParams.get('next');
+
+  // A buyer who signed in to complete a purchase resumes that plan rather than
+  // landing on the dashboard with no memory of the checkout they started.
+  const destination =
+    next === 'checkout' && plan
+      ? `${SITE_URL}/pricing?resume=${encodeURIComponent(plan)}`
+      : `${SITE_URL}/dashboard`;
 
   if (!code) {
     return NextResponse.redirect(`${origin}/login?error=missing_code`);
@@ -42,7 +51,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(`${origin}/login?error=invalid_code`);
   }
 
-  const response = NextResponse.redirect(`${SITE_URL}/dashboard`);
+  const response = NextResponse.redirect(destination);
   for (const { name, value, options } of received) {
     response.cookies.set(name, value, options);
   }

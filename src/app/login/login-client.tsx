@@ -31,13 +31,20 @@ function ErrorHandler({ onError }: { onError: (message: string) => void }) {
   return null;
 }
 
-function LoginForm() {
+function LoginForm({ plan, next }: { plan?: string; next?: string }) {
   const router = useRouter();
   const [mode, setMode] = useState<Mode>('signin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [state, setState] = useState<State>({ kind: 'idle' });
+
+  // A buyer who arrived from a plan button returns to that plan instead of the
+  // dashboard, so the checkout they intended to start resumes immediately.
+  const afterAuth =
+    next === 'checkout' && plan
+      ? `/pricing?resume=${encodeURIComponent(plan)}`
+      : '/dashboard';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,8 +73,8 @@ function LoginForm() {
         }
 
         if (data.user) {
-          // Successfully signed up, redirect to dashboard
-          router.push('/dashboard');
+          // Successfully signed up — resume the intended plan if there was one
+          router.push(afterAuth);
         }
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({
@@ -81,8 +88,8 @@ function LoginForm() {
         }
 
         if (data.user) {
-          // Successfully signed in, redirect to dashboard
-          router.push('/dashboard');
+          // Successfully signed in — resume the intended plan if there was one
+          router.push(afterAuth);
         }
       }
     } catch (error) {
@@ -98,10 +105,15 @@ function LoginForm() {
     const supabase = createSupabaseBrowserClient();
 
     try {
+      const callback = new URL('/api/auth/callback', window.location.origin);
+      if (next === 'checkout' && plan) {
+        callback.searchParams.set('plan', plan);
+        callback.searchParams.set('next', 'checkout');
+      }
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/api/auth/callback`,
+          redirectTo: callback.toString(),
         },
       });
 
@@ -353,6 +365,6 @@ function LoginForm() {
   );
 }
 
-export default function LoginClient() {
-  return <LoginForm />;
+export default function LoginClient({ plan, next }: { plan?: string; next?: string }) {
+  return <LoginForm plan={plan} next={next} />;
 }

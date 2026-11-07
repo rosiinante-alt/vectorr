@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 
@@ -16,14 +16,28 @@ export function SubscribeButton({
   planKey,
   children,
   variant = 'secondary',
+  autoStart = false,
 }: {
   planKey: string;
   children: React.ReactNode;
   variant?: 'primary' | 'secondary';
+  /** Open checkout on mount — set when a buyer just signed in for this plan. */
+  autoStart?: boolean;
 }) {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+
+  const startedRef = useRef(false);
+
+  // Resume a checkout the buyer already chose before signing in. The ref keeps
+  // React's double-mount in development from opening two Polar sessions.
+  useEffect(() => {
+    if (!autoStart || startedRef.current) return;
+    startedRef.current = true;
+    void startCheckout();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoStart]);
 
   async function startCheckout() {
     setPending(true);
@@ -37,8 +51,10 @@ export function SubscribeButton({
       });
 
       if (response.status === 401) {
-        // Checkout needs a session; the pricing page is one click away after.
-        router.push('/login');
+        // Checkout needs a session. Carry the chosen plan through login so the
+        // buyer resumes at the checkout they already picked instead of having
+        // to find the pricing page again.
+        router.push(`/login?plan=${encodeURIComponent(planKey)}&next=checkout`);
         return;
       }
 
