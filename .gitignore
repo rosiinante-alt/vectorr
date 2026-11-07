@@ -45,3 +45,10 @@ docker-compose.override.yml
 *.tsbuildinfo
 next-env.d.ts
 .debug/
+
+# OpenChamber agent artifacts
+.openchamber/
+
+# Demo assets: example images are intentional SVG artwork
+!public/demo/examples/*.svg
+!public/demo/*.svg

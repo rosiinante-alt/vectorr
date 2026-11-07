@@ -1,0 +1,7 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#f0e6ff"/>
+  <circle cx="60" cy="60" r="35" fill="#b19cd9" opacity="0.7"/>
+  <rect x="120" y="30" width="60" height="60" fill="#ffc3a0" opacity="0.8" transform="rotate(20 150 60)"/>
+  <polygon points="100,140 140,180 60,180" fill="#a8d8ea"/>
+  <path d="M 40 120 Q 60 100 80 120" fill="none" stroke="#ff6b9d" stroke-width="3"/>
+</svg>

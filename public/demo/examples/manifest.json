@@ -1,0 +1,110 @@
+{
+  "examples": [
+    {
+      "id": "tech-logo",
+      "filename": "tech-logo-raster.svg",
+      "category": "logo",
+      "label": "Tech Logo",
+      "description": "Modern tech company logo with minimalist circles and geometric shapes"
+    },
+    {
+      "id": "coffee-logo",
+      "filename": "coffee-logo-raster.svg",
+      "category": "logo",
+      "label": "Coffee Shop Logo",
+      "description": "Hand-drawn coffee cup logo for a local café brand"
+    },
+    {
+      "id": "leaf-logo",
+      "filename": "leaf-logo-raster.svg",
+      "category": "logo",
+      "label": "Eco Brand Logo",
+      "description": "Organic eco-friendly brand identity with leaf motif"
+    },
+    {
+      "id": "gradient-logo",
+      "filename": "gradient-logo-raster.svg",
+      "category": "logo",
+      "label": "Modern App Logo",
+      "description": "Contemporary app icon with gradient fill and rounded corners"
+    },
+    {
+      "id": "character-illustration",
+      "filename": "character-illustration-raster.svg",
+      "category": "illustration",
+      "label": "Character Art",
+      "description": "Digital character illustration with bold colors and clean lines"
+    },
+    {
+      "id": "abstract-illustration",
+      "filename": "abstract-illustration-raster.svg",
+      "category": "illustration",
+      "label": "Abstract Design",
+      "description": "Abstract geometric composition with layered shapes and transparency"
+    },
+    {
+      "id": "detailed-illustration",
+      "filename": "detailed-illustration-raster.svg",
+      "category": "illustration",
+      "label": "Detailed Scene",
+      "description": "Complex landscape illustration with multiple layers and perspective"
+    },
+    {
+      "id": "product-photo",
+      "filename": "product-photo-raster.svg",
+      "category": "photo",
+      "label": "Product Photography",
+      "description": "Professional product shot with studio lighting effects"
+    },
+    {
+      "id": "landscape-photo",
+      "filename": "landscape-photo-raster.svg",
+      "category": "photo",
+      "label": "Landscape Photo",
+      "description": "Outdoor landscape scene with natural gradients and depth"
+    },
+    {
+      "id": "macro-photo",
+      "filename": "macro-photo-raster.svg",
+      "category": "photo",
+      "label": "Macro Photography",
+      "description": "Close-up macro shot with subtle texture and lighting"
+    },
+    {
+      "id": "hand-drawn-sketch",
+      "filename": "hand-drawn-sketch-raster.svg",
+      "category": "sketch",
+      "label": "Hand Drawn Sketch",
+      "description": "Quick hand-drawn sketch with loose strokes and annotations"
+    },
+    {
+      "id": "wireframe-sketch",
+      "filename": "wireframe-sketch-raster.svg",
+      "category": "sketch",
+      "label": "UI Wireframe",
+      "description": "Low-fidelity wireframe for mobile app user interface"
+    }
+  ],
+  "categories": [
+    {
+      "id": "logo",
+      "label": "Logos",
+      "description": "Brand logos and icons"
+    },
+    {
+      "id": "illustration",
+      "label": "Illustrations",
+      "description": "Digital and hand-drawn illustrations"
+    },
+    {
+      "id": "photo",
+      "label": "Photos",
+      "description": "Photographic images"
+    },
+    {
+      "id": "sketch",
+      "label": "Sketches",
+      "description": "Sketches and wireframes"
+    }
+  ]
+}

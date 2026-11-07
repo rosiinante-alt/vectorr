@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 import { ImageComparisonSlider } from "@/components/image-comparison-slider";
+import { ExampleGallery } from "@/components/example-gallery";
+import { DragDropUpload } from "@/components/drag-drop-upload";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
@@ -117,6 +119,46 @@ export default function Home() {
               <p className="mt-6 text-center text-[14px] text-text-tertiary">
                 Drag the handle to compare raster vs. vector quality
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Example Gallery ────────────────────────────────── */}
+        <section className="py-20 sm:py-28 bg-bg-secondary" aria-labelledby="examples-heading">
+          <div className="wrap">
+            <div className="max-w-[760px] mb-12">
+              <h2
+                id="examples-heading"
+                className="display text-[clamp(30px,4.4vw,50px)]"
+              >
+                See what's possible.
+              </h2>
+              <p className="mt-5 text-[clamp(17px,1.7vw,20px)] leading-relaxed text-text-secondary">
+                From simple logos to detailed illustrations, our users convert every type of image. Explore examples across design categories.
+              </p>
+            </div>
+
+            <ExampleGallery />
+          </div>
+        </section>
+
+        {/* ── Drag & Drop Upload ─────────────────────────────── */}
+        <section className="py-20 sm:py-28" aria-labelledby="upload-heading">
+          <div className="wrap">
+            <div className="max-w-[760px] mx-auto mb-12 text-center">
+              <h2
+                id="upload-heading"
+                className="display text-[clamp(30px,4.4vw,50px)]"
+              >
+                Ready to vectorize?
+              </h2>
+              <p className="mt-5 text-[clamp(17px,1.7vw,20px)] leading-relaxed text-text-secondary">
+                Upload any image and get crisp, scalable vectors in seconds. No sign-up required.
+              </p>
+            </div>
+
+            <div className="max-w-[800px] mx-auto">
+              <DragDropUpload />
             </div>
           </div>
         </section>
