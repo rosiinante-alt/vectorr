@@ -4,6 +4,7 @@ import { ImageComparisonSlider } from "@/components/image-comparison-slider";
 import { ExampleGallery } from "@/components/example-gallery";
 import { DragDropUpload } from "@/components/drag-drop-upload";
 import { FeatureShowcase } from "@/components/feature-showcase";
+import { UseCaseGrid } from "@/components/use-case-grid";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
@@ -362,6 +363,29 @@ export default function Home() {
                 </tbody>
               </table>
             </div>
+          </div>
+        </section>
+
+        {/* ── Use cases ──────────────────────────────────────── */}
+        <section
+          className="bg-bg-secondary py-20 sm:py-28"
+          aria-labelledby="usecases-heading"
+        >
+          <div className="wrap">
+            <div className="max-w-[760px]">
+              <h2
+                id="usecases-heading"
+                className="display text-[clamp(30px,4.4vw,50px)]"
+              >
+                Made for the way you work.
+              </h2>
+              <p className="mt-5 text-[clamp(17px,1.7vw,20px)] leading-relaxed text-text-secondary">
+                The same conversion, tuned to what your next step needs — a cut
+                file, a print-ready vector, or an API call.
+              </p>
+            </div>
+
+            <UseCaseGrid />
           </div>
         </section>
 
