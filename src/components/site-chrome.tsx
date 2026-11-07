@@ -33,6 +33,7 @@ export function SiteHeader({ initialUser = null }: { initialUser?: User | null }
           href="/"
           className="flex items-center gap-2.5 text-[16px] font-semibold tracking-[-0.015em] text-text-primary"
         >
+          {/* TODO: Replace with Vectorr icon once provided */}
           <svg
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -46,7 +47,7 @@ export function SiteHeader({ initialUser = null }: { initialUser?: User | null }
             <path d="M4 18L12 5l8 13z" />
             <path d="M8.5 18L12 12l3.5 6" />
           </svg>
-          Vectorr
+          Vectroy
         </Link>
 
         <nav aria-label="Main" className="flex items-center gap-1">
@@ -128,7 +129,7 @@ export function SiteFooter() {
       title: "Resources",
       links: [
         { label: "All Resources", href: "/resources" },
-        { label: "Compare Vectorr", href: "/compare/vectosolve" },
+        { label: "Compare Vectroy", href: "/compare/vectosolve" },
         { label: "Converter Tools", href: "/convert/jpg-to-svg" },
       ],
     },
@@ -146,7 +147,7 @@ export function SiteFooter() {
       <div className="wrap">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="text-[16px] font-semibold tracking-[-0.015em]">Vectorr</p>
+            <p className="text-[16px] font-semibold tracking-[-0.015em]">Vectroy</p>
             <p className="mt-3 max-w-[280px] text-[14.5px] leading-relaxed text-text-tertiary">
               Vector-to-vector optimization with a report you can read. Shrink the
               SVG you already have.
@@ -176,7 +177,7 @@ export function SiteFooter() {
 
         <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--border-strong)] pt-5">
           <p className="text-[13.5px] text-text-tertiary">
-            © 2026 Vectorr. Your files stay yours.
+            © 2026 Vectroy. Your files stay yours.
           </p>
           <div className="flex flex-wrap items-center gap-6">
             <p className="text-[13.5px] text-text-tertiary">

@@ -5,6 +5,7 @@ import { ExampleGallery } from "@/components/example-gallery";
 import { DragDropUpload } from "@/components/drag-drop-upload";
 import { FeatureShowcase } from "@/components/feature-showcase";
 import { UseCaseGrid } from "@/components/use-case-grid";
+import { TestimonialCarousel } from "@/components/testimonial-carousel";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
@@ -386,6 +387,22 @@ export default function Home() {
             </div>
 
             <UseCaseGrid />
+          </div>
+        </section>
+
+        {/* ── Testimonials ───────────────────────────────────── */}
+        <section className="py-20 sm:py-28" aria-labelledby="testimonials-heading">
+          <div className="wrap">
+            <h2
+              id="testimonials-heading"
+              className="display text-center text-[clamp(30px,4.4vw,50px)]"
+            >
+              Loved by makers and builders.
+            </h2>
+
+            <div className="mt-16">
+              <TestimonialCarousel />
+            </div>
           </div>
         </section>
 
