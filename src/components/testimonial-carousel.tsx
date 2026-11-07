@@ -15,7 +15,7 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     quote:
-      "Vectorr has been a game-changer for our print shop. Clean paths mean fewer failed cuts and faster production. We've cut our scrap rate by a third.",
+      "Vectroy has been a game-changer for our print shop. Clean paths mean fewer failed cuts and faster production. We've cut our scrap rate by a third.",
     author: 'Sarah Martinez',
     role: 'Production Manager',
     company: 'SignCraft Studios',
@@ -33,7 +33,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "I was skeptical about tracing logos by algorithm, but Vectorr gets details right. The output is genuinely ready to use — no manual cleanup needed.",
+      "I was skeptical about tracing logos by algorithm, but Vectroy gets details right. The output is genuinely ready to use — no manual cleanup needed.",
     author: 'Elena Rossi',
     role: 'Creative Director',
     company: 'Momentum Design',
@@ -42,7 +42,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "Embroidery digitizing usually means starting from scratch on every design. With Vectorr, I can feed sketches straight into our software and ship patterns in minutes.",
+      "Embroidery digitizing usually means starting from scratch on every design. With Vectroy, I can feed sketches straight into our software and ship patterns in minutes.",
     author: 'Marcus Thompson',
     role: 'Embroidery Specialist',
     company: 'Thread & Needle Co.',
@@ -51,7 +51,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "For product photos that need to become stickers or decals, Vectorr is unbeatable. Fast, automatic, and the quality consistently impresses our customers.",
+      "For product photos that need to become stickers or decals, Vectroy is unbeatable. Fast, automatic, and the quality consistently impresses our customers.",
     author: 'Priya Patel',
     role: 'Product Manager',
     company: 'Creative Commerce',

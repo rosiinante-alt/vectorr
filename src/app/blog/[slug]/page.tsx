@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!post) {
     return {
-      title: "Article Not Found — Vectorr",
+      title: "Article Not Found — Vectroy",
       description: "This article is not available.",
     };
   }
@@ -91,8 +91,8 @@ export default async function BlogPostPage({ params }: PageProps) {
     description: post.seoDescription,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt ?? post.publishedAt,
-    author: { "@type": "Organization", name: "Vectorr" },
-    publisher: { "@type": "Organization", name: "Vectorr" },
+    author: { "@type": "Organization", name: "Vectroy" },
+    publisher: { "@type": "Organization", name: "Vectroy" },
     mainEntityOfPage: `${baseUrl}/blog/${post.slug}`,
   };
 

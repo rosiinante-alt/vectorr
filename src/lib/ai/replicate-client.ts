@@ -111,7 +111,7 @@ export class ReplicateError extends Error {
 // ---------------------------------------------------------------------------
 
 const globalForReplicate = globalThis as typeof globalThis & {
-  vectorrReplicate?: Replicate;
+  vectroyReplicate?: Replicate;
 };
 
 /** Lazily constructed so importing this module never requires the token. */
@@ -124,7 +124,7 @@ export function getReplicateClient(): Replicate {
   }
 
   // Reuse one client across hot reloads to avoid leaking HTTP agents.
-  return (globalForReplicate.vectorrReplicate ??= new Replicate({
+  return (globalForReplicate.vectroyReplicate ??= new Replicate({
     auth: process.env.REPLICATE_API_TOKEN,
   }));
 }

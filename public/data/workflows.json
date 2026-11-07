@@ -21,7 +21,7 @@
       "SVG",
       "DXF"
     ],
-    "content": "# Convert Images for Cricut Design Space\n\nCricut Design Space works best with clean SVG files that have well-defined paths and minimal complexity. Vectorr converts your photos, logos, and designs into Cricut-ready SVG files with optimized paths that cut cleanly on vinyl, cardstock, and other materials.\n\n## Why Vectorr for Cricut?\n\nClean Paths: Our AI traces edges precisely, creating smooth curves without stray nodes that cause cutting errors.\n\nOptimized Complexity: We automatically simplify paths to reduce file size while preserving detail\u2014Design Space loads faster and cuts more reliably.\n\nReady for Cut: Output SVG files work immediately in Design Space with no manual cleanup. Just upload, resize, and cut.\n\n## Best Practices\n\n1. Start with high-contrast images: Black logos on white backgrounds work best. The clearer the edges, the better the trace.\n\n2. Simplify before converting: Remove backgrounds and isolate your subject. Use our background removal tool if needed.\n\n3. Check path count: Cricut Design Space performs best with files under 1,000 paths. Use our simplification slider if your design is complex.\n\n4. Export as SVG (not DXF): SVG preserves colors and layers. DXF is for cut-only projects with no fill.\n\n## Common Cricut Workflows\n\nVinyl Decals:\n1. Upload your logo or text image\n2. Convert to SVG with medium detail\n3. Import to Design Space\n4. Set material to vinyl and cut\n\nMulti-Layer Designs:\n1. Upload your design\n2. Enable color separation to get one SVG per color\n3. Import each layer to Design Space\n4. Assign each layer to a different material\n\nIron-On Transfers:\n1. Convert your image to SVG\n2. Import to Design Space\n3. Mirror the image horizontally\n4. Cut on iron-on vinyl (HTV)\n\n## Related Resources\n\n[SVG Optimization Guide](/resources/svg-optimization-guide)\n[Cricut Design Guide](/resources/cricut-design-guide)\n[Convert PNG to SVG](/convert/png-to-svg)\n\n## File Requirements Design Space Actually Enforces\n\nDesign Space is fussy in ways that are not documented well. Every import is checked for a closed cut path, a bounding box under 23.5 by 11.5 inches, and a path count low enough to keep the preview responsive. Files that break one of these rules fail at the \"Preparing\" step rather than at import, which is why a design can look fine in the canvas and still refuse to cut.\n\nA clean trace avoids most of this. The common failure is a photo trace with thousands of micro-paths, where each speck of noise becomes a separate closed contour. Design Space will import it, then take minutes to render and cut a pattern of dust. Raising the simplification level before export removes those contours instead of forcing you to delete them by hand.\n\n## Choosing Detail Level for the Material\n\nDetail should follow the material, not the artwork. Vinyl and cardstock cut cleanly down to about one sixteenth of an inch, so a high-detail trace is safe. Fabric and leather tear at fine features, so a medium setting that merges small gaps produces a sturdier cut. Iron-on needs a mirrored design, and mirroring is a Design Space action, not a conversion step \u2014 export normally, then flip on import.\n\n## Working With Multi-Color Artwork\n\nCricut does not print color, so color in the source artwork is only useful as a grouping signal. Color separation turns each distinct fill into its own SVG layer, which matches the mylar-bag workflow: cut every layer from a different vinyl color, then stack them on the same base. If you skip separation you get one composite path that cuts every color as a single outline, which is only correct for single-color decals.\n\n## Troubleshooting\n\nIf the import sits at \"Preparing\" indefinitely, the path count is almost always the cause \u2014 resimplify and retry. If edges look ragged after cutting, the source image was low resolution and the trace followed the pixel stair-steps; upscale by 2x before converting. If layers do not line up, one layer was resized independently in Design Space; group all layers, then resize the group.",
+    "content": "# Convert Images for Cricut Design Space\n\nCricut Design Space works best with clean SVG files that have well-defined paths and minimal complexity. Vectroy converts your photos, logos, and designs into Cricut-ready SVG files with optimized paths that cut cleanly on vinyl, cardstock, and other materials.\n\n## Why Vectroy for Cricut?\n\nClean Paths: Our AI traces edges precisely, creating smooth curves without stray nodes that cause cutting errors.\n\nOptimized Complexity: We automatically simplify paths to reduce file size while preserving detail—Design Space loads faster and cuts more reliably.\n\nReady for Cut: Output SVG files work immediately in Design Space with no manual cleanup. Just upload, resize, and cut.\n\n## Best Practices\n\n1. Start with high-contrast images: Black logos on white backgrounds work best. The clearer the edges, the better the trace.\n\n2. Simplify before converting: Remove backgrounds and isolate your subject. Use our background removal tool if needed.\n\n3. Check path count: Cricut Design Space performs best with files under 1,000 paths. Use our simplification slider if your design is complex.\n\n4. Export as SVG (not DXF): SVG preserves colors and layers. DXF is for cut-only projects with no fill.\n\n## Common Cricut Workflows\n\nVinyl Decals:\n1. Upload your logo or text image\n2. Convert to SVG with medium detail\n3. Import to Design Space\n4. Set material to vinyl and cut\n\nMulti-Layer Designs:\n1. Upload your design\n2. Enable color separation to get one SVG per color\n3. Import each layer to Design Space\n4. Assign each layer to a different material\n\nIron-On Transfers:\n1. Convert your image to SVG\n2. Import to Design Space\n3. Mirror the image horizontally\n4. Cut on iron-on vinyl (HTV)\n\n## Related Resources\n\n[SVG Optimization Guide](/resources/svg-optimization-guide)\n[Cricut Design Guide](/resources/cricut-design-guide)\n[Convert PNG to SVG](/convert/png-to-svg)\n\n## File Requirements Design Space Actually Enforces\n\nDesign Space is fussy in ways that are not documented well. Every import is checked for a closed cut path, a bounding box under 23.5 by 11.5 inches, and a path count low enough to keep the preview responsive. Files that break one of these rules fail at the \"Preparing\" step rather than at import, which is why a design can look fine in the canvas and still refuse to cut.\n\nA clean trace avoids most of this. The common failure is a photo trace with thousands of micro-paths, where each speck of noise becomes a separate closed contour. Design Space will import it, then take minutes to render and cut a pattern of dust. Raising the simplification level before export removes those contours instead of forcing you to delete them by hand.\n\n## Choosing Detail Level for the Material\n\nDetail should follow the material, not the artwork. Vinyl and cardstock cut cleanly down to about one sixteenth of an inch, so a high-detail trace is safe. Fabric and leather tear at fine features, so a medium setting that merges small gaps produces a sturdier cut. Iron-on needs a mirrored design, and mirroring is a Design Space action, not a conversion step — export normally, then flip on import.\n\n## Working With Multi-Color Artwork\n\nCricut does not print color, so color in the source artwork is only useful as a grouping signal. Color separation turns each distinct fill into its own SVG layer, which matches the mylar-bag workflow: cut every layer from a different vinyl color, then stack them on the same base. If you skip separation you get one composite path that cuts every color as a single outline, which is only correct for single-color decals.\n\n## Troubleshooting\n\nIf the import sits at \"Preparing\" indefinitely, the path count is almost always the cause — resimplify and retry. If edges look ragged after cutting, the source image was low resolution and the trace followed the pixel stair-steps; upscale by 2x before converting. If layers do not line up, one layer was resized independently in Design Space; group all layers, then resize the group.",
     "faqs": [
       {
         "question": "What file format does Cricut Design Space need?",
@@ -150,7 +150,7 @@
       "SVG",
       "DXF"
     ],
-    "content": "# Convert Images for Silhouette Cameo\n\nSilhouette Studio accepts SVG and DXF files, but not all vector files are created equal. Vectorr generates Cameo-optimized SVG files with clean paths, proper node placement, and simplified geometry that cuts accurately on vinyl, cardstock, heat transfer vinyl, and other materials.\n\n## Why Vectorr for Silhouette?\n\nStudio-Compatible: Our SVG files import directly into Silhouette Studio (Basic, Designer, Business editions) without path errors or unsupported elements.\n\nClean Nodes: We place nodes strategically to minimize file complexity while preserving smooth curves\u2014fewer nodes mean faster cuts and less blade wear.\n\nLayer Preservation: Multi-color designs export with layers intact, making it easy to assign different cut settings per color.\n\n## Silhouette Cameo Workflow\n\n1. Upload your image: JPG, PNG, or HEIC photos work great. High contrast images (logos, text, illustrations) trace best.\n\n2. Adjust detail level: Use the detail slider to control how closely the vector follows your image. Lower detail = simpler paths = faster cuts.\n\n3. Export as SVG or DXF: SVG preserves colors, layers, and fills. Best for print-and-cut or multi-material projects. DXF is cut lines only, no fills. Use for single-color vinyl decals.\n\n4. Import to Silhouette Studio: Open Studio, go to File \u2192 Open, and select your SVG. The design appears on your canvas ready to cut.\n\n## Print-and-Cut Projects\n\nThe Silhouette Cameo excels at print-and-cut: print a design on your home printer, then have the Cameo cut around it precisely.\n\n1. Convert your image to SVG with colors preserved.\n2. Import to Silhouette Studio.\n3. Add registration marks (Studio does this automatically).\n4. Print on sticker paper or cardstock.\n5. Load the printed sheet into your Cameo and let it cut.\n\n## Related Resources\n\n[SVG Optimization Guide](/resources/svg-optimization-guide)\n[File Formats Explained](/resources/file-formats)\n[Convert JPG to SVG](/convert/jpg-to-svg)\n\n## Silhouette Studio Editions and What They Change\n\nSilhouette Studio ships in four tiers, and the edition decides which file types you can even open. The free Basic Edition reads SVG and DXF. Designer Edition adds SVG imports with better editing and is the usual minimum for serious cutters. Business Edition adds the shape and layer tools used for production runs. None of the editions read PES, DST or JEF, so embroidery files cannot be cut on a Cameo regardless of tier.\n\nDXF is the safer interchange format on this platform. Silhouette's DXF reader is more forgiving of path structure than its SVG reader, particularly with files that use nested groups. If an SVG opens with missing pieces, exporting the same artwork as DXF usually brings them back.\n\n## Cut Settings That Follow the Trace\n\nThe Cameo picks cut pressure from the material preset, but the trace decides whether that pressure works. A path with many short segments makes the blade lift and pivot constantly, which frays heat transfer vinyl and perforates paper. Smoothing curves during conversion reduces those pivots. Close paths also matter: an open contour makes the machine guess where to stop, and the blade usually keeps going past the intended endpoint.\n\n## Registration and Print-and-Cut\n\nPrint-and-cut projects need registration marks, and the marks must sit outside the artwork's bounding box. If the trace fills the entire canvas edge to edge, the marks have nowhere to go and the Cameo will reject the job. Leave at least half an inch of margin around the design before converting, and the marks will fit.\n\n## Troubleshooting\n\nIf the Cameo cuts a shape twice, the file contains duplicate overlapping paths \u2014 a common result of converting an image that already had a vector outline. Simplification collapses them. If the blade drags material instead of cutting it, the path is denser than the preset expects; lower the detail setting and re-export. If Studio refuses the file outright, confirm you are on an edition that reads SVG.",
+    "content": "# Convert Images for Silhouette Cameo\n\nSilhouette Studio accepts SVG and DXF files, but not all vector files are created equal. Vectroy generates Cameo-optimized SVG files with clean paths, proper node placement, and simplified geometry that cuts accurately on vinyl, cardstock, heat transfer vinyl, and other materials.\n\n## Why Vectroy for Silhouette?\n\nStudio-Compatible: Our SVG files import directly into Silhouette Studio (Basic, Designer, Business editions) without path errors or unsupported elements.\n\nClean Nodes: We place nodes strategically to minimize file complexity while preserving smooth curves—fewer nodes mean faster cuts and less blade wear.\n\nLayer Preservation: Multi-color designs export with layers intact, making it easy to assign different cut settings per color.\n\n## Silhouette Cameo Workflow\n\n1. Upload your image: JPG, PNG, or HEIC photos work great. High contrast images (logos, text, illustrations) trace best.\n\n2. Adjust detail level: Use the detail slider to control how closely the vector follows your image. Lower detail = simpler paths = faster cuts.\n\n3. Export as SVG or DXF: SVG preserves colors, layers, and fills. Best for print-and-cut or multi-material projects. DXF is cut lines only, no fills. Use for single-color vinyl decals.\n\n4. Import to Silhouette Studio: Open Studio, go to File → Open, and select your SVG. The design appears on your canvas ready to cut.\n\n## Print-and-Cut Projects\n\nThe Silhouette Cameo excels at print-and-cut: print a design on your home printer, then have the Cameo cut around it precisely.\n\n1. Convert your image to SVG with colors preserved.\n2. Import to Silhouette Studio.\n3. Add registration marks (Studio does this automatically).\n4. Print on sticker paper or cardstock.\n5. Load the printed sheet into your Cameo and let it cut.\n\n## Related Resources\n\n[SVG Optimization Guide](/resources/svg-optimization-guide)\n[File Formats Explained](/resources/file-formats)\n[Convert JPG to SVG](/convert/jpg-to-svg)\n\n## Silhouette Studio Editions and What They Change\n\nSilhouette Studio ships in four tiers, and the edition decides which file types you can even open. The free Basic Edition reads SVG and DXF. Designer Edition adds SVG imports with better editing and is the usual minimum for serious cutters. Business Edition adds the shape and layer tools used for production runs. None of the editions read PES, DST or JEF, so embroidery files cannot be cut on a Cameo regardless of tier.\n\nDXF is the safer interchange format on this platform. Silhouette's DXF reader is more forgiving of path structure than its SVG reader, particularly with files that use nested groups. If an SVG opens with missing pieces, exporting the same artwork as DXF usually brings them back.\n\n## Cut Settings That Follow the Trace\n\nThe Cameo picks cut pressure from the material preset, but the trace decides whether that pressure works. A path with many short segments makes the blade lift and pivot constantly, which frays heat transfer vinyl and perforates paper. Smoothing curves during conversion reduces those pivots. Close paths also matter: an open contour makes the machine guess where to stop, and the blade usually keeps going past the intended endpoint.\n\n## Registration and Print-and-Cut\n\nPrint-and-cut projects need registration marks, and the marks must sit outside the artwork's bounding box. If the trace fills the entire canvas edge to edge, the marks have nowhere to go and the Cameo will reject the job. Leave at least half an inch of margin around the design before converting, and the marks will fit.\n\n## Troubleshooting\n\nIf the Cameo cuts a shape twice, the file contains duplicate overlapping paths — a common result of converting an image that already had a vector outline. Simplification collapses them. If the blade drags material instead of cutting it, the path is denser than the preset expects; lower the detail setting and re-export. If Studio refuses the file outright, confirm you are on an edition that reads SVG.",
     "faqs": [
       {
         "question": "Which Silhouette Studio edition opens SVG files?",
@@ -281,7 +281,7 @@
       "DXF",
       "G-code"
     ],
-    "content": "# Convert Images for Laser Engraving\n\nLaser engraving and cutting machines require vector files with precise paths. Vectorr converts your images to SVG, DXF, or G-code optimized for laser software like Lightburn, RDWorks, and LaserGRBL.\n\n## Why Vectorr for Laser Work?\n\nPrecise Paths: Laser engravers follow vector paths exactly. Our AI generates smooth, accurate curves with minimal node count for fast, clean cuts.\n\nNo Overlapping Lines: Overlapping paths waste time and burn material. Vectorr automatically removes duplicate paths and simplifies geometry.\n\nMultiple Formats: Export to SVG (most common), DXF (CAD-compatible), or G-code (direct machine control).\n\n## Laser Cutting vs. Engraving\n\nCutting: Full-power laser passes that cut through material. Use outline paths only (no fills). Export as DXF or SVG with stroke-only paths.\n\nEngraving: Lower-power laser that etches the surface. Can use filled paths or raster images. Export as SVG with fills, or use bitmap engraving mode in your laser software.\n\nScoring: Medium-power passes that mark but don't cut through. Use thin stroke paths (0.1mm or less). Export as SVG or DXF.\n\n## Workflow for Lightburn\n\n1. Upload your image to Vectorr.\n2. Adjust detail: For cutting, use lower detail to get clean, simple outlines. For engraving, higher detail preserves texture and shading.\n3. Export as SVG or DXF.\n4. Import to Lightburn: File \u2192 Import \u2192 select your file.\n5. Assign layers: In Lightburn, assign cut power, speed, and number of passes to each layer.\n6. Frame and cut: Use Lightburn's frame tool to preview the cut area, then run the job.\n\n## Related Resources\n\n[Laser Cutting Guide](/resources/laser-cutting-guide)\n[DXF File Format](/resources/file-formats)\n[Convert PNG to DXF](/convert/png-to-dxf)\n\n## From Raster to Toolpath\n\nA laser does not read SVG directly. The chain is image to vector to toolpath: the vector defines where the head travels, and the G-code or LightBurn file assigns power and speed to each move. Mistakes in the vector stage are permanent, because the laser cannot smooth a jagged path after the fact \u2014 it simply follows it.\n\nTwo vector properties matter more than any other at this stage. First, closed contours: an unfilled outline still engraves, but a contour that does not close leaves a tiny gap in the final shape. Second, minimal overlapping nodes: a path that doubles back on itself burns twice at the same spot, producing a dark line where the artwork shows none.\n\n## Engrave Versus Cut\n\nEngraving uses fill; cutting uses stroke. A conversion that preserves color fills gives you a raster-style engraving where every region is burned at the preset power. A conversion that emits outlines gives you a cutting file. Decide which you want before converting, because the two need different trace settings \u2014 engraving keeps detail, cutting needs simplicity.\n\n## Why DXF Beats SVG for Some Machines\n\nOlder controllers and RDWorks-based cutters handle DXF more reliably than SVG. DXF carries geometry with explicit layer names and no CSS, so there is nothing for the controller to misinterpret. If a machine ignores fills or collapses layers, converting to DXF and reimporting often fixes it without changing the artwork.\n\n## Material Notes\n\nEngraved fill density changes how dark the result looks, not just how deep. Too dense a fill pattern over a large area heats the material unevenly and warps thin stock. For a large filled region, reduce fill density rather than power, which keeps the depth consistent across the shape. Always run a small test cut on scrap before committing a full sheet \u2014 power scales with material, not with the design.",
+    "content": "# Convert Images for Laser Engraving\n\nLaser engraving and cutting machines require vector files with precise paths. Vectroy converts your images to SVG, DXF, or G-code optimized for laser software like Lightburn, RDWorks, and LaserGRBL.\n\n## Why Vectroy for Laser Work?\n\nPrecise Paths: Laser engravers follow vector paths exactly. Our AI generates smooth, accurate curves with minimal node count for fast, clean cuts.\n\nNo Overlapping Lines: Overlapping paths waste time and burn material. Vectroy automatically removes duplicate paths and simplifies geometry.\n\nMultiple Formats: Export to SVG (most common), DXF (CAD-compatible), or G-code (direct machine control).\n\n## Laser Cutting vs. Engraving\n\nCutting: Full-power laser passes that cut through material. Use outline paths only (no fills). Export as DXF or SVG with stroke-only paths.\n\nEngraving: Lower-power laser that etches the surface. Can use filled paths or raster images. Export as SVG with fills, or use bitmap engraving mode in your laser software.\n\nScoring: Medium-power passes that mark but don't cut through. Use thin stroke paths (0.1mm or less). Export as SVG or DXF.\n\n## Workflow for Lightburn\n\n1. Upload your image to Vectroy.\n2. Adjust detail: For cutting, use lower detail to get clean, simple outlines. For engraving, higher detail preserves texture and shading.\n3. Export as SVG or DXF.\n4. Import to Lightburn: File → Import → select your file.\n5. Assign layers: In Lightburn, assign cut power, speed, and number of passes to each layer.\n6. Frame and cut: Use Lightburn's frame tool to preview the cut area, then run the job.\n\n## Related Resources\n\n[Laser Cutting Guide](/resources/laser-cutting-guide)\n[DXF File Format](/resources/file-formats)\n[Convert PNG to DXF](/convert/png-to-dxf)\n\n## From Raster to Toolpath\n\nA laser does not read SVG directly. The chain is image to vector to toolpath: the vector defines where the head travels, and the G-code or LightBurn file assigns power and speed to each move. Mistakes in the vector stage are permanent, because the laser cannot smooth a jagged path after the fact — it simply follows it.\n\nTwo vector properties matter more than any other at this stage. First, closed contours: an unfilled outline still engraves, but a contour that does not close leaves a tiny gap in the final shape. Second, minimal overlapping nodes: a path that doubles back on itself burns twice at the same spot, producing a dark line where the artwork shows none.\n\n## Engrave Versus Cut\n\nEngraving uses fill; cutting uses stroke. A conversion that preserves color fills gives you a raster-style engraving where every region is burned at the preset power. A conversion that emits outlines gives you a cutting file. Decide which you want before converting, because the two need different trace settings — engraving keeps detail, cutting needs simplicity.\n\n## Why DXF Beats SVG for Some Machines\n\nOlder controllers and RDWorks-based cutters handle DXF more reliably than SVG. DXF carries geometry with explicit layer names and no CSS, so there is nothing for the controller to misinterpret. If a machine ignores fills or collapses layers, converting to DXF and reimporting often fixes it without changing the artwork.\n\n## Material Notes\n\nEngraved fill density changes how dark the result looks, not just how deep. Too dense a fill pattern over a large area heats the material unevenly and warps thin stock. For a large filled region, reduce fill density rather than power, which keeps the depth consistent across the shape. Always run a small test cut on scrap before committing a full sheet — power scales with material, not with the design.",
     "faqs": [
       {
         "question": "Does a laser cutter read SVG directly?",
@@ -416,7 +416,7 @@
       "PES",
       "JEF"
     ],
-    "content": "# Convert Images for Embroidery Digitizing\n\nEmbroidery machines read stitch files (DST, PES, JEF) that tell the needle where to move. Vectorr converts your logos and designs into embroidery-ready files with optimized stitch paths for Brother, Janome, Bernina, and commercial machines.\n\n## Why Vectorr for Embroidery?\n\nStitch-Optimized Paths: We convert vector paths into efficient stitch sequences that minimize thread breaks and jump stitches.\n\nMultiple Formats: Export to DST (universal), PES (Brother), or JEF (Janome).\n\nDensity Control: Adjust stitch density to balance coverage and file size. Higher density = fuller coverage, but slower stitching.\n\n## Embroidery File Formats\n\nDST (Tajima): The most universal format. Supported by almost all embroidery machines and software. Use DST if you're unsure.\n\nPES (Brother): Native format for Brother embroidery machines (PE-Design, Innovis, Entrepreneur). Supports color information and metadata.\n\nJEF (Janome): Native format for Janome machines (Memory Craft, Horizon, Skyline). Similar to PES but with Janome-specific features.\n\n## Digitizing Workflow\n\n1. Upload your logo or design: High-contrast images work best. Remove backgrounds and simplify colors before converting.\n\n2. Convert to vector first: Embroidery files are based on vector paths. If your image is a photo (JPG, PNG), Vectorr converts it to SVG first, then to embroidery format.\n\n3. Adjust stitch density: Use the density slider to control how tightly stitches are packed.\n\n4. Export as DST, PES, or JEF.\n\n5. Load onto your machine: Copy the file to a USB drive, insert into your embroidery machine, and select the design.\n\n## Related Resources\n\n[Embroidery File Formats](/resources/embroidery-file-formats)\n[Convert JPG to DST](/convert/jpg-to-dst)\n[Convert PNG to PES](/convert/png-to-pes)\n\n## Why Conversion Is Not Digitizing\n\nIt is worth being direct: converting an image to DST or PES produces a stitch file, but it does not produce good digitizing. Professional digitizing chooses stitch type, underlay, pull compensation and path order for the specific fabric. An automated conversion follows the outline, which works for simple logos and line art and struggles with large filled shapes and fine text.\n\nThis is a useful distinction rather than a limitation. For a single-color logo, a converted outline stitches cleanly. For a photographic or heavily shaded design, expect to hand-tune the result in your machine's software, or send it to a digitizer. Knowing which side of that line your artwork falls on saves a lot of wasted thread.\n\n## Reading the File Formats\n\nDST carries stitch coordinates and a minimal header; it does not carry color. Every machine that reads DST assigns its own thread colors on open, so the same file looks different on a Brother than a Tajima. PES adds an embedded PEC block with a single color assignment, which most home machines honor. JEF is Janome's format and behaves similarly, with a 200 mm hoop limit that rejects oversized designs rather than scaling them.\n\nIf color fidelity matters more than portability, PES is the better choice. If you need maximum machine compatibility and will set thread colors at the machine anyway, DST is the safer bet.\n\n## Hoop Size and Design Boundaries\n\nEvery export must fit the physical hoop. A design that overflows is not silently cropped \u2014 the machine either refuses the file or, worse, stitches off the edge of the stabilizer. Check the design dimensions before exporting and scale down if needed. Our exporter rejects a PES or JEF design past the hoop limit instead of writing a file the machine cannot run.\n\n## Stitch Count and Time\n\nStitch count predicts run time directly: most home machines complete roughly 400 to 700 stitches per minute. A converted outline of a simple logo lands in the low thousands of stitches and finishes in minutes. A dense filled region can exceed thirty thousand stitches and run the better part of an hour, so preview the stitch count before starting a long job.",
+    "content": "# Convert Images for Embroidery Digitizing\n\nEmbroidery machines read stitch files (DST, PES, JEF) that tell the needle where to move. Vectroy converts your logos and designs into embroidery-ready files with optimized stitch paths for Brother, Janome, Bernina, and commercial machines.\n\n## Why Vectroy for Embroidery?\n\nStitch-Optimized Paths: We convert vector paths into efficient stitch sequences that minimize thread breaks and jump stitches.\n\nMultiple Formats: Export to DST (universal), PES (Brother), or JEF (Janome).\n\nDensity Control: Adjust stitch density to balance coverage and file size. Higher density = fuller coverage, but slower stitching.\n\n## Embroidery File Formats\n\nDST (Tajima): The most universal format. Supported by almost all embroidery machines and software. Use DST if you're unsure.\n\nPES (Brother): Native format for Brother embroidery machines (PE-Design, Innovis, Entrepreneur). Supports color information and metadata.\n\nJEF (Janome): Native format for Janome machines (Memory Craft, Horizon, Skyline). Similar to PES but with Janome-specific features.\n\n## Digitizing Workflow\n\n1. Upload your logo or design: High-contrast images work best. Remove backgrounds and simplify colors before converting.\n\n2. Convert to vector first: Embroidery files are based on vector paths. If your image is a photo (JPG, PNG), Vectroy converts it to SVG first, then to embroidery format.\n\n3. Adjust stitch density: Use the density slider to control how tightly stitches are packed.\n\n4. Export as DST, PES, or JEF.\n\n5. Load onto your machine: Copy the file to a USB drive, insert into your embroidery machine, and select the design.\n\n## Related Resources\n\n[Embroidery File Formats](/resources/embroidery-file-formats)\n[Convert JPG to DST](/convert/jpg-to-dst)\n[Convert PNG to PES](/convert/png-to-pes)\n\n## Why Conversion Is Not Digitizing\n\nIt is worth being direct: converting an image to DST or PES produces a stitch file, but it does not produce good digitizing. Professional digitizing chooses stitch type, underlay, pull compensation and path order for the specific fabric. An automated conversion follows the outline, which works for simple logos and line art and struggles with large filled shapes and fine text.\n\nThis is a useful distinction rather than a limitation. For a single-color logo, a converted outline stitches cleanly. For a photographic or heavily shaded design, expect to hand-tune the result in your machine's software, or send it to a digitizer. Knowing which side of that line your artwork falls on saves a lot of wasted thread.\n\n## Reading the File Formats\n\nDST carries stitch coordinates and a minimal header; it does not carry color. Every machine that reads DST assigns its own thread colors on open, so the same file looks different on a Brother than a Tajima. PES adds an embedded PEC block with a single color assignment, which most home machines honor. JEF is Janome's format and behaves similarly, with a 200 mm hoop limit that rejects oversized designs rather than scaling them.\n\nIf color fidelity matters more than portability, PES is the better choice. If you need maximum machine compatibility and will set thread colors at the machine anyway, DST is the safer bet.\n\n## Hoop Size and Design Boundaries\n\nEvery export must fit the physical hoop. A design that overflows is not silently cropped — the machine either refuses the file or, worse, stitches off the edge of the stabilizer. Check the design dimensions before exporting and scale down if needed. Our exporter rejects a PES or JEF design past the hoop limit instead of writing a file the machine cannot run.\n\n## Stitch Count and Time\n\nStitch count predicts run time directly: most home machines complete roughly 400 to 700 stitches per minute. A converted outline of a simple logo lands in the low thousands of stitches and finishes in minutes. A dense filled region can exceed thirty thousand stitches and run the better part of an hour, so preview the stitch count before starting a long job.",
     "faqs": [
       {
         "question": "Is converting an image to PES the same as digitizing?",
@@ -551,14 +551,14 @@
       "3MF",
       "OBJ"
     ],
-    "content": "# Convert Images for 3D Printing\n\n3D printers require 3D mesh files (STL, 3MF, OBJ). Vectorr converts 2D images and logos into 3D models by extruding vector paths along the Z-axis, creating printable models ready for FDM, resin, and SLA printers.\n\n## How It Works\n\n1. Vectorization: Your image (JPG, PNG, SVG) is converted to vector paths.\n2. Extrusion: Each path is extruded upward along the Z-axis to create depth.\n3. Mesh Generation: The extruded paths are converted to a triangle mesh (STL, 3MF, or OBJ).\n4. Export: The 3D model is ready to slice and print.\n\n## Use Cases\n\nLogos and Badges: Convert your company logo into a 3D sign or badge. Perfect for desk decorations, keychains, and promotional items.\n\nCookie Cutters: Extrude simple shapes into cookie cutter outlines. Print in food-safe PLA or PETG.\n\nSignage: Turn text and icons into 3D signs for walls, shelves, and displays.\n\n## File Formats\n\nSTL: The most common 3D printing format. Supported by all slicers and printers.\n\n3MF: Modern format that supports colors, textures, and metadata. Preferred by Bambu Lab, Prusa, and other modern printers.\n\nOBJ: Text-based format that supports colors and materials. Compatible with Blender, MeshLab, and CAD software.\n\n## Related Resources\n\n[File Formats Explained](/resources/file-formats)\n[Convert PNG to STL](/convert/png-to-stl)\n[Convert SVG to 3MF](/convert/svg-to-3mf)\n\n## How a 2D Design Becomes a Printable Model\n\nA 3D printer needs a watertight surface mesh, not a picture. Converting artwork to STL, 3MF or OBJ means extruding every closed 2D region upward into a solid with a top, a bottom and vertical walls. The extrusion depth you choose is the model's thickness, and the slicer handles everything above and below that.\n\nThe part that determines whether the print succeeds is closure. A region that is not fully closed produces a surface with a hole, and the slicer cannot decide where solid ends and air begins. It will usually print anyway, with a missing wall or a stray fragment. Checking for closed contours before conversion is the single highest-value step.\n\n## Format Choice\n\nSTL is the universal format and every slicer reads it, but it stores only geometry \u2014 no units, no color, no material. 3MF is the modern replacement: it is also an XML package, so it can carry units, colors and multiple objects, and both PrusaSlicer and Bambu Studio read it natively. OBJ suits further modeling work in Blender or another mesh editor because it preserves structure better than STL when you need to edit rather than print.\n\nIf you plan to hand the file to someone else, 3MF is the best default. If you need maximum compatibility with older software, STL is the one that always opens.\n\n## Wall Thickness and Layer Height\n\nAn extruded region thinner than two nozzle widths will print as a single fragile wall or fail entirely. For a 0.4 mm nozzle, keep the model at least 1 mm thick. Layer height then controls the vertical resolution of any angled edge: 0.2 mm is the usual balance, and dropping to 0.12 mm makes a shallow ramp noticeably smoother at the cost of print time.\n\n## Scaling and Base Plate\n\nModels come out of conversion in design units, which rarely match millimeters. Most slicers let you scale on import, but confirming the unit before printing prevents a thumbnail-sized ornament or a phone-sized monstrosity. A flat base improves adhesion \u2014 if the design is a thin outline, adding a plinth in the slicer gives the print something to grip.",
+    "content": "# Convert Images for 3D Printing\n\n3D printers require 3D mesh files (STL, 3MF, OBJ). Vectroy converts 2D images and logos into 3D models by extruding vector paths along the Z-axis, creating printable models ready for FDM, resin, and SLA printers.\n\n## How It Works\n\n1. Vectorization: Your image (JPG, PNG, SVG) is converted to vector paths.\n2. Extrusion: Each path is extruded upward along the Z-axis to create depth.\n3. Mesh Generation: The extruded paths are converted to a triangle mesh (STL, 3MF, or OBJ).\n4. Export: The 3D model is ready to slice and print.\n\n## Use Cases\n\nLogos and Badges: Convert your company logo into a 3D sign or badge. Perfect for desk decorations, keychains, and promotional items.\n\nCookie Cutters: Extrude simple shapes into cookie cutter outlines. Print in food-safe PLA or PETG.\n\nSignage: Turn text and icons into 3D signs for walls, shelves, and displays.\n\n## File Formats\n\nSTL: The most common 3D printing format. Supported by all slicers and printers.\n\n3MF: Modern format that supports colors, textures, and metadata. Preferred by Bambu Lab, Prusa, and other modern printers.\n\nOBJ: Text-based format that supports colors and materials. Compatible with Blender, MeshLab, and CAD software.\n\n## Related Resources\n\n[File Formats Explained](/resources/file-formats)\n[Convert PNG to STL](/convert/png-to-stl)\n[Convert SVG to 3MF](/convert/svg-to-3mf)\n\n## How a 2D Design Becomes a Printable Model\n\nA 3D printer needs a watertight surface mesh, not a picture. Converting artwork to STL, 3MF or OBJ means extruding every closed 2D region upward into a solid with a top, a bottom and vertical walls. The extrusion depth you choose is the model's thickness, and the slicer handles everything above and below that.\n\nThe part that determines whether the print succeeds is closure. A region that is not fully closed produces a surface with a hole, and the slicer cannot decide where solid ends and air begins. It will usually print anyway, with a missing wall or a stray fragment. Checking for closed contours before conversion is the single highest-value step.\n\n## Format Choice\n\nSTL is the universal format and every slicer reads it, but it stores only geometry — no units, no color, no material. 3MF is the modern replacement: it is also an XML package, so it can carry units, colors and multiple objects, and both PrusaSlicer and Bambu Studio read it natively. OBJ suits further modeling work in Blender or another mesh editor because it preserves structure better than STL when you need to edit rather than print.\n\nIf you plan to hand the file to someone else, 3MF is the best default. If you need maximum compatibility with older software, STL is the one that always opens.\n\n## Wall Thickness and Layer Height\n\nAn extruded region thinner than two nozzle widths will print as a single fragile wall or fail entirely. For a 0.4 mm nozzle, keep the model at least 1 mm thick. Layer height then controls the vertical resolution of any angled edge: 0.2 mm is the usual balance, and dropping to 0.12 mm makes a shallow ramp noticeably smoother at the cost of print time.\n\n## Scaling and Base Plate\n\nModels come out of conversion in design units, which rarely match millimeters. Most slicers let you scale on import, but confirming the unit before printing prevents a thumbnail-sized ornament or a phone-sized monstrosity. A flat base improves adhesion — if the design is a thin outline, adding a plinth in the slicer gives the print something to grip.",
     "faqs": [
       {
         "question": "Can I 3D print a logo or drawing?",
         "answer": "Yes, by extruding every closed 2D region into a solid. The extrusion depth becomes the model thickness and the slicer prepares it for printing."
       },
       {
-        "question": "STL, 3MF or OBJ \u2014 which should I use?",
+        "question": "STL, 3MF or OBJ — which should I use?",
         "answer": "STL for universal compatibility, 3MF for units and color in modern slicers, OBJ when you plan to edit the mesh further in modeling software."
       },
       {
@@ -605,7 +605,7 @@
             {
               "@type": "HowToStep",
               "position": 2,
-              "name": "STL, 3MF or OBJ \u2014 which should I use?",
+              "name": "STL, 3MF or OBJ — which should I use?",
               "text": "STL for universal compatibility, 3MF for units and color in modern slicers, OBJ when you plan to edit the mesh further in modeling software."
             },
             {
@@ -635,7 +635,7 @@
             },
             {
               "@type": "Question",
-              "name": "STL, 3MF or OBJ \u2014 which should I use?",
+              "name": "STL, 3MF or OBJ — which should I use?",
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "STL for universal compatibility, 3MF for units and color in modern slicers, OBJ when you plan to edit the mesh further in modeling software."
@@ -685,7 +685,7 @@
       "SVG (separated)",
       "PDF"
     ],
-    "content": "# Convert Images for Screen Printing\n\nScreen printing requires color separation: splitting a multi-color design into individual layers, one per ink color. Vectorr converts your images into separated SVG or PDF files ready for screen printing, whether you're using CMYK process colors or spot colors.\n\n## How Color Separation Works\n\nScreen printing applies one ink color at a time through mesh screens. Each color needs its own screen, so a 4-color design requires 4 separations (4 screens, 4 printing passes).\n\nProcess Colors (CMYK): Use Cyan, Magenta, Yellow, and Black inks to simulate full-color images. Vectorr separates your design into 4 layers (one per CMYK channel).\n\nSpot Colors: Use exact Pantone or custom ink colors. Vectorr separates your design by unique color, creating one layer per distinct color in your artwork.\n\n## Workflow\n\n1. Upload your design: Works best with vector art (SVG, PDF) or high-resolution images (PNG, JPG at 300 DPI or higher).\n\n2. Choose separation type: CMYK for full-color designs, photos, gradients. Spot Color for logos, text, and designs with 6 or fewer solid colors.\n\n3. Export separations: Vectorr generates one SVG file per color/layer. Each file contains only the artwork for that color.\n\n4. Print films: Print each separation onto transparent film (inkjet transparency or laser transparency). Make sure to print in black ink only at high density.\n\n5. Burn screens: Place each film on a mesh screen coated with photo emulsion, expose to UV light, wash out the unexposed emulsion.\n\n6. Print: Register all screens, apply ink, and print each color in sequence.\n\n## Best Practices\n\nSimplify colors: Limit your design to 4\u20136 colors to reduce screen costs. Merge similar colors where possible.\n\nUse high-contrast artwork: Clean edges separate better. Avoid soft shadows or blurry edges.\n\nCheck registration: Ensure all layers align perfectly. Use registration marks (crosshairs) at the corners of each separation.\n\nPrint films at 100% black: Set your printer to maximum ink density.\n\n## Related Resources\n\n[Color Separation Guide](/resources/color-separation)\n[File Formats Explained](/resources/file-formats)\n[Convert JPG to SVG](/convert/jpg-to-svg)\n\n## Why Screen Printing Needs Separated Artwork\n\nA screen printer builds one screen per ink color. Artwork that arrives as a single flattened image has to be split by hand, which is slow and error-prone. Color separation does that split in one step: each distinct fill becomes its own layer, and each layer becomes one screen. The printed result is the stack of all layers in register.\n\nSeparation by fill color works because screen printing is a spot-color process. Each screen lays down one opaque ink, and there is no blending at the edges. That is also why process (CMYK) separation exists as a separate mode \u2014 it reproduces continuous color by halftoning four screens, which is the right choice for photographic art and the wrong choice for a three-color logo.\n\n## Registration and Trapping\n\nEvery layer must align exactly, so the geometry stays in the same coordinate space across all outputs. Any per-layer shift produces halos of the wrong color along the edges. The practical fix at print time is trapping: expanding each ink slightly so adjacent colors overlap by a hair, hiding registration drift. That adjustment usually happens in prepress software, but it relies on layers keeping their original positions.\n\n## Line Weight and Ink Spread\n\nInk spreads on fabric. A 0.5 pt line that looks crisp on screen becomes a blurred 1 pt line on a shirt. Minimum line weight for textile printing is generally 1 pt, and small text below roughly 8 pt fills in solid. Check the vector before output: if the artwork relies on hairlines, thicken them at the design stage rather than on press.\n\n## Choosing RGB Versus CMYK Mode\n\nUse RGB separation when the design has a fixed set of spot colors \u2014 a logo, a badge, a simple illustration. You get one clean screen per color. Use CMYK when the artwork is photographic or has gradients that must reproduce continuously. CMYK gives you four screens and a printable approximation of the original, at the cost of the vibrant, flat look that spot color provides.",
+    "content": "# Convert Images for Screen Printing\n\nScreen printing requires color separation: splitting a multi-color design into individual layers, one per ink color. Vectroy converts your images into separated SVG or PDF files ready for screen printing, whether you're using CMYK process colors or spot colors.\n\n## How Color Separation Works\n\nScreen printing applies one ink color at a time through mesh screens. Each color needs its own screen, so a 4-color design requires 4 separations (4 screens, 4 printing passes).\n\nProcess Colors (CMYK): Use Cyan, Magenta, Yellow, and Black inks to simulate full-color images. Vectroy separates your design into 4 layers (one per CMYK channel).\n\nSpot Colors: Use exact Pantone or custom ink colors. Vectroy separates your design by unique color, creating one layer per distinct color in your artwork.\n\n## Workflow\n\n1. Upload your design: Works best with vector art (SVG, PDF) or high-resolution images (PNG, JPG at 300 DPI or higher).\n\n2. Choose separation type: CMYK for full-color designs, photos, gradients. Spot Color for logos, text, and designs with 6 or fewer solid colors.\n\n3. Export separations: Vectroy generates one SVG file per color/layer. Each file contains only the artwork for that color.\n\n4. Print films: Print each separation onto transparent film (inkjet transparency or laser transparency). Make sure to print in black ink only at high density.\n\n5. Burn screens: Place each film on a mesh screen coated with photo emulsion, expose to UV light, wash out the unexposed emulsion.\n\n6. Print: Register all screens, apply ink, and print each color in sequence.\n\n## Best Practices\n\nSimplify colors: Limit your design to 4–6 colors to reduce screen costs. Merge similar colors where possible.\n\nUse high-contrast artwork: Clean edges separate better. Avoid soft shadows or blurry edges.\n\nCheck registration: Ensure all layers align perfectly. Use registration marks (crosshairs) at the corners of each separation.\n\nPrint films at 100% black: Set your printer to maximum ink density.\n\n## Related Resources\n\n[Color Separation Guide](/resources/color-separation)\n[File Formats Explained](/resources/file-formats)\n[Convert JPG to SVG](/convert/jpg-to-svg)\n\n## Why Screen Printing Needs Separated Artwork\n\nA screen printer builds one screen per ink color. Artwork that arrives as a single flattened image has to be split by hand, which is slow and error-prone. Color separation does that split in one step: each distinct fill becomes its own layer, and each layer becomes one screen. The printed result is the stack of all layers in register.\n\nSeparation by fill color works because screen printing is a spot-color process. Each screen lays down one opaque ink, and there is no blending at the edges. That is also why process (CMYK) separation exists as a separate mode — it reproduces continuous color by halftoning four screens, which is the right choice for photographic art and the wrong choice for a three-color logo.\n\n## Registration and Trapping\n\nEvery layer must align exactly, so the geometry stays in the same coordinate space across all outputs. Any per-layer shift produces halos of the wrong color along the edges. The practical fix at print time is trapping: expanding each ink slightly so adjacent colors overlap by a hair, hiding registration drift. That adjustment usually happens in prepress software, but it relies on layers keeping their original positions.\n\n## Line Weight and Ink Spread\n\nInk spreads on fabric. A 0.5 pt line that looks crisp on screen becomes a blurred 1 pt line on a shirt. Minimum line weight for textile printing is generally 1 pt, and small text below roughly 8 pt fills in solid. Check the vector before output: if the artwork relies on hairlines, thicken them at the design stage rather than on press.\n\n## Choosing RGB Versus CMYK Mode\n\nUse RGB separation when the design has a fixed set of spot colors — a logo, a badge, a simple illustration. You get one clean screen per color. Use CMYK when the artwork is photographic or has gradients that must reproduce continuously. CMYK gives you four screens and a printable approximation of the original, at the cost of the vibrant, flat look that spot color provides.",
     "faqs": [
       {
         "question": "Why do I need color separation for screen printing?",
@@ -799,7 +799,7 @@
   {
     "slug": "provo-craft-cuttlebug-embossing",
     "title": "Provo Craft Cuttlebug Embossing Workflow",
-    "seoTitle": "Cuttlebug Embossing and Die Cutting \u2014 Dies, Embossing Folders, and Layering Techniques",
+    "seoTitle": "Cuttlebug Embossing and Die Cutting — Dies, Embossing Folders, and Layering Techniques",
     "seoDescription": "Use Cuttlebug embossing machine for cardstock, vellum, and thin metals. Dies, embossing folder patterns, sandwich technique, and heat embossing.",
     "keywords": [
       "cuttlebug embossing",
@@ -822,7 +822,7 @@
     "faqs": [
       {
         "question": "What is the difference between embossing and debossing?",
-        "answer": "Embossing raises the design (convex). Debossing presses it inward (concave). Cuttlebug does both\u2014flip the die over for debossing, or use embossing folders for raised texture."
+        "answer": "Embossing raises the design (convex). Debossing presses it inward (concave). Cuttlebug does both—flip the die over for debossing, or use embossing folders for raised texture."
       },
       {
         "question": "Can I emboss metal with Cuttlebug?",
@@ -841,7 +841,7 @@
         "answer": "Apply release spray or dry cooking spray to die before use. Let spray dry (1-2 minutes), wipe off excess with paper towel, then load cardstock."
       }
     ],
-    "content": "# Provo Craft Cuttlebug Embossing Workflow\n\nThis workflow provides step-by-step guidance for provo craft cuttlebug embossing workflow.\n\n## Key Tips\n\n- **What is the difference between embossing and debossing?** Embossing raises the design (convex). Debossing presses it inward (concave). Cuttlebug does both\u2014flip the die over for debossing, or use embossing folders for raised texture.\n- **Can I emboss metal with Cuttlebug?** Yes, thin copper and aluminum foil (20-26 gauge). Use lower pressure settings, feed slowly, and check alignment. Thicker metal requires a separate metal embossing press.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
+    "content": "# Provo Craft Cuttlebug Embossing Workflow\n\nThis workflow provides step-by-step guidance for provo craft cuttlebug embossing workflow.\n\n## Key Tips\n\n- **What is the difference between embossing and debossing?** Embossing raises the design (convex). Debossing presses it inward (concave). Cuttlebug does both—flip the die over for debossing, or use embossing folders for raised texture.\n- **Can I emboss metal with Cuttlebug?** Yes, thin copper and aluminum foil (20-26 gauge). Use lower pressure settings, feed slowly, and check alignment. Thicker metal requires a separate metal embossing press.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
     "schema": {
       "@context": "https://schema.org",
       "@graph": [
@@ -854,7 +854,7 @@
               "@type": "HowToStep",
               "position": 1,
               "name": "What is the difference between embossing and debossing?",
-              "text": "Embossing raises the design (convex). Debossing presses it inward (concave). Cuttlebug does both\u2014flip the die over for debossing, or use embossing folders for raised texture."
+              "text": "Embossing raises the design (convex). Debossing presses it inward (concave). Cuttlebug does both—flip the die over for debossing, or use embossing folders for raised texture."
             },
             {
               "@type": "HowToStep",
@@ -890,7 +890,7 @@
               "name": "What is the difference between embossing and debossing?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Embossing raises the design (convex). Debossing presses it inward (concave). Cuttlebug does both\u2014flip the die over for debossing, or use embossing folders for raised texture."
+                "text": "Embossing raises the design (convex). Debossing presses it inward (concave). Cuttlebug does both—flip the die over for debossing, or use embossing folders for raised texture."
               }
             },
             {
@@ -933,7 +933,7 @@
   {
     "slug": "heat-press-htv-application",
     "title": "Heat Press HTV (Heat Transfer Vinyl) Application",
-    "seoTitle": "Heat Press HTV Application \u2014 Temperature, Time, and Pressure Settings for Garments",
+    "seoTitle": "Heat Press HTV Application — Temperature, Time, and Pressure Settings for Garments",
     "seoDescription": "Apply heat transfer vinyl to apparel with correct temperature, pressure, and dwell time. Cotton, polyester, blends, and specialty finishes.",
     "keywords": [
       "heat press htv",
@@ -960,11 +960,11 @@
       },
       {
         "question": "Why is my HTV lifting after washing?",
-        "answer": "Temperature too low, pressure too light, or insufficient dwell time. Repress at higher temp (+10\u00b0F), increase pressure 5 PSI, or add 3 more seconds. Always cure 24 hours before washing."
+        "answer": "Temperature too low, pressure too light, or insufficient dwell time. Repress at higher temp (+10°F), increase pressure 5 PSI, or add 3 more seconds. Always cure 24 hours before washing."
       },
       {
         "question": "Can I use HTV on 100% polyester?",
-        "answer": "Yes, but use lower temperature (290-300\u00b0F) to prevent glossiness or melting. Polyester responds well to HTV but requires precise temp control."
+        "answer": "Yes, but use lower temperature (290-300°F) to prevent glossiness or melting. Polyester responds well to HTV but requires precise temp control."
       },
       {
         "question": "How do I layer multiple colors of HTV?",
@@ -979,7 +979,7 @@
         "answer": "Yes, but light colors show heat shine more than dark colors. Use lowest recommended temperature and check for glossiness before full production run."
       }
     ],
-    "content": "# Heat Press HTV (Heat Transfer Vinyl) Application\n\nThis workflow provides step-by-step guidance for heat press htv (heat transfer vinyl) application.\n\n## Key Tips\n\n- **What is the difference between hot and cold peel HTV?** Hot peel: Peel carrier film while warm, faster process, works on standard vinyl. Cold peel: Peel after cooling, better for metallics/glitter, adhesive sets fully before peeling.\n- **Why is my HTV lifting after washing?** Temperature too low, pressure too light, or insufficient dwell time. Repress at higher temp (+10\u00b0F), increase pressure 5 PSI, or add 3 more seconds. Always cure 24 hours before washing.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
+    "content": "# Heat Press HTV (Heat Transfer Vinyl) Application\n\nThis workflow provides step-by-step guidance for heat press htv (heat transfer vinyl) application.\n\n## Key Tips\n\n- **What is the difference between hot and cold peel HTV?** Hot peel: Peel carrier film while warm, faster process, works on standard vinyl. Cold peel: Peel after cooling, better for metallics/glitter, adhesive sets fully before peeling.\n- **Why is my HTV lifting after washing?** Temperature too low, pressure too light, or insufficient dwell time. Repress at higher temp (+10°F), increase pressure 5 PSI, or add 3 more seconds. Always cure 24 hours before washing.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
     "schema": {
       "@context": "https://schema.org",
       "@graph": [
@@ -998,13 +998,13 @@
               "@type": "HowToStep",
               "position": 2,
               "name": "Why is my HTV lifting after washing?",
-              "text": "Temperature too low, pressure too light, or insufficient dwell time. Repress at higher temp (+10\u00b0F), increase pressure 5 PSI, or add 3 more seconds. Always cure 24 hours before washing."
+              "text": "Temperature too low, pressure too light, or insufficient dwell time. Repress at higher temp (+10°F), increase pressure 5 PSI, or add 3 more seconds. Always cure 24 hours before washing."
             },
             {
               "@type": "HowToStep",
               "position": 3,
               "name": "Can I use HTV on 100% polyester?",
-              "text": "Yes, but use lower temperature (290-300\u00b0F) to prevent glossiness or melting. Polyester responds well to HTV but requires precise temp control."
+              "text": "Yes, but use lower temperature (290-300°F) to prevent glossiness or melting. Polyester responds well to HTV but requires precise temp control."
             },
             {
               "@type": "HowToStep",
@@ -1036,7 +1036,7 @@
               "name": "Why is my HTV lifting after washing?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Temperature too low, pressure too light, or insufficient dwell time. Repress at higher temp (+10\u00b0F), increase pressure 5 PSI, or add 3 more seconds. Always cure 24 hours before washing."
+                "text": "Temperature too low, pressure too light, or insufficient dwell time. Repress at higher temp (+10°F), increase pressure 5 PSI, or add 3 more seconds. Always cure 24 hours before washing."
               }
             },
             {
@@ -1044,7 +1044,7 @@
               "name": "Can I use HTV on 100% polyester?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes, but use lower temperature (290-300\u00b0F) to prevent glossiness or melting. Polyester responds well to HTV but requires precise temp control."
+                "text": "Yes, but use lower temperature (290-300°F) to prevent glossiness or melting. Polyester responds well to HTV but requires precise temp control."
               }
             },
             {
@@ -1079,7 +1079,7 @@
   {
     "slug": "resin-printing-casting",
     "title": "Resin Printing and Casting Workflow",
-    "seoTitle": "Resin 3D Printing and Casting \u2014 UV/LCD Resin, Post-Processing, and Mold Making",
+    "seoTitle": "Resin 3D Printing and Casting — UV/LCD Resin, Post-Processing, and Mold Making",
     "seoDescription": "Prepare STL files for resin SLA/LCD printers. UV exposure, support design, washing, curing, and casting molds.",
     "keywords": [
       "resin 3d printing",
@@ -1103,7 +1103,7 @@
     "faqs": [
       {
         "question": "What is the difference between SLA and LCD resin printers?",
-        "answer": "SLA (Stereolithography) uses a laser\u2014precise but slower, high detail. LCD uses a screen mask\u2014faster, lower cost, similar quality. Both produce similar print quality; LCD is more affordable."
+        "answer": "SLA (Stereolithography) uses a laser—precise but slower, high detail. LCD uses a screen mask—faster, lower cost, similar quality. Both produce similar print quality; LCD is more affordable."
       },
       {
         "question": "Why do my resin prints fail mid-print?",
@@ -1111,7 +1111,7 @@
       },
       {
         "question": "How do I remove supports without damaging the part?",
-        "answer": "Use flush cutters at base of support\u2014cut close to the part, then sand attachment points smooth with 400-600 grit. For delicate features, cut 1-2mm from part, finish with sandpaper."
+        "answer": "Use flush cutters at base of support—cut close to the part, then sand attachment points smooth with 400-600 grit. For delicate features, cut 1-2mm from part, finish with sandpaper."
       },
       {
         "question": "Can I reuse IPA for multiple prints?",
@@ -1126,7 +1126,7 @@
         "answer": "Yes. Water-washable resin is gentler, no solvent smell, but requires washing immediately after printing. Dry thoroughly after washing to prevent water spotting during cure."
       }
     ],
-    "content": "# Resin Printing and Casting Workflow\n\nThis workflow provides step-by-step guidance for resin printing and casting workflow.\n\n## Key Tips\n\n- **What is the difference between SLA and LCD resin printers?** SLA (Stereolithography) uses a laser\u2014precise but slower, high detail. LCD uses a screen mask\u2014faster, lower cost, similar quality. Both produce similar print quality; LCD is more affordable.\n- **Why do my resin prints fail mid-print?** Build plate not properly leveled, FEP film worn/damaged, or exposure time too short. Re-level plate, replace FEP film if scratched, and test exposure on scrap print.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
+    "content": "# Resin Printing and Casting Workflow\n\nThis workflow provides step-by-step guidance for resin printing and casting workflow.\n\n## Key Tips\n\n- **What is the difference between SLA and LCD resin printers?** SLA (Stereolithography) uses a laser—precise but slower, high detail. LCD uses a screen mask—faster, lower cost, similar quality. Both produce similar print quality; LCD is more affordable.\n- **Why do my resin prints fail mid-print?** Build plate not properly leveled, FEP film worn/damaged, or exposure time too short. Re-level plate, replace FEP film if scratched, and test exposure on scrap print.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
     "schema": {
       "@context": "https://schema.org",
       "@graph": [
@@ -1139,7 +1139,7 @@
               "@type": "HowToStep",
               "position": 1,
               "name": "What is the difference between SLA and LCD resin printers?",
-              "text": "SLA (Stereolithography) uses a laser\u2014precise but slower, high detail. LCD uses a screen mask\u2014faster, lower cost, similar quality. Both produce similar print quality; LCD is more affordable."
+              "text": "SLA (Stereolithography) uses a laser—precise but slower, high detail. LCD uses a screen mask—faster, lower cost, similar quality. Both produce similar print quality; LCD is more affordable."
             },
             {
               "@type": "HowToStep",
@@ -1151,7 +1151,7 @@
               "@type": "HowToStep",
               "position": 3,
               "name": "How do I remove supports without damaging the part?",
-              "text": "Use flush cutters at base of support\u2014cut close to the part, then sand attachment points smooth with 400-600 grit. For delicate features, cut 1-2mm from part, finish with sandpaper."
+              "text": "Use flush cutters at base of support—cut close to the part, then sand attachment points smooth with 400-600 grit. For delicate features, cut 1-2mm from part, finish with sandpaper."
             },
             {
               "@type": "HowToStep",
@@ -1175,7 +1175,7 @@
               "name": "What is the difference between SLA and LCD resin printers?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "SLA (Stereolithography) uses a laser\u2014precise but slower, high detail. LCD uses a screen mask\u2014faster, lower cost, similar quality. Both produce similar print quality; LCD is more affordable."
+                "text": "SLA (Stereolithography) uses a laser—precise but slower, high detail. LCD uses a screen mask—faster, lower cost, similar quality. Both produce similar print quality; LCD is more affordable."
               }
             },
             {
@@ -1191,7 +1191,7 @@
               "name": "How do I remove supports without damaging the part?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Use flush cutters at base of support\u2014cut close to the part, then sand attachment points smooth with 400-600 grit. For delicate features, cut 1-2mm from part, finish with sandpaper."
+                "text": "Use flush cutters at base of support—cut close to the part, then sand attachment points smooth with 400-600 grit. For delicate features, cut 1-2mm from part, finish with sandpaper."
               }
             },
             {
@@ -1226,7 +1226,7 @@
   {
     "slug": "glowforge-pro-laser-cutting",
     "title": "Glowforge Pro Laser Cutting Workflow",
-    "seoTitle": "Glowforge Pro CO2 Laser \u2014 File Prep, Passthrough Ramp, and Engrave Settings",
+    "seoTitle": "Glowforge Pro CO2 Laser — File Prep, Passthrough Ramp, and Engrave Settings",
     "seoDescription": "Prepare files for Glowforge Pro CO2 laser with SVG/PDF imports, passthrough ramp for unlimited length cuts, and variable power engraving.",
     "keywords": [
       "glowforge pro",
@@ -1255,11 +1255,11 @@
       },
       {
         "question": "Can I cut clear acrylic?",
-        "answer": "Yes. Cast clear acrylic cuts cleanly\u2014not transparent in cut line, appears frosted/white. Use 80-100 power, 100 speed. Avoid polycarbonate (plastic will melt)."
+        "answer": "Yes. Cast clear acrylic cuts cleanly—not transparent in cut line, appears frosted/white. Use 80-100 power, 100 speed. Avoid polycarbonate (plastic will melt)."
       },
       {
         "question": "How long does it take to cut through 1/4 inch wood?",
-        "answer": "About 3-5 minutes for a medium-sized design. Glowforge is not the fastest laser\u2014optimized for detail over speed. Multiple passes at lower power produce cleaner cuts than one high-power pass."
+        "answer": "About 3-5 minutes for a medium-sized design. Glowforge is not the fastest laser—optimized for detail over speed. Multiple passes at lower power produce cleaner cuts than one high-power pass."
       },
       {
         "question": "Why does my engrave look splotchy or uneven?",
@@ -1274,7 +1274,7 @@
         "answer": "Add-on accessory ($500+) that allows cutting items up to 11 feet long. Only works on Glowforge Pro model. Requires ramp installation and precision alignment."
       }
     ],
-    "content": "# Glowforge Pro Laser Cutting Workflow\n\nThis workflow provides step-by-step guidance for glowforge pro laser cutting workflow.\n\n## Key Tips\n\n- **What materials can Glowforge Pro cut?** Wood, plywood, acrylic, leather, cork, fabric, rubber, paper. CANNOT cut: PVC (toxic fumes), vinyl, fiberglass, carbon fiber, or anodized aluminum.\n- **Can I cut clear acrylic?** Yes. Cast clear acrylic cuts cleanly\u2014not transparent in cut line, appears frosted/white. Use 80-100 power, 100 speed. Avoid polycarbonate (plastic will melt).\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
+    "content": "# Glowforge Pro Laser Cutting Workflow\n\nThis workflow provides step-by-step guidance for glowforge pro laser cutting workflow.\n\n## Key Tips\n\n- **What materials can Glowforge Pro cut?** Wood, plywood, acrylic, leather, cork, fabric, rubber, paper. CANNOT cut: PVC (toxic fumes), vinyl, fiberglass, carbon fiber, or anodized aluminum.\n- **Can I cut clear acrylic?** Yes. Cast clear acrylic cuts cleanly—not transparent in cut line, appears frosted/white. Use 80-100 power, 100 speed. Avoid polycarbonate (plastic will melt).\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
     "schema": {
       "@context": "https://schema.org",
       "@graph": [
@@ -1293,13 +1293,13 @@
               "@type": "HowToStep",
               "position": 2,
               "name": "Can I cut clear acrylic?",
-              "text": "Yes. Cast clear acrylic cuts cleanly\u2014not transparent in cut line, appears frosted/white. Use 80-100 power, 100 speed. Avoid polycarbonate (plastic will melt)."
+              "text": "Yes. Cast clear acrylic cuts cleanly—not transparent in cut line, appears frosted/white. Use 80-100 power, 100 speed. Avoid polycarbonate (plastic will melt)."
             },
             {
               "@type": "HowToStep",
               "position": 3,
               "name": "How long does it take to cut through 1/4 inch wood?",
-              "text": "About 3-5 minutes for a medium-sized design. Glowforge is not the fastest laser\u2014optimized for detail over speed. Multiple passes at lower power produce cleaner cuts than one high-power pass."
+              "text": "About 3-5 minutes for a medium-sized design. Glowforge is not the fastest laser—optimized for detail over speed. Multiple passes at lower power produce cleaner cuts than one high-power pass."
             },
             {
               "@type": "HowToStep",
@@ -1331,7 +1331,7 @@
               "name": "Can I cut clear acrylic?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. Cast clear acrylic cuts cleanly\u2014not transparent in cut line, appears frosted/white. Use 80-100 power, 100 speed. Avoid polycarbonate (plastic will melt)."
+                "text": "Yes. Cast clear acrylic cuts cleanly—not transparent in cut line, appears frosted/white. Use 80-100 power, 100 speed. Avoid polycarbonate (plastic will melt)."
               }
             },
             {
@@ -1339,7 +1339,7 @@
               "name": "How long does it take to cut through 1/4 inch wood?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "About 3-5 minutes for a medium-sized design. Glowforge is not the fastest laser\u2014optimized for detail over speed. Multiple passes at lower power produce cleaner cuts than one high-power pass."
+                "text": "About 3-5 minutes for a medium-sized design. Glowforge is not the fastest laser—optimized for detail over speed. Multiple passes at lower power produce cleaner cuts than one high-power pass."
               }
             },
             {
@@ -1401,11 +1401,11 @@
       },
       {
         "question": "What's the difference between polyester-coated and ceramic blanks?",
-        "answer": "Polyester-coated blanks have a synthetic polymer layer and require 350-375\u00b0F; ceramic blanks have a glazed polymer surface and need 385-400\u00b0F. Ceramic holds colors longer-term but is more expensive. Polyester offers faster turnaround."
+        "answer": "Polyester-coated blanks have a synthetic polymer layer and require 350-375°F; ceramic blanks have a glazed polymer surface and need 385-400°F. Ceramic holds colors longer-term but is more expensive. Polyester offers faster turnaround."
       },
       {
         "question": "Can I sublimate on natural ceramic without coating?",
-        "answer": "No. Uncoated ceramic will not accept sublimation dyes\u2014colors won't transfer and will wash off immediately. Always buy blanks explicitly labeled 'sublimation-ready' or 'polymer-coated.'"
+        "answer": "No. Uncoated ceramic will not accept sublimation dyes—colors won't transfer and will wash off immediately. Always buy blanks explicitly labeled 'sublimation-ready' or 'polymer-coated.'"
       },
       {
         "question": "How do I avoid ghosting or partial transfers?",
@@ -1453,7 +1453,7 @@
         {
           "@type": "HowToStep",
           "name": "Heat Press Sublimation: Temp, Time, Pressure",
-          "text": "Pre-heat press to 400\u00b0F (204\u00b0C)..."
+          "text": "Pre-heat press to 400°F (204°C)..."
         },
         {
           "@type": "HowToStep",
@@ -1515,7 +1515,7 @@
         ]
       }
     },
-    "content": "# Sublimation Blanks & Mugs Setup\n\nThis workflow provides step-by-step guidance for sublimation blanks & mugs setup.\n\n## Key Tips\n\n- **Why are my sublimation colors fading or muddy?** Fading indicates low temperature or insufficient pressure. Muddy colors suggest overheating. Calibrate your heat press temperature with a laser thermometer, adjust pressure gradually (0.5 psi increments), and test on scrap blanks first.\n- **What's the difference between polyester-coated and ceramic blanks?** Polyester-coated blanks have a synthetic polymer layer and require 350-375\u00b0F; ceramic blanks have a glazed polymer surface and need 385-400\u00b0F. Ceramic holds colors longer-term but is more expensive. Polyester offers faster turnaround.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
+    "content": "# Sublimation Blanks & Mugs Setup\n\nThis workflow provides step-by-step guidance for sublimation blanks & mugs setup.\n\n## Key Tips\n\n- **Why are my sublimation colors fading or muddy?** Fading indicates low temperature or insufficient pressure. Muddy colors suggest overheating. Calibrate your heat press temperature with a laser thermometer, adjust pressure gradually (0.5 psi increments), and test on scrap blanks first.\n- **What's the difference between polyester-coated and ceramic blanks?** Polyester-coated blanks have a synthetic polymer layer and require 350-375°F; ceramic blanks have a glazed polymer surface and need 385-400°F. Ceramic holds colors longer-term but is more expensive. Polyester offers faster turnaround.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
   },
   {
     "slug": "vinyl-weeding-technique-precision",
@@ -1559,7 +1559,7 @@
       },
       {
         "question": "Why does my weeded design still have sticky residue?",
-        "answer": "Residue is typically old adhesive or dust. Wipe gently with a damp cloth or rubbing alcohol. Avoid scrubbing, which may damage fine details. If stickiness persists, the backing may be overused\u2014replace it."
+        "answer": "Residue is typically old adhesive or dust. Wipe gently with a damp cloth or rubbing alcohol. Avoid scrubbing, which may damage fine details. If stickiness persists, the backing may be overused—replace it."
       },
       {
         "question": "Should I weed multi-color vinyl separately?",
@@ -1697,7 +1697,7 @@
       },
       {
         "question": "My second layer shifted during cooling. How do I fix it?",
-        "answer": "If still warm, re-press gently at lower temperature (300\u00b0F, 5 seconds) to re-tack. If cooled, use a heat gun to re-activate adhesive, realign manually, then re-press. For future projects, use heat-resistant spray adhesive between layers."
+        "answer": "If still warm, re-press gently at lower temperature (300°F, 5 seconds) to re-tack. If cooled, use a heat gun to re-activate adhesive, realign manually, then re-press. For future projects, use heat-resistant spray adhesive between layers."
       },
       {
         "question": "Can I layer HTV on HTV that's already been washed?",
@@ -1740,7 +1740,7 @@
         {
           "@type": "HowToStep",
           "name": "Apply First HTV Layer & Cool",
-          "text": "Pre-heat the garment or substrate at 350\u00b0F..."
+          "text": "Pre-heat the garment or substrate at 350°F..."
         },
         {
           "@type": "HowToStep",
@@ -1835,7 +1835,7 @@
     "faqs": [
       {
         "question": "What's the difference between heat-set and fabric-glue rhinestones?",
-        "answer": "Heat-set rhinestones use adhesive powder that bonds with heat (300\u00b0F, 10 seconds); results cure in minutes. Fabric-glue rhinestones use liquid adhesive; curing takes 24 hours but requires no heat press. Heat-set is faster but requires precise temperature control; fabric glue is more forgiving."
+        "answer": "Heat-set rhinestones use adhesive powder that bonds with heat (300°F, 10 seconds); results cure in minutes. Fabric-glue rhinestones use liquid adhesive; curing takes 24 hours but requires no heat press. Heat-set is faster but requires precise temperature control; fabric glue is more forgiving."
       },
       {
         "question": "How do I keep rhinestones from shifting during placement?",
@@ -1953,7 +1953,7 @@
         ]
       }
     },
-    "content": "# Rhinestone Template & Placement\n\nThis workflow provides step-by-step guidance for rhinestone template & placement.\n\n## Key Tips\n\n- **What's the difference between heat-set and fabric-glue rhinestones?** Heat-set rhinestones use adhesive powder that bonds with heat (300\u00b0F, 10 seconds); results cure in minutes. Fabric-glue rhinestones use liquid adhesive; curing takes 24 hours but requires no heat press. Heat-set is faster but requires precise temperature control; fabric glue is more forgiving.\n- **How do I keep rhinestones from shifting during placement?** Pre-apply adhesive to the garment in advance of template removal. Keep template in place while placing 3-5 stones per area, then remove template sections as you progress. Use firm, downward pressure on each stone for 3 seconds.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
+    "content": "# Rhinestone Template & Placement\n\nThis workflow provides step-by-step guidance for rhinestone template & placement.\n\n## Key Tips\n\n- **What's the difference between heat-set and fabric-glue rhinestones?** Heat-set rhinestones use adhesive powder that bonds with heat (300°F, 10 seconds); results cure in minutes. Fabric-glue rhinestones use liquid adhesive; curing takes 24 hours but requires no heat press. Heat-set is faster but requires precise temperature control; fabric glue is more forgiving.\n- **How do I keep rhinestones from shifting during placement?** Pre-apply adhesive to the garment in advance of template removal. Keep template in place while placing 3-5 stones per area, then remove template sections as you progress. Use firm, downward pressure on each stone for 3 seconds.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
   },
   {
     "slug": "stencil-making-laser-cutting",
@@ -1981,7 +1981,7 @@
     "faqs": [
       {
         "question": "What's the minimum line thickness for a laser-cut stencil?",
-        "answer": "0.25 inches (6mm) is the safe minimum. Thinner lines may not cut completely or may be fragile. For fine details, use mylar instead of plywood\u2014it tolerates thinner cuts better."
+        "answer": "0.25 inches (6mm) is the safe minimum. Thinner lines may not cut completely or may be fragile. For fine details, use mylar instead of plywood—it tolerates thinner cuts better."
       },
       {
         "question": "How long do laser-cut stencils last?",
@@ -2099,7 +2099,7 @@
         ]
       }
     },
-    "content": "# Stencil Making & Laser Cutting\n\nThis workflow provides step-by-step guidance for stencil making & laser cutting.\n\n## Key Tips\n\n- **What's the minimum line thickness for a laser-cut stencil?** 0.25 inches (6mm) is the safe minimum. Thinner lines may not cut completely or may be fragile. For fine details, use mylar instead of plywood\u2014it tolerates thinner cuts better.\n- **How long do laser-cut stencils last?** Plywood stencils: 50-100 uses before wear. Sealed plywood: 200+ uses. Mylar: 50-80 uses. Longevity depends on paint type (acrylics last longer than oils), cleaning frequency, and storage conditions.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
+    "content": "# Stencil Making & Laser Cutting\n\nThis workflow provides step-by-step guidance for stencil making & laser cutting.\n\n## Key Tips\n\n- **What's the minimum line thickness for a laser-cut stencil?** 0.25 inches (6mm) is the safe minimum. Thinner lines may not cut completely or may be fragile. For fine details, use mylar instead of plywood—it tolerates thinner cuts better.\n- **How long do laser-cut stencils last?** Plywood stencils: 50-100 uses before wear. Sealed plywood: 200+ uses. Mylar: 50-80 uses. Longevity depends on paint type (acrylics last longer than oils), cleaning frequency, and storage conditions.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
   },
   {
     "slug": "custom-decal-production-waterslide",
@@ -2127,11 +2127,11 @@
     "faqs": [
       {
         "question": "What's the difference between transparent and opaque waterslide paper?",
-        "answer": "Transparent: background shows through, best for light ceramic. Opaque: includes white background, best for dark or colored ceramics. Choose based on your blank color\u2014transparent on dark produces muddy colors; opaque on light wastes ink."
+        "answer": "Transparent: background shows through, best for light ceramic. Opaque: includes white background, best for dark or colored ceramics. Choose based on your blank color—transparent on dark produces muddy colors; opaque on light wastes ink."
       },
       {
         "question": "My decal is backward/mirrored on the ceramic. Did I do something wrong?",
-        "answer": "You likely forgot to flip the artwork before printing. Waterslide requires artwork to be horizontally mirrored (flipped left-right) in your design software before printing. Always mirror text and logos\u2014otherwise they appear reversed on the final product."
+        "answer": "You likely forgot to flip the artwork before printing. Waterslide requires artwork to be horizontally mirrored (flipped left-right) in your design software before printing. Always mirror text and logos—otherwise they appear reversed on the final product."
       },
       {
         "question": "Why did my decal tear when I slid it into the water?",
@@ -2139,7 +2139,7 @@
       },
       {
         "question": "How durable are waterslide decals after heat setting?",
-        "answer": "Properly heat-set decals survive 100+ washes and normal daily use. Wash by hand or in the dishwasher (after full cure). Avoid bleach and abrasive scrubbing. Longevity depends on ceramic quality and ink type\u2014premium inks and glazed ceramics last longest."
+        "answer": "Properly heat-set decals survive 100+ washes and normal daily use. Wash by hand or in the dishwasher (after full cure). Avoid bleach and abrasive scrubbing. Longevity depends on ceramic quality and ink type—premium inks and glazed ceramics last longest."
       },
       {
         "question": "Can I apply waterslide decals to unglazed ceramic?",
@@ -2147,7 +2147,7 @@
       },
       {
         "question": "What temperature should I use for heat setting?",
-        "answer": "300\u00b0F (150\u00b0C) for 3-5 minutes is the standard. Temperatures vary by ceramic type and ink; follow your waterslide paper manufacturer's instructions. Too low = adhesion fails; too high = colors fade or shift. Always test on scrap blanks first."
+        "answer": "300°F (150°C) for 3-5 minutes is the standard. Temperatures vary by ceramic type and ink; follow your waterslide paper manufacturer's instructions. Too low = adhesion fails; too high = colors fade or shift. Always test on scrap blanks first."
       }
     ],
     "schema": {
@@ -2239,13 +2239,13 @@
             "name": "What temperature should I use for heat setting?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "300\u00b0F for 3-5 minutes is the standard..."
+              "text": "300°F for 3-5 minutes is the standard..."
             }
           }
         ]
       }
     },
-    "content": "# Custom Decal Production & Waterslide\n\nThis workflow provides step-by-step guidance for custom decal production & waterslide.\n\n## Key Tips\n\n- **What's the difference between transparent and opaque waterslide paper?** Transparent: background shows through, best for light ceramic. Opaque: includes white background, best for dark or colored ceramics. Choose based on your blank color\u2014transparent on dark produces muddy colors; opaque on light wastes ink.\n- **My decal is backward/mirrored on the ceramic. Did I do something wrong?** You likely forgot to flip the artwork before printing. Waterslide requires artwork to be horizontally mirrored (flipped left-right) in your design software before printing. Always mirror text and logos\u2014otherwise they appear reversed on the final product.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
+    "content": "# Custom Decal Production & Waterslide\n\nThis workflow provides step-by-step guidance for custom decal production & waterslide.\n\n## Key Tips\n\n- **What's the difference between transparent and opaque waterslide paper?** Transparent: background shows through, best for light ceramic. Opaque: includes white background, best for dark or colored ceramics. Choose based on your blank color—transparent on dark produces muddy colors; opaque on light wastes ink.\n- **My decal is backward/mirrored on the ceramic. Did I do something wrong?** You likely forgot to flip the artwork before printing. Waterslide requires artwork to be horizontally mirrored (flipped left-right) in your design software before printing. Always mirror text and logos—otherwise they appear reversed on the final product.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
   },
   {
     "slug": "magnetic-backing-production",
@@ -2277,7 +2277,7 @@
       },
       {
         "question": "Can I use any inkjet printer to print on magnetic sheets?",
-        "answer": "Most modern inkjet printers work, but check specifications first. Avoid mixing magnetic sheets with regular paper in your feed tray\u2014magnetic properties can interfere with paper feed sensors. Use manual feed when available."
+        "answer": "Most modern inkjet printers work, but check specifications first. Avoid mixing magnetic sheets with regular paper in your feed tray—magnetic properties can interfere with paper feed sensors. Use manual feed when available."
       },
       {
         "question": "How strong should my magnets be for display/storage?",
@@ -2391,7 +2391,7 @@
         ]
       }
     },
-    "content": "# Magnetic Backing & Production\n\nThis workflow provides step-by-step guidance for magnetic backing & production.\n\n## Key Tips\n\n- **What's the difference between glossy and matte magnetic sheets?** Glossy sheets produce vibrant, saturated colors and sharp details; best for photo-quality designs. Matte sheets are more affordable but less vibrant; work well for text-heavy designs. Glossy is worth the cost for premium products; matte is fine for budget merchandise.\n- **Can I use any inkjet printer to print on magnetic sheets?** Most modern inkjet printers work, but check specifications first. Avoid mixing magnetic sheets with regular paper in your feed tray\u2014magnetic properties can interfere with paper feed sensors. Use manual feed when available.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
+    "content": "# Magnetic Backing & Production\n\nThis workflow provides step-by-step guidance for magnetic backing & production.\n\n## Key Tips\n\n- **What's the difference between glossy and matte magnetic sheets?** Glossy sheets produce vibrant, saturated colors and sharp details; best for photo-quality designs. Matte sheets are more affordable but less vibrant; work well for text-heavy designs. Glossy is worth the cost for premium products; matte is fine for budget merchandise.\n- **Can I use any inkjet printer to print on magnetic sheets?** Most modern inkjet printers work, but check specifications first. Avoid mixing magnetic sheets with regular paper in your feed tray—magnetic properties can interfere with paper feed sensors. Use manual feed when available.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
   },
   {
     "slug": "acrylic-keychain-production",
@@ -2419,7 +2419,7 @@
     "faqs": [
       {
         "question": "What's the best method for coloring acrylic keychains?",
-        "answer": "Three options: (1) UV printing for full color (fastest); (2) laser engraving on colored acrylic for permanence (recommended); (3) multi-layer acrylic with different colors (most striking). Each has tradeoffs\u2014choose based on volume and desired look."
+        "answer": "Three options: (1) UV printing for full color (fastest); (2) laser engraving on colored acrylic for permanence (recommended); (3) multi-layer acrylic with different colors (most striking). Each has tradeoffs—choose based on volume and desired look."
       },
       {
         "question": "Why are my laser-engraved keychains charred/burned?",
@@ -2427,19 +2427,19 @@
       },
       {
         "question": "Can I laser-cut 1/4-inch acrylic for keychains?",
-        "answer": "Yes, but it's heavier and takes 2-3 laser passes to cut cleanly. Most keychains use 1/8 inch (3mm)\u2014better weight-to-durability ratio. 1/4 inch is better for larger items like coasters or phone stands."
+        "answer": "Yes, but it's heavier and takes 2-3 laser passes to cut cleanly. Most keychains use 1/8 inch (3mm)—better weight-to-durability ratio. 1/4 inch is better for larger items like coasters or phone stands."
       },
       {
         "question": "How do I keep multi-layer acrylic keychains from separating?",
-        "answer": "Use thin, even adhesive layer between all interfaces. Clamp or weight layers together during cure (24 hours). Test pull force on 10% of batch before shipping. Avoid rapid temperature changes post-cure\u2014these cause layer stress."
+        "answer": "Use thin, even adhesive layer between all interfaces. Clamp or weight layers together during cure (24 hours). Test pull force on 10% of batch before shipping. Avoid rapid temperature changes post-cure—these cause layer stress."
       },
       {
         "question": "What's the ideal keychain size for retail?",
-        "answer": "1.5-2 inches is ideal\u2014large enough to notice and use, small enough to fit in pockets. Avoid very large (>2.5 inches) or very small (<1 inch) unless specifically requested. Standard sizing also simplifies inventory and production."
+        "answer": "1.5-2 inches is ideal—large enough to notice and use, small enough to fit in pockets. Avoid very large (>2.5 inches) or very small (<1 inch) unless specifically requested. Standard sizing also simplifies inventory and production."
       },
       {
         "question": "How long do acrylic keychains last?",
-        "answer": "With quality acrylic and hardware, keychains last 2-5+ years of daily use. UV-printed colors fade slightly over time (especially in sunlight); laser-engraved designs are permanent. Hardware is the weakest point\u2014use stainless steel for longevity."
+        "answer": "With quality acrylic and hardware, keychains last 2-5+ years of daily use. UV-printed colors fade slightly over time (especially in sunlight); laser-engraved designs are permanent. Hardware is the weakest point—use stainless steel for longevity."
       }
     ],
     "schema": {
@@ -2537,12 +2537,12 @@
         ]
       }
     },
-    "content": "# Acrylic Keychain Production\n\nThis workflow provides step-by-step guidance for acrylic keychain production.\n\n## Key Tips\n\n- **What's the best method for coloring acrylic keychains?** Three options: (1) UV printing for full color (fastest); (2) laser engraving on colored acrylic for permanence (recommended); (3) multi-layer acrylic with different colors (most striking). Each has tradeoffs\u2014choose based on volume and desired look.\n- **Why are my laser-engraved keychains charred/burned?** Charring happens when laser power is too high or speed too slow. Reduce power to 60-70%, increase speed to 40-50%, or make multiple light passes instead of one deep pass. Always test settings on scrap acrylic first.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
+    "content": "# Acrylic Keychain Production\n\nThis workflow provides step-by-step guidance for acrylic keychain production.\n\n## Key Tips\n\n- **What's the best method for coloring acrylic keychains?** Three options: (1) UV printing for full color (fastest); (2) laser engraving on colored acrylic for permanence (recommended); (3) multi-layer acrylic with different colors (most striking). Each has tradeoffs—choose based on volume and desired look.\n- **Why are my laser-engraved keychains charred/burned?** Charring happens when laser power is too high or speed too slow. Reduce power to 60-70%, increase speed to 40-50%, or make multiple light passes instead of one deep pass. Always test settings on scrap acrylic first.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n"
   },
   {
     "slug": "xtool-d1-pro-workflow",
     "title": "xTool D1 Pro Laser Engraving Workflow",
-    "seoTitle": "xTool D1 Pro Laser Engraving \u2014 File Prep, Material Settings, and Rotary Attachment",
+    "seoTitle": "xTool D1 Pro Laser Engraving — File Prep, Material Settings, and Rotary Attachment",
     "seoDescription": "Prepare files for xTool D1 Pro diode laser with proper focus height, material-specific power/speed, rotary attachment setup, and XCS software optimization.",
     "keywords": [
       "xtool d1 pro",
@@ -2688,7 +2688,7 @@
   {
     "slug": "bambu-lab-3d-printing",
     "title": "Bambu Lab 3D Printing Workflow",
-    "seoTitle": "Bambu Lab P1/X1 3D Printing \u2014 Multi-Color AMS, Slicing Profiles, and Remote Monitoring",
+    "seoTitle": "Bambu Lab P1/X1 3D Printing — Multi-Color AMS, Slicing Profiles, and Remote Monitoring",
     "seoDescription": "Prepare models for Bambu Lab P1/X1 Carbon with AMS multi-color printing, Bambu Studio slicing, support optimization, and remote print monitoring.",
     "keywords": [
       "bambu lab 3d printing",
@@ -2716,26 +2716,26 @@
       },
       {
         "question": "Do I need supports for overhangs?",
-        "answer": "Yes, for overhangs steeper than 50-60\u00b0. Bambu Studio auto-generates supports. Use tree supports for organic shapes (less material, faster removal) and normal supports for mechanical parts."
+        "answer": "Yes, for overhangs steeper than 50-60°. Bambu Studio auto-generates supports. Use tree supports for organic shapes (less material, faster removal) and normal supports for mechanical parts."
       },
       {
         "question": "Why does my first layer not stick?",
-        "answer": "Bed not level, Z-offset wrong, or bed temperature too low. Run auto-leveling calibration, adjust Z-offset -0.02mm at a time, and increase bed temp 5-10\u00b0C. Clean bed with IPA."
+        "answer": "Bed not level, Z-offset wrong, or bed temperature too low. Run auto-leveling calibration, adjust Z-offset -0.02mm at a time, and increase bed temp 5-10°C. Clean bed with IPA."
       },
       {
         "question": "Can I print ABS without an enclosure?",
-        "answer": "Not recommended. ABS requires stable 50-60\u00b0C chamber temperature to prevent warping. X1 Carbon has a heated chamber; P1P needs an aftermarket enclosure or stick to PLA/PETG."
+        "answer": "Not recommended. ABS requires stable 50-60°C chamber temperature to prevent warping. X1 Carbon has a heated chamber; P1P needs an aftermarket enclosure or stick to PLA/PETG."
       },
       {
         "question": "How do I reduce stringing and blobs?",
-        "answer": "Lower nozzle temperature 5-10\u00b0C, enable retraction (6-7mm for Bowden, 0.5-1mm for direct drive), increase retraction speed to 40-50mm/s, and enable 'Wipe While Retracting'."
+        "answer": "Lower nozzle temperature 5-10°C, enable retraction (6-7mm for Bowden, 0.5-1mm for direct drive), increase retraction speed to 40-50mm/s, and enable 'Wipe While Retracting'."
       },
       {
         "question": "What causes layer shifting mid-print?",
         "answer": "Belt tension too loose, print speed too fast for complexity, or motor overheating. Tighten belts to 200-250Hz resonance frequency, reduce speed 10-20%, and ensure cooling fan runs."
       }
     ],
-    "content": "# Bambu Lab 3D Printing Workflow\n\nThis workflow provides step-by-step guidance for bambu lab 3d printing workflow.\n\n## Key Tips\n\n- **What is AMS and how does multi-color printing work?** AMS (Automatic Material System) is a 4-spool filament changer. Assign colors to model regions in Bambu Studio, and AMS switches filaments automatically. Purging between colors creates waste (20-50g per change).\n- **Do I need supports for overhangs?** Yes, for overhangs steeper than 50-60\u00b0. Bambu Studio auto-generates supports. Use tree supports for organic shapes (less material, faster removal) and normal supports for mechanical parts.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
+    "content": "# Bambu Lab 3D Printing Workflow\n\nThis workflow provides step-by-step guidance for bambu lab 3d printing workflow.\n\n## Key Tips\n\n- **What is AMS and how does multi-color printing work?** AMS (Automatic Material System) is a 4-spool filament changer. Assign colors to model regions in Bambu Studio, and AMS switches filaments automatically. Purging between colors creates waste (20-50g per change).\n- **Do I need supports for overhangs?** Yes, for overhangs steeper than 50-60°. Bambu Studio auto-generates supports. Use tree supports for organic shapes (less material, faster removal) and normal supports for mechanical parts.\n\n## Common Questions\n\nRefer to the FAQs below for answers to frequently asked questions.\n",
     "schema": {
       "@context": "https://schema.org",
       "@graph": [
@@ -2754,25 +2754,25 @@
               "@type": "HowToStep",
               "position": 2,
               "name": "Do I need supports for overhangs?",
-              "text": "Yes, for overhangs steeper than 50-60\u00b0. Bambu Studio auto-generates supports. Use tree supports for organic shapes (less material, faster removal) and normal supports for mechanical parts."
+              "text": "Yes, for overhangs steeper than 50-60°. Bambu Studio auto-generates supports. Use tree supports for organic shapes (less material, faster removal) and normal supports for mechanical parts."
             },
             {
               "@type": "HowToStep",
               "position": 3,
               "name": "Why does my first layer not stick?",
-              "text": "Bed not level, Z-offset wrong, or bed temperature too low. Run auto-leveling calibration, adjust Z-offset -0.02mm at a time, and increase bed temp 5-10\u00b0C. Clean bed with IPA."
+              "text": "Bed not level, Z-offset wrong, or bed temperature too low. Run auto-leveling calibration, adjust Z-offset -0.02mm at a time, and increase bed temp 5-10°C. Clean bed with IPA."
             },
             {
               "@type": "HowToStep",
               "position": 4,
               "name": "Can I print ABS without an enclosure?",
-              "text": "Not recommended. ABS requires stable 50-60\u00b0C chamber temperature to prevent warping. X1 Carbon has a heated chamber; P1P needs an aftermarket enclosure or stick to PLA/PETG."
+              "text": "Not recommended. ABS requires stable 50-60°C chamber temperature to prevent warping. X1 Carbon has a heated chamber; P1P needs an aftermarket enclosure or stick to PLA/PETG."
             },
             {
               "@type": "HowToStep",
               "position": 5,
               "name": "How do I reduce stringing and blobs?",
-              "text": "Lower nozzle temperature 5-10\u00b0C, enable retraction (6-7mm for Bowden, 0.5-1mm for direct drive), increase retraction speed to 40-50mm/s, and enable 'Wipe While Retracting'."
+              "text": "Lower nozzle temperature 5-10°C, enable retraction (6-7mm for Bowden, 0.5-1mm for direct drive), increase retraction speed to 40-50mm/s, and enable 'Wipe While Retracting'."
             }
           ]
         },
@@ -2792,7 +2792,7 @@
               "name": "Do I need supports for overhangs?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes, for overhangs steeper than 50-60\u00b0. Bambu Studio auto-generates supports. Use tree supports for organic shapes (less material, faster removal) and normal supports for mechanical parts."
+                "text": "Yes, for overhangs steeper than 50-60°. Bambu Studio auto-generates supports. Use tree supports for organic shapes (less material, faster removal) and normal supports for mechanical parts."
               }
             },
             {
@@ -2800,7 +2800,7 @@
               "name": "Why does my first layer not stick?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Bed not level, Z-offset wrong, or bed temperature too low. Run auto-leveling calibration, adjust Z-offset -0.02mm at a time, and increase bed temp 5-10\u00b0C. Clean bed with IPA."
+                "text": "Bed not level, Z-offset wrong, or bed temperature too low. Run auto-leveling calibration, adjust Z-offset -0.02mm at a time, and increase bed temp 5-10°C. Clean bed with IPA."
               }
             },
             {
@@ -2808,7 +2808,7 @@
               "name": "Can I print ABS without an enclosure?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Not recommended. ABS requires stable 50-60\u00b0C chamber temperature to prevent warping. X1 Carbon has a heated chamber; P1P needs an aftermarket enclosure or stick to PLA/PETG."
+                "text": "Not recommended. ABS requires stable 50-60°C chamber temperature to prevent warping. X1 Carbon has a heated chamber; P1P needs an aftermarket enclosure or stick to PLA/PETG."
               }
             },
             {
@@ -2816,7 +2816,7 @@
               "name": "How do I reduce stringing and blobs?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Lower nozzle temperature 5-10\u00b0C, enable retraction (6-7mm for Bowden, 0.5-1mm for direct drive), increase retraction speed to 40-50mm/s, and enable 'Wipe While Retracting'."
+                "text": "Lower nozzle temperature 5-10°C, enable retraction (6-7mm for Bowden, 0.5-1mm for direct drive), increase retraction speed to 40-50mm/s, and enable 'Wipe While Retracting'."
               }
             },
             {
@@ -2835,7 +2835,7 @@
   {
     "slug": "brother-scanncut-workflow",
     "title": "Brother ScanNCut Workflow",
-    "seoTitle": "Brother ScanNCut \u2014 Direct Scanning, Cut File Prep, and Print-Then-Cut Setup",
+    "seoTitle": "Brother ScanNCut — Direct Scanning, Cut File Prep, and Print-Then-Cut Setup",
     "seoDescription": "Prepare files for Brother ScanNCut with direct scanning, SVG import, print-then-cut registration, and CanvasWorkspace integration.",
     "keywords": [
       "brother scanncut",

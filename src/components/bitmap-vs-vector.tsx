@@ -169,7 +169,7 @@ export function BitmapVsVectorExplainer() {
           {mode === 'vector' && (
             <div className="rounded-[var(--radius-lg)] bg-accent-wash p-5">
               <p className="text-sm text-text-secondary mb-3">
-                Ready to convert bitmap to vector? Vectorr handles the tracing
+                Ready to convert bitmap to vector? Vectroy handles the tracing
                 automatically.
               </p>
               <Link

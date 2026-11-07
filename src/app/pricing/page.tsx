@@ -8,7 +8,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { PRICING_TIERS, CREDIT_COSTS } from "@/lib/credits/constants";
 
 export const metadata: Metadata = {
-  title: "Pricing — Vectorr",
+  title: "Pricing — Vectroy",
   description:
     "Simple credit-based pricing for PNG/JPG/WEBP to SVG conversion. Start with 5 free credits.",
 };
@@ -207,7 +207,7 @@ export default function PricingPage() {
               id="compare-heading"
               className="display max-w-[760px] text-[clamp(28px,4vw,44px)]"
             >
-              Why choose Vectorr?
+              Why choose Vectroy?
             </h2>
             <p className="mt-5 max-w-[620px] text-[17px] leading-relaxed text-text-secondary">
               Fast, accurate vectorization with all the formats you need for Cricut,

@@ -10,11 +10,11 @@
  */
 import comparisons from "../../public/data/comparisons.json";
 
-export type FeatureWinner = "vectorr" | "competitor" | "tie";
+export type FeatureWinner = "vectroy" | "competitor" | "tie";
 
 export interface ComparisonFeature {
   feature: string;
-  vectorr: boolean;
+  vectroy: boolean;
   competitor: boolean;
   winner: FeatureWinner;
 }
@@ -35,7 +35,7 @@ export interface Comparison {
   competitorUrl: string;
   features: ComparisonFeature[];
   pricing: {
-    vectorr: ComparisonPricingTier;
+    vectroy: ComparisonPricingTier;
     competitor: ComparisonPricingTier;
   };
   contentTemplate: string;

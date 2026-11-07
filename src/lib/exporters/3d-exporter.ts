@@ -249,7 +249,7 @@ export class STLExporter extends BaseExporter {
       throw new Error('No closed paths found to extrude. 3D export requires closed shapes.');
     }
     
-    let stl = 'solid vectorr_model\n';
+    let stl = 'solid vectroy_model\n';
     
     for (const tri of triangles) {
       const normal = calculateNormal(tri);
@@ -263,7 +263,7 @@ export class STLExporter extends BaseExporter {
       stl += '  endfacet\n';
     }
     
-    stl += 'endsolid vectorr_model\n';
+    stl += 'endsolid vectroy_model\n';
     
     return stl;
   }
@@ -311,9 +311,9 @@ export class OBJExporter extends BaseExporter {
     }
     
     // Generate OBJ file
-    let obj = '# Vectorr SVG to OBJ Export\n';
+    let obj = '# Vectroy SVG to OBJ Export\n';
     obj += '# Generated from 2D SVG by extrusion\n\n';
-    obj += 'o vectorr_model\n\n';
+    obj += 'o vectroy_model\n\n';
     
     // Vertices
     for (const v of vertices) {

@@ -147,7 +147,7 @@ function LoginForm() {
                 <path d="M4 18L12 5l8 13z" />
                 <path d="M8.5 18L12 12l3.5 6" />
               </svg>
-              Vectorr
+              Vectroy
             </div>
 
             <h1 className="display mt-6 text-center text-[clamp(28px,4vw,38px)]">

@@ -1,5 +1,5 @@
 /**
- * Typed client for the Vectorr API.
+ * Typed client for the Vectroy API.
  *
  * Every call is same-origin (Next.js route handlers), so there is no base URL to
  * configure. Responses are narrowed here rather than in components, and the one

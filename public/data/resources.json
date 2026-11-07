@@ -20,11 +20,11 @@
       "description": "A practical guide to SVG, DXF, EPS, PDF, DST, and PES and when to use each.",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Fundamentals"
     }
@@ -50,11 +50,11 @@
       "description": "How to reduce SVG file size through precision, metadata stripping, flattening, and path cleanup.",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Optimization"
     }
@@ -80,11 +80,11 @@
       "description": "Best practices for preparing, tracing, tuning, and cleaning up raster-to-vector conversions.",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Tracing"
     }
@@ -110,11 +110,11 @@
       "description": "How to prepare SVG geometry, text, sizes, and layers for reliable Cricut cuts.",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Craft & Cutting"
     }
@@ -140,11 +140,11 @@
       "description": "DXF units, path topology, kerf compensation, minimum features, and layer preparation for laser cutting.",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Craft & Cutting"
     }
@@ -170,11 +170,11 @@
       "description": "A comparison of DST, PES, and JEF formats and how artwork becomes a machine stitch file.",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Craft & Cutting"
     }
@@ -200,11 +200,11 @@
       "description": "Spot versus process color, separation mechanics, trapping, and reviewing plates before production.",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Print"
     }
@@ -230,11 +230,11 @@
       "description": "Patterns for reliable batch conversion: idempotency, validation, naming, concurrency, and reporting.",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Automation"
     }
@@ -260,11 +260,11 @@
       "description": "Understand the key differences between SVG and PNG formats. Learn when to use vector SVG for scalability and when raster PNG is the right choice for p",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Format Comparison"
     }
@@ -290,11 +290,11 @@
       "description": "Compare DXF and SVG for CNC routers, laser cutters, and plasma tables. Learn which format your machine prefers and how to prepare files for reliable c",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Format Comparison"
     }
@@ -320,11 +320,11 @@
       "description": "Compare EPS and AI formats for professional design work. Learn the differences, compatibility, print workflows, and when to use each Adobe format.",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Format Comparison"
     }
@@ -350,11 +350,11 @@
       "description": "Compare STL, 3MF, and OBJ formats for 3D printing. Learn which format your slicer prefers, how they handle color and metadata, and when to use each.",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Format Comparison"
     }
@@ -380,11 +380,11 @@
       "description": "Compare PES, DST, and JEF embroidery formats. Learn what each stores, machine compatibility, and how to convert vector artwork to stitch files.",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Format Comparison"
     }
@@ -410,11 +410,11 @@
       "description": "Compare PDF and SVG for print production. Learn about PDF/X standards, font embedding, color management, and when each format is appropriate for print",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Format Comparison"
     }
@@ -440,11 +440,11 @@
       "description": "Compare WebP and SVG for modern web graphics. Learn performance implications, browser support, use cases, and optimization strategies for each format.",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Format Comparison"
     }
@@ -470,11 +470,11 @@
       "description": "Understand EMF and WMF Windows metafile formats. Learn the differences, compatibility, conversion options, and when each is appropriate for Windows ap",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Format Comparison"
     }
@@ -500,11 +500,11 @@
       "description": "Compare Adobe Illustrator and Figma for vector design work. Learn strengths, weaknesses, collaboration features, and which tool fits your workflow bes",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Software Comparison"
     }
@@ -530,11 +530,11 @@
       "description": "Compare Inkscape and Adobe Illustrator for vector design. Learn feature differences, learning curves, file format support, and whether free Inkscape c",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Software Comparison"
     }
@@ -560,11 +560,11 @@
       "description": "Compare CorelDRAW and Adobe Illustrator for professional vector design. Learn differences in workflow, features, pricing, and which is better for spec",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Software Comparison"
     }
@@ -590,11 +590,11 @@
       "description": "Compare Affinity Designer and Adobe Illustrator in 2026. Learn feature parity, pricing models, workflow differences, and which offers better value for",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Software Comparison"
     }
@@ -620,11 +620,11 @@
       "description": "Compare Vectornator and Adobe Illustrator on iPad. Learn which offers better touch interface, features, file compatibility, and workflow for mobile ve",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Software Comparison"
     }
@@ -650,11 +650,11 @@
       "description": "Comprehensive guide to the best free vector software in 2026. Compare Inkscape, Vectornator, Vectr, and others for features, learning curve, and use c",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Software Comparison"
     }
@@ -680,11 +680,11 @@
       "description": "Compare CAD software for vector file export. Learn which CAD tools produce the cleanest DXF and SVG output for laser cutting, CNC, and design workflow",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Software Comparison"
     }
@@ -710,11 +710,11 @@
       "description": "Comprehensive guide to color spaces in vector design. Learn RGB, CMYK, Pantone spot colors, color management, conversion strategies, and print product",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Technical Deep-Dive"
     }
@@ -740,11 +740,11 @@
       "description": "Learn vector resolution and scaling best practices. Understand resolution independence, export settings, rasterization, and how to prepare vectors for",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Technical Deep-Dive"
     }
@@ -770,11 +770,11 @@
       "description": "Master path simplification and node optimization techniques. Learn how to reduce file size, improve rendering performance, and maintain visual quality",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Technical Deep-Dive"
     }
@@ -800,11 +800,11 @@
       "description": "Comprehensive guide to compound paths and boolean operations in vector design. Learn union, subtract, intersect, exclude, and when to use each operati",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Technical Deep-Dive"
     }
@@ -830,11 +830,11 @@
       "description": "Learn best practices for vector layer management and organization. Master naming conventions, layer structures, grouping strategies, and workflow opti",
       "author": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Vectorr"
+        "name": "Vectroy"
       },
       "articleSection": "Technical Deep-Dive"
     }

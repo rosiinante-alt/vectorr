@@ -33,7 +33,7 @@ export function SiteHeader({ initialUser = null }: { initialUser?: User | null }
           href="/"
           className="flex items-center gap-2.5 text-[16px] font-semibold tracking-[-0.015em] text-text-primary"
         >
-          {/* TODO: Replace with Vectorr icon once provided */}
+          {/* TODO: Replace with Vectroy icon once provided */}
           <svg
             viewBox="0 0 24 24"
             aria-hidden="true"

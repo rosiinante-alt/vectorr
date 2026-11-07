@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { DESIGNERS_WORKFLOWS, getDesignersCategories } from '@/lib/designers-workflow-configs';
 
 export const metadata: Metadata = {
-  title: 'For Designers — Asset Export & Design System Workflows | Vectorr',
+  title: 'For Designers — Asset Export & Design System Workflows | Vectroy',
   description:
     'Production-ready workflows for Figma export, logo redesign, icon systems, typeface optimization, brand asset management, design tokens, and color palettes.',
   keywords: [
@@ -134,7 +134,7 @@ export default function ForDesignersPage() {
               </span>
             </summary>
             <p className="mt-4 text-text-secondary leading-relaxed">
-              Figma includes editor metadata and verbose path data. Use an SVG optimizer (like Vectorr) to
+              Figma includes editor metadata and verbose path data. Use an SVG optimizer (like Vectroy) to
               remove metadata, reduce decimal precision, and collapse redundant groups. This often cuts file
               size by 40–60%.
             </p>

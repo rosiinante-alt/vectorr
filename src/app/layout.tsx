@@ -15,15 +15,18 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vectorr — Optimize SVG files without losing a curve",
+  title: "Vectroy — Optimize SVG files without losing a curve",
   description:
     "Upload an SVG, see exactly where the bytes went, and download a smaller file. Path precision, metadata stripping and redundant groups — with a report no other tool gives you.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   openGraph: {
-    title: "Vectorr — Your SVG is 2.4 MB. Find the 1 MB you can cut.",
+    title: "Vectroy — Your SVG is 2.4 MB. Find the 1 MB you can cut.",
     description:
       "Vector-to-vector optimization with a real savings report. No signup to preview.",
     type: "website",
+  },
+  alternates: {
+    canonical: "/",
   },
 };
 

@@ -21,7 +21,7 @@ export async function generateMetadata({
     return { title: 'Workflow Not Found' };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vectorr.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vectroy.com';
 
   return {
     title: workflow.seoTitle,

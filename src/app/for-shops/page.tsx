@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { SHOPS_WORKFLOWS, getShopsCategories } from '@/lib/shops-workflow-configs';
 
 export const metadata: Metadata = {
-  title: 'For Print Shops & Production — File Prep Workflows | Vectorr',
+  title: 'For Print Shops & Production — File Prep Workflows | Vectroy',
   description:
     'Production-ready file preparation guides for DTF printing, screen printing, embroidery, vinyl cutting, laser engraving, UV printing, and CNC routing. Practical workflows for shop operators.',
   keywords: [

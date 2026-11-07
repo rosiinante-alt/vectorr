@@ -26,7 +26,7 @@ export const FREE_TOOLS: ToolConfig[] = [
   {
     slug: 'svg-path-editor',
     title: 'SVG Path Editor',
-    seoTitle: 'SVG Path Editor - Interactive Vector Path Manipulation | Vectorr',
+    seoTitle: 'SVG Path Editor - Interactive Vector Path Manipulation | Vectroy',
     seoDescription:
       'Edit SVG paths interactively with visual node editing, bezier curve controls, and real-time preview. Free online tool, no signup required.',
     category: 'design',
@@ -39,7 +39,7 @@ export const FREE_TOOLS: ToolConfig[] = [
   {
     slug: 'vector-grid-generator',
     title: 'Vector Grid Generator',
-    seoTitle: 'Vector Grid Generator - Customizable Grid Patterns SVG | Vectorr',
+    seoTitle: 'Vector Grid Generator - Customizable Grid Patterns SVG | Vectroy',
     seoDescription:
       'Generate custom vector grids for design layouts, mockups, and technical drawings. Adjustable spacing, line weight, and color. Export as SVG.',
     category: 'design',
@@ -52,7 +52,7 @@ export const FREE_TOOLS: ToolConfig[] = [
   {
     slug: 'shape-library-browser',
     title: 'Shape Library Browser',
-    seoTitle: 'Shape Library Browser - Pre-made Vector Shapes & Icons | Vectorr',
+    seoTitle: 'Shape Library Browser - Pre-made Vector Shapes & Icons | Vectroy',
     seoDescription:
       'Browse and download pre-made vector shapes, icons, and design elements. Free SVG library with geometric shapes, arrows, and decorative elements.',
     category: 'design',
@@ -65,7 +65,7 @@ export const FREE_TOOLS: ToolConfig[] = [
   {
     slug: 'color-palette-extractor',
     title: 'Color Palette Extractor',
-    seoTitle: 'Color Palette Extractor - Extract Colors from Images & SVG | Vectorr',
+    seoTitle: 'Color Palette Extractor - Extract Colors from Images & SVG | Vectroy',
     seoDescription:
       'Extract color palettes from images and SVG files. Get hex codes, RGB values, and dominant colors. Perfect for design systems and branding.',
     category: 'design',
@@ -78,7 +78,7 @@ export const FREE_TOOLS: ToolConfig[] = [
   {
     slug: 'font-to-svg-path',
     title: 'Font to SVG Path Converter',
-    seoTitle: 'Font to SVG Path Converter - Convert Text to Vector Outlines | Vectorr',
+    seoTitle: 'Font to SVG Path Converter - Convert Text to Vector Outlines | Vectroy',
     seoDescription:
       'Convert text to SVG paths with font embedding. Create editable vector outlines from any text. Perfect for logos, signage, and cutting machines.',
     category: 'design',
@@ -93,7 +93,7 @@ export const FREE_TOOLS: ToolConfig[] = [
   {
     slug: 'gang-sheet-layout',
     title: 'Gang Sheet Layout Tool',
-    seoTitle: 'Gang Sheet Layout Tool - Optimize Print Layouts & Nesting | Vectorr',
+    seoTitle: 'Gang Sheet Layout Tool - Optimize Print Layouts & Nesting | Vectroy',
     seoDescription:
       'Optimize gang sheet layouts for DTF, screen printing, and sublimation. Auto-nest designs, maximize material usage, and reduce waste.',
     category: 'production',
@@ -106,7 +106,7 @@ export const FREE_TOOLS: ToolConfig[] = [
   {
     slug: 'laser-cut-settings-calculator',
     title: 'Laser Cut Settings Calculator',
-    seoTitle: 'Laser Cut Settings Calculator - Power, Speed & Material Guide | Vectorr',
+    seoTitle: 'Laser Cut Settings Calculator - Power, Speed & Material Guide | Vectroy',
     seoDescription:
       'Calculate laser cutter settings for different materials. Get recommended power, speed, and pass settings for wood, acrylic, leather, and more.',
     category: 'production',
@@ -124,7 +124,7 @@ export const FREE_TOOLS: ToolConfig[] = [
   {
     slug: 'embroidery-density-calculator',
     title: 'Embroidery Density Calculator',
-    seoTitle: 'Embroidery Density Calculator - Stitch Count & Thread Estimates | Vectorr',
+    seoTitle: 'Embroidery Density Calculator - Stitch Count & Thread Estimates | Vectroy',
     seoDescription:
       'Calculate embroidery stitch density, thread usage, and production time. Estimate costs for custom embroidery projects with precision.',
     category: 'production',
@@ -142,7 +142,7 @@ export const FREE_TOOLS: ToolConfig[] = [
   {
     slug: '3d-print-support-generator',
     title: '3D Print Support Generator',
-    seoTitle: '3D Print Support Generator - Auto Supports for Vector Models | Vectorr',
+    seoTitle: '3D Print Support Generator - Auto Supports for Vector Models | Vectroy',
     seoDescription:
       'Generate support structures for 3D printing vector-based models. Optimize for multicolor prints on Bambu Lab, Prusa, and other FDM printers.',
     category: 'production',
@@ -155,7 +155,7 @@ export const FREE_TOOLS: ToolConfig[] = [
   {
     slug: 'material-cost-calculator',
     title: 'Material Cost Calculator',
-    seoTitle: 'Material Cost Calculator - Per-Piece Pricing for Production | Vectorr',
+    seoTitle: 'Material Cost Calculator - Per-Piece Pricing for Production | Vectroy',
     seoDescription:
       'Calculate material costs per piece for vinyl, sublimation, DTF, laser cutting, and embroidery. Factor in waste, setup time, and material usage.',
     category: 'production',
@@ -170,7 +170,7 @@ export const FREE_TOOLS: ToolConfig[] = [
   {
     slug: 'vector-validator',
     title: 'Vector Validator',
-    seoTitle: 'Vector Validator - Check SVG Files for Errors & Issues | Vectorr',
+    seoTitle: 'Vector Validator - Check SVG Files for Errors & Issues | Vectroy',
     seoDescription:
       'Validate SVG files for common issues: open paths, overlapping shapes, invalid colors, and compatibility problems. Free file checker.',
     category: 'quality',
@@ -183,7 +183,7 @@ export const FREE_TOOLS: ToolConfig[] = [
   {
     slug: 'dxf-layer-analyzer',
     title: 'DXF Layer Analyzer',
-    seoTitle: 'DXF Layer Analyzer - Inspect CAD File Layers & Structure | Vectorr',
+    seoTitle: 'DXF Layer Analyzer - Inspect CAD File Layers & Structure | Vectroy',
     seoDescription:
       'Analyze DXF files to inspect layers, entities, and structure. View layer contents, colors, and line types. Perfect for CAD file quality control.',
     category: 'quality',
@@ -196,7 +196,7 @@ export const FREE_TOOLS: ToolConfig[] = [
   {
     slug: 'svg-accessibility-checker',
     title: 'SVG Accessibility Checker',
-    seoTitle: 'SVG Accessibility Checker - WCAG Compliance & Alt Text | Vectorr',
+    seoTitle: 'SVG Accessibility Checker - WCAG Compliance & Alt Text | Vectroy',
     seoDescription:
       'Check SVG files for accessibility compliance. Validate ARIA labels, alt text, color contrast, and screen reader compatibility.',
     category: 'quality',
@@ -209,7 +209,7 @@ export const FREE_TOOLS: ToolConfig[] = [
   {
     slug: 'path-complexity-analyzer',
     title: 'Path Complexity Analyzer',
-    seoTitle: 'Path Complexity Analyzer - SVG Node Count & Performance Stats | Vectorr',
+    seoTitle: 'Path Complexity Analyzer - SVG Node Count & Performance Stats | Vectroy',
     seoDescription:
       'Analyze SVG path complexity with node counts, segment statistics, and performance metrics. Identify optimization opportunities.',
     category: 'quality',
@@ -222,7 +222,7 @@ export const FREE_TOOLS: ToolConfig[] = [
   {
     slug: 'file-size-optimizer',
     title: 'File Size Optimizer',
-    seoTitle: 'File Size Optimizer - Compare Compression & Format Options | Vectorr',
+    seoTitle: 'File Size Optimizer - Compare Compression & Format Options | Vectroy',
     seoDescription:
       'Compare file sizes across formats and compression settings. Test SVG optimization, PNG compression levels, and format conversions side-by-side.',
     category: 'quality',

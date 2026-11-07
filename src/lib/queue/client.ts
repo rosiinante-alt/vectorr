@@ -1,10 +1,10 @@
 import Redis from 'ioredis';
 
-const globalForRedis = globalThis as typeof globalThis & { vectorrRedis?: Redis };
+const globalForRedis = globalThis as typeof globalThis & { vectroyRedis?: Redis };
 
 export const connection =
-  globalForRedis.vectorrRedis ??
-  (globalForRedis.vectorrRedis = new Redis(process.env.REDIS_URL || 'redis://localhost:6379', {
+  globalForRedis.vectroyRedis ??
+  (globalForRedis.vectroyRedis = new Redis(process.env.REDIS_URL || 'redis://localhost:6379', {
     maxRetriesPerRequest: null,
     lazyConnect: true,
   }));

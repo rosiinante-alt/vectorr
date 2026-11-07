@@ -29,7 +29,7 @@ export interface CheckoutBuyer {
 /**
  * Opens a Polar checkout for one of our catalog plans.
  *
- * `metadata.userId` is the only link between a Polar payment and a Vectorr
+ * `metadata.userId` is the only link between a Polar payment and a Vectroy
  * account, and it is written here on the server from the authenticated session
  * — never taken from the request body.
  */

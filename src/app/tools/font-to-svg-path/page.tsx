@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 export default function FontToSvgPathPage() {
-  const [text, setText] = useState('Vectorr');
+  const [text, setText] = useState('Vectroy');
   const [fontSize, setFontSize] = useState(48);
   const [fontWeight, setFontWeight] = useState('700');
   const [fontFamily, setFontFamily] = useState('Arial');

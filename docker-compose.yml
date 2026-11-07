@@ -11,11 +11,11 @@ services:
   # =========================================================================
   # Vectorr Node.js Backend
   # =========================================================================
-  vectorr:
+  vectroy:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: vectorr-app
+    container_name: vectroy-app
     restart: unless-stopped
     ports:
       - "${APP_PORT:-3000}:3000"
@@ -57,11 +57,11 @@ services:
       start_period: 5s
 
     networks:
-      - vectorr-network
+      - vectroy-network
 
     # Optional: Coolify volumes for persistent data
     volumes:
-      - vectorr-logs:/app/logs
+      - vectroy-logs:/app/logs
 
   # =========================================================================
   # Vectorr BullMQ workers
@@ -73,7 +73,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.worker
-    container_name: vectorr-worker
+    container_name: vectroy-worker
     restart: unless-stopped
     environment:
       # Supabase Configuration (required)
@@ -93,7 +93,7 @@ services:
       - redis
 
     networks:
-      - vectorr-network
+      - vectroy-network
 
   # =========================================================================
   # Optional: Nginx reverse proxy (for Coolify)
@@ -101,7 +101,7 @@ services:
   # =========================================================================
   # nginx:
   #   image: nginx:alpine
-  #   container_name: vectorr-nginx
+  #   container_name: vectroy-nginx
   #   restart: unless-stopped
   #   ports:
   #     - "80:80"
@@ -110,16 +110,16 @@ services:
   #     - ./nginx.conf:/etc/nginx/nginx.conf:ro
   #     - ./certs:/etc/nginx/certs:ro
   #   depends_on:
-  #     - vectorr
+  #     - vectroy
   #   networks:
-  #     - vectorr-network
+  #     - vectroy-network
 
 networks:
-  vectorr-network:
+  vectroy-network:
     driver: bridge
 
 volumes:
   redis-data:
     driver: local
-  vectorr-logs:
+  vectroy-logs:
     driver: local

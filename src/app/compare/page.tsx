@@ -3,21 +3,21 @@ import Link from "next/link";
 import { COMPARISONS } from "@/lib/comparisons";
 
 export const metadata: Metadata = {
-  title: "Best Vector Converters Comparison 2026 | Vectorr vs Competitors",
+  title: "Best Vector Converters Comparison 2026 | Vectroy vs Competitors",
   description:
-    "Honest comparison of the top vector conversion tools. Find the best solution for converting your images to scalable vectors. Compare Vectorr with Vectosolve, Vectorizer.ai, Adobe Illustrator, and more.",
+    "Honest comparison of the top vector conversion tools. Find the best solution for converting your images to scalable vectors. Compare Vectroy with Vectosolve, Vectorizer.ai, Adobe Illustrator, and more.",
   keywords: [
     "vector converter comparison",
     "best vectorization tool",
     "PNG to SVG converter",
-    "Vectorr vs Vectosolve",
+    "Vectroy vs Vectosolve",
     "vector conversion tools",
     "AI vectorization",
   ],
   openGraph: {
     title: "Best Vector Converters Comparison 2026",
     description:
-      "Compare Vectorr with leading vector conversion tools. AI-powered vectorization, batch processing, and more.",
+      "Compare Vectroy with leading vector conversion tools. AI-powered vectorization, batch processing, and more.",
     type: "website",
   },
 };
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 // Main competitors for the comparison table
 const mainCompetitors = [
   {
-    name: "Vectorr",
+    name: "Vectroy",
     pricing: "From $9/mo",
     badge: "Best Value",
     features: {
@@ -166,7 +166,7 @@ export default function ComparePage() {
               <p className="text-2xl font-bold text-primary mb-4">
                 {competitor.pricing}
               </p>
-              {competitor.name === "Vectorr" && (
+              {competitor.name === "Vectroy" && (
                 <p className="text-sm text-muted-foreground mb-4">
                   Free previews, batch processing
                 </p>
@@ -251,7 +251,7 @@ export default function ComparePage() {
               <div className="mb-4">
                 <h4 className="font-semibold text-green-600 mb-2">Pros</h4>
                 <ul className="space-y-1">
-                  {competitor.name === "Vectorr" && (
+                  {competitor.name === "Vectroy" && (
                     <>
                       <li className="text-sm">
                         + AI-powered with batch processing
@@ -292,7 +292,7 @@ export default function ComparePage() {
               <div>
                 <h4 className="font-semibold text-red-600 mb-2">Cons</h4>
                 <ul className="space-y-1">
-                  {competitor.name === "Vectorr" && (
+                  {competitor.name === "Vectroy" && (
                     <>
                       <li className="text-sm">- Newer in market</li>
                     </>
@@ -324,12 +324,12 @@ export default function ComparePage() {
                 </ul>
               </div>
 
-              {competitor.name === "Vectorr" && (
+              {competitor.name === "Vectroy" && (
                 <Link
                   href="/pricing"
                   className="mt-6 block text-center bg-primary text-primary-foreground py-2 rounded-lg font-semibold hover:opacity-90 transition-opacity"
                 >
-                  Try Vectorr Free
+                  Try Vectroy Free
                 </Link>
               )}
             </div>
@@ -337,10 +337,10 @@ export default function ComparePage() {
         </div>
       </div>
 
-      {/* Why Choose Vectorr Section */}
+      {/* Why Choose Vectroy Section */}
       <div className="max-w-4xl mx-auto mb-16 bg-primary/5 rounded-2xl p-12">
         <h2 className="text-3xl font-bold mb-8 text-center">
-          Why Choose Vectorr?
+          Why Choose Vectroy?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="text-center">
@@ -381,7 +381,7 @@ export default function ComparePage() {
           Detailed Comparisons
         </h2>
         <p className="text-center text-muted-foreground mb-12">
-          Dive deeper into how Vectorr compares to specific competitors with our
+          Dive deeper into how Vectroy compares to specific competitors with our
           detailed comparison pages.
         </p>
 
@@ -401,7 +401,7 @@ export default function ComparePage() {
                       Comparison
                     </span>
                     <span className="text-xs bg-green-500/10 text-green-700 dark:text-green-400 px-2 py-1 rounded font-semibold">
-                      Vectorr Wins
+                      Vectroy Wins
                     </span>
                   </div>
                   <h4 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors">
@@ -435,7 +435,7 @@ export default function ComparePage() {
                       Comparison
                     </span>
                     <span className="text-xs bg-green-500/10 text-green-700 dark:text-green-400 px-2 py-1 rounded font-semibold">
-                      Vectorr Wins
+                      Vectroy Wins
                     </span>
                   </div>
                   <h4 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors">
@@ -469,7 +469,7 @@ export default function ComparePage() {
                       Comparison
                     </span>
                     <span className="text-xs bg-green-500/10 text-green-700 dark:text-green-400 px-2 py-1 rounded font-semibold">
-                      Vectorr Wins
+                      Vectroy Wins
                     </span>
                   </div>
                   <h4 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors">
@@ -503,7 +503,7 @@ export default function ComparePage() {
                       Comparison
                     </span>
                     <span className="text-xs bg-green-500/10 text-green-700 dark:text-green-400 px-2 py-1 rounded font-semibold">
-                      Vectorr Wins
+                      Vectroy Wins
                     </span>
                   </div>
                   <h4 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors">
@@ -533,7 +533,7 @@ export default function ComparePage() {
               What is the best free PNG to SVG converter?
             </h3>
             <p className="text-muted-foreground">
-              Vectorr offers free watermarked previews with no signup required.
+              Vectroy offers free watermarked previews with no signup required.
               You can test the quality before purchasing credits. For unlimited
               conversions without watermarks, plans start at $9/month with batch
               processing and API access.
@@ -541,10 +541,10 @@ export default function ComparePage() {
           </div>
           <div className="border-b pb-6">
             <h3 className="font-bold mb-2">
-              Is Vectorr better than Vectosolve?
+              Is Vectroy better than Vectosolve?
             </h3>
             <p className="text-muted-foreground">
-              Both offer excellent AI-powered vectorization. Vectorr includes
+              Both offer excellent AI-powered vectorization. Vectroy includes
               batch processing, API access, and more export formats at $9/mo,
               while Vectosolve starts at $6.99/mo for single conversions. Choose
               based on whether you need advanced features or just basic
@@ -557,17 +557,17 @@ export default function ComparePage() {
             </h3>
             <p className="text-muted-foreground">
               No! While Illustrator can trace images, it requires manual work,
-              design skills, and costs $22.99/mo. AI-powered tools like Vectorr
+              design skills, and costs $22.99/mo. AI-powered tools like Vectroy
               do it automatically in seconds at a much lower cost with
               comparable or better quality.
             </p>
           </div>
           <div className="pb-6">
             <h3 className="font-bold mb-2">
-              Can I use Vectorr for batch conversions?
+              Can I use Vectroy for batch conversions?
             </h3>
             <p className="text-muted-foreground">
-              Yes! Vectorr includes batch processing on all paid plans, allowing
+              Yes! Vectroy includes batch processing on all paid plans, allowing
               you to convert hundreds of files at once. This is a major
               advantage over competitors like Vectosolve and Vectorizer.ai which
               only support single-file conversion.
@@ -579,7 +579,7 @@ export default function ComparePage() {
       {/* Footer CTA */}
       <div className="max-w-3xl mx-auto text-center mt-16 pt-16 border-t">
         <p className="text-sm text-muted-foreground">
-          © 2026 Vectorr. All rights reserved.
+          © 2026 Vectroy. All rights reserved.
         </p>
         <p className="text-sm text-muted-foreground mt-2">
           Last updated: November 2026

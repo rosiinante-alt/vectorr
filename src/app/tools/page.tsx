@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { FREE_TOOLS, TOOL_CATEGORIES } from '@/lib/tools-configs';
 
 export const metadata: Metadata = {
-  title: 'Free SVG & Vector Tools — 18 Production-Ready Tools | Vectorr',
+  title: 'Free SVG & Vector Tools — 18 Production-Ready Tools | Vectroy',
   description:
     'Free online tools for vector files: batch converter, SVG optimizer, path editor, grid generator, and more. No signup, no limits.',
   keywords: ['free svg tools', 'batch converter', 'svg optimizer', 'color separation', 'path editor', 'vector tools'],

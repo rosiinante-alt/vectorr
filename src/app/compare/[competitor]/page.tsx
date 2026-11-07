@@ -125,9 +125,9 @@ function FeatureRows({ features }: { features: ComparisonFeature[] }) {
             className="py-4 pr-4 text-left text-[15px] font-medium text-text-primary"
           >
             {row.feature}
-            {row.winner === "vectorr" && (
+            {row.winner === "vectroy" && (
               <Badge tone="success" className="ml-2 align-middle">
-                Vectorr
+                Vectroy
               </Badge>
             )}
             {row.winner === "competitor" && (
@@ -137,7 +137,7 @@ function FeatureRows({ features }: { features: ComparisonFeature[] }) {
             )}
           </th>
           <td className="px-4 py-4 text-center">
-            <WinnerMark value={row.vectorr} />
+            <WinnerMark value={row.vectroy} />
           </td>
           <td className="px-4 py-4 text-center">
             <WinnerMark value={row.competitor} />
@@ -151,14 +151,14 @@ function FeatureRows({ features }: { features: ComparisonFeature[] }) {
 function CtaBlock({ competitorName }: { competitorName: string }) {
   return (
     <section className="mt-16 rounded-[var(--radius-xl)] bg-bg-secondary p-8 text-center sm:p-12">
-      <h2 className="display text-[clamp(26px,4vw,38px)]">Try Vectorr Free</h2>
+      <h2 className="display text-[clamp(26px,4vw,38px)]">Try Vectroy Free</h2>
       <p className="mx-auto mt-4 max-w-[520px] text-[16.5px] leading-relaxed text-text-secondary">
         Start with 5 free credits. No credit card required — see how your files
         compare against {competitorName} before you commit.
       </p>
       <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
         <ButtonLink href="/convert" size="lg">
-          Try Vectorr Free
+          Try Vectroy Free
         </ButtonLink>
         <ButtonLink href="/pricing" size="lg" variant="secondary">
           See pricing
@@ -215,7 +215,7 @@ export default async function ComparePage({ params }: PageProps) {
 
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <ButtonLink href="/convert" size="lg">
-                Try Vectorr Free
+                Try Vectroy Free
               </ButtonLink>
               <a
                 href={comparison.competitorUrl}
@@ -235,7 +235,7 @@ export default async function ComparePage({ params }: PageProps) {
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[560px] border-collapse">
                   <caption id="matrix-heading" className="visually-hidden">
-                    Feature comparison between Vectorr and {comparison.competitorName}
+                    Feature comparison between Vectroy and {comparison.competitorName}
                   </caption>
                   <thead>
                     <tr className="bg-bg-secondary">
@@ -249,7 +249,7 @@ export default async function ComparePage({ params }: PageProps) {
                         scope="col"
                         className="px-4 py-4 text-center text-[14px] font-semibold text-text-primary"
                       >
-                        Vectorr
+                        Vectroy
                       </th>
                       <th
                         scope="col"
@@ -270,13 +270,13 @@ export default async function ComparePage({ params }: PageProps) {
                       </th>
                       <td className="px-4 py-5 text-center align-top">
                         <p className="text-[15px] font-semibold text-text-primary">
-                          {comparison.pricing.vectorr.startingPrice}
+                          {comparison.pricing.vectroy.startingPrice}
                         </p>
                         <p className="mt-1 text-[13px] text-text-tertiary">
-                          {comparison.pricing.vectorr.model}
+                          {comparison.pricing.vectroy.model}
                         </p>
                         <p className="mt-1 text-[13px] text-text-tertiary">
-                          Free: {comparison.pricing.vectorr.freeTier}
+                          Free: {comparison.pricing.vectroy.freeTier}
                         </p>
                       </td>
                       <td className="px-4 py-5 text-center align-top">

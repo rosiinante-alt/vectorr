@@ -23,7 +23,7 @@ export async function generateMetadata({
     };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vectorr.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vectroy.com';
 
   return {
     title: workflow.seoTitle,
@@ -155,7 +155,7 @@ export default async function WorkflowPage({
   // Parse content sections (split by ## headers)
   const sections = workflow.content.split(/\n## /).slice(1);
   const intro = workflow.content.split(/\n## /)[0].replace(/^# .+\n\n/, '');
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vectorr.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vectroy.com';
 
   return (
     <main className="min-h-screen bg-[#FAFBFC]">

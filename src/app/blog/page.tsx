@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "Practical guides for people who convert artwork for cutters, lasers, embroidery machines and 3D printers. File format internals, machine constraints, and the exact steps that stop a job failing.",
   alternates: { canonical: "/blog" },
   openGraph: {
-    title: "Vectorr Blog",
+    title: "Vectroy Blog",
     description:
       "Practical guides to vector files, machine workflows, and production-ready artwork.",
     type: "website",

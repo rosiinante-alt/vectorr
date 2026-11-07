@@ -33,7 +33,7 @@ export class EPSExporter extends BaseExporter {
       '%!PS-Adobe-3.0 EPSF-3.0',
       `%%BoundingBox: 0 0 ${Math.ceil(pageWidth)} ${Math.ceil(pageHeight)}`,
       '%%Title: Vector Image',
-      '%%Creator: Vectorr',
+      '%%Creator: Vectroy',
       '%%LanguageLevel: 2',
       '%%Pages: 1',
       '%%EndComments',

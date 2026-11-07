@@ -25,7 +25,7 @@ function isUuid(value: unknown): value is string {
 }
 
 /**
- * Resolves the Vectorr user a payment belongs to.
+ * Resolves the Vectroy user a payment belongs to.
  *
  * `metadata.userId` is written by our own checkout endpoint. Orders also carry
  * the metadata of the checkout that produced them, so a one-time purchase and a

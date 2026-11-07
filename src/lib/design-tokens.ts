@@ -1,5 +1,5 @@
 /**
- * Design tokens currently used by the Vectorr light-mode interface.
+ * Design tokens currently used by the Vectroy light-mode interface.
  * Values mirror the CSS custom properties in app/globals.css.
  */
 export const TOKENS = {

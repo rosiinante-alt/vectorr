@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!resource) {
     return {
-      title: "Resource Not Found — Vectorr",
+      title: "Resource Not Found — Vectroy",
       description: "This resource guide is not available.",
     };
   }

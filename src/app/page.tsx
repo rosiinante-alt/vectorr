@@ -203,7 +203,7 @@ export default function Home() {
               </h2>
               <p className="mt-5 text-[clamp(17px,1.7vw,20px)] leading-relaxed text-text-secondary">
                 Whether you need a logo for your website or a design for your
-                Cricut, Vectorr converts any image into production-ready vectors.
+                Cricut, Vectroy converts any image into production-ready vectors.
               </p>
             </div>
 
@@ -250,7 +250,7 @@ export default function Home() {
                 What actually makes a good vector.
               </h3>
               <p className="mt-4 max-w-[620px] text-[clamp(16px,1.6vw,18px)] leading-relaxed text-text-secondary">
-                Pick a detail to see how Vectorr handles it, compared with a
+                Pick a detail to see how Vectroy handles it, compared with a
                 straight raster trace.
               </p>
 
@@ -294,7 +294,7 @@ export default function Home() {
                       scope="col"
                       className="border-b border-[var(--border)] bg-accent-wash px-4 py-3.5 text-[13.5px] font-semibold text-accent-ink whitespace-nowrap"
                     >
-                      Vectorr
+                      Vectroy
                     </th>
                     <th
                       scope="col"
@@ -320,42 +320,42 @@ export default function Home() {
                   {[
                     {
                       label: "AI-powered tracing",
-                      vectorr: "Yes",
+                      vectroy: "Yes",
                       illustrator: "Yes",
                       magic: "Yes",
                       online: "Basic",
                     },
                     {
                       label: "Background removal",
-                      vectorr: "Yes",
+                      vectroy: "Yes",
                       illustrator: "Manual",
                       magic: "No",
                       online: "No",
                     },
                     {
                       label: "Batch processing (50 files)",
-                      vectorr: "Yes",
+                      vectroy: "Yes",
                       illustrator: "Scripted",
                       magic: "No",
                       online: "No",
                     },
                     {
                       label: "Embroidery export (DST)",
-                      vectorr: "Yes",
+                      vectroy: "Yes",
                       illustrator: "Plugin",
                       magic: "No",
                       online: "No",
                     },
                     {
                       label: "G-code for laser/CNC",
-                      vectorr: "Yes",
+                      vectroy: "Yes",
                       illustrator: "No",
                       magic: "No",
                       online: "No",
                     },
                     {
                       label: "Browser-based",
-                      vectorr: "Yes",
+                      vectroy: "Yes",
                       illustrator: "No",
                       magic: "No",
                       online: "Yes",
@@ -369,7 +369,7 @@ export default function Home() {
                         {row.label}
                       </th>
                       <td className="border-b border-[var(--border)] bg-accent-wash/60 px-4 py-3.5 text-[15px] font-medium text-text-primary">
-                        {row.vectorr}
+                        {row.vectroy}
                       </td>
                       <td className="border-b border-[var(--border)] px-4 py-3.5 text-[15px] text-text-secondary">
                         {row.illustrator}

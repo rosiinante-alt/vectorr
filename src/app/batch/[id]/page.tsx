@@ -5,7 +5,7 @@ import { BatchStatusView } from "@/components/batch-status-view";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 
 export const metadata: Metadata = {
-  title: "Batch progress — Vectorr",
+  title: "Batch progress — Vectroy",
   description: "Track a batch conversion and download the resulting vectors.",
   robots: { index: false, follow: false },
 };

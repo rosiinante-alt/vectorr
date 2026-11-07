@@ -78,9 +78,9 @@ function generateOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Vectorr",
-    url: "https://vectorr.com",
-    logo: "https://vectorr.com/logo.png",
+    name: "Vectroy",
+    url: "https://vectroy.com",
+    logo: "https://vectroy.com/logo.png",
     description:
       "Free online vector conversion and optimization tools for designers, makers, and professionals.",
   };

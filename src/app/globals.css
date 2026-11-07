@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Vectorr design tokens
+   Vectroy design tokens
    Light-mode source of truth. No gradients, no glows.
    Contrast (WCAG 2.1, computed against --bg-primary #FFFFFF):
      --text-primary    #1D1D1F  17.0:1  AA/AAA

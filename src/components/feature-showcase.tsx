@@ -27,7 +27,7 @@ const features: Feature[] = [
   {
     id: 'true-vector',
     title: 'Real vectors, not embedded images',
-    body: 'Some tools wrap your bitmap in an SVG and call it done. Vectorr traces actual shapes, so the result scales and edits like real geometry.',
+    body: 'Some tools wrap your bitmap in an SVG and call it done. Vectroy traces actual shapes, so the result scales and edits like real geometry.',
     detail: 'zero embedded rasters',
   },
   {
