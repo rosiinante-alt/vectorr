@@ -6,6 +6,7 @@ import { DragDropUpload } from "@/components/drag-drop-upload";
 import { FeatureShowcase } from "@/components/feature-showcase";
 import { UseCaseGrid } from "@/components/use-case-grid";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
+import { HowItWorks } from "@/components/how-it-works";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
@@ -122,6 +123,25 @@ export default function Home() {
               <p className="mt-6 text-center text-[14px] text-text-tertiary">
                 Drag the handle to compare raster vs. vector quality
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── How it works ──────────────────────────────────── */}
+        <section className="py-20 sm:py-28" aria-labelledby="how-heading">
+          <div className="wrap">
+            <h2
+              id="how-heading"
+              className="display text-center text-[clamp(30px,4.4vw,50px)]"
+            >
+              How it works.
+            </h2>
+            <p className="mt-4 mx-auto max-w-[620px] text-center text-[clamp(16px,1.6vw,18px)] leading-relaxed text-text-secondary">
+              Four steps from image to production-ready vector.
+            </p>
+
+            <div className="mt-16">
+              <HowItWorks />
             </div>
           </div>
         </section>
