@@ -1,7 +1,9 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
+import { AuthSlot } from "@/components/auth-slot";
 import { SubscribeButton } from "@/components/subscribe-button";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
@@ -30,7 +32,13 @@ export default async function PricingPage({
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <SiteHeader />
+      <SiteHeader
+        authSlot={
+          <Suspense fallback={null}>
+            <AuthSlot />
+          </Suspense>
+        }
+      />
 
       <main id="main" className="flex-1">
         <section className="py-16 text-center sm:py-24">

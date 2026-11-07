@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 
 import { ImageComparisonSlider } from "@/components/image-comparison-slider";
@@ -9,6 +10,7 @@ import { TestimonialCarousel } from "@/components/testimonial-carousel";
 import { HowItWorks } from "@/components/how-it-works";
 import { BitmapVsVectorExplainer } from "@/components/bitmap-vs-vector";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
+import { AuthSlot } from "@/components/auth-slot";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 
@@ -55,7 +57,13 @@ export default function Home() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <SiteHeader />
+      <SiteHeader
+        authSlot={
+          <Suspense fallback={null}>
+            <AuthSlot />
+          </Suspense>
+        }
+      />
 
       <main id="main" className="flex-1">
         {/* ── Hero ───────────────────────────────────────────── */}

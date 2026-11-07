@@ -35,10 +35,14 @@ export async function proxy(request: NextRequest) {
   // Do not remove: this call is what triggers the token refresh.
   const { data: { user } } = await supabase.auth.getUser();
 
-  // Check if the current path requires authentication
+  // Check if the current path requires authentication. `/convert` is public:
+  // its landing pages are indexed marketing pages, while the upload itself
+  // happens client-side and is gated by the API.
   const pathname = request.nextUrl.pathname;
-  const protectedPaths = ['/dashboard', '/convert', '/workflows', '/settings'];
-  const isProtectedPath = protectedPaths.some((p) => pathname.startsWith(p));
+  const protectedPaths = ['/dashboard', '/workflows', '/settings'];
+  const isProtectedPath = protectedPaths.some(
+    (p) => pathname === p || pathname.startsWith(`${p}/`),
+  );
 
   if (isProtectedPath && !user) {
     // Redirect to login if not authenticated

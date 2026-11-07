@@ -1,8 +1,10 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
+import { AuthSlot } from "@/components/auth-slot";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -186,7 +188,13 @@ export default async function ComparePage({ params }: PageProps) {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <SiteHeader />
+      <SiteHeader
+        authSlot={
+          <Suspense fallback={null}>
+            <AuthSlot />
+          </Suspense>
+        }
+      />
 
       <main id="main" className="flex-1">
         <section className="py-14 sm:py-20">

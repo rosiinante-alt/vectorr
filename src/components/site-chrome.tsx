@@ -5,7 +5,20 @@ import { HelpCircle } from "lucide-react";
 /**
  * Account controls are passed in as a slot rather than resolved here: the
  * client bundle must not include the Supabase auth SDK on marketing pages.
+ * Client-rendered pages that pass no slot get the signed-out link.
  */
+/** Signed-out control, and the placeholder while the session resolves. */
+export function SignInLink() {
+  return (
+    <Link
+      href="/login"
+      className="ml-1.5 inline-flex h-9 items-center rounded-full bg-text-primary px-4 text-[13.5px] font-semibold text-white transition-colors hover:bg-black"
+    >
+      Sign in
+    </Link>
+  );
+}
+
 export function SiteHeader({ authSlot }: { authSlot?: ReactNode }) {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-white/85 backdrop-blur-xl [backdrop-filter:saturate(1.8)_blur(20px)]">
@@ -62,7 +75,7 @@ export function SiteHeader({ authSlot }: { authSlot?: ReactNode }) {
           >
             Tools
           </Link>
-          {authSlot}
+          {authSlot ?? <SignInLink />}
         </nav>
       </div>
     </header>

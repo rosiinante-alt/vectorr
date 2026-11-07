@@ -1,8 +1,10 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
+import { AuthSlot } from "@/components/auth-slot";
 import {
   blogFaqSchema,
   BLOG_SLUGS,
@@ -116,7 +118,13 @@ export default async function BlogPostPage({ params }: PageProps) {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <SiteHeader />
+      <SiteHeader
+        authSlot={
+          <Suspense fallback={null}>
+            <AuthSlot />
+          </Suspense>
+        }
+      />
 
       <main id="main" className="flex-1">
         <script

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 
 import { BatchStatusView } from "@/components/batch-status-view";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
+import { AuthSlot } from "@/components/auth-slot";
 
 export const metadata: Metadata = {
   title: "Batch progress — Vectroy",
@@ -25,7 +26,13 @@ export default function BatchPage({ params }: { params: Promise<{ id: string }> 
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <SiteHeader />
+      <SiteHeader
+        authSlot={
+          <Suspense fallback={null}>
+            <AuthSlot />
+          </Suspense>
+        }
+      />
 
       <main id="main" className="flex-1 py-10 sm:py-14">
         <div className="wrap max-w-[820px]">

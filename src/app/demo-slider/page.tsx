@@ -1,10 +1,18 @@
+import { Suspense } from "react";
 import { ImageComparisonSlider } from "@/components/image-comparison-slider";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
+import { AuthSlot } from "@/components/auth-slot";
 
 export default function DemoSliderPage() {
   return (
     <>
-      <SiteHeader />
+      <SiteHeader
+        authSlot={
+          <Suspense fallback={null}>
+            <AuthSlot />
+          </Suspense>
+        }
+      />
       <main className="py-12">
         <div className="wrap">
           <h1 className="text-3xl font-bold mb-12">Image Comparison Slider Demo</h1>
