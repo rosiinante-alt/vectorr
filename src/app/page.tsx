@@ -7,6 +7,7 @@ import { FeatureShowcase } from "@/components/feature-showcase";
 import { UseCaseGrid } from "@/components/use-case-grid";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
 import { HowItWorks } from "@/components/how-it-works";
+import { BitmapVsVectorExplainer } from "@/components/bitmap-vs-vector";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
@@ -407,6 +408,22 @@ export default function Home() {
             </div>
 
             <UseCaseGrid />
+          </div>
+        </section>
+
+        {/* ── Bitmap vs Vector ───────────────────────────────── */}
+        <section className="py-20 sm:py-28 bg-bg-secondary" aria-labelledby="bitmap-heading">
+          <div className="wrap">
+            <h2
+              id="bitmap-heading"
+              className="display text-center text-[clamp(30px,4.4vw,50px)]"
+            >
+              Bitmap vs Vector — why it matters.
+            </h2>
+
+            <div className="mt-16">
+              <BitmapVsVectorExplainer />
+            </div>
           </div>
         </section>
 
