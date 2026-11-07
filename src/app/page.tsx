@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ImageComparisonSlider } from "@/components/image-comparison-slider";
 import { ExampleGallery } from "@/components/example-gallery";
 import { DragDropUpload } from "@/components/drag-drop-upload";
+import { FeatureShowcase } from "@/components/feature-showcase";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
@@ -220,6 +221,20 @@ export default function Home() {
                 </li>
               ))}
             </ul>
+
+            <div className="mt-20">
+              <h3 className="display text-[clamp(24px,3vw,34px)]">
+                What actually makes a good vector.
+              </h3>
+              <p className="mt-4 max-w-[620px] text-[clamp(16px,1.6vw,18px)] leading-relaxed text-text-secondary">
+                Pick a detail to see how Vectorr handles it, compared with a
+                straight raster trace.
+              </p>
+
+              <div className="mt-10">
+                <FeatureShowcase />
+              </div>
+            </div>
           </div>
         </section>
 
