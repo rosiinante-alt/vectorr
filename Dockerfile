@@ -21,6 +21,23 @@ FROM base AS builder
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
+
+# `next build` collects page data, which imports server modules that throw when
+# their configuration is missing. The real values arrive at runtime through the
+# container environment; these build-time placeholders only satisfy module load.
+ARG NEXT_PUBLIC_SUPABASE_URL="https://build.invalid"
+ARG NEXT_PUBLIC_SUPABASE_ANON_KEY="build-placeholder"
+ARG NEXT_PUBLIC_SITE_URL="https://vectroy.com"
+ARG POLAR_ACCESS_TOKEN="build-placeholder"
+ARG POLAR_SERVER="production"
+ARG SUPABASE_SERVICE_ROLE_KEY="build-placeholder"
+ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL \
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY \
+    NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL \
+    POLAR_ACCESS_TOKEN=$POLAR_ACCESS_TOKEN \
+    POLAR_SERVER=$POLAR_SERVER \
+    SUPABASE_SERVICE_ROLE_KEY=$SUPABASE_SERVICE_ROLE_KEY
+
 RUN npm run build
 
 # ============================================================================
