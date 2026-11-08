@@ -1,5 +1,5 @@
 /**
- * Vectorr Color Tokens
+ * Vectroy Color Tokens
  * 
  * All colors meet WCAG 2.1 AA contrast requirements against white background.
  * No gradients in backgrounds - use flat colors only.

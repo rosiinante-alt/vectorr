@@ -1,5 +1,5 @@
 /**
- * Vectorr Motion Tokens
+ * Vectroy Motion Tokens
  * 
  * Animation timing, easing, and spring configurations.
  * Based on e1genqq's deterministic animation principles and
@@ -58,7 +58,7 @@ export const durations = {
  * Based on response and dampingFraction from spec
  */
 export const springs = {
-  // Default spring from Vectorr spec
+  // Default spring from Vectroy spec
   default: {
     type: 'spring' as const,
     stiffness: 300,

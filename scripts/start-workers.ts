@@ -38,7 +38,7 @@ import { RemoveBgWorker } from '../src/lib/workers/remove-bg-worker';
 import { BatchWorker } from '../src/lib/workers/batch-worker';
 import { StyleTransferWorker } from '../src/lib/workers/style-transfer-worker';
 
-console.log('🚀 Starting Vectorr workers...\n');
+console.log('🚀 Starting Vectroy workers...\n');
 
 const vectorizeWorker = new VectorizeWorker(2); // 2 concurrent vectorize jobs
 const upscaleWorker = new UpscaleWorker(2);

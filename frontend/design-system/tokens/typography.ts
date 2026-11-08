@@ -1,5 +1,5 @@
 /**
- * Vectorr Typography Tokens
+ * Vectroy Typography Tokens
  * 
  * Font families, sizes, weights, and line heights.
  * All sizes snap to Tailwind's default type scale.

@@ -16,7 +16,7 @@ const caseStudies: CaseStudy[] = [
     company: "Precision Laser Works",
     role: "Production Facility",
     challenge: "Manual tracing of customer logos took 2-3 hours per design",
-    solution: "Batch vectorization with Vectorr + direct DXF export to CNC",
+    solution: "Batch vectorization with Vectroy + direct DXF export to CNC",
     result: "Reduced turnaround from days to hours",
     metric: "80% faster production",
   },
@@ -32,7 +32,7 @@ const caseStudies: CaseStudy[] = [
     company: "Design Studio XYZ",
     role: "Design Agency",
     challenge: "Clients wanted editable vectors from their existing raster logos",
-    solution: "Vectorr's editable paths replaced expensive manual tracing",
+    solution: "Vectroy's editable paths replaced expensive manual tracing",
     result: "Added vectorization service to product line",
     metric: "New $5K/month revenue stream",
   },
@@ -44,10 +44,10 @@ export function CaseStudies() {
       <div className="wrap">
         <div className="max-w-[760px] mb-16">
           <h2 id="case-studies-heading" className="display text-[clamp(30px,4.4vw,50px)]">
-            How teams use Vectorr.
+            How teams use Vectroy.
           </h2>
           <p className="mt-5 text-[clamp(17px,1.7vw,20px)] leading-relaxed text-text-secondary">
-            From one-person shops to production facilities, here's how Vectorr fits into real workflows.
+            From one-person shops to production facilities, here's how Vectroy fits into real workflows.
           </p>
         </div>
 

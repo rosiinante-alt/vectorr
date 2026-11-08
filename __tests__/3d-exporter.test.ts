@@ -17,10 +17,10 @@ describe('3D Exporters', () => {
       const result = await exporter.export(simpleSVG);
       
       expect(typeof result).toBe('string');
-      expect(result).toContain('solid vectorr_model');
+      expect(result).toContain('solid vectroy_model');
       expect(result).toContain('facet normal');
       expect(result).toContain('vertex');
-      expect(result).toContain('endsolid vectorr_model');
+      expect(result).toContain('endsolid vectroy_model');
     });
     
     it('should generate multiple facets for a shape', async () => {
@@ -56,8 +56,8 @@ describe('3D Exporters', () => {
       const result = await exporter.export(simpleSVG);
       
       expect(typeof result).toBe('string');
-      expect(result).toContain('# Vectorr SVG to OBJ Export');
-      expect(result).toContain('o vectorr_model');
+      expect(result).toContain('# Vectroy SVG to OBJ Export');
+      expect(result).toContain('o vectroy_model');
       expect(result).toMatch(/^v /m); // Vertex lines
       expect(result).toMatch(/^f /m); // Face lines
     });
