@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Upload, Loader2, CheckCircle, AlertCircle, FolderInput, Layers } from 'lucide-react';
 import Link from 'next/link';
 import { SiteHeader, SiteFooter } from '@/components/site-chrome';
 import { CREDIT_COSTS } from '@/lib/credits/constants';
+import { useAuthGatedAction } from '@/hooks/use-auth-gated-action';
 
 type OutputFormat = 'svg' | 'dxf' | 'eps' | 'pdf';
 type JobStatus = 'idle' | 'uploading' | 'processing' | 'completed' | 'failed';
@@ -32,7 +33,26 @@ export default function BatchPage() {
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<BatchResult | null>(null);
 
+  const { checkAuthAndRun, restorePendingState, isCheckingAuth } = useAuthGatedAction('/batch');
+
   const creditCost = files.length * (CREDIT_COSTS.VECTORIZE + (removeBg ? CREDIT_COSTS.REMOVE_BG : 0));
+
+  // Restore state after login redirect
+  useEffect(() => {
+    const restored = restorePendingState();
+    if (restored && restored.settings.files) {
+      const { settings } = restored;
+      const restoredFiles = settings.files as File[];
+      setFiles(restoredFiles);
+      if (settings.outputFormat) setOutputFormat(settings.outputFormat as OutputFormat);
+      if (settings.removeBg !== undefined) setRemoveBg(settings.removeBg as boolean);
+
+      // Auto-submit after a brief delay
+      setTimeout(() => {
+        performBatch(restoredFiles, settings.outputFormat as OutputFormat, settings.removeBg as boolean);
+      }, 500);
+    }
+  }, [restorePendingState]);
 
   const handleFiles = useCallback((newFiles: FileList | File[]) => {
     const fileArray = Array.from(newFiles);
@@ -58,16 +78,19 @@ export default function BatchPage() {
     }
   }, [handleFiles]);
 
-  const handleBatch = async () => {
-    if (files.length === 0) return;
+  const performBatch = async (
+    filesToUpload: File[],
+    format: OutputFormat,
+    removeBackground: boolean,
+  ) => {
     setStatus('uploading');
     setError(null);
 
     try {
       const formData = new FormData();
-      files.forEach((file) => formData.append('files', file));
-      formData.append('outputFormat', outputFormat);
-      formData.append('preprocessing', JSON.stringify({ removeBg, upscale: undefined }));
+      filesToUpload.forEach((file) => formData.append('files', file));
+      formData.append('outputFormat', format);
+      formData.append('preprocessing', JSON.stringify({ removeBg: removeBackground, upscale: undefined }));
 
       const res = await fetch('/api/batch', { method: 'POST', body: formData });
       const data = await res.json();
@@ -80,7 +103,7 @@ export default function BatchPage() {
 
       setResult({
         batchId: data.id,
-        totalFiles: files.length,
+        totalFiles: filesToUpload.length,
         creditCost: data.creditCost || creditCost,
         remainingBalance: data.remainingBalance || 0,
       });
@@ -91,6 +114,22 @@ export default function BatchPage() {
     }
   };
 
+  const handleBatch = async () => {
+    if (files.length === 0) return;
+
+    // For batch, we need to pass files as settings (not a single file)
+    // Create a fake single file for the hook's structure, pass real files in settings
+    const firstFile = files[0];
+    
+    await checkAuthAndRun(
+      { 
+        file: firstFile,
+        settings: { files, outputFormat, removeBg },
+      },
+      async () => performBatch(files, outputFormat, removeBg),
+    );
+  };
+
   const reset = () => {
     setFiles([]);
     setStatus('idle');
@@ -98,7 +137,7 @@ export default function BatchPage() {
     setResult(null);
   };
 
-  const isProcessing = status === 'uploading' || status === 'processing';
+  const isProcessing = status === 'uploading' || status === 'processing' || isCheckingAuth;
 
   return (
     <div className="flex min-h-svh flex-col">
@@ -166,7 +205,8 @@ export default function BatchPage() {
                         </p>
                         <button
                           onClick={reset}
-                          className="text-[13px] text-text-secondary hover:text-text-primary"
+                          disabled={isProcessing}
+                          className="text-[13px] text-text-secondary hover:text-text-primary disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           Clear all
                         </button>
@@ -214,6 +254,19 @@ export default function BatchPage() {
                       </div>
                     )}
 
+                    {isProcessing && (
+                      <div className="border-t border-[var(--border)] p-4">
+                        <div className="flex items-center gap-2">
+                          <Loader2 className="h-4 w-4 animate-spin text-text-secondary" />
+                          <span className="text-[14px] font-medium text-text-primary">
+                            {isCheckingAuth && 'Checking authentication…'}
+                            {status === 'uploading' && !isCheckingAuth && 'Uploading batch…'}
+                            {status === 'processing' && 'Processing…'}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
                     {status === 'failed' && (
                       <div className="border-t border-[var(--border)] p-4">
                         <div className="mb-3 flex items-center gap-2 text-error">
@@ -249,12 +302,14 @@ export default function BatchPage() {
                       <button
                         key={fmt}
                         onClick={() => setOutputFormat(fmt)}
+                        disabled={isProcessing}
                         aria-pressed={outputFormat === fmt}
                         className={[
                           'w-full rounded-[var(--radius-md)] border px-3 py-2 text-left transition-colors',
                           outputFormat === fmt
                             ? 'border-accent bg-accent/10 text-accent'
                             : 'border-[var(--border)] text-text-primary hover:border-accent/50',
+                          isProcessing && 'cursor-not-allowed opacity-50',
                         ].join(' ')}
                       >
                         <div className="text-[13px] font-medium">{FORMAT_LABELS[fmt]}</div>
@@ -267,7 +322,8 @@ export default function BatchPage() {
                       type="checkbox"
                       checked={removeBg}
                       onChange={(e) => setRemoveBg(e.target.checked)}
-                      className="h-4 w-4 rounded border-[var(--border)] text-accent focus:ring-accent"
+                      disabled={isProcessing}
+                      className="h-4 w-4 rounded border-[var(--border)] text-accent focus:ring-accent disabled:cursor-not-allowed disabled:opacity-50"
                     />
                     <span className="text-text-primary">Remove backgrounds (+{CREDIT_COSTS.REMOVE_BG} credit/image)</span>
                   </label>
@@ -285,7 +341,7 @@ export default function BatchPage() {
                     {isProcessing ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        Processing…
+                        {isCheckingAuth ? 'Checking…' : 'Processing…'}
                       </>
                     ) : (
                       <>

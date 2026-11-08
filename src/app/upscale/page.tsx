@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Upload, Loader2, CheckCircle, AlertCircle, Download, Zap, ArrowUpRight } from 'lucide-react';
 import { SiteHeader, SiteFooter } from '@/components/site-chrome';
 import { CREDIT_COSTS } from '@/lib/credits/constants';
+import { useAuthGatedAction } from '@/hooks/use-auth-gated-action';
 
 type UpscaleOption = '2x' | '4x';
 type JobStatus = 'idle' | 'uploading' | 'queued' | 'processing' | 'completed' | 'failed';
@@ -31,7 +32,31 @@ export default function UpscalePage() {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
 
+  const { checkAuthAndRun, restorePendingState, isCheckingAuth } = useAuthGatedAction('/upscale');
+
   const creditCost = upscale === '2x' ? CREDIT_COSTS.UPSCALE_2X : CREDIT_COSTS.UPSCALE_4X;
+
+  // Restore state after login redirect
+  useEffect(() => {
+    const restored = restorePendingState();
+    if (restored && restored.file) {
+      const { file: restoredFile, settings } = restored;
+      setFile(restoredFile);
+      
+      // Restore settings
+      if (settings.upscale) setUpscale(settings.upscale as UpscaleOption);
+      
+      // Generate preview
+      const reader = new FileReader();
+      reader.onload = (e) => setPreview(e.target?.result as string);
+      reader.readAsDataURL(restoredFile);
+
+      // Auto-submit after a brief delay
+      setTimeout(() => {
+        performUpscale(restoredFile, settings.upscale as UpscaleOption);
+      }, 500);
+    }
+  }, [restorePendingState]);
 
   const handleFile = useCallback((f: File) => {
     const allowed = ['image/png', 'image/jpeg', 'image/webp'];
@@ -60,18 +85,17 @@ export default function UpscalePage() {
     if (dropped) handleFile(dropped);
   }, [handleFile]);
 
-  const handleUpscale = async () => {
-    if (!file) return;
+  const performUpscale = async (fileToUpload: File, upscaleOption: UpscaleOption) => {
     setStatus('uploading');
     setError(null);
     setProgress(0);
 
     try {
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append('file', fileToUpload);
       formData.append('outputFormat', 'svg');
       formData.append('removeBg', 'false');
-      formData.append('upscale', upscale);
+      formData.append('upscale', upscaleOption);
 
       const res = await fetch('/api/convert', { method: 'POST', body: formData });
       const data = await res.json();
@@ -115,6 +139,16 @@ export default function UpscalePage() {
     }
   };
 
+  const handleUpscale = async () => {
+    if (!file) return;
+
+    // Check auth and run (will redirect if not authenticated)
+    await checkAuthAndRun(
+      { file, settings: { upscale } },
+      async () => performUpscale(file, upscale),
+    );
+  };
+
   const reset = () => {
     setFile(null);
     setPreview(null);
@@ -125,7 +159,7 @@ export default function UpscalePage() {
     setProgress(0);
   };
 
-  const isProcessing = status === 'uploading' || status === 'queued' || status === 'processing';
+  const isProcessing = status === 'uploading' || status === 'queued' || status === 'processing' || isCheckingAuth;
 
   return (
     <div className="flex min-h-svh flex-col">
@@ -231,7 +265,8 @@ export default function UpscalePage() {
                         <div className="mb-3 flex items-center gap-2">
                           <Loader2 className="h-4 w-4 animate-spin text-text-secondary" />
                           <span className="text-[14px] font-medium text-text-primary">
-                            {status === 'uploading' && 'Uploading…'}
+                            {isCheckingAuth && 'Checking authentication…'}
+                            {status === 'uploading' && !isCheckingAuth && 'Uploading…'}
                             {status === 'queued' && 'Queued…'}
                             {status === 'processing' && 'Upscaling…'}
                           </span>
@@ -282,11 +317,13 @@ export default function UpscalePage() {
                         key={opt.value}
                         onClick={() => setUpscale(opt.value)}
                         aria-pressed={upscale === opt.value}
+                        disabled={isProcessing}
                         className={[
                           'w-full rounded-[var(--radius-md)] border px-3 py-2.5 text-left transition-colors',
                           upscale === opt.value
                             ? 'border-accent bg-accent/10 text-accent'
                             : 'border-[var(--border)] text-text-primary hover:border-accent/50',
+                          isProcessing && 'cursor-not-allowed opacity-50',
                         ].join(' ')}
                       >
                         <div className="text-[14px] font-medium">{opt.label}</div>
@@ -308,7 +345,7 @@ export default function UpscalePage() {
                     {isProcessing ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        Processing…
+                        {isCheckingAuth ? 'Checking…' : 'Processing…'}
                       </>
                     ) : (
                       <>

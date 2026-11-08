@@ -16,11 +16,14 @@ export default async function LoginPage({
   const { plan, next } = await searchParams;
 
   // A signed-in buyer who landed here from a plan button goes straight back to
-  // checkout; everyone else keeps the plain dashboard redirect.
-  const afterAuth =
-    next === 'checkout' && plan
-      ? `/pricing?resume=${encodeURIComponent(plan)}`
-      : '/dashboard';
+  // checkout; everyone else goes to their intended destination or dashboard.
+  let afterAuth = '/dashboard';
+  if (next === 'checkout' && plan) {
+    afterAuth = `/pricing?resume=${encodeURIComponent(plan)}`;
+  } else if (next && next !== 'checkout') {
+    // Direct return to tool page (e.g., /upscale, /remove-bg)
+    afterAuth = next.startsWith('/') ? next : `/${next}`;
+  }
 
   // Check if user is already logged in
   const supabase = await createSupabaseServerClient();

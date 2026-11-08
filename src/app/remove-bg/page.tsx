@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Upload, Loader2, CheckCircle, AlertCircle, Download, Layers, Sparkles } from 'lucide-react';
 import { SiteHeader, SiteFooter } from '@/components/site-chrome';
 import { CREDIT_COSTS } from '@/lib/credits/constants';
+import { useAuthGatedAction } from '@/hooks/use-auth-gated-action';
 
 type JobStatus = 'idle' | 'uploading' | 'queued' | 'processing' | 'completed' | 'failed';
 
@@ -24,7 +25,28 @@ export default function RemoveBackgroundPage() {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
 
+  const { checkAuthAndRun, restorePendingState, isCheckingAuth } = useAuthGatedAction('/remove-bg');
+
   const creditCost = CREDIT_COSTS.REMOVE_BG;
+
+  // Restore state after login redirect
+  useEffect(() => {
+    const restored = restorePendingState();
+    if (restored && restored.file) {
+      const { file: restoredFile } = restored;
+      setFile(restoredFile);
+      
+      // Generate preview
+      const reader = new FileReader();
+      reader.onload = (e) => setPreview(e.target?.result as string);
+      reader.readAsDataURL(restoredFile);
+
+      // Auto-submit after a brief delay
+      setTimeout(() => {
+        performRemoveBackground(restoredFile);
+      }, 500);
+    }
+  }, [restorePendingState]);
 
   const handleFile = useCallback((f: File) => {
     const allowed = ['image/png', 'image/jpeg', 'image/webp'];
@@ -53,15 +75,14 @@ export default function RemoveBackgroundPage() {
     if (dropped) handleFile(dropped);
   }, [handleFile]);
 
-  const handleRemoveBackground = async () => {
-    if (!file) return;
+  const performRemoveBackground = async (fileToUpload: File) => {
     setStatus('uploading');
     setError(null);
     setProgress(0);
 
     try {
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append('file', fileToUpload);
       formData.append('outputFormat', 'svg');
       formData.append('removeBg', 'true');
 
@@ -107,6 +128,16 @@ export default function RemoveBackgroundPage() {
     }
   };
 
+  const handleRemoveBackground = async () => {
+    if (!file) return;
+
+    // Check auth and run (will redirect if not authenticated)
+    await checkAuthAndRun(
+      { file, settings: {} },
+      async () => performRemoveBackground(file),
+    );
+  };
+
   const reset = () => {
     setFile(null);
     setPreview(null);
@@ -117,7 +148,7 @@ export default function RemoveBackgroundPage() {
     setProgress(0);
   };
 
-  const isProcessing = status === 'uploading' || status === 'queued' || status === 'processing';
+  const isProcessing = status === 'uploading' || status === 'queued' || status === 'processing' || isCheckingAuth;
 
   return (
     <div className="flex min-h-svh flex-col">
@@ -225,7 +256,8 @@ export default function RemoveBackgroundPage() {
                         <div className="mb-3 flex items-center gap-2">
                           <Loader2 className="h-4 w-4 animate-spin text-text-secondary" />
                           <span className="text-[14px] font-medium text-text-primary">
-                            {status === 'uploading' && 'Uploading…'}
+                            {isCheckingAuth && 'Checking authentication…'}
+                            {status === 'uploading' && !isCheckingAuth && 'Uploading…'}
                             {status === 'queued' && 'Queued…'}
                             {status === 'processing' && 'Removing background…'}
                           </span>
@@ -283,7 +315,7 @@ export default function RemoveBackgroundPage() {
                     {isProcessing ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        Processing…
+                        {isCheckingAuth ? 'Checking…' : 'Processing…'}
                       </>
                     ) : (
                       <>
