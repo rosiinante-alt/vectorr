@@ -1,3 +1,23 @@
+// Pricing tier shape — all fields beyond the core are optional so each tier
+// only carries what applies to it (e.g. FREE has no annual variant).
+export interface PricingTier {
+  name: string;
+  price: number | null;
+  priceAnnual?: number;
+  credits: number | null;
+  creditsAnnual?: number;
+  interval: string | null;
+  description: string;
+  planKey: string | null;
+  planKeyAnnual?: string;
+  annualSavings?: number;
+  overageRate?: number;
+  seats?: number;
+  features: readonly string[];
+  /** Only on FREE tier — legacy field, not used by subscribe flow. */
+  polarProductId?: string;
+}
+
 // Credit costs per operation — from PRICING_STRATEGY_2026.md
 export const CREDIT_COSTS = {
   VECTORIZE: 1.00,          // 1 credit = 1 image conversion
@@ -26,7 +46,7 @@ export const OVERAGE_RATES = {
 //
 // CAUTION: prices and credit amounts MUST match the live Polar product catalog
 // exactly. A customer who sees a different price at checkout will abandon.
-export const PRICING_TIERS = {
+export const PRICING_TIERS: Record<string, PricingTier> = {
   FREE: {
     name: 'Free',
     price: 0,
@@ -144,7 +164,7 @@ export const PRICING_TIERS = {
       'Custom contract terms',
     ],
   },
-} as const;
+};
 
 export type PricingTierKey = keyof typeof PRICING_TIERS;
 export type CreditCostKey = keyof typeof CREDIT_COSTS;

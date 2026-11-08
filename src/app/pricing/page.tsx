@@ -43,9 +43,9 @@ export default function PricingPage() {
             <div className="mx-auto mt-10 flex items-center justify-center gap-3">
               <button
                 onClick={() => setIsAnnual(false)}
-                className={\`text-[15px] font-medium transition-colors \${
+                className={`text-[15px] font-medium transition-colors ${
                   !isAnnual ? 'text-text-primary' : 'text-text-tertiary hover:text-text-secondary'
-                }\`}
+                }`}
               >
                 Monthly
               </button>
@@ -57,16 +57,16 @@ export default function PricingPage() {
                 aria-label="Toggle annual billing"
               >
                 <span
-                  className={\`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition-transform \${
+                  className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition-transform ${
                     isAnnual ? 'translate-x-[22px]' : 'translate-x-0.5'
-                  }\`}
+                  }`}
                 />
               </button>
               <button
                 onClick={() => setIsAnnual(true)}
-                className={\`text-[15px] font-medium transition-colors \${
+                className={`text-[15px] font-medium transition-colors ${
                   isAnnual ? 'text-text-primary' : 'text-text-tertiary hover:text-text-secondary'
-                }\`}
+                }`}
               >
                 Annual
                 <Badge tone="success" className="ml-2">Save up to 26%</Badge>
@@ -120,7 +120,7 @@ export default function PricingPage() {
                       </h3>
                       {isPro && <Badge tone="accent">Most popular</Badge>}
                       {isTeam && tier.seats && (
-                        <Badge tone="info">{tier.seats} seats</Badge>
+                        <Badge tone="accent">{tier.seats} seats</Badge>
                       )}
                     </div>
 
@@ -278,8 +278,8 @@ export default function PricingPage() {
                 >
                   <div className="flex items-baseline justify-between gap-3">
                     <h3 className="text-[16px] font-semibold">{item.name}</h3>
-                    <span className={\`tabular font-mono text-[15px] font-semibold \${item.cost === 0 ? 'text-success-text' : 'text-accent'}\`}>
-                      {item.cost === 0 ? 'FREE' : \`\${item.cost.toFixed(2)}cr\`}
+                    <span className={`tabular font-mono text-[15px] font-semibold ${item.cost === 0 ? 'text-success-text' : 'text-accent'}`}>
+                      {item.cost === 0 ? 'FREE' : `${item.cost.toFixed(2)}cr`}
                     </span>
                   </div>
                   <p className="mt-1 text-[14px] text-text-secondary">

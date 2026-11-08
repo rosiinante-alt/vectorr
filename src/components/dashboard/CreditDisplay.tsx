@@ -70,7 +70,7 @@ export function CreditDisplay({
           <p className="mt-2 text-[13.5px] text-text-tertiary">
             {tier === 'free' 
               ? 'Free tier credits' 
-              : \`\${creditsUsedThisMonth.toLocaleString()} of \${monthlyAllocation.toLocaleString()} used this month\`
+              : `${creditsUsedThisMonth.toLocaleString()} of ${monthlyAllocation.toLocaleString()} used this month`
             }
           </p>
         </div>
@@ -87,14 +87,14 @@ export function CreditDisplay({
         <div className="mt-6 space-y-2">
           <div className="h-2 w-full overflow-hidden rounded-full bg-border">
             <div
-              className={\`h-full transition-all duration-300 \${
+              className={`h-full transition-all duration-300 ${
                 isVeryLow 
                   ? 'bg-error-border' 
                   : isLow 
                   ? 'bg-warning-border' 
                   : 'bg-accent'
-              }\`}
-              style={{ width: \`\${usagePercent}%\` }}
+              }`}
+              style={{ width: `${usagePercent}%` }}
             />
           </div>
           <div className="flex items-center justify-between text-[12px]">
@@ -102,7 +102,7 @@ export function CreditDisplay({
               {usagePercent.toFixed(0)}% used
             </span>
             {isLow && (
-              <span className={\`font-medium \${isVeryLow ? 'text-error-text' : 'text-warning-text'}\`}>
+              <span className={`font-medium ${isVeryLow ? 'text-error-text' : 'text-warning-text'}`}>
                 {isVeryLow ? 'Almost out of credits!' : 'Running low'}
               </span>
             )}
