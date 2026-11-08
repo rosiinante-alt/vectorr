@@ -12,7 +12,7 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
-    quote: "Vectorr cuts our production time in half. Crisp vectors every time, ready for the laser cutter immediately.",
+    quote: "Vectroy cuts our production time in half. Crisp vectors every time, ready for the laser cutter immediately.",
     author: "Sarah Chen",
     role: "Production Manager",
     company: "LaserCraft Studio",
@@ -24,7 +24,7 @@ const testimonials: Testimonial[] = [
     company: "Embark Design Co",
   },
   {
-    quote: "Clean paths, predictable stitch counts. Our digitizing software works perfectly with Vectorr output.",
+    quote: "Clean paths, predictable stitch counts. Our digitizing software works perfectly with Vectroy output.",
     author: "Jamie Palmer",
     role: "Embroidery Technician",
     company: "Thread & Needle",
@@ -46,7 +46,7 @@ export function TestimonialSection() {
             Used by makers, shops, and studios.
           </h2>
           <p className="mt-5 text-[clamp(17px,1.7vw,20px)] leading-relaxed text-text-secondary">
-            From one-person design shops to production facilities, Vectorr handles every format and workflow.
+            From one-person design shops to production facilities, Vectroy handles every format and workflow.
           </p>
         </div>
 

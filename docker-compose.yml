@@ -9,7 +9,7 @@ services:
     command: redis-server --appendonly yes
 
   # =========================================================================
-  # Vectorr Node.js Backend
+  # Vectroy Node.js Backend
   # =========================================================================
   vectroy:
     build:
@@ -64,7 +64,7 @@ services:
       - vectroy-logs:/app/logs
 
   # =========================================================================
-  # Vectorr BullMQ workers
+  # Vectroy BullMQ workers
   # ---------------------------------------------------------------------------
   # The web container only serves HTTP. Queued conversions are consumed here,
   # so without this service every job would sit in Redis forever.
@@ -97,7 +97,7 @@ services:
 
   # =========================================================================
   # Optional: Nginx reverse proxy (for Coolify)
-  # Uncomment to add reverse proxy in front of Vectorr
+  # Uncomment to add reverse proxy in front of Vectroy
   # =========================================================================
   # nginx:
   #   image: nginx:alpine

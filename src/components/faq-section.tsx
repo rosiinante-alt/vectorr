@@ -13,7 +13,7 @@ const faqs: FAQItem[] = [
     answer: "You can upload PNG, JPG, GIF, WEBP, or BMP files. We convert them to SVG, PDF, EPS, DXF, or G-code depending on your needs.",
   },
   {
-    question: "What makes Vectorr different from other vectorizers?",
+    question: "What makes Vectroy different from other vectorizers?",
     answer: "We rebuild real geometry instead of just outlining pixels. Our AI detects circles, ellipses, smooth curves, and sharp corners—so you get editable paths, not node soup.",
   },
   {

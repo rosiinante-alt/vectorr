@@ -1,5 +1,5 @@
 /**
- * Vectorr Spacing Tokens
+ * Vectroy Spacing Tokens
  * 
  * Only use these values for padding, margin, and gaps.
  * Nothing between them, nothing outside them.

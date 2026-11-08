@@ -1,5 +1,5 @@
 /**
- * Vectorr Design System Utilities
+ * Vectroy Design System Utilities
  * 
  * Export all utility functions and hooks.
  */

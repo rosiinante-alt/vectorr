@@ -1,5 +1,5 @@
 /**
- * Vectorr Design System Components
+ * Vectroy Design System Components
  * 
  * Central export for all animation and UI components.
  */
