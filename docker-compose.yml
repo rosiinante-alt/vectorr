@@ -14,7 +14,7 @@ services:
   vectroy:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.optimized
     container_name: vectroy-app
     restart: unless-stopped
     ports:
