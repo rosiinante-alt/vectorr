@@ -21,13 +21,13 @@ describe('3D Export Integration', () => {
     it('should export SVG to STL format', async () => {
       const result = await exportFile('stl', testSVG);
       expect(typeof result).toBe('string');
-      expect(result).toContain('solid vectorr_model');
+      expect(result).toContain('solid vectroy_model');
     });
     
     it('should export SVG to OBJ format', async () => {
       const result = await exportFile('obj', testSVG);
       expect(typeof result).toBe('string');
-      expect(result).toContain('o vectorr_model');
+      expect(result).toContain('o vectroy_model');
     });
     
     it('should handle case-insensitive format names', async () => {
