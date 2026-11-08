@@ -1,0 +1,11 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Laser Cutting Pattern - Vector (clean/traced) -->
+  
+  <rect width="200" height="200" fill="#fdf4e6"/>
+  <path d="M 50 50 L 150 50 Q 158 50 158 58 L 158 142 Q 158 150 150 150 L 50 150 Q 42 150 42 142 L 42 58 Q 42 50 50 50" fill="none" stroke="#2c2c2c" stroke-width="2"/>
+  <circle cx="60" cy="70" r="7" fill="none" stroke="#2c2c2c" stroke-width="1.5"/>
+  <circle cx="140" cy="70" r="7" fill="none" stroke="#2c2c2c" stroke-width="1.5"/>
+  <line x1="100" y1="100" x2="120" y2="120" stroke="#2c2c2c" stroke-width="2" stroke-linecap="round"/>
+  <line x1="100" y1="120" x2="120" y2="100" stroke="#2c2c2c" stroke-width="2" stroke-linecap="round"/>
+  
+</svg>

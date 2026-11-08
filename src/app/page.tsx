@@ -2,11 +2,17 @@ import { Suspense } from "react";
 import Link from "next/link";
 
 import { ImageComparisonSlider } from "@/components/image-comparison-slider";
+import { InteractiveSliderShowcase } from "@/components/interactive-slider-showcase";
 import { ExampleGallery } from "@/components/example-gallery";
 import { DragDropUpload } from "@/components/drag-drop-upload";
 import { FeatureShowcase } from "@/components/feature-showcase";
 import { UseCaseGrid } from "@/components/use-case-grid";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
+import { TestimonialSection } from "@/components/testimonial-section";
+import { FormatComparisonTable } from "@/components/format-comparison-table";
+import { FAQSection } from "@/components/faq-section";
+import { VideoDemo } from "@/components/video-demo";
+import { CaseStudies } from "@/components/case-studies";
 import { HowItWorks } from "@/components/how-it-works";
 import { BitmapVsVectorExplainer } from "@/components/bitmap-vs-vector";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
@@ -107,7 +113,7 @@ export default function Home() {
         {/* ── Interactive Comparison ────────────────────────── */}
         <section className="py-16 sm:py-20 bg-gradient-to-b from-bg-secondary to-transparent" aria-labelledby="demo-heading">
           <div className="wrap">
-            <div className="text-center mb-10">
+            <div className="text-center mb-12">
               <h2
                 id="demo-heading"
                 className="display text-[clamp(28px,4vw,44px)] mb-4"
@@ -115,23 +121,92 @@ export default function Home() {
                 See the difference.
               </h2>
               <p className="text-[clamp(16px,1.7vw,19px)] text-text-secondary max-w-[560px] mx-auto">
-                Drag the slider to compare your original image with the vectorized result.
+                Explore different image types. Our AI rebuilds real geometry—circles, smooth curves, clean paths—not just pixel outlines.
               </p>
             </div>
 
             <div className="max-w-[900px] mx-auto">
-              <ImageComparisonSlider
-                beforeImage="/demo/logo-raster.svg"
-                afterImage="/demo/logo-vector.svg"
-                beforeAlt="Raster image - pixelated and blurry"
-                afterAlt="Vector image - crisp and scalable"
-                initialPosition={50}
-                className="rounded-[var(--radius-xl)] shadow-[0_0_0_0.5px_var(--border),0_8px_24px_rgba(0,0,0,0.08)] bg-white"
-                height={600}
-              />
-              <p className="mt-6 text-center text-[14px] text-text-tertiary">
-                Drag the handle to compare raster vs. vector quality
+              <InteractiveSliderShowcase />
+            </div>
+          </div>
+        </section>
+
+        {/* ── Machine-Specific Landing Cards ─────────────────────── */}
+        <section className="py-20 sm:py-28" aria-labelledby="machines-heading">
+          <div className="wrap">
+            <div className="max-w-[760px] mb-12">
+              <h2
+                id="machines-heading"
+                className="display text-[clamp(30px,4.4vw,50px)] mb-4"
+              >
+                Works with every cutter and machine.
+              </h2>
+              <p className="text-[clamp(17px,1.7vw,20px)] text-text-secondary max-w-[620px]">
+                Cricut. Laser. Embroidery. Whatever you make with, Vectroy outputs the exact file format it needs.
               </p>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <Link
+                href="/for-crafters/cricut"
+                className="group rounded-[var(--radius-xl)] bg-white p-6 shadow-[0_0_0_0.5px_var(--border),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_0_0_0.5px_var(--border-strong),0_2px_6px_rgba(0,0,0,0.05)] transition-all"
+              >
+                <div className="text-[28px] mb-3">✂️</div>
+                <h3 className="font-semibold text-[17px] group-hover:text-accent transition-colors">
+                  Cricut
+                </h3>
+                <p className="mt-2 text-[14.5px] text-text-secondary">
+                  SVG-ready for Design Space
+                </p>
+              </Link>
+
+              <Link
+                href="/for-crafters/laser-cutting"
+                className="group rounded-[var(--radius-xl)] bg-white p-6 shadow-[0_0_0_0.5px_var(--border),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_0_0_0.5px_var(--border-strong),0_2px_6px_rgba(0,0,0,0.05)] transition-all"
+              >
+                <div className="text-[28px] mb-3">🔴</div>
+                <h3 className="font-semibold text-[17px] group-hover:text-accent transition-colors">
+                  Laser Cutting
+                </h3>
+                <p className="mt-2 text-[14.5px] text-text-secondary">
+                  DXF and G-code export
+                </p>
+              </Link>
+
+              <Link
+                href="/for-crafters/embroidery"
+                className="group rounded-[var(--radius-xl)] bg-white p-6 shadow-[0_0_0_0.5px_var(--border),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_0_0_0.5px_var(--border-strong),0_2px_6px_rgba(0,0,0,0.05)] transition-all"
+              >
+                <div className="text-[28px] mb-3">🧵</div>
+                <h3 className="font-semibold text-[17px] group-hover:text-accent transition-colors">
+                  Embroidery
+                </h3>
+                <p className="mt-2 text-[14.5px] text-text-secondary">
+                  DST, PES, JEF formats
+                </p>
+              </Link>
+
+              <Link
+                href="/for-crafters/vinyl-cutting"
+                className="group rounded-[var(--radius-xl)] bg-white p-6 shadow-[0_0_0_0.5px_var(--border),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_0_0_0.5px_var(--border-strong),0_2px_6px_rgba(0,0,0,0.05)] transition-all"
+              >
+                <div className="text-[28px] mb-3">🎯</div>
+                <h3 className="font-semibold text-[17px] group-hover:text-accent transition-colors">
+                  Vinyl Cutting
+                </h3>
+                <p className="mt-2 text-[14.5px] text-text-secondary">
+                  Silhouette & Cricut ready
+                </p>
+              </Link>
+            </div>
+
+            <div className="mt-12 text-center">
+              <Link
+                href="/for-crafters"
+                className="text-accent font-medium underline underline-offset-[3px] text-[16px]"
+              >
+                View all machine guides →
+              </Link>
             </div>
           </div>
         </section>
@@ -173,6 +248,9 @@ export default function Home() {
             <ExampleGallery />
           </div>
         </section>
+
+        {/* ── Video Demo ─────────────────────────────────────── */}
+        <VideoDemo />
 
         {/* ── Drag & Drop Upload ─────────────────────────────── */}
         <section className="py-20 sm:py-28" aria-labelledby="upload-heading">
@@ -440,16 +518,278 @@ export default function Home() {
           <div className="wrap">
             <h2
               id="testimonials-heading"
-              className="display text-center text-[clamp(30px,4.4vw,50px)]"
+              className="display text-center text-[clamp(30px,4.4vw,50px)] mb-6"
             >
               Loved by makers and builders.
             </h2>
+            <p className="text-center text-text-secondary text-[17px] mb-16 max-w-[620px] mx-auto">
+              From Etsy sellers to production shops, Vectroy saves time and eliminates file conversion headaches.
+            </p>
 
-            <div className="mt-16">
-              <TestimonialCarousel />
+            <div className="grid gap-6 md:grid-cols-3">
+              <div className="rounded-[var(--radius-xl)] bg-bg-secondary p-8">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-[#f59e0b]">★</span>
+                  ))}
+                </div>
+                <p className="text-[15.5px] text-text-secondary leading-relaxed mb-6">
+                  "We were spending 3-4 hours per day converting customer artwork. Vectroy cut that to 20 minutes. Our clients love the faster turnaround, and we love not being the bottleneck."
+                </p>
+                <div>
+                  <p className="font-semibold text-[15px]">Sarah Chen</p>
+                  <p className="text-[13.5px] text-text-tertiary">Owner, Precision Screen Print Co.</p>
+                </div>
+              </div>
+
+              <div className="rounded-[var(--radius-xl)] bg-bg-secondary p-8">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-[#f59e0b]">★</span>
+                  ))}
+                </div>
+                <p className="text-[15.5px] text-text-secondary leading-relaxed mb-6">
+                  "As someone who just started with a Cricut, figuring out SVG files was overwhelming. Vectroy made it dead simple—upload, download, done. I actually use my machine now!"
+                </p>
+                <div>
+                  <p className="font-semibold text-[15px]">Marcus Thompson</p>
+                  <p className="text-[13.5px] text-text-tertiary">Small Business Owner, Etsy</p>
+                </div>
+              </div>
+
+              <div className="rounded-[var(--radius-xl)] bg-bg-secondary p-8">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-[#f59e0b]">★</span>
+                  ))}
+                </div>
+                <p className="text-[15.5px] text-text-secondary leading-relaxed mb-6">
+                  "The API integration was seamless. We now batch-process 200+ designs per day without any manual intervention. Best decision we made for production automation."
+                </p>
+                <div>
+                  <p className="font-semibold text-[15px]">Kenji Nakamura</p>
+                  <p className="text-[13.5px] text-text-tertiary">Tech Lead, Print-on-Demand Startup</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
+
+        {/* ── Blog & Resources ────────────────────────────────── */}
+        <section className="py-20 sm:py-28 bg-bg-secondary" aria-labelledby="blog-heading">
+          <div className="wrap">
+            <div className="flex items-center justify-between mb-12">
+              <div className="max-w-[760px]">
+                <h2
+                  id="blog-heading"
+                  className="display text-[clamp(30px,4.4vw,50px)]"
+                >
+                  Learn how to vectorize smarter.
+                </h2>
+                <p className="mt-5 text-[clamp(17px,1.7vw,20px)] text-text-secondary max-w-[620px]">
+                  Guides, tutorials, and best practices for every use case—from Cricut designs to embroidery digitizing.
+                </p>
+              </div>
+              <Link
+                href="/blog"
+                className="hidden md:block text-accent font-medium underline underline-offset-[3px] whitespace-nowrap ml-8 text-[16px]"
+              >
+                Read all posts →
+              </Link>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-3">
+              <Link
+                href="/blog/how-to-prepare-images-for-cricut"
+                className="group rounded-[var(--radius-xl)] bg-white p-6 shadow-[0_0_0_0.5px_var(--border),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_0_0_0.5px_var(--border-strong),0_2px_6px_rgba(0,0,0,0.05)] transition-all"
+              >
+                <p className="text-[13px] font-semibold text-text-tertiary uppercase tracking-widest mb-2">
+                  GUIDE
+                </p>
+                <h3 className="text-[18px] font-semibold group-hover:text-accent transition-colors mb-2">
+                  How to Prepare Images for Cricut
+                </h3>
+                <p className="text-[14.5px] text-text-secondary mb-4">
+                  Best practices for clean SVG exports and avoiding common cutting errors.
+                </p>
+                <span className="text-accent text-[14px] font-medium">Read more →</span>
+              </Link>
+
+              <Link
+                href="/blog/embroidery-file-formats-explained"
+                className="group rounded-[var(--radius-xl)] bg-white p-6 shadow-[0_0_0_0.5px_var(--border),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_0_0_0.5px_var(--border-strong),0_2px_6px_rgba(0,0,0,0.05)] transition-all"
+              >
+                <p className="text-[13px] font-semibold text-text-tertiary uppercase tracking-widest mb-2">
+                  TUTORIAL
+                </p>
+                <h3 className="text-[18px] font-semibold group-hover:text-accent transition-colors mb-2">
+                  Embroidery File Formats Explained
+                </h3>
+                <p className="text-[14.5px] text-text-secondary mb-4">
+                  DST vs PES vs JEF: which format works for your machine.
+                </p>
+                <span className="text-accent text-[14px] font-medium">Read more →</span>
+              </Link>
+
+              <Link
+                href="/blog/vectorizing-hand-drawn-designs"
+                className="group rounded-[var(--radius-xl)] bg-white p-6 shadow-[0_0_0_0.5px_var(--border),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_0_0_0.5px_var(--border-strong),0_2px_6px_rgba(0,0,0,0.05)] transition-all"
+              >
+                <p className="text-[13px] font-semibold text-text-tertiary uppercase tracking-widest mb-2">
+                  TIPS
+                </p>
+                <h3 className="text-[18px] font-semibold group-hover:text-accent transition-colors mb-2">
+                  Vectorizing Hand-Drawn Designs
+                </h3>
+                <p className="text-[14.5px] text-text-secondary mb-4">
+                  Getting the best results from sketches, scans, and artwork photos.
+                </p>
+                <span className="text-accent text-[14px] font-medium">Read more →</span>
+              </Link>
+            </div>
+
+            <div className="mt-8 md:hidden text-center">
+              <Link
+                href="/blog"
+                className="text-accent font-medium underline underline-offset-[3px] text-[16px]"
+              >
+                Read all posts →
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Format Comparison ──────────────────────────────── */}
+        <FormatComparisonTable />
+
+        {/* ── Shop Tier CTA ───────────────────────────────────– */}
+        <section className="py-20 sm:py-28 bg-bg-secondary" aria-labelledby="shop-heading">
+          <div className="wrap">
+            <div className="max-w-[760px] mb-12">
+              <h2
+                id="shop-heading"
+                className="display text-[clamp(30px,4.4vw,50px)]"
+              >
+                For production shops.
+              </h2>
+              <p className="mt-5 text-[clamp(17px,1.7vw,20px)] text-text-secondary max-w-[620px]">
+                Batch processing, unlimited conversions, and dedicated support for screen print, embroidery, and production operations.
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-3 mb-12">
+              <div className="rounded-[var(--radius-xl)] bg-white p-8 shadow-[0_0_0_0.5px_var(--border),0_1px_2px_rgba(0,0,0,0.04)]">
+                <h3 className="text-[20px] font-semibold mb-3">Batch Processing</h3>
+                <p className="text-[15px] text-text-secondary leading-relaxed mb-6">
+                  Convert 50 files at once. Handle daily workload automatically, not one image at a time.
+                </p>
+              </div>
+              <div className="rounded-[var(--radius-xl)] bg-white p-8 shadow-[0_0_0_0.5px_var(--border),0_1px_2px_rgba(0,0,0,0.04)]">
+                <h3 className="text-[20px] font-semibold mb-3">Color Separation</h3>
+                <p className="text-[15px] text-text-secondary leading-relaxed mb-6">
+                  Ready for screen printing. Multi-layer separation, spot color control, all in one step.
+                </p>
+              </div>
+              <div className="rounded-[var(--radius-xl)] bg-white p-8 shadow-[0_0_0_0.5px_var(--border),0_1px_2px_rgba(0,0,0,0.04)]">
+                <h3 className="text-[20px] font-semibold mb-3">REST API</h3>
+                <p className="text-[15px] text-text-secondary leading-relaxed mb-6">
+                  Integrate into your workflow. No monthly minimums, pay per image. Scale without limits.
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <ButtonLink href="/for-shops" size="lg" variant="secondary">
+                View Shop Plans & Pricing
+              </ButtonLink>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Comparisons ─────────────────────────────────────– */}
+        <section className="py-20 sm:py-28" aria-labelledby="compare-heading">
+          <div className="wrap">
+            <div className="max-w-[760px] mb-12">
+              <h2
+                id="compare-heading"
+                className="display text-[clamp(30px,4.4vw,50px)]"
+              >
+                How Vectroy compares.
+              </h2>
+              <p className="mt-5 text-[clamp(17px,1.7vw,20px)] text-text-secondary max-w-[620px]">
+                See detailed comparisons with other tools. Understand where we excel and what trade-offs exist.
+              </p>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <Link
+                href="/compare/vectosolve"
+                className="group rounded-[var(--radius-xl)] bg-bg-secondary p-6 hover:shadow-[0_0_0_0.5px_var(--border-strong),0_2px_6px_rgba(0,0,0,0.05)] transition-all"
+              >
+                <h3 className="font-semibold text-[17px] mb-2 group-hover:text-accent transition-colors">
+                  Vectroy vs Vectosolve
+                </h3>
+                <p className="text-[14.5px] text-text-secondary">
+                  Batch processing, API, and embroidery focus.
+                </p>
+              </Link>
+
+              <Link
+                href="/compare/vectorizer-ai"
+                className="group rounded-[var(--radius-xl)] bg-bg-secondary p-6 hover:shadow-[0_0_0_0.5px_var(--border-strong),0_2px_6px_rgba(0,0,0,0.05)] transition-all"
+              >
+                <h3 className="font-semibold text-[17px] mb-2 group-hover:text-accent transition-colors">
+                  Vectroy vs Vectorizer.ai
+                </h3>
+                <p className="text-[14.5px] text-text-secondary">
+                  Production focus and format export.
+                </p>
+              </Link>
+
+              <Link
+                href="/compare/vector-magic"
+                className="group rounded-[var(--radius-xl)] bg-bg-secondary p-6 hover:shadow-[0_0_0_0.5px_var(--border-strong),0_2px_6px_rgba(0,0,0,0.05)] transition-all"
+              >
+                <h3 className="font-semibold text-[17px] mb-2 group-hover:text-accent transition-colors">
+                  Vectroy vs Vector Magic
+                </h3>
+                <p className="text-[14.5px] text-text-secondary">
+                  Batch, API, and desktop alternatives.
+                </p>
+              </Link>
+
+              <Link
+                href="/compare/adobe-illustrator"
+                className="group rounded-[var(--radius-xl)] bg-bg-secondary p-6 hover:shadow-[0_0_0_0.5px_var(--border-strong),0_2px_6px_rgba(0,0,0,0.05)] transition-all"
+              >
+                <h3 className="font-semibold text-[17px] mb-2 group-hover:text-accent transition-colors">
+                  Vectroy vs Adobe Illustrator
+                </h3>
+                <p className="text-[14.5px] text-text-secondary">
+                  Specialized conversion vs. design tool.
+                </p>
+              </Link>
+
+              <Link
+                href="/compare"
+                className="group rounded-[var(--radius-xl)] bg-accent-wash border border-accent p-6 hover:shadow-[0_0_0_0.5px_var(--border-strong),0_2px_6px_rgba(0,0,0,0.05)] transition-all"
+              >
+                <h3 className="font-semibold text-[17px] mb-2 text-accent group-hover:opacity-80 transition-opacity">
+                  See all comparisons
+                </h3>
+                <p className="text-[14.5px] text-text-secondary">
+                  Compare Vectroy with 10+ tools and services.
+                </p>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Case Studies ────────────────────────────────────── */}
+        <CaseStudies />
+
+        {/* ── FAQ ───────────────────────────────────────────── */}
+        <FAQSection />
 
         {/* ── Final CTA ──────────────────────────────────────── */}
         <section className="pb-24 sm:pb-32" aria-labelledby="cta-heading">

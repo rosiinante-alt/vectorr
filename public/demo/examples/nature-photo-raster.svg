@@ -1,0 +1,10 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs><filter id="blur4"><feGaussianBlur in="SourceGraphic" stdDeviation="3"/></filter></defs>
+  <rect width="400" height="300" fill="#87CEEB" filter="url(#blur4)"/>
+  <ellipse cx="200" cy="100" rx="80" ry="40" fill="#FDB813" opacity="0.5" filter="url(#blur4)"/>
+  <polygon points="0,150 150,60 300,150" fill="#228B22" opacity="0.6" filter="url(#blur4)"/>
+  <polygon points="200,150 350,50 400,150" fill="#2F4F2F" opacity="0.6" filter="url(#blur4)"/>
+  <rect y="150" width="400" height="150" fill="#8B7355" opacity="0.5" filter="url(#blur4)"/>
+  <circle cx="80" cy="180" r="30" fill="#556B2F" opacity="0.5" filter="url(#blur4)"/>
+  <circle cx="320" cy="200" r="35" fill="#228B22" opacity="0.5" filter="url(#blur4)"/>
+</svg>

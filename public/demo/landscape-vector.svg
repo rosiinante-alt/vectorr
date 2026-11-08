@@ -1,0 +1,31 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Clean vector landscape illustration -->
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B0E0E6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Sky -->
+  <rect width="400" height="150" fill="url(#skyGrad)"/>
+  <!-- Mountains with smooth paths -->
+  <path d="M 0 150 L 80 80 L 160 150 Z" fill="#8B7355"/>
+  <path d="M 120 150 L 200 60 L 280 150 Z" fill="#A0826D"/>
+  <path d="M 240 150 L 320 90 L 400 150 Z" fill="#8B7355"/>
+  <!-- Foreground grass -->
+  <rect y="150" width="400" height="150" fill="#6B8E23"/>
+  <!-- Trees - clean shapes -->
+  <g fill="#556B2F">
+    <circle cx="100" cy="180" r="40"/>
+    <polygon points="95,160 105,140 115,160" fill="#5a7c2f"/>
+  </g>
+  <g fill="#6B8E23">
+    <circle cx="200" cy="200" r="50"/>
+    <polygon points="190,170 200,145 210,170" fill="#738e1a"/>
+  </g>
+  <g fill="#556B2F">
+    <circle cx="300" cy="180" r="45"/>
+    <polygon points="290,155 300,130 310,155" fill="#5a7c2f"/>
+  </g>
+  <text x="200" y="295" font-size="11" text-anchor="middle" fill="#333" font-weight="500">VECTOR ILLUSTRATION</text>
+</svg>

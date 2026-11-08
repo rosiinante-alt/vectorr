@@ -75,6 +75,12 @@ export function SiteHeader({ authSlot }: { authSlot?: ReactNode }) {
           >
             Tools
           </Link>
+          <Link
+            href="/about"
+            className="hidden rounded-[var(--radius-sm)] px-3 py-2 text-[14px] font-medium text-text-secondary transition-colors hover:bg-[rgba(0,0,0,0.045)] hover:text-text-primary md:block"
+          >
+            About
+          </Link>
           {authSlot ?? <SignInLink />}
         </nav>
       </div>
@@ -90,6 +96,7 @@ export function SiteFooter() {
         { label: "How it works", href: "/#how" },
         { label: "Pricing", href: "/pricing" },
         { label: "Blog", href: "/blog" },
+        { label: "About", href: "/about" },
         { label: "Open app", href: "/dashboard" },
       ],
     },
@@ -106,7 +113,7 @@ export function SiteFooter() {
       title: "Resources",
       links: [
         { label: "All Resources", href: "/resources" },
-        { label: "Compare Vectroy", href: "/compare/vectosolve" },
+        { label: "All Comparisons", href: "/compare" },
         { label: "Converter Tools", href: "/convert/jpg-to-svg" },
       ],
     },

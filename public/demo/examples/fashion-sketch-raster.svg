@@ -1,0 +1,11 @@
+<svg viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
+  <defs><filter id="blur7"><feGaussianBlur in="SourceGraphic" stdDeviation="1.5"/></filter></defs>
+  <rect width="200" height="400" fill="#fef5e7" filter="url(#blur7)"/>
+  <circle cx="100" cy="50" r="20" stroke="#333" stroke-width="1.5" fill="none" opacity="0.6" filter="url(#blur7)"/>
+  <path d="M 70 75 L 130 75 L 130 120 L 70 120 Z" stroke="#333" stroke-width="1.5" fill="none" opacity="0.6" filter="url(#blur7)"/>
+  <path d="M 60 120 L 50 200 M 140 120 L 150 200" stroke="#333" stroke-width="1.5" fill="none" opacity="0.5" filter="url(#blur7)"/>
+  <path d="M 50 200 L 40 300 M 150 200 L 160 300" stroke="#333" stroke-width="1.5" fill="none" opacity="0.5" filter="url(#blur7)"/>
+  <path d="M 90 75 L 70 120 M 110 75 L 130 120" stroke="#333" stroke-width="1" fill="none" opacity="0.4" filter="url(#blur7)"/>
+  <path d="M 100 120 L 100 200" stroke="#FF69B4" stroke-width="2" fill="none" opacity="0.5" filter="url(#blur7)"/>
+  <text x="100" y="390" font-size="10" text-anchor="middle" fill="#666" opacity="0.6">DRESS DESIGN</text>
+</svg>

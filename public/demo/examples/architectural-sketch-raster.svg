@@ -1,0 +1,11 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs><filter id="blur6"><feGaussianBlur in="SourceGraphic" stdDeviation="1.5"/></filter></defs>
+  <rect width="400" height="300" fill="#fffacd" filter="url(#blur6)"/>
+  <path d="M 50 150 L 100 50 L 350 50 L 400 150 L 400 280 L 50 280 Z" stroke="#333" stroke-width="2" fill="none" opacity="0.5" filter="url(#blur6)"/>
+  <line x1="150" y1="50" x2="150" y2="280" stroke="#333" stroke-width="1" opacity="0.4" filter="url(#blur6)"/>
+  <line x1="250" y1="50" x2="250" y2="280" stroke="#333" stroke-width="1" opacity="0.4" filter="url(#blur6)"/>
+  <rect x="70" y="100" width="40" height="50" stroke="#333" stroke-width="1" fill="none" opacity="0.4" filter="url(#blur6)"/>
+  <rect x="170" y="100" width="40" height="50" stroke="#333" stroke-width="1" fill="none" opacity="0.4" filter="url(#blur6)"/>
+  <rect x="270" y="100" width="40" height="50" stroke="#333" stroke-width="1" fill="none" opacity="0.4" filter="url(#blur6)"/>
+  <text x="200" y="290" font-size="12" text-anchor="middle" fill="#666" opacity="0.6">BUILDING ELEVATION</text>
+</svg>

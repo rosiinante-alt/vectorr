@@ -1,0 +1,19 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Clean vector line art -->
+  <rect width="400" height="300" fill="#FFF"/>
+  <g stroke="#1a1a1a" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Plant stem -->
+    <path d="M 200 250 Q 201 200 200 150" stroke-width="2"/>
+    <!-- Leaves -->
+    <path d="M 200 150 Q 190 140 160 100"/>
+    <path d="M 200 150 Q 210 140 240 100"/>
+    <path d="M 200 180 Q 180 170 140 160"/>
+    <path d="M 200 180 Q 220 170 260 160"/>
+    <path d="M 200 210 Q 175 205 150 200"/>
+    <path d="M 200 210 Q 225 205 250 200"/>
+    <!-- Leaf details -->
+    <path d="M 160 100 Q 155 95 170 85" stroke-width="1"/>
+    <path d="M 240 100 Q 245 95 230 85" stroke-width="1"/>
+  </g>
+  <text x="200" y="285" font-size="12" text-anchor="middle" fill="#333" font-weight="500">CLEAN VECTOR</text>
+</svg>

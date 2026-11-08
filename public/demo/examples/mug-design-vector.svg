@@ -1,0 +1,11 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mug Design - Vector (clean/traced) -->
+  
+  <ellipse cx="100" cy="50" rx="50" ry="14" fill="white" stroke="#333" stroke-width="1.5"/>
+  <path d="M 50 50 L 50 150 Q 50 158 58 158 L 142 158 Q 150 158 150 150 L 150 50" fill="white" stroke="#333" stroke-width="1.5"/>
+  <ellipse cx="100" cy="158" rx="50" ry="9" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+  <ellipse cx="152" cy="95" rx="10" ry="24" fill="none" stroke="#333" stroke-width="1.5"/>
+  <path d="M 72 88 Q 82 65 100 72 Q 118 80 128 88" fill="#ff5252" stroke="none"/>
+  <circle cx="95" cy="80" r="2.5" fill="#ff5252"/>
+  
+</svg>

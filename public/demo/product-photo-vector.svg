@@ -1,0 +1,19 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Clean vector product -->
+  <rect width="400" height="300" fill="#F5F5F5"/>
+  <!-- Shadow -->
+  <ellipse cx="200" cy="250" rx="150" ry="40" fill="#000" opacity="0.15"/>
+  <!-- Clean product shape with proper curves -->
+  <defs>
+    <linearGradient id="prodGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4C5B0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8A896;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <path d="M 100 80 Q 110 50 150 50 L 250 50 Q 290 50 300 80 L 300 200 Q 290 230 250 230 L 150 230 Q 110 230 100 200 Z" fill="url(#prodGrad)" stroke="#999" stroke-width="0.5"/>
+  <!-- Highlight -->
+  <ellipse cx="180" cy="100" rx="60" ry="40" fill="#FFF" opacity="0.6"/>
+  <!-- Shadow detail -->
+  <path d="M 120 160 Q 130 180 150 190" stroke="#999" stroke-width="2" fill="none" opacity="0.4"/>
+  <text x="200" y="285" font-size="12" text-anchor="middle" fill="#666" font-weight="500">TRACED VECTOR</text>
+</svg>

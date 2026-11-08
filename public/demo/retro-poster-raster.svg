@@ -1,0 +1,28 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="pixelate">
+      <feFlood x="0" y="0" width="1" height="1" flood-color="#FF6B35" />
+      <feComposite in="SourceGraphic" operator="xor" />
+    </filter>
+  </defs>
+  <!-- Raster/pixelated appearance -->
+  <rect width="400" height="300" fill="#FFF9E6"/>
+  <circle cx="100" cy="80" r="40" fill="#FF6B35" opacity="0.8"/>
+  <circle cx="140" cy="95" r="35" fill="#FF6B35" opacity="0.9"/>
+  <rect x="80" y="140" width="120" height="100" fill="#F4A261" opacity="0.7"/>
+  <rect x="85" y="145" width="30" height="90" fill="#E76F51"/>
+  <rect x="125" y="145" width="30" height="90" fill="#E76F51"/>
+  <rect x="165" y="145" width="30" height="90" fill="#E76F51"/>
+  <circle cx="250" cy="120" r="50" fill="#2A9D8F" opacity="0.6"/>
+  <rect x="270" y="200" width="60" height="80" fill="#264653" opacity="0.5"/>
+  <!-- Pixelated grid effect -->
+  <g opacity="0.15" stroke="#000" stroke-width="4">
+    <line x1="0" y1="30" x2="400" y2="30"/><line x1="0" y1="60" x2="400" y2="60"/><line x1="0" y1="90" x2="400" y2="90"/>
+    <line x1="0" y1="120" x2="400" y2="120"/><line x1="0" y1="150" x2="400" y2="150"/><line x1="0" y1="180" x2="400" y2="180"/>
+    <line x1="0" y1="210" x2="400" y2="210"/><line x1="0" y1="240" x2="400" y2="240"/><line x1="0" y1="270" x2="400" y2="270"/>
+    <line x1="50" y1="0" x2="50" y2="300"/><line x1="100" y1="0" x2="100" y2="300"/><line x1="150" y1="0" x2="150" y2="300"/>
+    <line x1="200" y1="0" x2="200" y2="300"/><line x1="250" y1="0" x2="250" y2="300"/><line x1="300" y1="0" x2="300" y2="300"/>
+    <line x1="350" y1="0" x2="350" y2="300"/>
+  </g>
+  <text x="200" y="290" font-size="16" text-anchor="middle" fill="#999" font-family="monospace">PIXELATED</text>
+</svg>

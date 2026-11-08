@@ -1,0 +1,8 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Geometric Abstract - Vector (clean/traced) -->
+  
+  <polygon points="100,20 150,80 100,140 50,80" fill="#3498db"/>
+  <circle cx="100" cy="80" r="28" fill="#e74c3c"/>
+  <rect x="62" y="122" width="76" height="46" fill="#2ecc71"/>
+  
+</svg>

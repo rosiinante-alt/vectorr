@@ -1,0 +1,22 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Raster/pixelated line art -->
+  <rect width="400" height="300" fill="#FFF"/>
+  <g opacity="0.6" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Plant/leaf design with pixelated lines -->
+    <path d="M 200 250 L 200 150" filter="url(#pixelStroke)"/>
+    <path d="M 200 150 L 160 100" filter="url(#pixelStroke)"/>
+    <path d="M 200 150 L 240 100" filter="url(#pixelStroke)"/>
+    <path d="M 200 180 L 140 160" filter="url(#pixelStroke)"/>
+    <path d="M 200 180 L 260 160" filter="url(#pixelStroke)"/>
+    <path d="M 200 210 L 150 200" filter="url(#pixelStroke)"/>
+    <path d="M 200 210 L 250 200" filter="url(#pixelStroke)"/>
+  </g>
+  <g opacity="0.15" stroke="#000" stroke-width="3">
+    <line x1="0" y1="40" x2="400" y2="40"/><line x1="0" y1="80" x2="400" y2="80"/><line x1="0" y1="120" x2="400" y2="120"/>
+    <line x1="0" y1="160" x2="400" y2="160"/><line x1="0" y1="200" x2="400" y2="200"/><line x1="0" y1="240" x2="400" y2="240"/>
+    <line x1="67" y1="0" x2="67" y2="300"/><line x1="133" y1="0" x2="133" y2="300"/><line x1="200" y1="0" x2="200" y2="300"/>
+    <line x1="267" y1="0" x2="267" y2="300"/><line x1="333" y1="0" x2="333" y2="300"/>
+  </g>
+  <defs><filter id="pixelStroke"><feGaussianBlur in="SourceGraphic" stdDeviation="1.5"/></filter></defs>
+  <text x="200" y="285" font-size="12" text-anchor="middle" fill="#999">LINE ART (pixelated)</text>
+</svg>

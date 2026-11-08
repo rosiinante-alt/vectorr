@@ -1,0 +1,11 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- T-Shirt Print - Raster (detailed/pixelated) -->
+  
+  <rect width="200" height="200" fill="#e8e8e8"/>
+  <circle cx="100" cy="100" r="45" fill="#2a2a2a" opacity="0.8"/>
+  <path d="M 85 95 L 95 85 L 105 95 L 105 115 L 95 115 L 95 105 L 105 105" fill="#e8e8e8" stroke="#e8e8e8" stroke-width="0.5"/>
+  <circle cx="100" cy="75" r="3" fill="#e8e8e8"/>
+  <path d="M 75 100 L 85 100 M 125 100 L 115 100" stroke="#e8e8e8" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="100" cy="100" r="45" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="3,2" opacity="0.6"/>
+  
+</svg>

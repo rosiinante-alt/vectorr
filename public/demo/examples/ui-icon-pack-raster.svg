@@ -1,0 +1,13 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs><filter id="blur3"><feGaussianBlur in="SourceGraphic" stdDeviation="1.5"/></filter></defs>
+  <rect width="200" height="200" fill="#f5f5f5" filter="url(#blur3)"/>
+  <rect x="30" y="30" width="35" height="35" rx="4" fill="#4A90E2" opacity="0.6" filter="url(#blur3)"/>
+  <rect x="80" y="30" width="35" height="35" rx="4" fill="#7B68EE" opacity="0.6" filter="url(#blur3)"/>
+  <rect x="130" y="30" width="35" height="35" rx="4" fill="#50C878" opacity="0.6" filter="url(#blur3)"/>
+  <circle cx="47.5" cy="110" r="17.5" fill="#FF6B6B" opacity="0.6" filter="url(#blur3)"/>
+  <circle cx="97.5" cy="110" r="17.5" fill="#FFA500" opacity="0.6" filter="url(#blur3)"/>
+  <circle cx="147.5" cy="110" r="17.5" fill="#20B2AA" opacity="0.6" filter="url(#blur3)"/>
+  <rect x="30" y="150" width="35" height="35" fill="#9370DB" opacity="0.6" filter="url(#blur3)"/>
+  <rect x="80" y="150" width="35" height="35" fill="#3CB371" opacity="0.6" filter="url(#blur3)"/>
+  <rect x="130" y="150" width="35" height="35" fill="#FF8C00" opacity="0.6" filter="url(#blur3)"/>
+</svg>

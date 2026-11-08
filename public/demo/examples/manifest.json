@@ -29,6 +29,20 @@
       "description": "Contemporary app icon with gradient fill and rounded corners"
     },
     {
+      "id": "sports-logo",
+      "filename": "sports-logo-raster.svg",
+      "category": "logo",
+      "label": "Sports Team Logo",
+      "description": "Athletic team logo with bold lettering and dynamic design"
+    },
+    {
+      "id": "food-logo",
+      "filename": "food-logo-raster.svg",
+      "category": "logo",
+      "label": "Food Brand Logo",
+      "description": "Playful food brand identity with vibrant colors"
+    },
+    {
       "id": "character-illustration",
       "filename": "character-illustration-raster.svg",
       "category": "illustration",
@@ -48,6 +62,20 @@
       "category": "illustration",
       "label": "Detailed Scene",
       "description": "Complex landscape illustration with multiple layers and perspective"
+    },
+    {
+      "id": "ui-icon-pack",
+      "filename": "ui-icon-pack-raster.svg",
+      "category": "illustration",
+      "label": "UI Icon Set",
+      "description": "Collection of pixel-perfect user interface icons"
+    },
+    {
+      "id": "retro-poster",
+      "filename": "retro-poster-raster.svg",
+      "category": "illustration",
+      "label": "Retro Poster",
+      "description": "Vintage-style poster with limited color palette and bold typography"
     },
     {
       "id": "product-photo",
@@ -71,6 +99,20 @@
       "description": "Close-up macro shot with subtle texture and lighting"
     },
     {
+      "id": "nature-photo",
+      "filename": "nature-photo-raster.svg",
+      "category": "photo",
+      "label": "Nature Photography",
+      "description": "Wildlife or nature scene with rich detail and natural lighting"
+    },
+    {
+      "id": "portrait-photo",
+      "filename": "portrait-photo-raster.svg",
+      "category": "photo",
+      "label": "Portrait Photography",
+      "description": "Professional portrait with professional studio lighting"
+    },
+    {
       "id": "hand-drawn-sketch",
       "filename": "hand-drawn-sketch-raster.svg",
       "category": "sketch",
@@ -83,6 +125,97 @@
       "category": "sketch",
       "label": "UI Wireframe",
       "description": "Low-fidelity wireframe for mobile app user interface"
+    },
+    {
+      "id": "architectural-sketch",
+      "filename": "architectural-sketch-raster.svg",
+      "category": "sketch",
+      "label": "Architectural Drawing",
+      "description": "Building design sketch with perspective and technical details"
+    },
+    {
+      "id": "fashion-sketch",
+      "filename": "fashion-sketch-raster.svg",
+      "category": "sketch",
+      "label": "Fashion Design",
+      "description": "Clothing and apparel design sketch with fabric details"
+    },
+    {
+      "id": "embroidery-pattern",
+      "filename": "embroidery-pattern-raster.svg",
+      "category": "crafts",
+      "label": "Embroidery Pattern",
+      "description": "Ready for embroidery machines with DST, PES, or JEF export"
+    },
+    {
+      "id": "tshirt-print",
+      "filename": "tshirt-print-raster.svg",
+      "category": "crafts",
+      "label": "T-Shirt Print Design",
+      "description": "Print-ready design optimized for screen printing and DTG"
+    },
+    {
+      "id": "mug-design",
+      "filename": "mug-design-raster.svg",
+      "category": "crafts",
+      "label": "Mug/Drinkware Design",
+      "description": "Perfect for mug wraps and ceramic transfers"
+    },
+    {
+      "id": "laser-cutting",
+      "filename": "laser-cutting-raster.svg",
+      "category": "crafts",
+      "label": "Laser Cutting Pattern",
+      "description": "Clean lines for laser cutting wood, acrylic, leather"
+    },
+    {
+      "id": "vinyl-sticker",
+      "filename": "vinyl-sticker-raster.svg",
+      "category": "crafts",
+      "label": "Vinyl Sticker Design",
+      "description": "Optimized for vinyl cutting and application"
+    },
+    {
+      "id": "portrait-illustration",
+      "filename": "portrait-illustration-raster.svg",
+      "category": "illustration",
+      "label": "Portrait Illustration",
+      "description": "Hand-drawn portrait converted to clean vector art"
+    },
+    {
+      "id": "geometric-abstract",
+      "filename": "geometric-abstract-raster.svg",
+      "category": "illustration",
+      "label": "Geometric Abstract",
+      "description": "Modern geometric design with perfect clean shapes"
+    },
+    {
+      "id": "floral-ornament",
+      "filename": "floral-ornament-raster.svg",
+      "category": "illustration",
+      "label": "Floral Ornament",
+      "description": "Decorative floral design cleaned up for production"
+    },
+    {
+      "id": "brush-stroke",
+      "filename": "brush-stroke-raster.svg",
+      "category": "illustration",
+      "label": "Brush Stroke Art",
+      "description": "Artistic brush strokes simplified to vector lines"
+    },
+    {
+      "id": "calligraphy-text",
+      "filename": "calligraphy-text-raster.svg",
+      "category": "sketch",
+      "label": "Calligraphy",
+      "description": "Elegant calligraphy text vectorized for any use"
+    },
+    {
+      "id": "icon-set",
+      "filename": "icon-set-raster.svg",
+      "category": "logo",
+      "label": "Icon Set",
+      "description": "Collection of icons unified and perfectly traced"
     }
   ],
   "categories": [
@@ -105,6 +238,11 @@
       "id": "sketch",
       "label": "Sketches",
       "description": "Sketches and wireframes"
+    },
+    {
+      "id": "crafts",
+      "label": "For Making",
+      "description": "Embroidery, cutting, screen print, and production designs"
     }
   ]
 }

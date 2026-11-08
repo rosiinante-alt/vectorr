@@ -1,0 +1,11 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mug Design - Raster (detailed/pixelated) -->
+  
+  <ellipse cx="100" cy="50" rx="50" ry="15" fill="#f5f5f5" stroke="#999" stroke-width="0.8"/>
+  <path d="M 50 50 L 50 150 Q 50 160 60 160 L 140 160 Q 150 160 150 150 L 150 50" fill="#f5f5f5" stroke="#999" stroke-width="1"/>
+  <ellipse cx="100" cy="160" rx="50" ry="10" fill="#e0e0e0" stroke="#999" stroke-width="0.8"/>
+  <ellipse cx="145" cy="95" rx="12" ry="25" fill="none" stroke="#999" stroke-width="1"/>
+  <path d="M 70 90 L 80 70 Q 90 60 100 70 L 110 90" fill="#ff6b6b" stroke="#d63031" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="90" cy="85" r="3" fill="#d63031" opacity="0.6"/>
+  
+</svg>

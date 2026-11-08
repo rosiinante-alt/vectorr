@@ -1,0 +1,14 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Portrait Illustration - Raster (detailed/pixelated) -->
+  
+  <rect width="200" height="200" fill="#fce4ec"/>
+  <circle cx="100" cy="70" r="28" fill="#f4a460" stroke="#daa520" stroke-width="1"/>
+  <path d="M 80 60 Q 85 55 90 58" fill="none" stroke="#8b4513" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M 120 60 Q 115 55 110 58" fill="none" stroke="#8b4513" stroke-width="1.2" stroke-linecap="round"/>
+  <ellipse cx="85" cy="65" rx="3" ry="4" fill="#000"/>
+  <ellipse cx="115" cy="65" rx="3" ry="4" fill="#000"/>
+  <path d="M 100 75 L 100 82" stroke="#8b4513" stroke-width="1" stroke-linecap="round"/>
+  <path d="M 95 88 Q 100 92 105 88" fill="#ff69b4" stroke="none"/>
+  <path d="M 70 100 L 130 100 L 125 140 Q 100 150 75 140 Z" fill="#f4a460" stroke="#daa520" stroke-width="1"/>
+  
+</svg>
