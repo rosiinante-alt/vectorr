@@ -8,6 +8,7 @@ import { SubscribeButton } from "@/components/subscribe-button";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { PRICING_TIERS, CREDIT_COSTS } from "@/lib/credits/constants";
+import { trackPricingView } from "@/lib/analytics/events";
 
 export const metadata: Metadata = {
   title: "Pricing — Vectroy",
@@ -28,6 +29,32 @@ export default async function PricingPage({
 }) {
   const { resume } = await searchParams;
   return (
+    <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <SiteHeader
+        authSlot={
+          <Suspense fallback={null}>
+            <AuthSlot />
+          </Suspense>
+        }
+      />
+
+      <main id="main" className="flex-1">
+        <PricingContent resume={resume} />
+      </main>
+
+      <SiteFooter />
+    </>
+  )
+}
+
+function PricingContent({ resume }: { resume?: string }) {
+  // Track pricing page view (client-side)
+  if (typeof window !== 'undefined') {
+    trackPricingView()
+  }
     <>
       <a className="skip-link" href="#main">
         Skip to content

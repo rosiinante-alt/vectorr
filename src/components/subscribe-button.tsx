@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
+import { trackTierClicked, trackBeginCheckout } from '@/lib/analytics/events';
+import { PRICING_TIERS } from '@/lib/credits/constants';
 
 /**
  * Starts a Polar checkout for a catalog plan.
@@ -42,6 +44,13 @@ export function SubscribeButton({
   async function startCheckout() {
     setPending(true);
     setError(null);
+
+    // Track tier clicked + checkout initiated
+    const tier = PRICING_TIERS[planKey as keyof typeof PRICING_TIERS];
+    if (tier) {
+      trackTierClicked(planKey, tier.price);
+      trackBeginCheckout(planKey, tier.price);
+    }
 
     try {
       const response = await fetch('/api/checkout/create-session', {
