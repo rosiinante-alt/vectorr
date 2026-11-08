@@ -1,18 +1,26 @@
-// Credit costs per operation — match VectoSolve pricing
+// Credit costs per operation — from PRICING_STRATEGY_2026.md
 export const CREDIT_COSTS = {
-  VECTORIZE: 0.20,
-  REMOVE_BG: 0.07,
-  UPSCALE_2X: 0.15,
+  VECTORIZE: 1.00,          // 1 credit = 1 image conversion
+  REMOVE_BG: 0.25,          // Minor operations cost 0.25 credits
+  UPSCALE_2X: 0.25,
   UPSCALE_4X: 0.25,
   STYLE_TRANSFER: 0.50,
-  AI_GENERATE: 2.50,
-  AI_EDIT: 1.00,
-  EXPORT_PREMIUM: 0.05, // DXF, EPS, G-code, DST
+  AI_GENERATE: 0.50,        // AI logo generation
+  AI_EDIT: 0.50,
+  EXPORT_PREMIUM: 0.00,     // Format exports are free
+} as const;
+
+// Overage rates per tier (charged per credit when over monthly limit)
+export const OVERAGE_RATES = {
+  starter: 0.20,
+  pro: 0.20,
+  team_starter: 0.15,
+  team_pro: 0.12,
 } as const;
 
 // Pricing tiers via Polar
 //
-// `planKey` points at the entry in src/lib/payments/products.ts that the
+// \`planKey\` points at the entry in src/lib/payments/products.ts that the
 // Subscribe button purchases. Keep the two in step: the catalog decides the
 // tier and credit grant, so this file is the marketing copy only.
 //
@@ -36,82 +44,104 @@ export const PRICING_TIERS = {
   },
   STARTER: {
     name: 'Starter',
-    price: 7.99,
-    credits: 30,
+    price: 9.99,
+    priceAnnual: 89.88,
+    credits: 50,
+    creditsAnnual: 600,
     interval: 'month',
-    description: '30 credits/month. Best for individuals.',
+    description: '50 credits/month. Best for individuals and hobbyists.',
     planKey: 'starter_monthly',
+    planKeyAnnual: 'starter_annual',
+    annualSavings: 26,
+    overageRate: 0.20,
     features: [
-      '30 credits/month',
-      'PNG/JPG/WEBP → SVG',
+      '50 credits/month',
+      'PNG/JPG/WEBP → SVG conversion',
       'Background removal',
-      '2× upscaling',
+      'Image upscaling',
       'All export formats',
       'No watermarks',
     ],
   },
-  PLUS: {
-    name: 'Plus',
-    price: 9.99,
-    credits: 50,
+  PRO: {
+    name: 'Pro',
+    price: 24.99,
+    priceAnnual: 224.88,
+    credits: 250,
+    creditsAnnual: 3000,
     interval: 'month',
-    description: '50 credits/month. Perfect for small teams.',
-    planKey: 'plus_monthly',
+    description: '250 credits/month. Perfect for creators and freelancers.',
+    planKey: 'pro_monthly',
+    planKeyAnnual: 'pro_annual',
+    annualSavings: 17,
+    overageRate: 0.20,
     features: [
-      '50 credits/month',
+      '250 credits/month',
       'Everything in Starter',
-      '4× upscaling',
+      'AI logo generation',
       'Style transfer',
       'Batch conversions',
       'Priority processing',
     ],
   },
-  PRO: {
-    name: 'Pro',
-    price: 14.99,
-    credits: 100,
+  TEAM_STARTER: {
+    name: 'Team Starter',
+    price: 99,
+    priceAnnual: 891,
+    credits: 750,
+    creditsAnnual: 9000,
     interval: 'month',
-    description: '100 credits/month. For professionals and agencies.',
-    planKey: 'pro_monthly',
+    description: '750 credits/month. For small shops and teams (3 seats).',
+    planKey: 'team_starter_monthly',
+    planKeyAnnual: 'team_starter_annual',
+    annualSavings: 25,
+    overageRate: 0.15,
+    seats: 3,
     features: [
-      '100 credits/month',
-      'Everything in Plus',
-      'AI generation',
-      'Workflow automation',
-      'API access',
+      '750 credits/month',
+      '3 team seats included',
+      'Everything in Pro',
+      'Team collaboration',
+      'Bulk operations',
+      'Email support',
+    ],
+  },
+  TEAM_PRO: {
+    name: 'Team Pro',
+    price: 249,
+    priceAnnual: 2241,
+    credits: 2500,
+    creditsAnnual: 30000,
+    interval: 'month',
+    description: '2,500 credits/month. For production teams (10 seats).',
+    planKey: 'team_pro_monthly',
+    planKeyAnnual: 'team_pro_annual',
+    annualSavings: 25,
+    overageRate: 0.12,
+    seats: 10,
+    features: [
+      '2,500 credits/month',
+      '10 team seats included',
+      'Everything in Team Starter',
+      'Advanced API access',
+      'Custom integrations',
       'Priority support',
     ],
   },
-  TEAM: {
-    name: 'Team',
-    price: 49.99,
-    credits: 250,
-    interval: 'month',
-    description: '250 credits/month. For growing teams.',
-    planKey: 'team_monthly',
+  ENTERPRISE: {
+    name: 'Enterprise',
+    price: null,
+    credits: null,
+    interval: null,
+    description: 'Custom solutions for agencies and large teams.',
+    planKey: null,
     features: [
-      '250 credits/month',
-      'Everything in Pro',
-      'Team collaboration',
-      'Advanced API access',
-      'Bulk operations',
-      'Dedicated Slack support',
-    ],
-  },
-  AGENCY: {
-    name: 'Agency',
-    price: 99.99,
-    credits: 500,
-    interval: 'month',
-    description: '500 credits/month. For agencies and production.',
-    planKey: 'agency_monthly',
-    features: [
-      '500 credits/month',
-      'Everything in Team',
-      'White-label licensing',
+      'Custom credit allocation',
       'Unlimited team seats',
+      'White-label licensing',
       'SLA guarantee',
-      'Account management',
+      'Dedicated account manager',
+      'Custom contract terms',
     ],
   },
 } as const;

@@ -1,5 +1,6 @@
-import { Suspense } from "react";
-import type { Metadata } from "next";
+'use client';
+
+import { useState, Suspense } from "react";
 import Link from "next/link";
 
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
@@ -9,24 +10,11 @@ import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { PRICING_TIERS, CREDIT_COSTS } from "@/lib/credits/constants";
 
-export const metadata: Metadata = {
-  title: "Pricing — Vectroy",
-  description:
-    "Simple credit-based pricing for PNG/JPG/WEBP to SVG conversion. Start with 5 free credits.",
-};
+const tierOrder = ["FREE", "STARTER", "PRO", "TEAM_STARTER", "TEAM_PRO", "ENTERPRISE"] as const;
 
-const tierOrder = ["FREE", "STARTER", "PLUS", "PRO", "TEAM", "AGENCY"] as const;
+export default function PricingPage() {
+  const [isAnnual, setIsAnnual] = useState(false);
 
-// Reads searchParams (resume=) on request, so it blocks rather than
-// prerendering into a static shell (Cache Components is enabled).
-export const instant = false;
-
-export default async function PricingPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ resume?: string }>;
-}) {
-  const { resume } = await searchParams;
   return (
     <>
       <a className="skip-link" href="#main">
@@ -50,6 +38,40 @@ export default async function PricingPage({
               Pay for what you use. Credits never expire, and failed jobs are
               never charged.
             </p>
+
+            {/* Annual/Monthly Toggle */}
+            <div className="mx-auto mt-10 flex items-center justify-center gap-3">
+              <button
+                onClick={() => setIsAnnual(false)}
+                className={\`text-[15px] font-medium transition-colors \${
+                  !isAnnual ? 'text-text-primary' : 'text-text-tertiary hover:text-text-secondary'
+                }\`}
+              >
+                Monthly
+              </button>
+              <button
+                onClick={() => setIsAnnual(!isAnnual)}
+                className="relative h-6 w-11 rounded-full bg-border transition-colors"
+                role="switch"
+                aria-checked={isAnnual}
+                aria-label="Toggle annual billing"
+              >
+                <span
+                  className={\`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition-transform \${
+                    isAnnual ? 'translate-x-[22px]' : 'translate-x-0.5'
+                  }\`}
+                />
+              </button>
+              <button
+                onClick={() => setIsAnnual(true)}
+                className={\`text-[15px] font-medium transition-colors \${
+                  isAnnual ? 'text-text-primary' : 'text-text-tertiary hover:text-text-secondary'
+                }\`}
+              >
+                Annual
+                <Badge tone="success" className="ml-2">Save up to 26%</Badge>
+              </button>
+            </div>
           </div>
         </section>
 
@@ -61,14 +83,33 @@ export default async function PricingPage({
             <ul className="grid gap-5 lg:grid-cols-3 xl:grid-cols-5">
               {tierOrder.map((key) => {
                 const tier = PRICING_TIERS[key];
-                const isPlus = key === "PLUS";
+                const isPro = key === "PRO";
+                const isTeam = key === "TEAM_STARTER" || key === "TEAM_PRO";
+                const isEnterprise = key === "ENTERPRISE";
+
+                // Determine price and credits based on billing period
+                const displayPrice = isAnnual && tier.priceAnnual 
+                  ? tier.priceAnnual 
+                  : tier.price;
+                const displayCredits = isAnnual && tier.creditsAnnual 
+                  ? tier.creditsAnnual 
+                  : tier.credits;
+                const planKey = isAnnual && tier.planKeyAnnual 
+                  ? tier.planKeyAnnual 
+                  : tier.planKey;
+                const interval = isAnnual ? 'year' : tier.interval;
+
+                // Calculate monthly price for annual plans
+                const monthlyEquivalent = isAnnual && displayPrice 
+                  ? (displayPrice / 12).toFixed(2) 
+                  : null;
 
                 return (
                   <li
                     key={key}
                     className={
                       "flex flex-col rounded-[var(--radius-xl)] bg-white p-7 " +
-                      (isPlus
+                      (isPro
                         ? "shadow-[inset_0_0_0_2px_var(--accent),0_2px_6px_rgba(0,0,0,0.05),0_18px_40px_-14px_rgba(0,0,0,0.16)]"
                         : "shadow-[0_0_0_0.5px_var(--border),0_1px_2px_rgba(0,0,0,0.04)]")
                     }
@@ -77,26 +118,57 @@ export default async function PricingPage({
                       <h3 className="text-[17px] font-semibold tracking-[-0.02em]">
                         {tier.name}
                       </h3>
-                      {isPlus && <Badge tone="accent">Most popular</Badge>}
+                      {isPro && <Badge tone="accent">Most popular</Badge>}
+                      {isTeam && tier.seats && (
+                        <Badge tone="info">{tier.seats} seats</Badge>
+                      )}
                     </div>
 
-                    <p className="mt-4 flex items-baseline gap-2">
-                      <span className="tabular text-[46px] leading-none font-bold tracking-[-0.04em]">
-                        ${tier.price}
-                      </span>
-                      {tier.interval && (
-                        <span className="text-[14.5px] text-text-tertiary">
-                          /{tier.interval}
-                        </span>
-                      )}
-                    </p>
+                    {isEnterprise ? (
+                      <p className="mt-4 text-[24px] font-bold tracking-[-0.02em]">
+                        Custom pricing
+                      </p>
+                    ) : (
+                      <>
+                        <p className="mt-4 flex items-baseline gap-2">
+                          <span className="tabular text-[46px] leading-none font-bold tracking-[-0.04em]">
+                            ${displayPrice}
+                          </span>
+                          {interval && (
+                            <span className="text-[14.5px] text-text-tertiary">
+                              /{interval}
+                            </span>
+                          )}
+                        </p>
+                        {isAnnual && monthlyEquivalent && tier.annualSavings && (
+                          <p className="mt-1 text-[13px] text-success-text">
+                            ${monthlyEquivalent}/mo · Save {tier.annualSavings}%
+                          </p>
+                        )}
+                      </>
+                    )}
 
                     <p className="mt-4 text-[15px] leading-relaxed text-text-secondary">
                       {tier.description}
                     </p>
 
+                    {!isEnterprise && displayCredits && (
+                      <p className="mt-2 text-[14px] font-medium text-accent">
+                        {displayCredits.toLocaleString()} credits{isAnnual ? '/year' : '/month'}
+                      </p>
+                    )}
+
                     <div className="mt-6">
-                      {tier.planKey === null ? (
+                      {isEnterprise ? (
+                        <ButtonLink
+                          href="mailto:sales@vectroy.com?subject=Enterprise Inquiry"
+                          size="lg"
+                          variant="secondary"
+                          className="w-full"
+                        >
+                          Contact sales
+                        </ButtonLink>
+                      ) : planKey === null ? (
                         <ButtonLink
                           href="/convert"
                           size="lg"
@@ -107,14 +179,14 @@ export default async function PricingPage({
                         </ButtonLink>
                       ) : (
                         <SubscribeButton
-                          planKey={tier.planKey}
-                          variant={isPlus ? "primary" : "secondary"}
-                          autoStart={resume === tier.planKey}
+                          planKey={planKey}
+                          variant={isPro ? "primary" : "secondary"}
                         >
                           Subscribe
                         </SubscribeButton>
                       )}
                     </div>
+
                     <ul className="mt-6 grid gap-3 border-t border-[var(--border)] pt-6">
                       {tier.features.map((feature) => (
                         <li
@@ -137,6 +209,12 @@ export default async function PricingPage({
                         </li>
                       ))}
                     </ul>
+
+                    {!isEnterprise && tier.overageRate && (
+                      <p className="mt-4 pt-4 border-t border-[var(--border)] text-[13px] text-text-tertiary">
+                        Overage: ${tier.overageRate}/credit (opt-in required)
+                      </p>
+                    )}
                   </li>
                 );
               })}
@@ -184,14 +262,14 @@ export default async function PricingPage({
                   desc: "Quadruple resolution",
                 },
                 {
-                  name: "Style Transfer",
-                  cost: CREDIT_COSTS.STYLE_TRANSFER,
-                  desc: "Apply artistic styles",
+                  name: "AI Logo Generation",
+                  cost: CREDIT_COSTS.AI_GENERATE,
+                  desc: "Generate logos with AI",
                 },
                 {
-                  name: "Premium export",
+                  name: "Format Export",
                   cost: CREDIT_COSTS.EXPORT_PREMIUM,
-                  desc: "DXF, EPS, G-code, DST formats",
+                  desc: "DXF, EPS, PDF, PNG — all free",
                 },
               ].map((item) => (
                 <div
@@ -200,8 +278,8 @@ export default async function PricingPage({
                 >
                   <div className="flex items-baseline justify-between gap-3">
                     <h3 className="text-[16px] font-semibold">{item.name}</h3>
-                    <span className="tabular font-mono text-[15px] font-semibold text-accent">
-                      {item.cost.toFixed(2)}cr
+                    <span className={\`tabular font-mono text-[15px] font-semibold \${item.cost === 0 ? 'text-success-text' : 'text-accent'}\`}>
+                      {item.cost === 0 ? 'FREE' : \`\${item.cost.toFixed(2)}cr\`}
                     </span>
                   </div>
                   <p className="mt-1 text-[14px] text-text-secondary">

@@ -11,24 +11,26 @@
  * many credits a payment grants.
  */
 
-export type PurchaseTier = 'free' | 'starter' | 'plus' | 'pro' | 'team' | 'agency';
+export type PurchaseTier = 'free' | 'starter' | 'pro' | 'team_starter' | 'team_pro' | 'enterprise';
 
 export interface ProductDefinition {
-  /** Polar product ID, resolved at runtime from `envKey`. */
+  /** Polar product ID, resolved at runtime from \`envKey\`. */
   id: string | null;
   envKey: string;
   name: string;
   /** Credits granted per billing period (or per purchase, when one-time). */
   credits: number;
-  /** `null` for a one-time purchase. */
+  /** \`null\` for a one-time purchase. */
   interval: 'month' | 'year' | null;
-  /** Tier written to `user_credits.tier` while the subscription is active. */
+  /** Tier written to \`user_credits.tier\` while the subscription is active. */
   tier: PurchaseTier;
   /** Credits are granted once on checkout, or renewed on each subscription cycle. */
   recurring: boolean;
+  /** Number of team seats (only for team tiers). */
+  seats?: number;
 }
 
-// `process.env.X` is written out in full rather than built from `envKey`, because
+// \`process.env.X\` is written out in full rather than built from \`envKey\`, because
 // Next.js inlines only statically written environment reads at build time.
 export const PRODUCTS: Record<string, ProductDefinition> = {
   one_time_credits: {
@@ -44,73 +46,77 @@ export const PRODUCTS: Record<string, ProductDefinition> = {
     id: process.env.POLAR_PRODUCT_STARTER_MONTHLY ?? null,
     envKey: 'POLAR_PRODUCT_STARTER_MONTHLY',
     name: 'Starter (monthly)',
-    credits: 30,
-    interval: 'month',
-    tier: 'starter',
-    recurring: true,
-  },
-  plus_monthly: {
-    id: process.env.POLAR_PRODUCT_PLUS_MONTHLY ?? null,
-    envKey: 'POLAR_PRODUCT_PLUS_MONTHLY',
-    name: 'Plus (monthly)',
     credits: 50,
     interval: 'month',
-    tier: 'plus',
+    tier: 'starter',
     recurring: true,
   },
   pro_monthly: {
     id: process.env.POLAR_PRODUCT_PRO_MONTHLY ?? null,
     envKey: 'POLAR_PRODUCT_PRO_MONTHLY',
     name: 'Pro (monthly)',
-    credits: 100,
+    credits: 250,
     interval: 'month',
     tier: 'pro',
     recurring: true,
   },
-  starter_yearly: {
-    id: process.env.POLAR_PRODUCT_STARTER_YEARLY ?? null,
-    envKey: 'POLAR_PRODUCT_STARTER_YEARLY',
-    name: 'Starter (yearly)',
-    credits: 60,
+  team_starter_monthly: {
+    id: process.env.POLAR_PRODUCT_TEAM_STARTER_MONTHLY ?? null,
+    envKey: 'POLAR_PRODUCT_TEAM_STARTER_MONTHLY',
+    name: 'Team Starter (monthly)',
+    credits: 750,
+    interval: 'month',
+    tier: 'team_starter',
+    recurring: true,
+    seats: 3,
+  },
+  team_pro_monthly: {
+    id: process.env.POLAR_PRODUCT_TEAM_PRO_MONTHLY ?? null,
+    envKey: 'POLAR_PRODUCT_TEAM_PRO_MONTHLY',
+    name: 'Team Pro (monthly)',
+    credits: 2500,
+    interval: 'month',
+    tier: 'team_pro',
+    recurring: true,
+    seats: 10,
+  },
+  starter_annual: {
+    id: process.env.POLAR_PRODUCT_STARTER_ANNUAL ?? null,
+    envKey: 'POLAR_PRODUCT_STARTER_ANNUAL',
+    name: 'Starter (annual)',
+    credits: 600,
     interval: 'year',
     tier: 'starter',
     recurring: true,
   },
-  plus_yearly: {
-    id: process.env.POLAR_PRODUCT_PLUS_YEARLY ?? null,
-    envKey: 'POLAR_PRODUCT_PLUS_YEARLY',
-    name: 'Plus (yearly)',
-    credits: 96,
-    interval: 'year',
-    tier: 'plus',
-    recurring: true,
-  },
-  pro_yearly: {
-    id: process.env.POLAR_PRODUCT_PRO_YEARLY ?? null,
-    envKey: 'POLAR_PRODUCT_PRO_YEARLY',
-    name: 'Pro (yearly)',
-    credits: 240,
+  pro_annual: {
+    id: process.env.POLAR_PRODUCT_PRO_ANNUAL ?? null,
+    envKey: 'POLAR_PRODUCT_PRO_ANNUAL',
+    name: 'Pro (annual)',
+    credits: 3000,
     interval: 'year',
     tier: 'pro',
     recurring: true,
   },
-  team_monthly: {
-    id: process.env.POLAR_PRODUCT_TEAM_MONTHLY ?? null,
-    envKey: 'POLAR_PRODUCT_TEAM_MONTHLY',
-    name: 'Team (monthly)',
-    credits: 250,
-    interval: 'month',
-    tier: 'team',
+  team_starter_annual: {
+    id: process.env.POLAR_PRODUCT_TEAM_STARTER_ANNUAL ?? null,
+    envKey: 'POLAR_PRODUCT_TEAM_STARTER_ANNUAL',
+    name: 'Team Starter (annual)',
+    credits: 9000,
+    interval: 'year',
+    tier: 'team_starter',
     recurring: true,
+    seats: 3,
   },
-  agency_monthly: {
-    id: process.env.POLAR_PRODUCT_AGENCY_MONTHLY ?? null,
-    envKey: 'POLAR_PRODUCT_AGENCY_MONTHLY',
-    name: 'Agency (monthly)',
-    credits: 500,
-    interval: 'month',
-    tier: 'agency',
+  team_pro_annual: {
+    id: process.env.POLAR_PRODUCT_TEAM_PRO_ANNUAL ?? null,
+    envKey: 'POLAR_PRODUCT_TEAM_PRO_ANNUAL',
+    name: 'Team Pro (annual)',
+    credits: 30000,
+    interval: 'year',
+    tier: 'team_pro',
     recurring: true,
+    seats: 10,
   },
 };
 
