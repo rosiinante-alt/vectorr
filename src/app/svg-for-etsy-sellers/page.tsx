@@ -51,7 +51,7 @@ export default function SvgForEtsySellersPage() {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 { title: 'Commercial-use ready', description: 'Output files are yours to sell. No attribution, no watermarks.' },
-                { title: 'Cricut & Silhouette', description: 'Works in Design Space, Silhouette Studio, and Inkscape — your buyers' tools.' },
+                { title: 'Cricut & Silhouette', description: 'Works in Design Space, Silhouette Studio, and Inkscape - your buyers\' tools.' },
                 { title: 'Print-on-demand', description: 'Clean vectors for Printful, Printify, Redbubble, and Merch by Amazon.' },
                 { title: 'Transparent backgrounds', description: 'Perfect for stickers, decals, and sublimation designs.' },
                 { title: 'Multiple formats', description: 'Export SVG, PNG, PDF, DXF — give your buyers options.' },
