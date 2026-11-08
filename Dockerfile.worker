@@ -1,4 +1,4 @@
-# Vectorr — BullMQ worker image
+# Vectroy — BullMQ worker image
 #
 # The Next.js image (Dockerfile) ships only the standalone server, so the
 # long-running queue consumers need their own image with the TypeScript

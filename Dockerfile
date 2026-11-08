@@ -1,4 +1,4 @@
-# Vectorr — Node.js backend for Coolify deployment
+# Vectroy — Node.js backend for Coolify deployment
 # Multi-stage build: compile TypeScript, bundle dependencies, run Next.js
 
 FROM node:20-alpine AS base

@@ -1,6 +1,6 @@
-# Vectorr — Vector Art Optimization Platform
+# Vectroy — AI-Powered Vector Conversion Platform
 
-Full-stack vector-art optimization and enhancement platform built with Next.js.
+Full-stack vector conversion and optimization platform built with Next.js.
 Backend: Node.js + Next.js API routes  
 Database: Supabase (Postgres + Auth + Storage)  
 Deployment: Docker + Coolify on Hetzner/Netcup VPS
