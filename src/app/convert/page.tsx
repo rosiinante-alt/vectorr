@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Upload, Loader2, CheckCircle, AlertCircle, Download, Zap, Image, Layers } from 'lucide-react';
 import Link from 'next/link';
 import { SiteHeader, SiteFooter } from '@/components/site-chrome';
 import { CREDIT_COSTS } from '@/lib/credits/constants';
+import { useAuthGatedAction } from '@/hooks/use-auth-gated-action';
 
 type OutputFormat = 'svg' | 'dxf' | 'eps' | 'pdf';
 type UpscaleOption = '2x' | '4x' | false;
@@ -37,11 +38,37 @@ export default function ConvertPage() {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
 
+  const { checkAuthAndRun, restorePendingState, isCheckingAuth } = useAuthGatedAction('/convert');
+
   const creditCost =
     CREDIT_COSTS.VECTORIZE +
     (removeBg ? CREDIT_COSTS.REMOVE_BG : 0) +
     (upscale === '2x' ? CREDIT_COSTS.UPSCALE_2X : 0) +
     (upscale === '4x' ? CREDIT_COSTS.UPSCALE_4X : 0);
+
+  // Restore state after login redirect
+  useEffect(() => {
+    const restored = restorePendingState();
+    if (restored && restored.file) {
+      const { file: restoredFile, settings } = restored;
+      setFile(restoredFile);
+      
+      // Restore settings
+      if (settings.outputFormat) setOutputFormat(settings.outputFormat as OutputFormat);
+      if (settings.removeBg !== undefined) setRemoveBg(settings.removeBg as boolean);
+      if (settings.upscale !== undefined) setUpscale(settings.upscale as UpscaleOption);
+      
+      // Generate preview
+      const reader = new FileReader();
+      reader.onload = (e) => setPreview(e.target?.result as string);
+      reader.readAsDataURL(restoredFile);
+
+      // Auto-submit after a brief delay
+      setTimeout(() => {
+        performConversion(restoredFile, settings.outputFormat as OutputFormat, settings.removeBg as boolean, settings.upscale as UpscaleOption);
+      }, 500);
+    }
+  }, [restorePendingState]);
 
   const handleFile = useCallback((f: File) => {
     const allowed = ['image/png', 'image/jpeg', 'image/webp'];
@@ -70,18 +97,22 @@ export default function ConvertPage() {
     if (dropped) handleFile(dropped);
   }, [handleFile]);
 
-  const handleConvert = async () => {
-    if (!file) return;
+  const performConversion = async (
+    fileToUpload: File,
+    format: OutputFormat,
+    removeBackground: boolean,
+    upscaleOption: UpscaleOption,
+  ) => {
     setStatus('uploading');
     setError(null);
     setProgress(0);
 
     try {
       const formData = new FormData();
-      formData.append('file', file);
-      formData.append('outputFormat', outputFormat);
-      formData.append('removeBg', String(removeBg));
-      if (upscale) formData.append('upscale', upscale);
+      formData.append('file', fileToUpload);
+      formData.append('outputFormat', format);
+      formData.append('removeBg', String(removeBackground));
+      if (upscaleOption) formData.append('upscale', upscaleOption);
 
       const res = await fetch('/api/convert', { method: 'POST', body: formData });
       const data = await res.json();
@@ -127,6 +158,16 @@ export default function ConvertPage() {
     }
   };
 
+  const handleConvert = async () => {
+    if (!file) return;
+
+    // Check auth and run (will redirect if not authenticated)
+    await checkAuthAndRun(
+      { file, settings: { outputFormat, removeBg, upscale } },
+      async () => performConversion(file, outputFormat, removeBg, upscale),
+    );
+  };
+
   const reset = () => {
     setFile(null);
     setPreview(null);
@@ -137,7 +178,7 @@ export default function ConvertPage() {
     setProgress(0);
   };
 
-  const isProcessing = status === 'uploading' || status === 'queued' || status === 'processing';
+  const isProcessing = status === 'uploading' || status === 'queued' || status === 'processing' || isCheckingAuth;
 
   return (
     <>
@@ -207,7 +248,8 @@ export default function ConvertPage() {
                       )}
                       <button
                         onClick={reset}
-                        className="absolute right-3 top-3 rounded-full bg-white px-3 py-1 text-[12px] font-medium text-text-secondary shadow-[var(--shadow-1)] hover:text-error"
+                        disabled={isProcessing}
+                        className="absolute right-3 top-3 rounded-full bg-white px-3 py-1 text-[12px] font-medium text-text-secondary shadow-[var(--shadow-1)] hover:text-error disabled:cursor-not-allowed disabled:opacity-50"
                       >
                         Change
                       </button>
@@ -238,7 +280,10 @@ export default function ConvertPage() {
                       <div className="flex items-center gap-2">
                         <Loader2 className="h-4 w-4 animate-spin text-accent" />
                         <span className="text-[14px] font-medium text-text-primary">
-                          {status === 'uploading' ? 'Uploading…' : status === 'queued' ? 'Queued…' : 'Converting…'}
+                          {isCheckingAuth && 'Checking authentication…'}
+                          {status === 'uploading' && !isCheckingAuth && 'Uploading…'}
+                          {status === 'queued' && 'Queued…'}
+                          {status === 'processing' && 'Converting…'}
                         </span>
                       </div>
                       <span className="text-[13px] text-text-tertiary">{progress}%</span>
@@ -301,11 +346,13 @@ export default function ConvertPage() {
                       <button
                         key={fmt}
                         onClick={() => setOutputFormat(fmt)}
+                        disabled={isProcessing}
                         className={[
                           'w-full rounded-[var(--radius-md)] px-3.5 py-2.5 text-left text-[14px] font-medium transition-colors',
                           outputFormat === fmt
                             ? 'bg-accent text-white'
                             : 'text-text-primary hover:bg-bg-secondary',
+                          isProcessing && 'cursor-not-allowed opacity-50',
                         ].join(' ')}
                       >
                         {label}
@@ -330,9 +377,10 @@ export default function ConvertPage() {
                       </div>
                     </div>
                     <div
-                      onClick={() => setRemoveBg(!removeBg)}
+                      onClick={() => !isProcessing && setRemoveBg(!removeBg)}
                       className={[
-                        'relative h-5 w-9 rounded-full transition-colors cursor-pointer',
+                        'relative h-5 w-9 rounded-full transition-colors',
+                        isProcessing ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
                         removeBg ? 'bg-accent' : 'bg-bg-tertiary',
                       ].join(' ')}
                     >
@@ -354,11 +402,13 @@ export default function ConvertPage() {
                         <button
                           key={String(opt)}
                           onClick={() => setUpscale(opt)}
+                          disabled={isProcessing}
                           className={[
                             'rounded-[var(--radius-md)] py-1.5 text-[13px] font-medium transition-colors',
                             upscale === opt
                               ? 'bg-accent text-white'
                               : 'bg-bg-secondary text-text-secondary hover:bg-bg-tertiary',
+                            isProcessing && 'cursor-not-allowed opacity-50',
                           ].join(' ')}
                         >
                           {opt === false ? 'None' : opt}
@@ -414,7 +464,7 @@ export default function ConvertPage() {
                     {isProcessing ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        Converting…
+                        {isCheckingAuth ? 'Checking…' : 'Converting…'}
                       </>
                     ) : (
                       <>
