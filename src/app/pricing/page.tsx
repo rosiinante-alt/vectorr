@@ -1,6 +1,4 @@
-'use client';
-
-import { useState, Suspense } from "react";
+import { Suspense } from "react";
 import Link from "next/link";
 
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
@@ -13,7 +11,7 @@ import { PRICING_TIERS, CREDIT_COSTS } from "@/lib/credits/constants";
 const tierOrder = ["FREE", "STARTER", "PRO", "TEAM_STARTER", "TEAM_PRO", "ENTERPRISE"] as const;
 
 export default function PricingPage() {
-  const [isAnnual, setIsAnnual] = useState(false);
+  const isAnnual = false; // TODO: Add toggle back with client component
 
   return (
     <>
@@ -39,39 +37,6 @@ export default function PricingPage() {
               never charged.
             </p>
 
-            {/* Annual/Monthly Toggle */}
-            <div className="mx-auto mt-10 flex items-center justify-center gap-3">
-              <button
-                onClick={() => setIsAnnual(false)}
-                className={`text-[15px] font-medium transition-colors ${
-                  !isAnnual ? 'text-text-primary' : 'text-text-tertiary hover:text-text-secondary'
-                }`}
-              >
-                Monthly
-              </button>
-              <button
-                onClick={() => setIsAnnual(!isAnnual)}
-                className="relative h-6 w-11 rounded-full bg-border transition-colors"
-                role="switch"
-                aria-checked={isAnnual}
-                aria-label="Toggle annual billing"
-              >
-                <span
-                  className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition-transform ${
-                    isAnnual ? 'translate-x-[22px]' : 'translate-x-0.5'
-                  }`}
-                />
-              </button>
-              <button
-                onClick={() => setIsAnnual(true)}
-                className={`text-[15px] font-medium transition-colors ${
-                  isAnnual ? 'text-text-primary' : 'text-text-tertiary hover:text-text-secondary'
-                }`}
-              >
-                Annual
-                <Badge tone="success" className="ml-2">Save up to 26%</Badge>
-              </button>
-            </div>
           </div>
         </section>
 
