@@ -1,0 +1,455 @@
+{
+  "version": "2.0",
+  "generated": "2026-11-08T08:38:01.041Z",
+  "method": "Artwork-level crops taken from the original source composites, isolated by content bounds against the detected background, registered on an identical canvas. No generative redraw, no inpainting, no pixel erasure.",
+  "pairs": [
+    {
+      "index": 1,
+      "name": "pixel-heart",
+      "title": "Pixel Heart",
+      "before": "image-01-before.png",
+      "after": "image-01-after.png",
+      "canvas_size": [
+        159,
+        140
+      ],
+      "source": "1download.png",
+      "source_size": [
+        293,
+        172
+      ],
+      "source_checksum": "3adac58ee640a105e0e8ee70bda7eafe",
+      "crop_rect": {
+        "before": [
+          5,
+          24,
+          111,
+          92
+        ],
+        "after": [
+          176,
+          28,
+          103,
+          92
+        ]
+      },
+      "registration": {
+        "method": "content-bounds alignment on shared canvas",
+        "before_scale": 1,
+        "uniform_scale_applied": false
+      },
+      "limitations": [
+        "A background grid is baked into the raster half of the source poster and crosses the artwork; it is preserved, not erased.",
+        "The clean half retains visible vector control-point markers in the source image.",
+        "The two heart shapes are not identical outlines, so registration aligns them by content bounds rather than by contour."
+      ]
+    },
+    {
+      "index": 2,
+      "name": "apple",
+      "title": "Apple",
+      "before": "image-02-before.png",
+      "after": "image-02-after.png",
+      "canvas_size": [
+        227,
+        245
+      ],
+      "source": "3.png",
+      "source_size": [
+        800,
+        800
+      ],
+      "source_checksum": "7074cd689e986490c9b2dcef01b5ff80",
+      "crop_rect": {
+        "before": [
+          142,
+          270,
+          179,
+          197
+        ],
+        "after": [
+          477,
+          270,
+          178,
+          194
+        ]
+      },
+      "registration": {
+        "method": "content-bounds alignment on shared canvas",
+        "before_scale": 1,
+        "uniform_scale_applied": false
+      },
+      "limitations": [
+        "The clean half retains visible vector control-point and anchor markers in the source image.",
+        "The raster half is an intentionally blurred/upscaled bitmap, so detail is not recoverable by registration."
+      ]
+    },
+    {
+      "index": 3,
+      "name": "cityscape",
+      "title": "City Skyline",
+      "before": "image-03-before.png",
+      "after": "image-03-after.png",
+      "canvas_size": [
+        538,
+        493
+      ],
+      "source": "4.png",
+      "source_size": [
+        1344,
+        768
+      ],
+      "source_checksum": "04fc4ecf6b43f1188663c370725b65e7",
+      "crop_rect": {
+        "before": [
+          54,
+          107,
+          490,
+          445
+        ],
+        "after": [
+          763,
+          107,
+          465,
+          445
+        ]
+      },
+      "registration": {
+        "method": "content-bounds alignment on shared canvas",
+        "before_scale": 1,
+        "uniform_scale_applied": false
+      },
+      "limitations": [
+        "The raster half carries a full-panel noise/grain texture that cannot be removed without redrawing.",
+        "Building silhouettes differ between the two halves; the residual mismatch is disclosed rather than warped away."
+      ]
+    },
+    {
+      "index": 4,
+      "name": "bird",
+      "title": "Bird Illustration",
+      "before": "image-04-before.png",
+      "after": "image-04-after.png",
+      "canvas_size": [
+        477,
+        388
+      ],
+      "source": "43.png",
+      "source_size": [
+        1024,
+        640
+      ],
+      "source_checksum": "17f90585f478cc00ba6bdbb05d5c18e2",
+      "crop_rect": {
+        "before": [
+          71,
+          77,
+          427,
+          339
+        ],
+        "after": [
+          555,
+          76,
+          429,
+          340
+        ]
+      },
+      "registration": {
+        "method": "content-bounds alignment on shared canvas",
+        "before_scale": 1,
+        "uniform_scale_applied": false
+      },
+      "limitations": [
+        "The source crops the lower stems: the black RASTER/VECTOR label blocks of the poster occlude the stem region and are excluded, which also cuts the artwork short.",
+        "Visible vector control points remain on the clean half."
+      ]
+    },
+    {
+      "index": 5,
+      "name": "apple-illustrator",
+      "title": "Apple — vector editor",
+      "before": "image-05-before.png",
+      "after": "image-05-after.png",
+      "canvas_size": [
+        387,
+        418
+      ],
+      "source": "5.png",
+      "source_size": [
+        1918,
+        1020
+      ],
+      "source_checksum": "faa63496a61b3ed9936846164c88a43f",
+      "crop_rect": {
+        "before": [
+          268,
+          352,
+          336,
+          367
+        ],
+        "after": [
+          735,
+          347,
+          339,
+          370
+        ]
+      },
+      "registration": {
+        "method": "content-bounds alignment on shared canvas",
+        "before_scale": 1,
+        "uniform_scale_applied": false
+      },
+      "limitations": [
+        "This source is a screenshot of a vector editor; only the artwork region is extracted and all editor chrome, canvas borders and Before/After captions are excluded.",
+        "Control points, anchor markers and a selection bounding box are visible on the clean half and are preserved."
+      ]
+    },
+    {
+      "index": 6,
+      "name": "deer-full",
+      "title": "Red Deer — full",
+      "before": "image-06-before.png",
+      "after": "image-06-after.png",
+      "canvas_size": [
+        610,
+        601
+      ],
+      "source": "7.png",
+      "source_size": [
+        1200,
+        1376
+      ],
+      "source_checksum": "1adaab7772d6a7a6bbda61f7e54cf449",
+      "crop_rect": {
+        "before": [
+          28,
+          113,
+          562,
+          553
+        ],
+        "after": [
+          610,
+          113,
+          562,
+          553
+        ]
+      },
+      "registration": {
+        "method": "content-bounds alignment on shared canvas",
+        "before_scale": 1,
+        "uniform_scale_applied": false
+      },
+      "limitations": [
+        "The clean half has a red cut-layer outline baked into the source artwork; it is preserved, not removed.",
+        "The raster half is a low-resolution render of the same artwork, so edges stay soft."
+      ]
+    },
+    {
+      "index": 7,
+      "name": "deer-detail",
+      "title": "Red Deer — antler detail",
+      "before": "image-07-before.png",
+      "after": "image-07-after.png",
+      "canvas_size": [
+        610,
+        490
+      ],
+      "source": "7.png",
+      "source_size": [
+        1200,
+        1376
+      ],
+      "source_checksum": "1adaab7772d6a7a6bbda61f7e54cf449",
+      "crop_rect": {
+        "before": [
+          28,
+          856,
+          562,
+          442
+        ],
+        "after": [
+          610,
+          858,
+          562,
+          440
+        ]
+      },
+      "registration": {
+        "method": "content-bounds alignment on shared canvas",
+        "before_scale": 1,
+        "uniform_scale_applied": false
+      },
+      "limitations": [
+        "The clean half has a red cut-layer outline baked into the source artwork; it is preserved, not removed.",
+        "The detail crop is registered on the antler mass, which sits left of centre in each panel, not on the panel centre."
+      ]
+    },
+    {
+      "index": 8,
+      "name": "cursor-full",
+      "title": "Cursor — full shape",
+      "before": "image-08-before.png",
+      "after": "image-08-after.png",
+      "canvas_size": [
+        277,
+        257
+      ],
+      "source": "do3wnload.png",
+      "source_size": [
+        733,
+        613
+      ],
+      "source_checksum": "b70264e7203025f8b94d825337aa766c",
+      "crop_rect": {
+        "before": [
+          35,
+          20,
+          264,
+          258
+        ],
+        "after": [
+          70,
+          362,
+          229,
+          209
+        ]
+      },
+      "registration": {
+        "method": "content-bounds alignment on shared canvas",
+        "before_scale": 0.8101,
+        "uniform_scale_applied": true
+      },
+      "limitations": [
+        "The source arranges this pair by rows (raster above, clean below), not left/right.",
+        "Magnification boxes and leader lines are drawn over the raster half in the source; they are preserved where they cross the artwork.",
+        "The zoom captions and panel furniture of the source are excluded."
+      ]
+    },
+    {
+      "index": 9,
+      "name": "cursor-zoom",
+      "title": "Cursor — magnified detail",
+      "before": "image-09-before.png",
+      "after": "image-09-after.png",
+      "canvas_size": [
+        309,
+        294
+      ],
+      "source": "do3wnload.png",
+      "source_size": [
+        733,
+        613
+      ],
+      "source_checksum": "b70264e7203025f8b94d825337aa766c",
+      "crop_rect": {
+        "before": [
+          382,
+          27,
+          261,
+          246
+        ],
+        "after": [
+          382,
+          338,
+          215,
+          244
+        ]
+      },
+      "registration": {
+        "method": "content-bounds alignment on shared canvas",
+        "before_scale": 1,
+        "uniform_scale_applied": false
+      },
+      "limitations": [
+        "The two halves of this pair show different visible background and transparency in the source, so the detail itself does not sit on identical backgrounds.",
+        "The 8x magnification captions are excluded."
+      ]
+    },
+    {
+      "index": 10,
+      "name": "eagle",
+      "title": "Eagle Logo",
+      "before": "image-10-before.png",
+      "after": "image-10-after.png",
+      "canvas_size": [
+        515,
+        389
+      ],
+      "source": "downlo56ad.png",
+      "source_size": [
+        1090,
+        538
+      ],
+      "source_checksum": "707ea722ea8c4e48c33774f6b22e5ae0",
+      "crop_rect": {
+        "before": [
+          65,
+          56,
+          453,
+          331
+        ],
+        "after": [
+          565,
+          51,
+          457,
+          341
+        ]
+      },
+      "registration": {
+        "method": "content-bounds alignment on shared canvas",
+        "before_scale": 1.0302,
+        "uniform_scale_applied": true
+      },
+      "limitations": [
+        "The raster half is a blurred bitmap in the source; the softness is real and is preserved.",
+        "Control points remain visible on the clean half."
+      ]
+    },
+    {
+      "index": 11,
+      "name": "s-letter",
+      "title": "Letter S",
+      "before": "image-11-before.png",
+      "after": "image-11-after.png",
+      "canvas_size": [
+        359,
+        344
+      ],
+      "source": "download.png",
+      "source_size": [
+        693,
+        442
+      ],
+      "source_checksum": "1f02620847c896ef0382a3f722ec7e43",
+      "crop_rect": {
+        "before": [
+          11,
+          11,
+          307,
+          293
+        ],
+        "after": [
+          373,
+          11,
+          311,
+          296
+        ]
+      },
+      "registration": {
+        "method": "content-bounds alignment on shared canvas",
+        "before_scale": 1,
+        "uniform_scale_applied": false
+      },
+      "limitations": [
+        "The purple taper illustration and the embedded small S are part of the source artwork and are preserved.",
+        "The outer frame and the Raster/Vector format captions of the source are excluded."
+      ]
+    }
+  ],
+  "excluded_sources": [
+    {
+      "source": "6.png",
+      "reason": "Two mirrored fox illustrations with directional controls; no verified before/after relationship and no demonstrated quality difference in the source. Excluded pending confirmation of provenance."
+    }
+  ]
+}
