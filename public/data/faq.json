@@ -1,0 +1,122 @@
+[
+  {
+    "id": "what-is-vectorization",
+    "question": "What is image vectorization?",
+    "answer": "Image vectorization converts a raster image (PNG, JPG) into vector artwork made of mathematical paths and curves. Unlike pixels, vector shapes scale to any size without blurring — which is why laser cutters, plotters, and CNC machines require vector files.",
+    "category": "Basics"
+  },
+  {
+    "id": "how-does-it-work",
+    "question": "How does AI vectorization work?",
+    "answer": "Our vectorizer identifies shapes, color regions, and edges in your image, then reconstructs them as clean geometric paths. Modern approaches detect color regions rather than just edges, which is why the output looks like a redrawn illustration instead of a stack of jagged outlines.",
+    "category": "Basics"
+  },
+  {
+    "id": "output-formats",
+    "question": "What file formats can I export?",
+    "answer": "SVG is the default and works everywhere — browsers, Illustrator, Figma, Cricut, Silhouette, and most laser cutters. DXF is available for CAD and CNC workflows, and PDF for print workflows.",
+    "category": "Basics"
+  },
+  {
+    "id": "best-image-quality",
+    "question": "What kind of source image gives the best results?",
+    "answer": "High-contrast, well-lit images with clear edges and distinct color regions work best. Transparent PNGs often trace more cleanly than photos on busy backgrounds. Use our background removal tool first if your subject has a cluttered backdrop.",
+    "category": "Tips"
+  },
+  {
+    "id": "vector-vs-raster",
+    "question": "Should I use SVG or PNG?",
+    "answer": "Use SVG whenever the output will be printed, cut, or displayed at different sizes. Use PNG only for photographs, screenshots, or images with photographic gradients that genuinely need pixel-level detail. Our SVG vs PNG guide covers this in depth.",
+    "category": "Basics"
+  },
+  {
+    "id": "editing-output",
+    "question": "Can I edit the result after converting?",
+    "answer": "Yes. The output is standard, editable SVG with named layers and clean paths — open it in Illustrator, Inkscape, Figma, or Affinity Designer and edit as you would any other vector file.",
+    "category": "Output"
+  },
+  {
+    "id": "file-size-limits",
+    "question": "Is there a file size limit?",
+    "answer": "Single images up to 25 MB and 8000×8000 pixels are supported. Batch processing accepts many files at once — upload a whole folder of artwork and we handle the queue.",
+    "category": "Technical"
+  },
+  {
+    "id": "supported-inputs",
+    "question": "Which input formats are supported?",
+    "answer": "PNG, JPG/JPEG, WebP, BMP, and TIFF are all accepted. SVG and PDF inputs are not traced — they are already vector, so they can be optimized rather than converted.",
+    "category": "Technical"
+  },
+  {
+    "id": "commercial-use",
+    "question": "Can I use the vectors commercially?",
+    "answer": "Yes. Vectroy is a tool — you own the output you create, with no licensing restrictions on selling, printing, or distributing the results. You are responsible for having the rights to the original image you upload.",
+    "category": "Billing"
+  },
+  {
+    "id": "credits-and-billing",
+    "question": "How do credits work?",
+    "answer": "Each conversion costs a small number of credits. Vectorization costs 1 credit, while background removal and upscaling cost 0.25 credits each. Credits are included in every plan, and you can top up at any time.",
+    "category": "Billing"
+  },
+  {
+    "id": "free-tier",
+    "question": "Is there a free tier?",
+    "answer": "Yes — every new account starts with free credits so you can try the full workflow, including background removal and upscaling, before choosing a plan.",
+    "category": "Billing"
+  },
+  {
+    "id": "data-privacy",
+    "question": "Are my images private?",
+    "answer": "Your uploads are processed to produce your result and are not used to train models or sold to third parties. Files are stored only as long as needed for you to download them, then automatically deleted.",
+    "category": "Trust"
+  },
+  {
+    "id": "background-removal",
+    "question": "Can you remove the background?",
+    "answer": "Yes. Our background removal isolates the main subject and outputs a transparent PNG, which is ideal for logos and product shots. You can then trace that clean PNG into SVG for a better result.",
+    "category": "Tools"
+  },
+  {
+    "id": "upscale-quality",
+    "question": "When should I upscale an image?",
+    "answer": "Upscale before vectorizing when your source is low resolution. Enlarging first gives the tracer more pixels to work from, which measurably improves path accuracy on detailed artwork.",
+    "category": "Tools"
+  },
+  {
+    "id": "batch-processing",
+    "question": "How does batch processing work?",
+    "answer": "Upload up to hundreds of images at once with consistent settings. We process them on a queue and you can download the results individually or as a single archive. Batch runs are billed per file.",
+    "category": "Tools"
+  },
+  {
+    "id": "api-access",
+    "question": "Do you have an API?",
+    "answer": "Yes. The API exposes vectorization, background removal, and upscaling as endpoints you can call from your own scripts and integrations, with the same credit-based pricing.",
+    "category": "Business"
+  },
+  {
+    "id": "cricut-compatibility",
+    "question": "Will the file work with Cricut?",
+    "answer": "Yes. The exported SVG imports directly into Cricut Design Space and Silhouette Studio. For cleaner cuts we also offer a dedicated SVG optimizer that merges overlapping paths and removes hidden duplicate lines.",
+    "category": "Making"
+  },
+  {
+    "id": "laser-compatibility",
+    "question": "Will the file work with my laser cutter?",
+    "answer": "For most laser cutters you will want DXF rather than SVG, since RDWorks, LightBurn, and LaserGRBL expect CAD-style paths. Export DXF from the batch tool or conversion settings.",
+    "category": "Making"
+  },
+  {
+    "id": "why-not-free",
+    "question": "Why is this better than a free online converter?",
+    "answer": "Free converters usually do simple edge thresholding, which produces jagged outlines and poor color handling. Our AI detects actual shapes and color regions, and also includes background removal, upscaling, and batch — the free tier lets you compare the difference directly.",
+    "category": "Basics"
+  },
+  {
+    "id": "refunds",
+    "question": "What is your refund policy?",
+    "answer": "If a conversion produced an unusable result, contact us within 14 days and we will make it right. Subscriptions can be cancelled at any time and remain active until the end of the paid period.",
+    "category": "Billing"
+  }
+]

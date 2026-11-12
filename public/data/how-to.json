@@ -1,0 +1,156 @@
+[
+  {
+    "id": "convert-logo",
+    "title": "Convert a Logo to SVG",
+    "description": "Turn a raster logo file into a clean, scalable SVG ready for print, web, embroidery, and cutting.",
+    "difficulty": "Beginner",
+    "duration": "2 minutes",
+    "toolPath": "/convert",
+    "toolLabel": "Start converting",
+    "category": "Logos",
+    "steps": [
+      "Upload your PNG or JPG logo to the converter.",
+      "Select 'Logo & Clipart' from the preset menu for clean, solid-color output.",
+      "If the background is not transparent, enable 'Remove Background' in settings.",
+      "Click Convert and wait a few seconds.",
+      "Download the SVG and open it in Illustrator, Figma, or Cricut Design Space."
+    ],
+    "tips": [
+      "Using a transparent PNG as input (instead of a white-background JPG) skips the need for background removal.",
+      "If the logo has gradients, the 'Gradient' preset preserves them better than 'Logo & Clipart'."
+    ],
+    "tags": ["logo", "svg", "convert", "beginner"]
+  },
+  {
+    "id": "vectorize-for-cricut",
+    "title": "Vectorize an Image for Cricut",
+    "description": "Prepare any raster image — sketch, clipart, or photo — as a cuttable SVG for Cricut Design Space.",
+    "difficulty": "Beginner",
+    "duration": "3 minutes",
+    "toolPath": "/svg-for-cricut",
+    "toolLabel": "Make Cricut SVG",
+    "category": "Craft & Vinyl",
+    "steps": [
+      "Upload your image to the converter.",
+      "Select the 'Cricut / Vinyl' preset to get clean cut-path outlines.",
+      "Enable 'Remove Background' if your image isn't already on a transparent background.",
+      "Convert and download the SVG.",
+      "Import the SVG into Cricut Design Space — it will appear with ready-to-cut contours.",
+      "Optionally use our SVG Optimizer to merge overlapping paths before cutting."
+    ],
+    "tips": [
+      "High-contrast clip art works best. Photographs often need cleaning up first.",
+      "If you get too many small stray paths, increase the 'Noise Threshold' slider before converting."
+    ],
+    "tags": ["cricut", "vinyl", "cut", "craft"]
+  },
+  {
+    "id": "batch-convert-folder",
+    "title": "Batch Convert a Folder of Images",
+    "description": "Process dozens of PNG or JPG files at once with consistent settings and download as a single archive.",
+    "difficulty": "Intermediate",
+    "duration": "5 minutes",
+    "toolPath": "/batch",
+    "toolLabel": "Open Batch Converter",
+    "category": "Workflow",
+    "steps": [
+      "Open the Batch Converter.",
+      "Drag your folder of images into the upload zone, or click to select multiple files.",
+      "Choose common settings — format, preset, background removal — applied to every file.",
+      "Click 'Start Batch' and watch the progress bar.",
+      "When complete, download individual results or click 'Download All' for a zip archive."
+    ],
+    "tips": [
+      "Sort your files before uploading — results preserve the original filename so sorting is easy.",
+      "Background removal adds 0.25 credits per file; disable it for images that are already clean."
+    ],
+    "tags": ["batch", "workflow", "automation"]
+  },
+  {
+    "id": "remove-background",
+    "title": "Remove a Background Before Vectorizing",
+    "description": "Isolate your subject with AI background removal, then convert the transparent PNG to a crisp vector.",
+    "difficulty": "Beginner",
+    "duration": "3 minutes",
+    "toolPath": "/remove-bg",
+    "toolLabel": "Remove background",
+    "category": "Photos",
+    "steps": [
+      "Open the Background Remover.",
+      "Upload your photo — product shot, logo scan, or illustration.",
+      "The AI isolates the subject and outputs a transparent PNG.",
+      "Download the PNG or click 'Vectorize this' to send it straight to the converter.",
+      "In the converter, choose the 'Photo' or 'Illustration' preset and convert."
+    ],
+    "tips": [
+      "Photographs with busy backgrounds benefit most — the AI handles hair and fur edges better than a manual path.",
+      "If the subject has a gradient, choose 'Gradient' in the vectorizer so it blends smoothly."
+    ],
+    "tags": ["background", "photo", "png", "transparent"]
+  },
+  {
+    "id": "prepare-laser-cut-file",
+    "title": "Prepare a Laser Cutting File",
+    "description": "Convert a sketch or design into a laser-ready DXF or SVG with clean, single-stroke cut paths.",
+    "difficulty": "Intermediate",
+    "duration": "5 minutes",
+    "toolPath": "/svg-for-laser-cutting",
+    "toolLabel": "Create laser file",
+    "category": "Manufacturing",
+    "steps": [
+      "Scan or photograph your design on a clean, white background.",
+      "Upload to the converter and select the 'Technical / Line Art' preset.",
+      "In Advanced Settings, enable 'Single-stroke outline' for cut paths rather than filled shapes.",
+      "Choose DXF as the export format for LightBurn, RDWorks, or LaserGRBL.",
+      "Import the DXF into your laser software, set power/speed, and cut."
+    ],
+    "tips": [
+      "Draw in black on white paper for the cleanest trace — pencil grey causes false paths.",
+      "Add a 0.1mm kerf offset in your laser software to compensate for beam width."
+    ],
+    "tags": ["laser", "DXF", "CNC", "manufacturing"]
+  },
+  {
+    "id": "upscale-then-convert",
+    "title": "Upscale a Low-Res Image First",
+    "description": "Improve vectorization accuracy by using the AI upscaler on small or blurry source images before tracing.",
+    "difficulty": "Beginner",
+    "duration": "3 minutes",
+    "toolPath": "/upscale",
+    "toolLabel": "Upscale image",
+    "category": "Workflow",
+    "steps": [
+      "Open the Upscaler and upload your image.",
+      "Choose 4x for very small images (under 300×300 px) or 2x for moderately sized ones.",
+      "Download the upscaled image, or click 'Vectorize this' to pass it straight to the converter.",
+      "In the converter the AI now has four times more pixels to work with, producing sharper paths."
+    ],
+    "tips": [
+      "AI upscaling adds detail that wasn't in the original — the goal is a better trace, not more information.",
+      "For logos, 2x is usually enough; for photographs go for 4x if the original is under 500 pixels wide."
+    ],
+    "tags": ["upscale", "quality", "workflow", "resolution"]
+  },
+  {
+    "id": "optimize-existing-svg",
+    "title": "Optimize an Existing SVG",
+    "description": "Reduce SVG file size and clean up messy paths from other tools, so the file is leaner for web and email.",
+    "difficulty": "Beginner",
+    "duration": "1 minute",
+    "toolPath": "/svg-optimizer",
+    "toolLabel": "Optimize SVG",
+    "category": "Workflow",
+    "steps": [
+      "Open the SVG Optimizer.",
+      "Upload an SVG exported from Illustrator, Figma, or another tool.",
+      "Review the savings report — it shows which optimization passes will shrink the file.",
+      "Click Optimize to remove unused defs, inline redundant styles, and reduce decimal precision.",
+      "Download the optimized SVG — typical savings are 30–70%."
+    ],
+    "tips": [
+      "Avoid running the optimizer on SVGs with embedded animations — some minification passes can break keyframe references.",
+      "Always keep a backup of the original before optimizing."
+    ],
+    "tags": ["optimizer", "svg", "file-size", "performance"]
+  }
+]
