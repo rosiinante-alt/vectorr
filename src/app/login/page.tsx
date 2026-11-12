@@ -2,9 +2,8 @@ import { redirect } from 'next/navigation';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import LoginClient from './login-client';
 
-// Reads the session cookie on every request, so it blocks rather than
-// prerendering into a static shell (Cache Components is enabled).
-export const instant = false;
+// Force dynamic rendering since we use cookies via Supabase
+export const dynamic = 'force-dynamic';
 
 type SearchParams = Promise<{ plan?: string; next?: string }>;
 
