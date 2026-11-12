@@ -25,9 +25,21 @@ export const CREDIT_COSTS = {
   UPSCALE_2X: 0.25,
   UPSCALE_4X: 0.25,
   STYLE_TRANSFER: 0.50,
-  AI_GENERATE: 0.50,        // AI logo generation
-  AI_EDIT: 0.50,
+  AI_GENERATE: 0.50,        // AI logo / SVG / pattern generation
+  AI_IMAGE: 0.50,           // Full AI image generation (alias for AI_GENERATE)
+  AI_EDIT: 0.50,            // Inpainting / variant generation
+  BRAND_IDENTITY: 1.00,     // Full brand identity kit (2× AI_GENERATE)
   EXPORT_PREMIUM: 0.00,     // Format exports are free
+
+  // Animation tiers
+  ANIMATE_ECO: 0,           // Basic fade-in — free
+  ANIMATE_STANDARD: 0.25,   // Stroke + entrance animations
+  ANIMATE_PRO: 0.50,        // Staggered / morph / parallax
+
+  // Content generation
+  CONTENT_LISTING: 0.25,    // Etsy listing / alt text
+  CONTENT_BLOG: 0.50,       // Long-form blog article
+  CONTENT_GENERATION: 0.25, // Backward-compat alias → listing tier
 } as const;
 
 // Overage rates per tier (charged per credit when over monthly limit)
@@ -168,3 +180,43 @@ export const PRICING_TIERS: Record<string, PricingTier> = {
 
 export type PricingTierKey = keyof typeof PRICING_TIERS;
 export type CreditCostKey = keyof typeof CREDIT_COSTS;
+
+// One-time credit packs (no subscription)
+export interface CreditPack {
+  credits: number;
+  price: number;
+  pricePerCredit: number;
+  name: string;
+  description: string;
+  planKey: string;
+  badge?: string;
+}
+
+export const CREDIT_PACKS: CreditPack[] = [
+  {
+    credits: 20,
+    price: 6.99,
+    pricePerCredit: 0.35,
+    name: 'Starter Pack',
+    description: 'Perfect for one-off projects',
+    planKey: 'one_time_credits',
+  },
+  {
+    credits: 50,
+    price: 14.99,
+    pricePerCredit: 0.30,
+    name: 'Value Pack',
+    description: 'Best value for occasional use',
+    planKey: 'one_time_credits_50',
+    badge: 'Popular',
+  },
+  {
+    credits: 100,
+    price: 24.99,
+    pricePerCredit: 0.25,
+    name: 'Pro Pack',
+    description: 'For serious projects',
+    planKey: 'one_time_credits_100',
+    badge: 'Best Value',
+  },
+];

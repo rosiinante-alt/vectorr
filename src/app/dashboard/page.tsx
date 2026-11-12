@@ -179,7 +179,7 @@ export default function DashboardPage() {
                               {file.output_format && (
                                 <span className="font-mono uppercase">{file.output_format}</span>
                               )}
-                              <span className="font-mono">{file.credits_used.toFixed(2)} cr</span>
+                              <span className="font-mono">{file.credits_used} cr</span>
                             </div>
                           </div>
                           <div className="flex items-center gap-3">

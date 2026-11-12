@@ -236,7 +236,7 @@ export default function UpscalePage() {
                         </div>
                         {result && (
                           <p className="mb-3 text-[13px] text-text-secondary">
-                            {result.remainingBalance.toFixed(2)} credits remaining
+                            {result.remainingBalance} credits remaining
                           </p>
                         )}
                         <div className="flex flex-wrap gap-2">

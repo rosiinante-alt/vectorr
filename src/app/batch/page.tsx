@@ -243,7 +243,7 @@ export default function BatchPage() {
                           </Link>.
                         </p>
                         <p className="mb-3 text-[13px] text-text-secondary">
-                          {result.remainingBalance.toFixed(2)} credits remaining
+                          {result.remainingBalance} credits remaining
                         </p>
                         <button
                           onClick={reset}
@@ -330,7 +330,7 @@ export default function BatchPage() {
 
                   <div className="mb-4 flex items-center justify-between text-[13px]">
                     <span className="text-text-secondary">Total credit cost</span>
-                    <span className="font-medium text-text-primary">{creditCost.toFixed(2)} credits</span>
+                    <span className="font-medium text-text-primary">{creditCost} credits</span>
                   </div>
 
                   <button

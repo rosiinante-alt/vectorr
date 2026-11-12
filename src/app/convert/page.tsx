@@ -320,7 +320,7 @@ export default function ConvertPage() {
                     )}
                     {result && (
                       <p className="mt-3 text-[13px] text-text-tertiary text-center">
-                        {result.creditCost.toFixed(2)} credits used · {result.remainingBalance.toFixed(2)} remaining
+                        {result.creditCost} credits used · {result.remainingBalance} remaining
                       </p>
                     )}
                     <button
@@ -446,7 +446,7 @@ export default function ConvertPage() {
                     )}
                     <div className="flex justify-between border-t border-[var(--border)] pt-2 text-[14px] font-semibold">
                       <span>Total</span>
-                      <span className="font-mono text-accent">{creditCost.toFixed(2)} credits</span>
+                      <span className="font-mono text-accent">{creditCost} credits</span>
                     </div>
                   </div>
 
