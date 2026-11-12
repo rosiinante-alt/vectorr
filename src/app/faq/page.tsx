@@ -42,7 +42,7 @@ function FAQAccordion({ item }: { item: FAQItem }) {
 }
 
 export default function FAQPage() {
-  const schema = buildFAQSchema();
+  const schema = buildFAQSchema(FAQ_ITEMS);
   const categories = [...new Set(FAQ_ITEMS.map((f) => f.category))];
 
   return (

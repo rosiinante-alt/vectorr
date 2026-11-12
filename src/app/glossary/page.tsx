@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 function TermCard({ term }: { term: GlossaryTerm }) {
   return (
     <article
-      id={term.id}
+      id={term.slug}
       className="scroll-mt-20 rounded-[var(--radius-md)] bg-bg-secondary p-5"
     >
       <h3 className="text-base font-semibold text-text-primary mb-1.5">
@@ -32,13 +32,13 @@ function TermCard({ term }: { term: GlossaryTerm }) {
         {term.definition}
       </p>
 
-      {term.relatedTerms.length > 0 && (
+      {term.related.length > 0 && (
         <div>
           <p className="text-xs font-medium text-text-tertiary mb-1.5">
             Related terms
           </p>
           <ul className="flex flex-wrap gap-1.5">
-            {term.relatedTerms.map((rt) => (
+            {term.related.map((rt) => (
               <li key={rt}>
                 <a
                   href={`#${rt.toLowerCase().replace(/\s+/g, "-")}`}
@@ -117,7 +117,7 @@ export default function GlossaryPage() {
                   </h2>
                   <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {terms.map((term) => (
-                      <TermCard key={term.id} term={term} />
+                      <TermCard key={term.slug} term={term} />
                     ))}
                   </div>
                 </section>

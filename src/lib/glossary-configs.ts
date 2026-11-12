@@ -28,3 +28,12 @@ export function getTermsByLetter(letter: string): GlossaryTerm[] {
 export function getTermsByCategory(category: string): GlossaryTerm[] {
   return GLOSSARY_TERMS.filter((t) => t.category === category);
 }
+
+export const LETTER_GROUPS: Record<string, GlossaryTerm[]> = GLOSSARY_TERMS.reduce(
+  (groups, term) => {
+    const key = term.letter;
+    (groups[key] ||= []).push(term);
+    return groups;
+  },
+  {} as Record<string, GlossaryTerm[]>
+);
