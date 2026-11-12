@@ -3,16 +3,11 @@ import Link from "next/link";
 
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { AuthSlot } from "@/components/auth-slot";
-import { SubscribeButton } from "@/components/subscribe-button";
-import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
-import { PRICING_TIERS, CREDIT_COSTS } from "@/lib/credits/constants";
-
-const tierOrder = ["FREE", "STARTER", "PRO", "TEAM_STARTER", "TEAM_PRO", "ENTERPRISE"] as const;
+import { TierCards } from "@/components/pricing/tier-cards";
+import { CostEstimator } from "@/components/pricing/cost-estimator";
 
 export default function PricingPage() {
-  const isAnnual = false; // TODO: Add toggle back with client component
-
   return (
     <>
       <a className="skip-link" href="#main">
@@ -27,6 +22,7 @@ export default function PricingPage() {
       />
 
       <main id="main" className="flex-1">
+        {/* ── Hero ─────────────────────────────────────────────── */}
         <section className="py-16 text-center sm:py-24">
           <div className="wrap">
             <h1 className="display mx-auto max-w-[760px] text-[clamp(32px,5vw,56px)]">
@@ -36,232 +32,69 @@ export default function PricingPage() {
               Pay for what you use. Credits never expire, and failed jobs are
               never charged.
             </p>
-
           </div>
         </section>
 
-        <section className="pb-16" aria-labelledby="tiers-heading">
-          <h2 id="tiers-heading" className="visually-hidden">
-            Plans
-          </h2>
+        {/* ── Tier cards (client island — annual toggle lives here) */}
+        <TierCards />
+
+        {/* ── One-time purchase ─────────────────────────────────── */}
+        <section className="py-16" aria-labelledby="one-time-heading">
           <div className="wrap">
-            <ul className="grid gap-5 lg:grid-cols-3 xl:grid-cols-5">
-              {tierOrder.map((key) => {
-                const tier = PRICING_TIERS[key];
-                const isPro = key === "PRO";
-                const isTeam = key === "TEAM_STARTER" || key === "TEAM_PRO";
-                const isEnterprise = key === "ENTERPRISE";
-
-                // Determine price and credits based on billing period
-                const displayPrice = isAnnual && tier.priceAnnual 
-                  ? tier.priceAnnual 
-                  : tier.price;
-                const displayCredits = isAnnual && tier.creditsAnnual 
-                  ? tier.creditsAnnual 
-                  : tier.credits;
-                const planKey = isAnnual && tier.planKeyAnnual 
-                  ? tier.planKeyAnnual 
-                  : tier.planKey;
-                const interval = isAnnual ? 'year' : tier.interval;
-
-                // Calculate monthly price for annual plans
-                const monthlyEquivalent = isAnnual && displayPrice 
-                  ? (displayPrice / 12).toFixed(2) 
-                  : null;
-
-                return (
-                  <li
-                    key={key}
-                    className={
-                      "flex flex-col rounded-[var(--radius-xl)] bg-white p-7 " +
-                      (isPro
-                        ? "shadow-[inset_0_0_0_2px_var(--accent),0_2px_6px_rgba(0,0,0,0.05),0_18px_40px_-14px_rgba(0,0,0,0.16)]"
-                        : "shadow-[0_0_0_0.5px_var(--border),0_1px_2px_rgba(0,0,0,0.04)]")
-                    }
-                  >
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-[17px] font-semibold tracking-[-0.02em]">
-                        {tier.name}
-                      </h3>
-                      {isPro && <Badge tone="accent">Most popular</Badge>}
-                      {isTeam && tier.seats && (
-                        <Badge tone="accent">{tier.seats} seats</Badge>
-                      )}
-                    </div>
-
-                    {isEnterprise ? (
-                      <p className="mt-4 text-[24px] font-bold tracking-[-0.02em]">
-                        Custom pricing
-                      </p>
-                    ) : (
-                      <>
-                        <p className="mt-4 flex items-baseline gap-2">
-                          <span className="tabular text-[46px] leading-none font-bold tracking-[-0.04em]">
-                            ${displayPrice}
-                          </span>
-                          {interval && (
-                            <span className="text-[14.5px] text-text-tertiary">
-                              /{interval}
-                            </span>
-                          )}
-                        </p>
-                        {isAnnual && monthlyEquivalent && tier.annualSavings && (
-                          <p className="mt-1 text-[13px] text-success-text">
-                            ${monthlyEquivalent}/mo · Save {tier.annualSavings}%
-                          </p>
-                        )}
-                      </>
-                    )}
-
-                    <p className="mt-4 text-[15px] leading-relaxed text-text-secondary">
-                      {tier.description}
-                    </p>
-
-                    {!isEnterprise && displayCredits && (
-                      <p className="mt-2 text-[14px] font-medium text-accent">
-                        {displayCredits.toLocaleString()} credits{isAnnual ? '/year' : '/month'}
-                      </p>
-                    )}
-
-                    <div className="mt-6">
-                      {isEnterprise ? (
-                        <ButtonLink
-                          href="mailto:sales@vectroy.com?subject=Enterprise Inquiry"
-                          size="lg"
-                          variant="secondary"
-                          className="w-full"
-                        >
-                          Contact sales
-                        </ButtonLink>
-                      ) : planKey === null ? (
-                        <ButtonLink
-                          href="/convert"
-                          size="lg"
-                          variant="secondary"
-                          className="w-full"
-                        >
-                          Get started
-                        </ButtonLink>
-                      ) : (
-                        <SubscribeButton
-                          planKey={planKey}
-                          variant={isPro ? "primary" : "secondary"}
-                        >
-                          Subscribe
-                        </SubscribeButton>
-                      )}
-                    </div>
-
-                    <ul className="mt-6 grid gap-3 border-t border-[var(--border)] pt-6">
-                      {tier.features.map((feature) => (
-                        <li
-                          key={feature}
-                          className="flex gap-2.5 text-[14.5px] leading-snug"
-                        >
-                          <svg
-                            viewBox="0 0 20 20"
-                            aria-hidden="true"
-                            className="mt-0.5 h-4 w-4 flex-none text-success-text"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M4 10.5l4 4 8-9" />
-                          </svg>
-                          <span className="text-text-primary">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    {!isEnterprise && tier.overageRate && (
-                      <p className="mt-4 pt-4 border-t border-[var(--border)] text-[13px] text-text-tertiary">
-                        Overage: ${tier.overageRate}/credit (opt-in required)
-                      </p>
-                    )}
+            <div className="mx-auto max-w-2xl rounded-[var(--radius-xl)] bg-white p-10 text-center shadow-[0_0_0_0.5px_var(--border),0_1px_2px_rgba(0,0,0,0.04)]">
+              <p className="text-[13px] font-semibold uppercase tracking-widest text-text-tertiary">
+                Just one file?
+              </p>
+              <h2
+                id="one-time-heading"
+                className="mt-3 text-[32px] font-bold tracking-[-0.03em]"
+              >
+                $6.99 one-time
+              </h2>
+              <p className="mx-auto mt-4 max-w-sm text-[16px] leading-relaxed text-text-secondary">
+                Need to convert a single logo? Pay once, download immediately,
+                keep the file forever — no account required.
+              </p>
+              <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+                <ButtonLink href="/convert" size="lg">
+                  Convert now
+                </ButtonLink>
+                <ButtonLink href="/pricing#tiers" size="lg" variant="secondary">
+                  Compare plans
+                </ButtonLink>
+              </div>
+              <ul className="mx-auto mt-8 grid max-w-xs gap-2 text-left text-[14px] text-text-secondary">
+                {[
+                  "Any format: SVG, DXF, EPS, PDF, PNG",
+                  "Full-resolution output",
+                  "No watermarks",
+                  "30-day re-download link",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <svg
+                      viewBox="0 0 20 20"
+                      aria-hidden="true"
+                      className="h-4 w-4 flex-none text-success-text"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M4 10.5l4 4 8-9" />
+                    </svg>
+                    {item}
                   </li>
-                );
-              })}
-            </ul>
-          </div>
-        </section>
-
-        {/* ── Credit costs ───────────────────────────────────── */}
-        <section
-          className="pb-20 bg-bg-secondary py-20"
-          aria-labelledby="costs-heading"
-        >
-          <div className="wrap">
-            <h2
-              id="costs-heading"
-              className="display max-w-[760px] text-[clamp(28px,4vw,44px)]"
-            >
-              Credit costs per operation.
-            </h2>
-            <p className="mt-5 max-w-[620px] text-[17px] leading-relaxed text-text-secondary">
-              Each operation costs a fraction of a credit. Run as many as you
-              need within your plan.
-            </p>
-
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {[
-                {
-                  name: "Vectorize",
-                  cost: CREDIT_COSTS.VECTORIZE,
-                  desc: "PNG/JPG/WEBP → SVG conversion",
-                },
-                {
-                  name: "Remove background",
-                  cost: CREDIT_COSTS.REMOVE_BG,
-                  desc: "AI background removal",
-                },
-                {
-                  name: "Upscale 2×",
-                  cost: CREDIT_COSTS.UPSCALE_2X,
-                  desc: "Double resolution",
-                },
-                {
-                  name: "Upscale 4×",
-                  cost: CREDIT_COSTS.UPSCALE_4X,
-                  desc: "Quadruple resolution",
-                },
-                {
-                  name: "AI Logo Generation",
-                  cost: CREDIT_COSTS.AI_GENERATE,
-                  desc: "Generate logos with AI",
-                },
-                {
-                  name: "Format Export",
-                  cost: CREDIT_COSTS.EXPORT_PREMIUM,
-                  desc: "DXF, EPS, PDF, PNG — all free",
-                },
-              ].map((item) => (
-                <div
-                  key={item.name}
-                  className="rounded-[var(--radius-lg)] bg-white px-5 py-4 shadow-[0_0_0_0.5px_var(--border),0_1px_2px_rgba(0,0,0,0.04)]"
-                >
-                  <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="text-[16px] font-semibold">{item.name}</h3>
-                    <span className={`tabular font-mono text-[15px] font-semibold ${item.cost === 0 ? 'text-success-text' : 'text-accent'}`}>
-                      {item.cost === 0 ? 'FREE' : `${item.cost.toFixed(2)}cr`}
-                    </span>
-                  </div>
-                  <p className="mt-1 text-[14px] text-text-secondary">
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
+                ))}
+              </ul>
             </div>
-
-            <p className="mt-6 text-[14px] text-text-tertiary">
-              Credits are deducted only when jobs succeed. Failed operations cost
-              nothing.
-            </p>
           </div>
         </section>
 
-        {/* ── Comparison ─────────────────────────────────────── */}
+        {/* ── Cost estimator (client island) ───────────────────── */}
+        <CostEstimator />
+
+        {/* ── Why Vectroy ──────────────────────────────────────── */}
         <section className="py-20" aria-labelledby="compare-heading">
           <div className="wrap">
             <h2
@@ -271,8 +104,8 @@ export default function PricingPage() {
               Why choose Vectroy?
             </h2>
             <p className="mt-5 max-w-[620px] text-[17px] leading-relaxed text-text-secondary">
-              Fast, accurate vectorization with all the formats you need for Cricut,
-              laser cutting, embroidery, and print.
+              Fast, accurate vectorization with all the formats you need for
+              Cricut, laser cutting, embroidery, and print.
             </p>
 
             <div className="mt-10 grid gap-6 sm:grid-cols-3">
