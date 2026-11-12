@@ -41,6 +41,9 @@ RUN npm ci \
 # Copy source code
 COPY . .
 
+# Clean any existing Next.js cache to prevent corrupted builds
+RUN rm -rf .next .turbo node_modules/.cache
+
 # Set build-time environment variables
 ARG NEXT_PUBLIC_SUPABASE_URL="https://build.invalid"
 ARG NEXT_PUBLIC_SUPABASE_ANON_KEY="build-placeholder"
