@@ -87,6 +87,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
+# Next.js standalone requires static files in public as well
+COPY --from=builder /app/.next/static ./public/_next/static
 COPY --from=builder /app/schema.sql ./schema.sql
 
 # Clean up any unnecessary files to minimize runtime image
