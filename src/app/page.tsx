@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 
 import { ImageComparisonSlider } from "@/components/image-comparison-slider";
-import { InteractiveSliderShowcase } from "@/components/interactive-slider-showcase";
+import { HeroTransformationSlider } from "@/components/hero-transformation-slider";
 import { ExampleGallery } from "@/components/example-gallery";
 import { DragDropUpload } from "@/components/drag-drop-upload";
 import { FeatureShowcase } from "@/components/feature-showcase";
@@ -77,20 +77,21 @@ export default function Home() {
           <div className="wrap">
             <p className="mb-6 inline-flex items-center gap-2 rounded-full bg-bg-secondary py-1.5 pr-3.5 pl-1.5 text-[13.5px] font-medium text-text-secondary">
               <span className="rounded-full bg-text-primary px-2.5 py-0.5 text-[12px] font-semibold text-white">
-                New
+                AI-Powered
               </span>
-              PNG, JPG, WEBP → crisp vectors for Cricut and laser cutting
+              Transform raster images into perfect vectors instantly
             </p>
 
             <h1 className="display mx-auto max-w-[880px] text-[clamp(38px,6.4vw,74px)]">
-              Turn any photo into a
+              Convert PNG & JPG to
               <br />
-              <span className="text-accent">clean vector</span>
+              <span className="text-accent">scalable SVG</span>
             </h1>
 
             <p className="mx-auto mt-6 max-w-[620px] text-[clamp(17px,1.9vw,20px)] leading-relaxed text-text-secondary">
-              Upload a PNG, JPG, or WEBP. Get back a crisp SVG, DXF, EPS, or
-              PDF — ready for Cricut, laser cutting, or print.
+              Professional raster-to-vector conversion powered by AI. Upload any image
+              and get crisp SVG, DXF, EPS, or PDF files — perfect for Cricut, laser cutting,
+              embroidery, and commercial printing.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -121,12 +122,12 @@ export default function Home() {
                 See the difference.
               </h2>
               <p className="text-[clamp(16px,1.7vw,19px)] text-text-secondary max-w-[560px] mx-auto">
-                Explore different image types. Our AI rebuilds real geometry—circles, smooth curves, clean paths—not just pixel outlines.
+                Drag the slider to reveal the transformation. Our AI rebuilds real geometry—circles, smooth curves, clean paths—not just pixel outlines.
               </p>
             </div>
 
             <div className="max-w-[900px] mx-auto">
-              <InteractiveSliderShowcase />
+              <HeroTransformationSlider />
             </div>
           </div>
         </section>

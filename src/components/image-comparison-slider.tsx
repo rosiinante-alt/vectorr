@@ -35,19 +35,17 @@ export function ImageComparisonSlider({
   const [sliderPosition, setSliderPosition] = useState(initialPosition);
   const [isFocused, setIsFocused] = useState(false);
 
-  // When inverted, calculate the effective position for display
-  const effectivePosition = inverted ? 100 - sliderPosition : sliderPosition;
+  // Use sliderPosition directly as the physical divider position (0-100)
+  // At p=0, divider at left edge → all clean (after) visible
+  // At p=100, divider at right edge → all raster (before) visible
+  const physicalPosition = sliderPosition;
 
   const getPositionFromX = useCallback(
     (clientX: number): number => {
       if (!containerRef.current) return sliderPosition;
       const rect = containerRef.current.getBoundingClientRect();
       const x = clientX - rect.left;
-      let pos = Math.max(0, Math.min(100, (x / rect.width) * 100));
-      // When inverted, invert the position calculation so dragging right = showing raster
-      if (inverted) {
-        pos = 100 - pos;
-      }
+      const pos = Math.max(0, Math.min(100, (x / rect.width) * 100));
       return pos;
     },
     [sliderPosition, inverted]
@@ -78,10 +76,7 @@ export function ImageComparisonSlider({
     const onMouseMove = (e: MouseEvent) => {
       if (!isDraggingRef.current || !containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
-      let pct = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
-      if (inverted) {
-        pct = 100 - pct;
-      }
+      const pct = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
       setSliderPosition(pct);
     };
 
@@ -95,10 +90,7 @@ export function ImageComparisonSlider({
       const touch = e.touches[0];
       if (!touch) return;
       const rect = containerRef.current.getBoundingClientRect();
-      let pct = Math.max(0, Math.min(100, ((touch.clientX - rect.left) / rect.width) * 100));
-      if (inverted) {
-        pct = 100 - pct;
-      }
+      const pct = Math.max(0, Math.min(100, ((touch.clientX - rect.left) / rect.width) * 100));
       setSliderPosition(pct);
     };
 
@@ -124,24 +116,20 @@ export function ImageComparisonSlider({
       const step = e.shiftKey ? 10 : 1;
       let next: number | undefined;
 
-      // When inverted, arrow directions work opposite
-      const leftKey = inverted ? "ArrowRight" : "ArrowLeft";
-      const rightKey = inverted ? "ArrowLeft" : "ArrowRight";
-
       switch (e.key) {
-        case leftKey:
+        case "ArrowLeft":
         case "ArrowDown":
           next = Math.max(0, sliderPosition - step);
           break;
-        case rightKey:
+        case "ArrowRight":
         case "ArrowUp":
           next = Math.min(100, sliderPosition + step);
           break;
         case "Home":
-          next = inverted ? 100 : 0;
+          next = 0;
           break;
         case "End":
-          next = inverted ? 0 : 100;
+          next = 100;
           break;
         default:
           return;
@@ -150,7 +138,7 @@ export function ImageComparisonSlider({
       e.preventDefault();
       setSliderPosition(next);
     },
-    [sliderPosition, inverted]
+    [sliderPosition]
   );
 
   return (
@@ -163,36 +151,34 @@ export function ImageComparisonSlider({
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="slider"
-      aria-label={`Image comparison slider — ${inverted ? 'drag right to show raster, left for vector' : 'drag to compare'}`}
+      aria-label="Image comparison slider: drag to reveal raster or vector artwork"
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={Math.round(sliderPosition)}
-      aria-valuetext={`${Math.round(effectivePosition)}% — showing ${beforeLabel || 'original'} and ${afterLabel || 'vectorized'}`}
+      aria-valuetext={`${Math.round(sliderPosition)}% — ${beforeLabel} on right, ${afterLabel} on left`}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
     >
-      {/* Before image — visible on the right (when inverted) or left (normal) */}
+      {/* Before image (raster) — full canvas, visible RIGHT of divider */}
       <img
         src={beforeImage}
         alt={beforeAlt}
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-contain"
         draggable={false}
       />
 
-      {/* After image — clipped, revealed on left (when inverted) or right (normal) */}
+      {/* After image (clean) — clipped by the divider position, visible LEFT of divider */}
       <div
         className="absolute inset-0 w-full h-full"
         style={{
-          clipPath: inverted
-            ? `inset(0 ${sliderPosition}% 0 0)`
-            : `inset(0 0 0 ${sliderPosition}%)`,
+          clipPath: `inset(0 ${100 - physicalPosition}% 0 0)`,
           willChange: "clip-path",
         }}
       >
         <img
           src={afterImage}
           alt={afterAlt}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-contain"
           draggable={false}
         />
       </div>
@@ -201,7 +187,7 @@ export function ImageComparisonSlider({
       <div
         className="absolute top-0 bottom-0 w-px bg-white shadow-[0_0_6px_rgba(0,0,0,0.3)]"
         style={{
-          left: `${effectivePosition}%`,
+          left: `${physicalPosition}%`,
           transform: "translateX(-50%)",
         }}
         aria-hidden="true"
@@ -211,7 +197,7 @@ export function ImageComparisonSlider({
       <div
         className="absolute top-1/2 flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.2)] border border-border hover:shadow-[0_4px_16px_rgba(0,0,0,0.3)] transition-shadow"
         style={{
-          left: `${effectivePosition}%`,
+          left: `${physicalPosition}%`,
           transform: "translate(-50%, -50%)",
           outline: isFocused ? "2px solid var(--accent)" : "none",
           outlineOffset: "2px",

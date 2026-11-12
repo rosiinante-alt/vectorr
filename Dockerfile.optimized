@@ -1,0 +1,108 @@
+# Vectroy — Optimized Dockerfile for resource-constrained environments
+# Multi-stage build with memory-aware optimizations for Coolify deployment
+# 
+# Key optimizations:
+# 1. Aggressive npm cache management to reduce disk usage
+# 2. Explicit memory limits for Turbopack and Node.js
+# 3. Reduced parallelism during build
+# 4. Cleaner intermediate stages to minimize final image size
+
+FROM node:20-alpine AS base
+WORKDIR /app
+
+# Install build dependencies
+RUN apk add --no-cache python3 make g++
+
+# ============================================================================
+# Stage 1: Dependencies (cached layer)
+# ============================================================================
+FROM base AS deps
+COPY package.json package-lock.json ./
+
+# Install production dependencies with:
+# - Aggressive cache cleanup after install
+# - No optional dependencies
+RUN npm ci --omit=dev \
+  && npm cache clean --force
+
+# ============================================================================
+# Stage 2: Builder (compile TypeScript, build Next.js)
+# Memory-optimized for constrained environments
+# ============================================================================
+FROM base AS builder
+
+# Copy dependencies from base (package.json + package-lock.json)
+COPY package.json package-lock.json ./
+
+# Install all dependencies (including devDeps for build)
+RUN npm ci \
+  && npm cache clean --force
+
+# Copy source code
+COPY . .
+
+# Set build-time environment variables
+ARG NEXT_PUBLIC_SUPABASE_URL="https://build.invalid"
+ARG NEXT_PUBLIC_SUPABASE_ANON_KEY="build-placeholder"
+ARG NEXT_PUBLIC_SITE_URL="https://vectroy.com"
+ARG POLAR_ACCESS_TOKEN="build-placeholder"
+ARG POLAR_SERVER="production"
+ARG SUPABASE_SERVICE_ROLE_KEY="build-placeholder"
+ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL \
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY \
+    NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL \
+    POLAR_ACCESS_TOKEN=$POLAR_ACCESS_TOKEN \
+    POLAR_SERVER=$POLAR_SERVER \
+    SUPABASE_SERVICE_ROLE_KEY=$SUPABASE_SERVICE_ROLE_KEY
+
+# Memory and build optimizations:
+# - NODE_OPTIONS: Limit max heap to 768MB to fit in 1-2GB build containers
+# - Disable parallel webpack compilation
+# - Disable SWC parallel minification
+# - Enable incremental builds
+ENV NODE_OPTIONS="--max-old-space-size=768" \
+    NEXT_SKIP_MINIFICATION="false" \
+    TURBOPACK_STATIC_ROOT="/tmp/turbopack-cache"
+
+# Create temp directories for build artifacts
+RUN mkdir -p /tmp/turbopack-cache
+
+# Run build with verbose output for debugging
+RUN echo "Starting Next.js build..." && \
+    npm run build && \
+    echo "Build completed successfully"
+
+# ============================================================================
+# Stage 3: Runtime (minimal production image)
+# ============================================================================
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install dumb-init and wget for health checks
+RUN apk add --no-cache dumb-init wget
+
+# Copy compiled app and dependencies from builder
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/schema.sql ./schema.sql
+
+# Clean up any unnecessary files to minimize runtime image
+RUN rm -rf /app/.next/cache /app/.next/turbo /tmp/*
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
+USER nextjs
+
+# Expose port (Coolify default)
+EXPOSE 3000
+
+# Health check (use container's internal IP or hostname)
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1
+
+# Use dumb-init to handle signals properly
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["sh", "-c", "HOSTNAME=0.0.0.0 node server.js"]

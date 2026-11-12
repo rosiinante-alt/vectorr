@@ -1,0 +1,102 @@
+[
+  {
+    "id": "vectorizer-ai",
+    "name": "Vectorizer.AI",
+    "slug": "vectorizer-ai",
+    "category": "Online vectorizer",
+    "url": "https://vectorizer.ai",
+    "description": "AI-powered vectorizer focused on photo-to-vector tracing with high edge fidelity.",
+    "pricing": "Pay-per-image, no free tier",
+    "strengths": ["Excellent photo detail", "Clean edge output", "API available"],
+    "weaknesses": ["No batch processing", "No background removal", "Per-image pricing adds up"],
+    "vectroyAdvantage": "Vectroy includes batch conversion, background removal, and upscaling in one workflow — no juggling separate tools.",
+    "features": [
+      { "name": "Batch processing", "them": false, "us": true },
+      { "name": "Background removal", "them": false, "us": true },
+      { "name": "Image upscaling", "them": false, "us": true },
+      { "name": "SVG optimizer", "them": false, "us": true },
+      { "name": "API access", "them": true, "us": true },
+      { "name": "Free tier", "them": false, "us": true }
+    ]
+  },
+  {
+    "id": "vectormagic",
+    "name": "Vector Magic",
+    "slug": "vector-magic",
+    "category": "Online vectorizer",
+    "url": "https://vectormagic.com",
+    "description": "Established online vectorizer with desktop app, strong at logo and clipart tracing.",
+    "pricing": "Subscription or one-time desktop license",
+    "strengths": ["Accurate color grouping", "Desktop app available", "Long track record"],
+    "weaknesses": ["Dated UI", "No background removal or upscaling", "Slow batch workflow"],
+    "vectroyAdvantage": "Vectroy's pipeline combines vectorization, background removal, and upscaling in a single upload — no extra steps or apps to install.",
+    "features": [
+      { "name": "Batch processing", "them": false, "us": true },
+      { "name": "Background removal", "them": false, "us": true },
+      { "name": "Image upscaling", "them": false, "us": true },
+      { "name": "SVG optimizer", "them": false, "us": true },
+      { "name": "API access", "them": false, "us": true },
+      { "name": "Free tier", "them": false, "us": true }
+    ]
+  },
+  {
+    "id": "adobe-illustrator",
+    "name": "Adobe Illustrator",
+    "slug": "adobe-illustrator",
+    "category": "Desktop application",
+    "url": "https://www.adobe.com/products/illustrator.html",
+    "description": "Professional vector design suite with Image Trace for vectorization.",
+    "pricing": "~$55/month subscription",
+    "strengths": ["Full design suite", "Fine-grained control", "Industry standard"],
+    "weaknesses": ["Steep learning curve", "Expensive subscription", "Manual trace settings required", "No web API"],
+    "vectroyAdvantage": "Vectroy delivers production-ready vectors in seconds with no Illustrator knowledge needed — ideal when speed matters more than manual control.",
+    "features": [
+      { "name": "Batch processing", "them": false, "us": true },
+      { "name": "Background removal", "them": true, "us": true },
+      { "name": "Image upscaling", "them": false, "us": true },
+      { "name": "SVG optimizer", "them": false, "us": true },
+      { "name": "API access", "them": false, "us": true },
+      { "name": "Free tier", "them": false, "us": true }
+    ]
+  },
+  {
+    "id": "inkscape",
+    "name": "Inkscape",
+    "slug": "inkscape",
+    "category": "Desktop application",
+    "url": "https://inkscape.org",
+    "description": "Free open-source vector graphics editor with built-in Potrace-based bitmap tracing.",
+    "pricing": "Free",
+    "strengths": ["Completely free", "Open-source", "Good Potrace integration", "Full editor"],
+    "weaknesses": ["Requires manual tuning", "No AI tracing", "Slow for large batches", "Desktop only"],
+    "vectroyAdvantage": "Vectroy's AI tracing produces cleaner results than Potrace without any manual threshold adjustments — and runs entirely in the browser.",
+    "features": [
+      { "name": "Batch processing", "them": false, "us": true },
+      { "name": "Background removal", "them": false, "us": true },
+      { "name": "Image upscaling", "them": false, "us": true },
+      { "name": "SVG optimizer", "them": true, "us": true },
+      { "name": "API access", "them": false, "us": true },
+      { "name": "Free tier", "them": true, "us": true }
+    ]
+  },
+  {
+    "id": "picsvg",
+    "name": "PicSVG",
+    "slug": "picsvg",
+    "category": "Online vectorizer",
+    "url": "https://picsvg.com",
+    "description": "Simple free online converter for basic raster-to-SVG conversion.",
+    "pricing": "Free with limits",
+    "strengths": ["Free to use", "Simple interface", "No signup"],
+    "weaknesses": ["Low output quality", "No color support", "No batch", "No API"],
+    "vectroyAdvantage": "Vectroy's AI produces dramatically sharper color-accurate vectors than simple threshold-based free tools, with batch and API support for scale.",
+    "features": [
+      { "name": "Batch processing", "them": false, "us": true },
+      { "name": "Background removal", "them": false, "us": true },
+      { "name": "Image upscaling", "them": false, "us": true },
+      { "name": "SVG optimizer", "them": false, "us": true },
+      { "name": "API access", "them": false, "us": true },
+      { "name": "Free tier", "them": true, "us": true }
+    ]
+  }
+]

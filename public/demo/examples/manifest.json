@@ -1,248 +1,138 @@
 {
-  "examples": [
+  "version": "2.0",
+  "generated": "2026-11-08T08:38:01.041Z",
+  "pairs": [
     {
-      "id": "tech-logo",
-      "filename": "tech-logo-raster.svg",
-      "category": "logo",
-      "label": "Tech Logo",
-      "description": "Modern tech company logo with minimalist circles and geometric shapes"
+      "index": 1,
+      "name": "pixel-heart",
+      "before": "image-01-before.png",
+      "after": "image-01-after.png",
+      "canvas_size": [
+        159,
+        140
+      ],
+      "source": "1download.png",
+      "source_checksum": "3adac58ee640a105e0e8ee70bda7eafe"
     },
     {
-      "id": "coffee-logo",
-      "filename": "coffee-logo-raster.svg",
-      "category": "logo",
-      "label": "Coffee Shop Logo",
-      "description": "Hand-drawn coffee cup logo for a local café brand"
+      "index": 2,
+      "name": "apple",
+      "before": "image-02-before.png",
+      "after": "image-02-after.png",
+      "canvas_size": [
+        227,
+        245
+      ],
+      "source": "3.png",
+      "source_checksum": "7074cd689e986490c9b2dcef01b5ff80"
     },
     {
-      "id": "leaf-logo",
-      "filename": "leaf-logo-raster.svg",
-      "category": "logo",
-      "label": "Eco Brand Logo",
-      "description": "Organic eco-friendly brand identity with leaf motif"
+      "index": 3,
+      "name": "cityscape",
+      "before": "image-03-before.png",
+      "after": "image-03-after.png",
+      "canvas_size": [
+        538,
+        493
+      ],
+      "source": "4.png",
+      "source_checksum": "04fc4ecf6b43f1188663c370725b65e7"
     },
     {
-      "id": "gradient-logo",
-      "filename": "gradient-logo-raster.svg",
-      "category": "logo",
-      "label": "Modern App Logo",
-      "description": "Contemporary app icon with gradient fill and rounded corners"
+      "index": 4,
+      "name": "bird",
+      "before": "image-04-before.png",
+      "after": "image-04-after.png",
+      "canvas_size": [
+        477,
+        388
+      ],
+      "source": "43.png",
+      "source_checksum": "17f90585f478cc00ba6bdbb05d5c18e2"
     },
     {
-      "id": "sports-logo",
-      "filename": "sports-logo-raster.svg",
-      "category": "logo",
-      "label": "Sports Team Logo",
-      "description": "Athletic team logo with bold lettering and dynamic design"
+      "index": 5,
+      "name": "apple-illustrator",
+      "before": "image-05-before.png",
+      "after": "image-05-after.png",
+      "canvas_size": [
+        387,
+        418
+      ],
+      "source": "5.png",
+      "source_checksum": "faa63496a61b3ed9936846164c88a43f"
     },
     {
-      "id": "food-logo",
-      "filename": "food-logo-raster.svg",
-      "category": "logo",
-      "label": "Food Brand Logo",
-      "description": "Playful food brand identity with vibrant colors"
+      "index": 6,
+      "name": "deer-full",
+      "before": "image-06-before.png",
+      "after": "image-06-after.png",
+      "canvas_size": [
+        610,
+        601
+      ],
+      "source": "7.png",
+      "source_checksum": "1adaab7772d6a7a6bbda61f7e54cf449"
     },
     {
-      "id": "character-illustration",
-      "filename": "character-illustration-raster.svg",
-      "category": "illustration",
-      "label": "Character Art",
-      "description": "Digital character illustration with bold colors and clean lines"
+      "index": 7,
+      "name": "deer-detail",
+      "before": "image-07-before.png",
+      "after": "image-07-after.png",
+      "canvas_size": [
+        610,
+        490
+      ],
+      "source": "7.png",
+      "source_checksum": "1adaab7772d6a7a6bbda61f7e54cf449"
     },
     {
-      "id": "abstract-illustration",
-      "filename": "abstract-illustration-raster.svg",
-      "category": "illustration",
-      "label": "Abstract Design",
-      "description": "Abstract geometric composition with layered shapes and transparency"
+      "index": 8,
+      "name": "cursor-full",
+      "before": "image-08-before.png",
+      "after": "image-08-after.png",
+      "canvas_size": [
+        277,
+        257
+      ],
+      "source": "do3wnload.png",
+      "source_checksum": "b70264e7203025f8b94d825337aa766c"
     },
     {
-      "id": "detailed-illustration",
-      "filename": "detailed-illustration-raster.svg",
-      "category": "illustration",
-      "label": "Detailed Scene",
-      "description": "Complex landscape illustration with multiple layers and perspective"
+      "index": 9,
+      "name": "cursor-zoom",
+      "before": "image-09-before.png",
+      "after": "image-09-after.png",
+      "canvas_size": [
+        309,
+        294
+      ],
+      "source": "do3wnload.png",
+      "source_checksum": "b70264e7203025f8b94d825337aa766c"
     },
     {
-      "id": "ui-icon-pack",
-      "filename": "ui-icon-pack-raster.svg",
-      "category": "illustration",
-      "label": "UI Icon Set",
-      "description": "Collection of pixel-perfect user interface icons"
+      "index": 10,
+      "name": "eagle",
+      "before": "image-10-before.png",
+      "after": "image-10-after.png",
+      "canvas_size": [
+        515,
+        389
+      ],
+      "source": "downlo56ad.png",
+      "source_checksum": "707ea722ea8c4e48c33774f6b22e5ae0"
     },
     {
-      "id": "retro-poster",
-      "filename": "retro-poster-raster.svg",
-      "category": "illustration",
-      "label": "Retro Poster",
-      "description": "Vintage-style poster with limited color palette and bold typography"
-    },
-    {
-      "id": "product-photo",
-      "filename": "product-photo-raster.svg",
-      "category": "photo",
-      "label": "Product Photography",
-      "description": "Professional product shot with studio lighting effects"
-    },
-    {
-      "id": "landscape-photo",
-      "filename": "landscape-photo-raster.svg",
-      "category": "photo",
-      "label": "Landscape Photo",
-      "description": "Outdoor landscape scene with natural gradients and depth"
-    },
-    {
-      "id": "macro-photo",
-      "filename": "macro-photo-raster.svg",
-      "category": "photo",
-      "label": "Macro Photography",
-      "description": "Close-up macro shot with subtle texture and lighting"
-    },
-    {
-      "id": "nature-photo",
-      "filename": "nature-photo-raster.svg",
-      "category": "photo",
-      "label": "Nature Photography",
-      "description": "Wildlife or nature scene with rich detail and natural lighting"
-    },
-    {
-      "id": "portrait-photo",
-      "filename": "portrait-photo-raster.svg",
-      "category": "photo",
-      "label": "Portrait Photography",
-      "description": "Professional portrait with professional studio lighting"
-    },
-    {
-      "id": "hand-drawn-sketch",
-      "filename": "hand-drawn-sketch-raster.svg",
-      "category": "sketch",
-      "label": "Hand Drawn Sketch",
-      "description": "Quick hand-drawn sketch with loose strokes and annotations"
-    },
-    {
-      "id": "wireframe-sketch",
-      "filename": "wireframe-sketch-raster.svg",
-      "category": "sketch",
-      "label": "UI Wireframe",
-      "description": "Low-fidelity wireframe for mobile app user interface"
-    },
-    {
-      "id": "architectural-sketch",
-      "filename": "architectural-sketch-raster.svg",
-      "category": "sketch",
-      "label": "Architectural Drawing",
-      "description": "Building design sketch with perspective and technical details"
-    },
-    {
-      "id": "fashion-sketch",
-      "filename": "fashion-sketch-raster.svg",
-      "category": "sketch",
-      "label": "Fashion Design",
-      "description": "Clothing and apparel design sketch with fabric details"
-    },
-    {
-      "id": "embroidery-pattern",
-      "filename": "embroidery-pattern-raster.svg",
-      "category": "crafts",
-      "label": "Embroidery Pattern",
-      "description": "Ready for embroidery machines with DST, PES, or JEF export"
-    },
-    {
-      "id": "tshirt-print",
-      "filename": "tshirt-print-raster.svg",
-      "category": "crafts",
-      "label": "T-Shirt Print Design",
-      "description": "Print-ready design optimized for screen printing and DTG"
-    },
-    {
-      "id": "mug-design",
-      "filename": "mug-design-raster.svg",
-      "category": "crafts",
-      "label": "Mug/Drinkware Design",
-      "description": "Perfect for mug wraps and ceramic transfers"
-    },
-    {
-      "id": "laser-cutting",
-      "filename": "laser-cutting-raster.svg",
-      "category": "crafts",
-      "label": "Laser Cutting Pattern",
-      "description": "Clean lines for laser cutting wood, acrylic, leather"
-    },
-    {
-      "id": "vinyl-sticker",
-      "filename": "vinyl-sticker-raster.svg",
-      "category": "crafts",
-      "label": "Vinyl Sticker Design",
-      "description": "Optimized for vinyl cutting and application"
-    },
-    {
-      "id": "portrait-illustration",
-      "filename": "portrait-illustration-raster.svg",
-      "category": "illustration",
-      "label": "Portrait Illustration",
-      "description": "Hand-drawn portrait converted to clean vector art"
-    },
-    {
-      "id": "geometric-abstract",
-      "filename": "geometric-abstract-raster.svg",
-      "category": "illustration",
-      "label": "Geometric Abstract",
-      "description": "Modern geometric design with perfect clean shapes"
-    },
-    {
-      "id": "floral-ornament",
-      "filename": "floral-ornament-raster.svg",
-      "category": "illustration",
-      "label": "Floral Ornament",
-      "description": "Decorative floral design cleaned up for production"
-    },
-    {
-      "id": "brush-stroke",
-      "filename": "brush-stroke-raster.svg",
-      "category": "illustration",
-      "label": "Brush Stroke Art",
-      "description": "Artistic brush strokes simplified to vector lines"
-    },
-    {
-      "id": "calligraphy-text",
-      "filename": "calligraphy-text-raster.svg",
-      "category": "sketch",
-      "label": "Calligraphy",
-      "description": "Elegant calligraphy text vectorized for any use"
-    },
-    {
-      "id": "icon-set",
-      "filename": "icon-set-raster.svg",
-      "category": "logo",
-      "label": "Icon Set",
-      "description": "Collection of icons unified and perfectly traced"
-    }
-  ],
-  "categories": [
-    {
-      "id": "logo",
-      "label": "Logos",
-      "description": "Brand logos and icons"
-    },
-    {
-      "id": "illustration",
-      "label": "Illustrations",
-      "description": "Digital and hand-drawn illustrations"
-    },
-    {
-      "id": "photo",
-      "label": "Photos",
-      "description": "Photographic images"
-    },
-    {
-      "id": "sketch",
-      "label": "Sketches",
-      "description": "Sketches and wireframes"
-    },
-    {
-      "id": "crafts",
-      "label": "For Making",
-      "description": "Embroidery, cutting, screen print, and production designs"
+      "index": 11,
+      "name": "s-letter",
+      "before": "image-11-before.png",
+      "after": "image-11-after.png",
+      "canvas_size": [
+        359,
+        344
+      ],
+      "source": "download.png",
+      "source_checksum": "1f02620847c896ef0382a3f722ec7e43"
     }
   ]
 }

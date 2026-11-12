@@ -41,10 +41,13 @@ function LoginForm({ plan, next }: { plan?: string; next?: string }) {
 
   // A buyer who arrived from a plan button returns to that plan instead of the
   // dashboard, so the checkout they intended to start resumes immediately.
-  const afterAuth =
-    next === 'checkout' && plan
-      ? `/pricing?resume=${encodeURIComponent(plan)}`
-      : '/dashboard';
+  // Tool users return to their tool page.
+  let afterAuth = '/dashboard';
+  if (next === 'checkout' && plan) {
+    afterAuth = `/pricing?resume=${encodeURIComponent(plan)}`;
+  } else if (next && next !== 'checkout') {
+    afterAuth = next.startsWith('/') ? next : `/${next}`;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

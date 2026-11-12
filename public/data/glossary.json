@@ -1,0 +1,250 @@
+[
+  {
+    "term": "Bezier Curve",
+    "slug": "bezier-curve",
+    "letter": "B",
+    "category": "Vector Basics",
+    "definition": "A mathematical curve defined by control points, used to draw the smooth outlines that make up vector artwork. Straight lines are just bezier curves with zero curvature.",
+    "related": ["Vector Graphics", "Path", "Node"]
+  },
+  {
+    "term": "Bleed",
+    "slug": "bleed",
+    "letter": "B",
+    "category": "Print & Production",
+    "definition": "Artwork extending past the trim edge so that no white slivers appear after cutting. A 3mm bleed is standard for print production.",
+    "related": ["Trim Line", "Vectorization"]
+  },
+  {
+    "term": "CMYK",
+    "slug": "cmyk",
+    "letter": "C",
+    "category": "Color",
+    "definition": "The subtractive color model (cyan, magenta, yellow, key/black) used for printing. Unlike RGB, it describes how ink absorbs light rather than how a screen emits it.",
+    "related": ["RGB", "Spot Color", "Color Separation"]
+  },
+  {
+    "term": "Color Separation",
+    "slug": "color-separation",
+    "letter": "C",
+    "category": "Print & Production",
+    "definition": "Splitting an artwork into individual color layers, each of which becomes a separate screen, plate, or cutting pass in production.",
+    "related": ["Spot Color", "Screen Printing", "CMYK"]
+  },
+  {
+    "term": "Compound Path",
+    "slug": "compound-path",
+    "letter": "C",
+    "category": "Vector Basics",
+    "definition": "Multiple sub-paths within a single path object, where interior shapes create holes. Essential for lettering and for cutting out shapes from a sheet.",
+    "related": ["Path", "Node", "Boolean Operation"]
+  },
+  {
+    "term": "Contour",
+    "slug": "contour",
+    "letter": "C",
+    "category": "Making & Fabrication",
+    "definition": "The outline path that a laser, vinyl cutter, or CNC bit follows. Accuracy of the contour determines the quality of the finished cut.",
+    "related": ["Kerf", "SVG", "Trace"]
+  },
+  {
+    "term": "DPI",
+    "slug": "dpi",
+    "letter": "D",
+    "category": "Raster Basics",
+    "definition": "Dots per inch — the resolution of a raster image. Higher DPI means more detail but a larger file; vector graphics have no DPI at all because they are resolution-independent.",
+    "related": ["PPI", "Raster Graphics", "Vector Graphics"]
+  },
+  {
+    "term": "DXF",
+    "slug": "dxf",
+    "letter": "D",
+    "category": "File Formats",
+    "definition": "Drawing Exchange Format — a CAD interchange format understood by nearly every laser cutter, CNC machine, and cutting plotter. Typically exported as layers or polylines.",
+    "related": ["SVG", "PLT", "Contour"]
+  },
+  {
+    "term": "Embroidered Digitizing",
+    "slug": "embroidered-digitizing",
+    "letter": "E",
+    "category": "Making & Fabrication",
+    "definition": "Converting artwork into stitch instructions — satin stitches, fill stitches, and run stitches — that an embroidery machine can follow. Stitch density and pull compensation both matter.",
+    "related": ["DST", "PES", "Stitch Density"]
+  },
+  {
+    "term": "EPS",
+    "slug": "eps",
+    "letter": "E",
+    "category": "File Formats",
+    "definition": "Encapsulated PostScript — a classic print-oriented vector format widely accepted by print shops, though it lacks the web-friendly structure of SVG.",
+    "related": ["SVG", "PDF", "AI"]
+  },
+  {
+    "term": "Fill",
+    "slug": "fill",
+    "letter": "F",
+    "category": "Vector Basics",
+    "definition": "The color applied to the inside of a closed path. Paths can have a fill, a stroke, or both.",
+    "related": ["Stroke", "Path", "Gradient"]
+  },
+  {
+    "term": "Gradient",
+    "slug": "gradient",
+    "letter": "G",
+    "category": "Color",
+    "definition": "A smooth transition between two or more colors. Vector gradients scale infinitely and remain sharp at any resolution.",
+    "related": ["Fill", "Mesh", "Spot Color"]
+  },
+  {
+    "term": "Group",
+    "slug": "group",
+    "letter": "G",
+    "category": "Vector Basics",
+    "definition": "A container that holds multiple objects so they can be moved, scaled, or edited together. Grouping keeps complex files manageable.",
+    "related": ["Layer", "Path", "Node"]
+  },
+  {
+    "term": "Kerf",
+    "slug": "kerf",
+    "letter": "K",
+    "category": "Making & Fabrication",
+    "definition": "The width of material removed by a cutting tool. Because the kerf consumes material, cut shapes come out slightly smaller than the drawn outline.",
+    "related": ["Contour", "Offset", "Laser Cutting"]
+  },
+  {
+    "term": "Node",
+    "slug": "node",
+    "letter": "N",
+    "category": "Vector Basics",
+    "definition": "An anchor point on a path. Nodes define where a curve bends and how sharp a corner is; they are the fundamental editable unit of vector artwork.",
+    "related": ["Handle", "Bezier Curve", "Path"]
+  },
+  {
+    "term": "Offset",
+    "slug": "offset",
+    "letter": "O",
+    "category": "Making & Fabrication",
+    "definition": "Creating a copy of a shape shifted inward or outward by a fixed distance. Used to make cutters, welder gaps, and press-up allowances.",
+    "related": ["Contour", "Kerf", "Boolean Operation"]
+  },
+  {
+    "term": "Path",
+    "slug": "path",
+    "letter": "P",
+    "category": "Vector Basics",
+    "definition": "An open or closed sequence of nodes and curves that defines a shape. A single SVG file can contain thousands of paths.",
+    "related": ["Node", "Bezier Curve", "Compound Path"]
+  },
+  {
+    "term": "PNG",
+    "slug": "png",
+    "letter": "P",
+    "category": "File Formats",
+    "definition": "Portable Network Graphics — a lossless raster format supporting transparency. It cannot scale cleanly and is not cuttable by a machine.",
+    "related": ["JPEG", "Raster Graphics", "SVG"]
+  },
+  {
+    "term": "Potrace",
+    "slug": "potrace",
+    "letter": "P",
+    "category": "Tools",
+    "definition": "A classic open-source bitmap tracer that converts black-and-white images into vector outlines. Effective for line art, less so for color and gradients.",
+    "related": ["Trace", "Vectorization", "Inkscape"]
+  },
+  {
+    "term": "PPI",
+    "slug": "ppi",
+    "letter": "P",
+    "category": "Raster Basics",
+    "definition": "Pixels per inch — the display equivalent of DPI. DPI describes print resolution, PPI describes screen resolution.",
+    "related": ["DPI", "Raster Graphics"]
+  },
+  {
+    "term": "Raster Graphics",
+    "slug": "raster-graphics",
+    "letter": "R",
+    "category": "Fundamentals",
+    "definition": "Images built from a grid of individual pixels (PNG, JPEG, GIF). They photograph well but blur or pixelate when scaled up.",
+    "related": ["Vector Graphics", "DPI", "Pixel"]
+  },
+  {
+    "term": "RGB",
+    "slug": "rgb",
+    "letter": "R",
+    "category": "Color",
+    "definition": "The additive color model (red, green, blue) used by screens. Adding all three at full intensity produces white.",
+    "related": ["CMYK", "Color Separation"]
+  },
+  {
+    "term": "Screen Printing",
+    "slug": "screen-printing",
+    "letter": "S",
+    "category": "Print & Production",
+    "definition": "A printing technique that pushes ink through a mesh stencil, one screen per color. Vector files produce the cleanest separations.",
+    "related": ["Color Separation", "Spot Color", "DTF"]
+  },
+  {
+    "term": "Spot Color",
+    "slug": "spot-color",
+    "letter": "S",
+    "category": "Color",
+    "definition": "A named premixed ink (Pantone, for example) used consistently across a print run rather than mixed from CMYK. Essential for consistent brand color on physical products.",
+    "related": ["CMYK", "Color Separation", "Screen Printing"]
+  },
+  {
+    "term": "SVG",
+    "slug": "svg",
+    "letter": "S",
+    "category": "File Formats",
+    "definition": "Scalable Vector Graphics — an XML-based vector format supported by browsers, design tools, laser cutters, and plotters. The native output format for most modern vectorizers.",
+    "related": ["DXF", "EPS", "Path"]
+  },
+  {
+    "term": "Stroke",
+    "slug": "stroke",
+    "letter": "S",
+    "category": "Vector Basics",
+    "definition": "The outline drawn along the edge of a path, defined by width, color, and cap style. Often used for line art and lettering.",
+    "related": ["Fill", "Path", "Outline"]
+  },
+  {
+    "term": "Trace",
+    "slug": "trace",
+    "letter": "T",
+    "category": "Vectorization",
+    "definition": "The process of converting a raster image into vector paths by identifying edges, regions, and color boundaries.",
+    "related": ["Vectorization", "Potrace", "Contour"]
+  },
+  {
+    "term": "Vector Graphics",
+    "slug": "vector-graphics",
+    "letter": "V",
+    "category": "Fundamentals",
+    "definition": "Images defined by mathematical paths and shapes rather than pixels. They scale to any size without loss of quality and are the required input for cutting and fabrication.",
+    "related": ["Raster Graphics", "Path", "SVG"]
+  },
+  {
+    "term": "Vectorization",
+    "slug": "vectorization",
+    "letter": "V",
+    "category": "Vectorization",
+    "definition": "Converting a raster image into vector artwork. Modern AI vectorizers detect color regions and shapes rather than only edges, producing far cleaner results than simple thresholding.",
+    "related": ["Trace", "Path", "SVG"]
+  },
+  {
+    "term": "Weeding",
+    "slug": "weeding",
+    "letter": "W",
+    "category": "Making & Fabrication",
+    "definition": "Removing the unwanted vinyl or transfer film from around a cut design, leaving only the parts you want to keep or transfer.",
+    "related": ["Contour", "Vinyl Cutting", "Offset"]
+  },
+  {
+    "term": "Boolean Operation",
+    "slug": "boolean-operation",
+    "letter": "B",
+    "category": "Vector Basics",
+    "definition": "Combining or subtracting shapes using union, intersection, or difference. Useful for punching holes in letters or merging overlapping shapes.",
+    "related": ["Compound Path", "Path", "Offset"]
+  }
+]

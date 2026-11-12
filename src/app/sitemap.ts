@@ -118,6 +118,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  // Phase 5 free tool pages
+  const phase5Pages = [
+    { url: `${baseUrl}/svg-editor`, priority: 0.8 },
+    { url: `${baseUrl}/templates`, priority: 0.8 },
+    { url: `${baseUrl}/favicon-generator`, priority: 0.8 },
+  ].map((p) => ({
+    ...p,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+  }));
+
+  // Phase 8 growth / legal pages
+  const phase8Pages = [
+    { url: `${baseUrl}/reviews`, priority: 0.7 },
+    { url: `${baseUrl}/affiliate`, priority: 0.7 },
+    { url: `${baseUrl}/partners`, priority: 0.6 },
+    { url: `${baseUrl}/refer`, priority: 0.6 },
+    { url: `${baseUrl}/education`, priority: 0.6 },
+    { url: `${baseUrl}/press`, priority: 0.6 },
+    { url: `${baseUrl}/free-svg-files`, priority: 0.8 },
+    { url: `${baseUrl}/terms`, priority: 0.5 },
+    { url: `${baseUrl}/privacy`, priority: 0.5 },
+    { url: `${baseUrl}/about`, priority: 0.6 },
+    { url: `${baseUrl}/faq`, priority: 0.7 },
+  ].map((p) => ({
+    ...p,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+  }));
+
   // Add main pages
   const mainPages = [
     {
@@ -157,5 +187,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...blogPages,
     ...toolPages,
     ...hubPages,
+    ...phase5Pages,
+    ...phase8Pages,
   ];
 }
