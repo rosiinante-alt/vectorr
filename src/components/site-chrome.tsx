@@ -52,6 +52,12 @@ export function SiteHeader({ authSlot }: { authSlot?: ReactNode }) {
             How it works
           </Link>
           <Link
+            href="/examples"
+            className="hidden rounded-[var(--radius-sm)] px-3 py-2 text-[14px] font-medium text-text-secondary transition-colors hover:bg-[rgba(0,0,0,0.045)] hover:text-text-primary sm:block"
+          >
+            Examples
+          </Link>
+          <Link
             href="/pricing"
             className="hidden rounded-[var(--radius-sm)] px-3 py-2 text-[14px] font-medium text-text-secondary transition-colors hover:bg-[rgba(0,0,0,0.045)] hover:text-text-primary sm:block"
           >
@@ -94,6 +100,7 @@ export function SiteFooter() {
       title: "Product",
       links: [
         { label: "How it works", href: "/#how" },
+        { label: "Examples", href: "/examples" },
         { label: "Pricing", href: "/pricing" },
         { label: "Blog", href: "/blog" },
         { label: "About", href: "/about" },
