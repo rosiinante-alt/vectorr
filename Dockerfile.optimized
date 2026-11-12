@@ -82,20 +82,19 @@ WORKDIR /app
 # Install dumb-init and wget for health checks
 RUN apk add --no-cache dumb-init wget
 
-# Copy compiled app and dependencies from builder
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/public ./public
-# Next.js standalone requires static files in public as well
-COPY --from=builder /app/.next/static ./public/_next/static
-COPY --from=builder /app/schema.sql ./schema.sql
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
+
+# Copy compiled app and dependencies from builder with proper ownership
+COPY --from=deps --chown=nextjs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/schema.sql ./schema.sql
 
 # Clean up any unnecessary files to minimize runtime image
 RUN rm -rf /app/.next/cache /app/.next/turbo /tmp/*
 
-# Create non-root user for security
-RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
 USER nextjs
 
 # Expose port (Coolify default)
