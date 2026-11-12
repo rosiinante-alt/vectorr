@@ -22,6 +22,10 @@ COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
 
+# Cache-busting: SOURCE_COMMIT changes on every deployment, invalidating all
+# downstream layers (build + static asset COPY) so stale chunks cannot persist.
+ARG SOURCE_COMMIT=unknown
+
 # `next build` collects page data, which imports server modules that throw when
 # their configuration is missing. The real values arrive at runtime through the
 # container environment; these build-time placeholders only satisfy module load.
