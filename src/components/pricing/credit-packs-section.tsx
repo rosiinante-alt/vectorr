@@ -31,7 +31,7 @@ export function CreditPacksSection() {
             >
               {pack.badge && (
                 <Badge
-                  tone="info"
+                  tone="accent"
                   className="absolute -top-3 left-1/2 -translate-x-1/2"
                 >
                   {pack.badge}

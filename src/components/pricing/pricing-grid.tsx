@@ -61,7 +61,7 @@ export function PricingGrid({ tiers, tierOrder }: PricingGridProps) {
             >
               {isPro && (
                 <Badge
-                  tone="info"
+                  tone="accent"
                   className="absolute -top-3 left-1/2 -translate-x-1/2"
                 >
                   Most Popular
@@ -126,14 +126,14 @@ export function PricingGrid({ tiers, tierOrder }: PricingGridProps) {
                   >
                     Get started
                   </ButtonLink>
-                ) : (
+                ) : planKey ? (
                   <SubscribeButton
                     planKey={planKey}
                     variant={isPro ? 'primary' : 'secondary'}
                   >
                     Subscribe
                   </SubscribeButton>
-                )}
+                ) : null}
               </div>
 
               <ul className="mt-6 grid gap-3 border-t border-[var(--border)] pt-6">

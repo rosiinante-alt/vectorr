@@ -30,23 +30,53 @@ export interface ProductDefinition {
   seats?: number;
 }
 
-// \`process.env.X\` is written out in full rather than built from \`envKey\`, because
+// `process.env.X` is written out in full rather than built from `envKey`, because
 // Next.js inlines only statically written environment reads at build time.
 export const PRODUCTS: Record<string, ProductDefinition> = {
-  one_time_credits: {
-    id: process.env.POLAR_PRODUCT_ONE_TIME_CREDITS ?? null,
-    envKey: 'POLAR_PRODUCT_ONE_TIME_CREDITS',
-    name: 'Credit pack',
-    credits: 20,
+  // Credit packs (one-time purchases)
+  pack_sample: {
+    id: process.env.POLAR_PRODUCT_PACK_SAMPLE ?? process.env.POLAR_PRODUCT_ONE_TIME_CREDITS ?? null,
+    envKey: 'POLAR_PRODUCT_PACK_SAMPLE',
+    name: 'Sample Pack',
+    credits: 60,
     interval: null,
     tier: 'free',
     recurring: false,
   },
+  pack_creator: {
+    id: process.env.POLAR_PRODUCT_PACK_CREATOR ?? null,
+    envKey: 'POLAR_PRODUCT_PACK_CREATOR',
+    name: 'Creator Pack',
+    credits: 300,
+    interval: null,
+    tier: 'free',
+    recurring: false,
+  },
+  pack_studio: {
+    id: process.env.POLAR_PRODUCT_PACK_STUDIO ?? null,
+    envKey: 'POLAR_PRODUCT_PACK_STUDIO',
+    name: 'Studio Pack',
+    credits: 900,
+    interval: null,
+    tier: 'free',
+    recurring: false,
+  },
+  pack_pro: {
+    id: process.env.POLAR_PRODUCT_PACK_PRO ?? null,
+    envKey: 'POLAR_PRODUCT_PACK_PRO',
+    name: 'Pro Pack',
+    credits: 2700,
+    interval: null,
+    tier: 'free',
+    recurring: false,
+  },
+  
+  // Monthly subscriptions
   starter_monthly: {
     id: process.env.POLAR_PRODUCT_STARTER_MONTHLY ?? null,
     envKey: 'POLAR_PRODUCT_STARTER_MONTHLY',
     name: 'Starter (monthly)',
-    credits: 50,
+    credits: 150,
     interval: 'month',
     tier: 'starter',
     recurring: true,
@@ -55,7 +85,7 @@ export const PRODUCTS: Record<string, ProductDefinition> = {
     id: process.env.POLAR_PRODUCT_PRO_MONTHLY ?? null,
     envKey: 'POLAR_PRODUCT_PRO_MONTHLY',
     name: 'Pro (monthly)',
-    credits: 250,
+    credits: 750,
     interval: 'month',
     tier: 'pro',
     recurring: true,
@@ -64,7 +94,7 @@ export const PRODUCTS: Record<string, ProductDefinition> = {
     id: process.env.POLAR_PRODUCT_TEAM_STARTER_MONTHLY ?? null,
     envKey: 'POLAR_PRODUCT_TEAM_STARTER_MONTHLY',
     name: 'Team Starter (monthly)',
-    credits: 750,
+    credits: 2250,
     interval: 'month',
     tier: 'team_starter',
     recurring: true,
@@ -74,17 +104,19 @@ export const PRODUCTS: Record<string, ProductDefinition> = {
     id: process.env.POLAR_PRODUCT_TEAM_PRO_MONTHLY ?? null,
     envKey: 'POLAR_PRODUCT_TEAM_PRO_MONTHLY',
     name: 'Team Pro (monthly)',
-    credits: 2500,
+    credits: 7500,
     interval: 'month',
     tier: 'team_pro',
     recurring: true,
     seats: 10,
   },
+  
+  // Annual subscriptions
   starter_annual: {
     id: process.env.POLAR_PRODUCT_STARTER_ANNUAL ?? null,
     envKey: 'POLAR_PRODUCT_STARTER_ANNUAL',
     name: 'Starter (annual)',
-    credits: 600,
+    credits: 1800,
     interval: 'year',
     tier: 'starter',
     recurring: true,
@@ -93,7 +125,7 @@ export const PRODUCTS: Record<string, ProductDefinition> = {
     id: process.env.POLAR_PRODUCT_PRO_ANNUAL ?? null,
     envKey: 'POLAR_PRODUCT_PRO_ANNUAL',
     name: 'Pro (annual)',
-    credits: 3000,
+    credits: 9000,
     interval: 'year',
     tier: 'pro',
     recurring: true,
@@ -102,7 +134,7 @@ export const PRODUCTS: Record<string, ProductDefinition> = {
     id: process.env.POLAR_PRODUCT_TEAM_STARTER_ANNUAL ?? null,
     envKey: 'POLAR_PRODUCT_TEAM_STARTER_ANNUAL',
     name: 'Team Starter (annual)',
-    credits: 9000,
+    credits: 27000,
     interval: 'year',
     tier: 'team_starter',
     recurring: true,
@@ -112,7 +144,7 @@ export const PRODUCTS: Record<string, ProductDefinition> = {
     id: process.env.POLAR_PRODUCT_TEAM_PRO_ANNUAL ?? null,
     envKey: 'POLAR_PRODUCT_TEAM_PRO_ANNUAL',
     name: 'Team Pro (annual)',
-    credits: 30000,
+    credits: 90000,
     interval: 'year',
     tier: 'team_pro',
     recurring: true,
