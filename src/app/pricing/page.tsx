@@ -6,6 +6,8 @@ import { AuthSlot } from "@/components/auth-slot";
 import { ButtonLink } from "@/components/ui/button";
 import { TierCards } from "@/components/pricing/tier-cards";
 import { CostEstimator } from "@/components/pricing/cost-estimator";
+import { CreditPacksSection } from "@/components/pricing/credit-packs-section";
+import { CREDIT_COSTS } from "@/lib/credits/constants";
 
 export default function PricingPage() {
   return (
@@ -38,6 +40,93 @@ export default function PricingPage() {
         {/* ── Tier cards (client island — annual toggle lives here) */}
         <TierCards />
 
+        {/* ── Credit packs ──────────────────────────────────────── */}
+        <CreditPacksSection />
+
+        {/* ── Credit costs ──────────────────────────────────────── */}
+        <section
+          className="pb-20 bg-bg-secondary py-20"
+          aria-labelledby="costs-heading"
+        >
+          <div className="wrap">
+            <h2
+              id="costs-heading"
+              className="display max-w-[760px] text-[clamp(28px,4vw,44px)]"
+            >
+              Credit costs per operation.
+            </h2>
+            <p className="mt-5 max-w-[620px] text-[17px] leading-relaxed text-text-secondary">
+              Each operation costs a fraction of a credit. Run as many as you
+              need within your plan.
+            </p>
+
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                {
+                  name: "Vectorize",
+                  cost: CREDIT_COSTS.VECTORIZE,
+                  desc: "PNG/JPG/WEBP → SVG conversion",
+                },
+                {
+                  name: "Remove background",
+                  cost: CREDIT_COSTS.REMOVE_BG,
+                  desc: "AI background removal",
+                },
+                {
+                  name: "Upscale 2×",
+                  cost: CREDIT_COSTS.UPSCALE_2X,
+                  desc: "Double resolution",
+                },
+                {
+                  name: "Upscale 4×",
+                  cost: CREDIT_COSTS.UPSCALE_4X,
+                  desc: "Quadruple resolution",
+                },
+                {
+                  name: "AI Logo Generation",
+                  cost: CREDIT_COSTS.AI_GENERATE,
+                  desc: "Generate logos with AI",
+                },
+                {
+                  name: "Style Transfer",
+                  cost: CREDIT_COSTS.STYLE_TRANSFER,
+                  desc: "Apply artistic styles",
+                },
+                {
+                  name: "Brand Identity Kit",
+                  cost: CREDIT_COSTS.BRAND_IDENTITY,
+                  desc: "Complete brand package",
+                },
+                {
+                  name: "Format Export",
+                  cost: CREDIT_COSTS.EXPORT_PREMIUM,
+                  desc: "DXF, EPS, PDF, PNG — all free",
+                },
+              ].map((item) => (
+                <div
+                  key={item.name}
+                  className="rounded-[var(--radius-lg)] bg-white px-5 py-4 shadow-[0_0_0_0.5px_var(--border),0_1px_2px_rgba(0,0,0,0.04)]"
+                >
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="text-[16px] font-semibold">{item.name}</h3>
+                    <span className={`tabular font-mono text-[15px] font-semibold ${item.cost === 0 ? 'text-success-text' : 'text-accent'}`}>
+                      {item.cost === 0 ? 'FREE' : `${item.cost.toFixed(2)}cr`}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-[14px] text-text-secondary">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <p className="mt-6 text-[14px] text-text-tertiary">
+              Credits are deducted only when jobs succeed. Failed operations cost
+              nothing.
+            </p>
+          </div>
+        </section>
+
         {/* ── One-time purchase ─────────────────────────────────── */}
         <section className="py-16" aria-labelledby="one-time-heading">
           <div className="wrap">
@@ -59,8 +148,8 @@ export default function PricingPage() {
                 <ButtonLink href="/convert" size="lg">
                   Convert now
                 </ButtonLink>
-                <ButtonLink href="/pricing#tiers" size="lg" variant="secondary">
-                  Compare plans
+                <ButtonLink href="#packs-heading" size="lg" variant="secondary">
+                  View credit packs
                 </ButtonLink>
               </div>
               <ul className="mx-auto mt-8 grid max-w-xs gap-2 text-left text-[14px] text-text-secondary">
@@ -92,7 +181,17 @@ export default function PricingPage() {
         </section>
 
         {/* ── Cost estimator (client island) ───────────────────── */}
-        <CostEstimator />
+        <section className="py-20 bg-bg-secondary" aria-labelledby="estimator-heading">
+          <div className="wrap">
+            <h2
+              id="estimator-heading"
+              className="visually-hidden"
+            >
+              Cost Estimator
+            </h2>
+            <CostEstimator />
+          </div>
+        </section>
 
         {/* ── Why Vectroy ──────────────────────────────────────── */}
         <section className="py-20" aria-labelledby="compare-heading">
