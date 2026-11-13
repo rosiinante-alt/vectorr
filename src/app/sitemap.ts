@@ -176,9 +176,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  // Geo-targeted landing pages
+  const geoPages = [
+    { url: `${baseUrl}/convert/jpg-to-svg-us`, priority: 0.8 },
+    { url: `${baseUrl}/convert/jpg-to-svg-uk`, priority: 0.8 },
+    { url: `${baseUrl}/convert/jpg-to-svg-de`, priority: 0.8 },
+  ].map((p) => ({
+    ...p,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+  }));
+
   return [
     ...mainPages,
     ...converterPages,
+    ...geoPages,
     ...comparisonPages,
     ...resourcePages,
     ...workflowPages,

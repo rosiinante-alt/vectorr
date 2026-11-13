@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -47,8 +47,30 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body>{children}</body>
-      {process.env.NEXT_PUBLIC_GA_ID && (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+      {/* GA4 is fired through the GTM container (GA4 Configuration tag), so
+          loading gtag.js here as well would double-count every pageview. */}
+      {process.env.NEXT_PUBLIC_GTM_ID && (
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
+      )}
+      {process.env.NEXT_PUBLIC_YANDEX_METRICA_ID && (
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+              m[i].l=1*new Date();
+              for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+              k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+              (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+              
+              ym(${process.env.NEXT_PUBLIC_YANDEX_METRICA_ID}, "init", {
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true,
+                webvisor:true
+              });
+            `,
+          }}
+        />
       )}
     </html>
   );

@@ -35,9 +35,14 @@ export function ExampleGallery({ className = '' }: ExampleGalleryProps) {
     const loadManifest = async () => {
       try {
         const response = await fetch('/demo/examples/manifest.json');
-        const data: ManifestData = await response.json();
-        setManifest(data);
-        filterExamples(data, 'logo');
+        const data = await response.json();
+        // Guard against manifest shape mismatches
+        const safe: ManifestData = {
+          examples: Array.isArray(data.examples) ? data.examples : [],
+          categories: Array.isArray(data.categories) ? data.categories : [],
+        };
+        setManifest(safe);
+        filterExamples(safe, 'logo');
         setIsLoading(false);
       } catch (error) {
         console.error('Failed to load manifest:', error);
@@ -60,7 +65,7 @@ export function ExampleGallery({ className = '' }: ExampleGalleryProps) {
     }
   };
 
-  if (isLoading || !manifest) {
+  if (isLoading) {
     return (
       <div className={`${className}`}>
         <div className="animate-pulse">
@@ -73,6 +78,10 @@ export function ExampleGallery({ className = '' }: ExampleGalleryProps) {
         </div>
       </div>
     );
+  }
+
+  if (!manifest || manifest.categories.length === 0) {
+    return null;
   }
 
   return (

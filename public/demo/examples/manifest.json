@@ -1,138 +1,192 @@
 {
-  "version": "2.0",
-  "generated": "2026-11-08T08:38:01.041Z",
-  "pairs": [
+  "version": "3.0",
+  "generated": "2026-11-13T00:00:00.000Z",
+  "examples": [
     {
-      "index": 1,
-      "name": "pixel-heart",
-      "before": "image-01-before.png",
-      "after": "image-01-after.png",
-      "canvas_size": [
-        159,
-        140
-      ],
-      "source": "1download.png",
-      "source_checksum": "3adac58ee640a105e0e8ee70bda7eafe"
+      "id": "coffee-logo",
+      "filename": "coffee-logo-raster.svg",
+      "category": "logo",
+      "label": "Coffee Logo",
+      "description": "Stylised coffee cup logo converted to clean vector paths"
     },
     {
-      "index": 2,
-      "name": "apple",
-      "before": "image-02-before.png",
-      "after": "image-02-after.png",
-      "canvas_size": [
-        227,
-        245
-      ],
-      "source": "3.png",
-      "source_checksum": "7074cd689e986490c9b2dcef01b5ff80"
+      "id": "food-logo",
+      "filename": "food-logo-raster.svg",
+      "category": "logo",
+      "label": "Food & Beverage Logo",
+      "description": "Restaurant branding mark converted from raster to scalable SVG"
     },
     {
-      "index": 3,
-      "name": "cityscape",
-      "before": "image-03-before.png",
-      "after": "image-03-after.png",
-      "canvas_size": [
-        538,
-        493
-      ],
-      "source": "4.png",
-      "source_checksum": "04fc4ecf6b43f1188663c370725b65e7"
+      "id": "gradient-logo",
+      "filename": "gradient-logo-raster.svg",
+      "category": "logo",
+      "label": "Gradient Logo",
+      "description": "Modern gradient brand mark with preserved colour transitions"
     },
     {
-      "index": 4,
-      "name": "bird",
-      "before": "image-04-before.png",
-      "after": "image-04-after.png",
-      "canvas_size": [
-        477,
-        388
-      ],
-      "source": "43.png",
-      "source_checksum": "17f90585f478cc00ba6bdbb05d5c18e2"
+      "id": "leaf-logo",
+      "filename": "leaf-logo-raster.svg",
+      "category": "logo",
+      "label": "Leaf Logo",
+      "description": "Nature-inspired logo with smooth organic curves"
     },
     {
-      "index": 5,
-      "name": "apple-illustrator",
-      "before": "image-05-before.png",
-      "after": "image-05-after.png",
-      "canvas_size": [
-        387,
-        418
-      ],
-      "source": "5.png",
-      "source_checksum": "faa63496a61b3ed9936846164c88a43f"
+      "id": "sports-logo",
+      "filename": "sports-logo-raster.svg",
+      "category": "logo",
+      "label": "Sports Logo",
+      "description": "Athletic emblem with crisp edges for screen printing"
     },
     {
-      "index": 6,
-      "name": "deer-full",
-      "before": "image-06-before.png",
-      "after": "image-06-after.png",
-      "canvas_size": [
-        610,
-        601
-      ],
-      "source": "7.png",
-      "source_checksum": "1adaab7772d6a7a6bbda61f7e54cf449"
+      "id": "tech-logo",
+      "filename": "tech-logo-raster.svg",
+      "category": "logo",
+      "label": "Tech Logo",
+      "description": "Geometric technology brand mark in clean vector form"
     },
     {
-      "index": 7,
-      "name": "deer-detail",
-      "before": "image-07-before.png",
-      "after": "image-07-after.png",
-      "canvas_size": [
-        610,
-        490
-      ],
-      "source": "7.png",
-      "source_checksum": "1adaab7772d6a7a6bbda61f7e54cf449"
+      "id": "brush-stroke",
+      "filename": "brush-stroke-vector.svg",
+      "category": "illustration",
+      "label": "Brush Stroke",
+      "description": "Hand-painted brush stroke preserved as smooth vector curves"
     },
     {
-      "index": 8,
-      "name": "cursor-full",
-      "before": "image-08-before.png",
-      "after": "image-08-after.png",
-      "canvas_size": [
-        277,
-        257
-      ],
-      "source": "do3wnload.png",
-      "source_checksum": "b70264e7203025f8b94d825337aa766c"
+      "id": "character-illustration",
+      "filename": "character-illustration-raster.svg",
+      "category": "illustration",
+      "label": "Character Illustration",
+      "description": "Cartoon character with flat fills and clear outlines"
     },
     {
-      "index": 9,
-      "name": "cursor-zoom",
-      "before": "image-09-before.png",
-      "after": "image-09-after.png",
-      "canvas_size": [
-        309,
-        294
-      ],
-      "source": "do3wnload.png",
-      "source_checksum": "b70264e7203025f8b94d825337aa766c"
+      "id": "detailed-illustration",
+      "filename": "detailed-illustration-raster.svg",
+      "category": "illustration",
+      "label": "Detailed Illustration",
+      "description": "Complex scene with layered shapes and colour regions"
     },
     {
-      "index": 10,
-      "name": "eagle",
-      "before": "image-10-before.png",
-      "after": "image-10-after.png",
-      "canvas_size": [
-        515,
-        389
-      ],
-      "source": "downlo56ad.png",
-      "source_checksum": "707ea722ea8c4e48c33774f6b22e5ae0"
+      "id": "floral-ornament",
+      "filename": "floral-ornament-vector.svg",
+      "category": "illustration",
+      "label": "Floral Ornament",
+      "description": "Decorative floral pattern with intricate petal detail"
     },
     {
-      "index": 11,
-      "name": "s-letter",
-      "before": "image-11-before.png",
-      "after": "image-11-after.png",
-      "canvas_size": [
-        359,
-        344
-      ],
-      "source": "download.png",
-      "source_checksum": "1f02620847c896ef0382a3f722ec7e43"
+      "id": "portrait-illustration",
+      "filename": "portrait-illustration-vector.svg",
+      "category": "illustration",
+      "label": "Portrait Illustration",
+      "description": "Stylised portrait with smooth gradient skin tones"
+    },
+    {
+      "id": "geometric-abstract",
+      "filename": "geometric-abstract-vector.svg",
+      "category": "abstract",
+      "label": "Geometric Abstract",
+      "description": "Precision geometric artwork with sharp angles and fills"
+    },
+    {
+      "id": "abstract-illustration",
+      "filename": "abstract-illustration-raster.svg",
+      "category": "abstract",
+      "label": "Abstract Illustration",
+      "description": "Free-form abstract shapes with complex colour blending"
+    },
+    {
+      "id": "calligraphy-text",
+      "filename": "calligraphy-text-vector.svg",
+      "category": "text",
+      "label": "Calligraphy Text",
+      "description": "Handwritten calligraphy converted to editable vector paths"
+    },
+    {
+      "id": "hand-drawn-sketch",
+      "filename": "hand-drawn-sketch-raster.svg",
+      "category": "text",
+      "label": "Hand-Drawn Sketch",
+      "description": "Pencil sketch with text annotations vectorised cleanly"
+    },
+    {
+      "id": "icon-set",
+      "filename": "icon-set-vector.svg",
+      "category": "ui",
+      "label": "Icon Set",
+      "description": "24px icon pack converted for web and app use"
+    },
+    {
+      "id": "ui-icon-pack",
+      "filename": "ui-icon-pack-raster.svg",
+      "category": "ui",
+      "label": "UI Icon Pack",
+      "description": "Outlined UI icons ready for Figma and production use"
+    },
+    {
+      "id": "mug-design",
+      "filename": "mug-design-vector.svg",
+      "category": "craft",
+      "label": "Mug Design",
+      "description": "Print-ready wrap design for sublimation and screen printing"
+    },
+    {
+      "id": "tshirt-print",
+      "filename": "tshirt-print-vector.svg",
+      "category": "craft",
+      "label": "T-Shirt Print",
+      "description": "Garment graphic with spot colours ready for screen printing"
+    },
+    {
+      "id": "vinyl-sticker",
+      "filename": "vinyl-sticker-vector.svg",
+      "category": "craft",
+      "label": "Vinyl Sticker",
+      "description": "Die-cut sticker design with clean contour cut line"
+    },
+    {
+      "id": "embroidery-pattern",
+      "filename": "embroidery-pattern-vector.svg",
+      "category": "craft",
+      "label": "Embroidery Pattern",
+      "description": "Floral embroidery design converted for DST / PES digitising"
+    },
+    {
+      "id": "laser-cutting",
+      "filename": "laser-cutting-vector.svg",
+      "category": "craft",
+      "label": "Laser Cutting",
+      "description": "Geometric cut template with separate fill and score layers"
+    }
+  ],
+  "categories": [
+    {
+      "id": "logo",
+      "label": "Logos",
+      "description": "Brand marks and logo artwork converted to production-ready vectors"
+    },
+    {
+      "id": "illustration",
+      "label": "Illustrations",
+      "description": "Detailed illustrations and character art with smooth curves and fills"
+    },
+    {
+      "id": "abstract",
+      "label": "Abstract",
+      "description": "Geometric and abstract compositions with precise shapes"
+    },
+    {
+      "id": "text",
+      "label": "Text & Lettering",
+      "description": "Calligraphy, hand lettering, and sketched text as editable paths"
+    },
+    {
+      "id": "ui",
+      "label": "Icons & UI",
+      "description": "UI icon packs and interface graphics optimised for digital use"
+    },
+    {
+      "id": "craft",
+      "label": "Craft & Print",
+      "description": "Cut files and print designs for Cricut, embroidery, and screen printing"
     }
   ]
 }
